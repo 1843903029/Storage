@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/MainPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SysRole</title>
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td><a href="#">首页<</a></td>
+                <td>系统设置<</td>
+                <td>角色管理</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong style="margin-left:20px">用户管理</strong></td>
+                <td> <input style="margin-left:1200px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-success" type="button" value="删除" /></td>
+                <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-warning" type="button" value="导出" /></td>
+            </tr>
+        </table>
+        <table action="javascript:void(0)" class="form-horizontal">
+            <tr>
+                <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入用户名或者工号"></td>
+                <td>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table style="width:100%;" class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>角色编号</td>
+                <td>角色名</td>
+                <td>创建时间</td>
+                <td>备注</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="tb1"></tbody>
+    </table>
+    <div id="jbox-content"  style="height: 136px;  position: static; margin-left:1200px" hidden>
+        <div class="tab-pane active" id="widget_tab1">
+            <table class="formtab_user">
+                <tbody>
+                    <tr>
+                        <td>角色编号</td>
+                        <td>
+                            <input id="txtRoleNum" name="txtRoleNum" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>角色名称</td>
+                        <td>
+                            <input id="txtRoleName" name="txtRoleName" type="text" placeholder="请输入角色名称" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="txtRemark" name="txtRemark" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
+                        <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+        $("#btnSubhh").click(function () {
+            if ($("#jbox-content").css("display") == "none") {
+                $("#jbox-content").show();
+
+            } else {
+                $("#jbox-content").hide();
+            }
+        });
+        $("#Button1_1").click(function () {
+            $("#jbox-content").hide();
+        });
+    });
+
+</script>
