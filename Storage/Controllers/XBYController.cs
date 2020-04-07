@@ -68,5 +68,14 @@ namespace Storage.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 退货管理页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult test()
+        {
+            return View();
+        }
     }
 }
