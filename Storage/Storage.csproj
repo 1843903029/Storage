@@ -154,6 +154,12 @@
     <Content Include="Views\XBY\YiKuGuanli.cshtml" />
     <Content Include="Views\XBY\PanDianGuanli.cshtml" />
     <Content Include="Views\XBY\TuiHuoGuanli.cshtml" />
+    <Content Include="Views\TXY\SysAdmin.cshtml" />
+    <Content Include="Views\TXY\SysDepart.cshtml" />
+    <Content Include="Views\TXY\SysRole.cshtml" />
+    <Content Include="Views\LLQ\CpGl.cshtml" />
+    <Content Include="Views\LLQ\Cplb.cshtml" />
+    <Content Include="Views\LLQ\Jldw.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -165,9 +171,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\LLJ\" />
-    <Folder Include="Views\LLQ\" />
     <Folder Include="Views\LL\" />
-    <Folder Include="Views\TXY\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

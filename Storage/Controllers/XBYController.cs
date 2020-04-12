@@ -61,7 +61,7 @@ namespace Storage.Controllers
         }
 
         /// <summary>
-        /// 退货管理页面12
+        /// 退货管理页面
         /// </summary>
         /// <returns></returns>
         public ActionResult TuiHuoGuanli()
