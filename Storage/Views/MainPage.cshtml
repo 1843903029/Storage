@@ -8,256 +8,131 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
     <title>MainPage</title>
-    <style>
-        #header {
-            background-color: black;
-            width: 100%;
-            height: 50px;
-            border: 1px solid;
-        }
 
-        #header_title {
-            color: beige;
-            font-size: 23px;
-            margin-left: -25px;
-        }
-
-        ul > li {
-            list-style: none;
-            float: left;
-        }
-
-        #header_title2 {
-            margin-left: 80%;
-            color: beige;
-            font-size: 20px;
-        }
-
-        #header_mather {
-            color: beige;
-            text-decoration: none;
-        }
-
-            #header_mather:hover {
-                text-decoration: underline;
-            }
-
-        #header_zijiedian {
-            width: 120px;
-            border: 1px solid none;
-        }
-
-            #header_zijiedian > li > a {
-                text-decoration: none;
-                color: black;
-                font-size: 16px;
-            }
-
-                #header_zijiedian > li > a:hover {
-                    text-decoration: underline;
-                    color: grey;
-                }
-
-        #header_zijiedian {
-            margin-left: -50px;
-        }
-
-        #content {
-            width: 180px;
-            height: 630px;
-            border: 1px solid none;
-            background-color: dimgray;
-            /*position: absolute;*/
-            float:left;
-        }
-
-        #content_title {
-            margin-top: 20px;
-            color: beige;
-            font-size: 22px;
-        }
-
-            #content_title:hover {
-                text-decoration: underline;
-                color: black;
-            }
-
-        #content_title2 > li > a {
-            text-decoration: none;
-            font-size: 18px;
-            color: beige;
-        }
-
-            #content_title2 > li > a:hover {
-                text-decoration: underline;
-                color: black;
-            }
-    </style>    
 </head>
-<body>
-<div>
-    <div id="header">
-        <ul>
-            <li id="header_title">仓库管理系统</li>
-        </ul>
-        <ul id="header_title2">
-            <li>
-                <a href="javascript:void(0)" id="header_mather" onclick="header()">&nbsp;当前登录</a>
-                <ul id="header_zijiedian" hidden>
-                    <li>&nbsp;&nbsp;</li>
-                    <li>&nbsp;&nbsp;</li>
-                    <li>&nbsp;&nbsp;</li>
-                    <li><a href="#">administrator</a></li>
-                    <li><a href="#">修改密码</a></li>
-                    <li><a href="#">退出系统</a></li>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo" style="font-size:25px">仓储管理系统</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            @*<ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item"><a href="">控制台</a></li>
+                    <li class="layui-nav-item"><a href="">商品管理</a></li>
+                    <li class="layui-nav-item"><a href="">用户</a></li>
+                </ul>*@
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">当前登录</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">admin</a></dd>
+                        <dd><a href="">修改密码</a></dd>
+                        <dd><a href="">退出系统</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;" id="lie1">系统设置</a>
+                        <dl class="layui-nav-child" id="lie11">
+                            <dd><a href="javascript:;">员工管理</a></dd>
+                            <dd><a href="javascript:;">角色管理</a></dd>
+                            <dd><a href="javascript:;">部门管理</a></dd>
+                            <dd><a href="javascript:;">菜单管理</a></dd>
+                            <dd><a href="javascript:;">权限分配</a></dd>
+                            <dd><a href="javascript:;">标识符管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" id="lie2">基本资料</a>
+                        <dl class="layui-nav-child" id="lie22">
+                            <dd><a href="javascript:;">库位管理</a></dd>
+                            <dd><a href="javascript:;">供应商管理</a></dd>
+                            <dd><a href="javascript:;">客户管理</a></dd>
+                            <dd><a href="javascript:;">计量单位</a></dd>
+                            <dd><a href="javascript:;">产品类别</a></dd>
+                            <dd><a href="javascript:;">产品管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" id="lie3">仓库作业</a>
+                        <dl class="layui-nav-child" id="lie33">
+                            <dd><a href="RukuGuanli">入库管理</a></dd>
+                            <dd><a href="/XBY/ChukuGuanli">出库管理</a></dd>
+                            <dd><a href="/XBY/BaoSunGuanli">报损管理</a></dd>
+                            <dd><a href="/XBY/YiKuGuanli">移库管理</a></dd>
+                            <dd><a href="/XBY/PanDianGuanli">盘点管理</a></dd>
+                            <dd><a href="/XBY/TuiHuoGuanli">退货管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" id="lie4">报表管理</a>
+                        <dl class="layui-nav-child" id="lie44">
+                            <dd><a href="javascript:;">库存清单</a></dd>
+                            <dd><a href="javascript:;">货品统计</a></dd>
+                            <dd><a href="javascript:;">出入库报表</a></dd>
+                            <dd><a href="javascript:;">入库报表</a></dd>
+                            <dd><a href="javascript:;">出库报表</a></dd>
+                            <dd><a href="javascript:;">报损报表</a></dd>
+                            <dd><a href="javascript:;">退货报表</a></dd>
+                            <dd><a href="javascript:;">客户报表</a></dd>
+                            <dd><a href="javascript:;">供应商报表</a></dd>
+                            <dd><a href="javascript:;">台账记录</a></dd>
+                            <dd><a href="javascript:;">自定义报表</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">退出系统</a></li>
                 </ul>
-            </li>
-        </ul>
-    </div>
-    <div id="content">
-        <ul>
-            <li>
-                <a href="#"><span id="content_title" class="content_titlesly1">系统设置</span></a>
-                <ul id="content_title2" class="content_titles1" hidden>
-                    <li><a href="#">员工管理</a></li>
-                    <li><a href="#">角色管理</a></li>
-                    <li><a href="#">部门管理</a></li>
-                    <li><a href="#">菜单管理</a></li>
-                    <li><a href="#">权限分配</a></li>
-                    <li><a href="#">标识符管理</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><span id="content_title" class="content_titlesly2">基本资料</span></a>
-                <ul id="content_title2" class="content_titles2" hidden>
-                    <li><a href="#">库位管理</a></li>
-                    <li><a href="#">供应商管理</a></li>
-                    <li><a href="#">客户管理</a></li>
-                    <li><a href="#">计量单位</a></li>
-                    <li><a href="#">产品类别</a></li>
-                    <li><a href="#">产品管理</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><span id="content_title" class="content_titlesly3">仓库作业</span></a>
-                <ul id="content_title2" class="content_titles3" hidden>
-                    <li><a href="#">入库管理</a></li>
-                    <li><a href="#">出库管理</a></li>
-                    <li><a href="#">报损管理</a></li>
-                    <li><a href="#">移库管理</a></li>
-                    <li><a href="#">盘点管理</a></li>
-                    <li><a href="#">退货管理</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><span id="content_title" class="content_titlesly4">报表管理</span></a>
-                <ul id="content_title2" class="content_titles4" hidden>
-                    <li><a href="#">库存清单</a></li>
-                    <li><a href="#">货品统计</a></li>
-                    <li><a href="#">出入库报表</a></li>
-                    <li><a href="#">入库报表</a></li>
-                    <li><a href="#">出库报表</a></li>
-                    <li><a href="#">报损报表</a></li>
-                    <li><a href="#">退货报表</a></li>
-                    <li><a href="#">客户报表</a></li>
-                    <li><a href="#">供应商报表</a></li>
-                    <li><a href="#">台账记录</a></li>
-                    <li><a href="#">自定义报表</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <span id="content_title">退出系统</span>
-                </a>
-            </li>
-        </ul>
-        <div id="content_right">
-            
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;"> @RenderBody()</div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            <div id="test" style="text-align:right"></div>
         </div>
     </div>
-    <div id="foot" style="border:2px solid red;float:left; width:85%;height:630px;">
-        @*在不同的页面右边显示不同的数据*@
-        @RenderBody()
-        
-    </div>
-</div>
 </body>
 </html>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
+<script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>
 <script>
-    //鼠标移入移出
-    //window.onload = function () {
-    //    var aa = document.getElementById("header_mather");
-    //    var bb = document.getElementById("header_zijiedian");
-    //    aa.onmouseover = function () {
-    //        bb.style.display = "block"
-    //    };
-    //    aa.onmouseout = function () {
-    //        bb.style.display = "none";
-    //    };
-    //}
-    $(function () {
-    $("#header_mather").click(function () {
-        if ($("#header_zijiedian").css("display") == "none") {
-            $("#header_zijiedian").show();
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
 
-        } else {
-            $("#header_zijiedian").hide();
-        }
-        })
 
-        $(".content_titlesly1").click(function () {
-            if ($(".content_titles1").css("display") == "none") {
-                $(".content_titles1").show();
+    });
 
-                $(".content_titles2").hide();
-                $(".content_titles3").hide();
-                $(".content_titles4").hide();
+    layui.use('util', function () {
+        var util = layui.util
+            , $ = layui.$;
 
-            } else {
-                $(".content_titles1").hide();
-            }
-        })
-        $(".content_titlesly2").click(function () {
-            if ($(".content_titles2").css("display") == "none") {
-                $(".content_titles2").show();
+        //倒计时
+        var endTime = new Date(2021, 1, 1).getTime() //假设为结束日期
+            , serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
 
-                $(".content_titles1").hide();
-                $(".content_titles3").hide();
-                $(".content_titles4").hide();
+        util.countdown(endTime, serverTime, function (date, serverTime, timer) {
+            var str = date[0] + '天' + date[1] + '时' + date[2] + '分' + date[3] + '秒';
+            $('#test').html('剩余使用天数：' + str);
+        });
 
-            } else {
-                $(".content_titles2").hide();
-            }
-        })
-        $(".content_titlesly3").click(function () {
-            if ($(".content_titles3").css("display") == "none") {
-                $(".content_titles3").show();
-
-                $(".content_titles2").hide();
-                $(".content_titles1").hide();
-                $(".content_titles4").hide();
-
-            } else {
-                $(".content_titles3").hide();
-            }
-        })
-        $(".content_titlesly4").click(function () {
-            if ($(".content_titles4").css("display") == "none") {
-                $(".content_titles4").show();
-
-                $(".content_titles2").hide();
-                $(".content_titles3").hide();
-                $(".content_titles1").hide();
-
-            } else {
-                $(".content_titles4").hide();
-            }
-        })
+        //某个时间在当前时间的多久前
+        var str = util.timeAgo(new Date(2017, 7, 15, 2, 58, 0));
+        $('#test1').html('示例写于：' + str);
+        
     });
 
 </script>
-
-
 
