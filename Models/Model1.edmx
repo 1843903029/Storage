@@ -1,0 +1,2513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StorageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="PassWord" Type="varchar" MaxLength="20" />
+          <Property Name="UserCode" Type="varchar" MaxLength="20" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateIp" Type="varchar" MaxLength="20" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="15" />
+          <Property Name="LoginCount" Type="int" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="30" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Status_id" Type="int" />
+          <Property Name="DepartNum_id" Type="int" />
+          <Property Name="RoleNum" Type="int" />
+          <Property Name="Remark" Type="varchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Authority">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="NodeId" Type="int" />
+        </EntityType>
+        <EntityType Name="Breakage">
+          <Key>
+            <PropertyRef Name="BreakageID" />
+          </Key>
+          <Property Name="BreakageID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="BreakageType" Type="varchar" MaxLength="50" />
+          <Property Name="AssociatedNumber" Type="varchar" MaxLength="50" />
+          <Property Name="BreakageCount" Type="int" />
+          <Property Name="State" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="operationType" Type="varchar" MaxLength="20" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="DataState" Type="bit" />
+          <Property Name="StateText" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BreakageDetailed">
+          <Key>
+            <PropertyRef Name="BreakageDetailedID" />
+          </Key>
+          <Property Name="BreakageDetailedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BreakageIDS" Type="varchar" MaxLength="20" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="BreakageNumber" Type="int" />
+          <Property Name="Batch" Type="money" />
+          <Property Name="WarehouseID" Type="int" />
+        </EntityType>
+        <EntityType Name="Cangku">
+          <Key>
+            <PropertyRef Name="Ckid" />
+          </Key>
+          <Property Name="Ckid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CKName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KhID" Type="varchar" MaxLength="50" />
+          <Property Name="KhName" Type="varchar" MaxLength="50" />
+          <Property Name="beizhu" Type="varchar" MaxLength="50" />
+          <Property Name="chuanzhen" Type="varchar" MaxLength="50" />
+          <Property Name="youxiang" Type="varchar" MaxLength="50" />
+          <Property Name="Hone" Type="varchar" MaxLength="50" />
+          <Property Name="Time" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="CpGlinfo">
+          <Key>
+            <PropertyRef Name="CpID" />
+          </Key>
+          <Property Name="CpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cpbh" Type="varchar" MaxLength="10" />
+          <Property Name="CpXsName" Type="varchar" MaxLength="50" />
+          <Property Name="CpSx" Type="int" />
+          <Property Name="CpXx" Type="int" />
+          <Property Name="CpPrice" Type="int" />
+          <Property Name="Specification" Type="varchar" MaxLength="50" />
+          <Property Name="CpLb" Type="int" />
+          <Property Name="CpJlName" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CkId" Type="int" />
+          <Property Name="KwId" Type="int" />
+          <Property Name="remark" Type="nchar" MaxLength="10" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="CpLbinfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CpId" Type="varchar" MaxLength="10" />
+          <Property Name="CpLbName" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="int" />
+          <Property Name="CpTime" Type="datetime" />
+          <Property Name="remark" Type="varchar" MaxLength="50" />
+          <Property Name="Delit" Type="bit" />
+        </EntityType>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KehuID" Type="int" />
+          <Property Name="CustomerAddressID" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerAddressName" Type="varchar" MaxLength="50" />
+          <Property Name="Lianxiren" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="CycleCount">
+          <Key>
+            <PropertyRef Name="CycleCountID" />
+          </Key>
+          <Property Name="CycleCountID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CycleCountType" Type="varchar" MaxLength="50" />
+          <Property Name="AssociatedNumber" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+          <Property Name="StateText" Type="varchar" MaxLength="20" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="dataState" Type="bit" />
+        </EntityType>
+        <EntityType Name="CycleCountDetailed">
+          <Key>
+            <PropertyRef Name="CycleCountDetailedID" />
+          </Key>
+          <Property Name="CycleCountDetailedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CycleCountDS" Type="varchar" MaxLength="20" />
+          <Property Name="productID" Type="int" />
+          <Property Name="CycleCountNum" Type="int" />
+          <Property Name="LessthanNum" Type="int" />
+          <Property Name="Batch" Type="money" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="NodeId" />
+          </Key>
+          <Property Name="NodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="50" />
+          <Property Name="NodeURL" Type="varchar" MaxLength="50" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="ParentNodeId" Type="int" />
+          <Property Name="ADDTime" Type="datetime" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JLinfo">
+          <Key>
+            <PropertyRef Name="Jlid" />
+          </Key>
+          <Property Name="Jlid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jlbh" Type="varchar" MaxLength="10" />
+          <Property Name="JlName" Type="varchar" MaxLength="50" />
+          <Property Name="Delit" Type="bit" />
+        </EntityType>
+        <EntityType Name="LocationManagement">
+          <Key>
+            <PropertyRef Name="kwID" />
+          </Key>
+          <Property Name="kwID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kwName" Type="varchar" MaxLength="50" />
+          <Property Name="CangKu" Type="int" />
+          <Property Name="kwType" Type="int" />
+          <Property Name="Zhuangtai" Type="int" />
+          <Property Name="Isdefault" Type="int" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Shuju" Type="bit" />
+        </EntityType>
+        <EntityType Name="LocationManagementType">
+          <Key>
+            <PropertyRef Name="KwID" />
+          </Key>
+          <Property Name="KwID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KwName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Movement">
+          <Key>
+            <PropertyRef Name="MovementID" />
+          </Key>
+          <Property Name="MovementID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MovementType" Type="varchar" MaxLength="50" />
+          <Property Name="Associatednumber" Type="varchar" MaxLength="50" />
+          <Property Name="MovementCount" Type="int" />
+          <Property Name="State" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="StateText" Type="varchar" MaxLength="50" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="DataState" Type="bit" />
+        </EntityType>
+        <EntityType Name="MovementDetailed">
+          <Key>
+            <PropertyRef Name="MovementDetailedID" />
+          </Key>
+          <Property Name="MovementDetailedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovementIDS" Type="varchar" MaxLength="20" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="MovementNumber" Type="int" />
+          <Property Name="Batch" Type="money" />
+          <Property Name="WarehouseID" Type="int" />
+          <Property Name="WarehouseIDs" Type="int" />
+        </EntityType>
+        <EntityType Name="Returns">
+          <Key>
+            <PropertyRef Name="ReturnsID" />
+          </Key>
+          <Property Name="ReturnsID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ReturnsType" Type="varchar" MaxLength="50" />
+          <Property Name="AssociatedNumber" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="StateText" Type="varchar" MaxLength="20" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="DataState" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReturnsDetailed">
+          <Key>
+            <PropertyRef Name="ReturnsdetailedID" />
+          </Key>
+          <Property Name="ReturnsdetailedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReturnsIDS" Type="varchar" MaxLength="20" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="WarehouseID" Type="int" />
+          <Property Name="CheckNum" Type="int" />
+          <Property Name="QuestionNum" Type="int" />
+          <Property Name="Batch" Type="money" />
+        </EntityType>
+        <EntityType Name="StockRemoval">
+          <Key>
+            <PropertyRef Name="StockRemovalID" />
+          </Key>
+          <Property Name="StockRemovalID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="StockRemovalType" Type="varchar" MaxLength="50" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="AssociatedNumber" Type="varchar" MaxLength="50" />
+          <Property Name="GoodsCount" Type="int" />
+          <Property Name="Summoney" Type="money" />
+          <Property Name="State" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="OperationType" Type="varchar" MaxLength="20" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="DataState" Type="bit" />
+          <Property Name="StateText" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StockRemovalDetailed">
+          <Key>
+            <PropertyRef Name="StockRemovalDetailedID" />
+          </Key>
+          <Property Name="StockRemovalDetailedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StockRemovalIDS" Type="varchar" MaxLength="20" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="StockRemovalNumber" Type="int" />
+          <Property Name="Summoney" Type="money" />
+          <Property Name="WarehouseID" Type="int" />
+          <Property Name="Batch" Type="money" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="StorageID" />
+          </Key>
+          <Property Name="StorageID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="StorageType" Type="varchar" MaxLength="50" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="AssociatedNumber" Type="varchar" MaxLength="50" />
+          <Property Name="GoodsCount" Type="int" />
+          <Property Name="Summoney" Type="money" />
+          <Property Name="State" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="OperationType" Type="varchar" MaxLength="20" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="DataState" Type="bit" />
+          <Property Name="StateText" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StorageDetailed">
+          <Key>
+            <PropertyRef Name="StoragedetailedID" />
+          </Key>
+          <Property Name="StoragedetailedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StorageIDS" Type="varchar" MaxLength="20" />
+          <Property Name="productID" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="StorageNumber" Type="int" />
+          <Property Name="Summoney" Type="money" />
+          <Property Name="WarehouseID" Type="int" />
+          <Property Name="Batch" Type="money" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="GysID" />
+          </Key>
+          <Property Name="GysID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GysType" Type="varchar" MaxLength="50" />
+          <Property Name="GysName" Type="varchar" MaxLength="50" />
+          <Property Name="Hone" Type="varchar" MaxLength="50" />
+          <Property Name="ChuangZhen" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Contacts" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Describe" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="SysDepart">
+          <Key>
+            <PropertyRef Name="SysDepartID" />
+          </Key>
+          <Property Name="SysDepartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartNum" Type="varchar" MaxLength="50" />
+          <Property Name="DepartName" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="SysRoleID" />
+          </Key>
+          <Property Name="SysRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleNum" Type="varchar" MaxLength="20" />
+          <Property Name="RoleName" Type="varchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Remark" Type="varchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="SysStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Admin_SysDepart">
+          <End Role="SysDepart" Type="Self.SysDepart" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDepart">
+              <PropertyRef Name="SysDepartID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="DepartNum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="SysRoleID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="RoleNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_SysStatus">
+          <End Role="SysStatus" Type="Self.SysStatus" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authority_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Authority" Type="Self.Authority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Authority">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authority_Function">
+          <End Role="Function" Type="Self.Function" Multiplicity="0..1" />
+          <End Role="Authority" Type="Self.Authority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function">
+              <PropertyRef Name="NodeId" />
+            </Principal>
+            <Dependent Role="Authority">
+              <PropertyRef Name="NodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breakage_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Breakage" Type="Self.Breakage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Breakage">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BreakageDetailed_Breakage">
+          <End Role="Breakage" Type="Self.Breakage" Multiplicity="0..1" />
+          <End Role="BreakageDetailed" Type="Self.BreakageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breakage">
+              <PropertyRef Name="BreakageID" />
+            </Principal>
+            <Dependent Role="BreakageDetailed">
+              <PropertyRef Name="BreakageIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BreakageDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="BreakageDetailed" Type="Self.BreakageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="BreakageDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BreakageDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="BreakageDetailed" Type="Self.BreakageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="BreakageDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_Cangku">
+          <End Role="Cangku" Type="Self.Cangku" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cangku">
+              <PropertyRef Name="Ckid" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="CkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_CpLbinfo">
+          <End Role="CpLbinfo" Type="Self.CpLbinfo" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpLbinfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="CpLb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_JLinfo">
+          <End Role="JLinfo" Type="Self.JLinfo" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JLinfo">
+              <PropertyRef Name="Jlid" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="CpJlName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="KwId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpLbinfo_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="CpLbinfo" Type="Self.CpLbinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="CpLbinfo">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAddress_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerAddress">
+              <PropertyRef Name="KehuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleCount_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="CycleCount" Type="Self.CycleCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="CycleCount">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleCountDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="CycleCountDetailed" Type="Self.CycleCountDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="CycleCountDetailed">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleCountDetailed_CycleCount">
+          <End Role="CycleCount" Type="Self.CycleCount" Multiplicity="0..1" />
+          <End Role="CycleCountDetailed" Type="Self.CycleCountDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CycleCount">
+              <PropertyRef Name="CycleCountID" />
+            </Principal>
+            <Dependent Role="CycleCountDetailed">
+              <PropertyRef Name="CycleCountDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationManagement_Cangku">
+          <End Role="Cangku" Type="Self.Cangku" Multiplicity="0..1" />
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cangku">
+              <PropertyRef Name="Ckid" />
+            </Principal>
+            <Dependent Role="LocationManagement">
+              <PropertyRef Name="CangKu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationManagement_LocationManagementType">
+          <End Role="LocationManagementType" Type="Self.LocationManagementType" Multiplicity="0..1" />
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagementType">
+              <PropertyRef Name="KwID" />
+            </Principal>
+            <Dependent Role="LocationManagement">
+              <PropertyRef Name="kwType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movement_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Movement">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_LocationManagement1">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="WarehouseIDs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_Movement">
+          <End Role="Movement" Type="Self.Movement" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movement">
+              <PropertyRef Name="MovementID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="MovementIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Returns_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Returns" Type="Self.Returns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Returns">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnsDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="ReturnsDetailed" Type="Self.ReturnsDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="ReturnsDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnsDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="ReturnsDetailed" Type="Self.ReturnsDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="ReturnsDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnsDetailed_Returns">
+          <End Role="Returns" Type="Self.Returns" Multiplicity="0..1" />
+          <End Role="ReturnsDetailed" Type="Self.ReturnsDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Returns">
+              <PropertyRef Name="ReturnsID" />
+            </Principal>
+            <Dependent Role="ReturnsDetailed">
+              <PropertyRef Name="ReturnsIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemoval_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="StockRemoval">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemoval_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="GysID" />
+            </Principal>
+            <Dependent Role="StockRemoval">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemovalDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="StockRemovalDetailed" Type="Self.StockRemovalDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="StockRemovalDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemovalDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="StockRemovalDetailed" Type="Self.StockRemovalDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="StockRemovalDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemovalDetailed_StockRemoval">
+          <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="0..1" />
+          <End Role="StockRemovalDetailed" Type="Self.StockRemovalDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockRemoval">
+              <PropertyRef Name="StockRemovalID" />
+            </Principal>
+            <Dependent Role="StockRemovalDetailed">
+              <PropertyRef Name="StockRemovalIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="GysID" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageDetailed_CpLbinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="StorageDetailed" Type="Self.StorageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="StorageDetailed">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="StorageDetailed" Type="Self.StorageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="StorageDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageDetailed_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="StorageDetailed" Type="Self.StorageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="StorageDetailed">
+              <PropertyRef Name="StorageIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StorageModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authority" EntityType="Self.Authority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Breakage" EntityType="Self.Breakage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BreakageDetailed" EntityType="Self.BreakageDetailed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cangku" EntityType="Self.Cangku" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CpGlinfo" EntityType="Self.CpGlinfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CpLbinfo" EntityType="Self.CpLbinfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CycleCount" EntityType="Self.CycleCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CycleCountDetailed" EntityType="Self.CycleCountDetailed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Function" EntityType="Self.Function" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JLinfo" EntityType="Self.JLinfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationManagement" EntityType="Self.LocationManagement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationManagementType" EntityType="Self.LocationManagementType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movement" EntityType="Self.Movement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovementDetailed" EntityType="Self.MovementDetailed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Returns" EntityType="Self.Returns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReturnsDetailed" EntityType="Self.ReturnsDetailed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockRemoval" EntityType="Self.StockRemoval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockRemovalDetailed" EntityType="Self.StockRemovalDetailed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageDetailed" EntityType="Self.StorageDetailed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysDepart" EntityType="Self.SysDepart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysStatus" EntityType="Self.SysStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_SysDepart" Association="Self.FK_Admin_SysDepart">
+            <End Role="SysDepart" EntitySet="SysDepart" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_SysRole" Association="Self.FK_Admin_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_SysStatus" Association="Self.FK_Admin_SysStatus">
+            <End Role="SysStatus" EntitySet="SysStatus" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authority_Admin" Association="Self.FK_Authority_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Authority" EntitySet="Authority" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authority_Function" Association="Self.FK_Authority_Function">
+            <End Role="Function" EntitySet="Function" />
+            <End Role="Authority" EntitySet="Authority" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breakage_Admin" Association="Self.FK_Breakage_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Breakage" EntitySet="Breakage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BreakageDetailed_Breakage" Association="Self.FK_BreakageDetailed_Breakage">
+            <End Role="Breakage" EntitySet="Breakage" />
+            <End Role="BreakageDetailed" EntitySet="BreakageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BreakageDetailed_CpGlinfo" Association="Self.FK_BreakageDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="BreakageDetailed" EntitySet="BreakageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BreakageDetailed_LocationManagement" Association="Self.FK_BreakageDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="BreakageDetailed" EntitySet="BreakageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_Cangku" Association="Self.FK_CpGlinfo_Cangku">
+            <End Role="Cangku" EntitySet="Cangku" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_Client" Association="Self.FK_CpGlinfo_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_CpLbinfo" Association="Self.FK_CpGlinfo_CpLbinfo">
+            <End Role="CpLbinfo" EntitySet="CpLbinfo" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_JLinfo" Association="Self.FK_CpGlinfo_JLinfo">
+            <End Role="JLinfo" EntitySet="JLinfo" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_LocationManagement" Association="Self.FK_CpGlinfo_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpLbinfo_Admin" Association="Self.FK_CpLbinfo_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="CpLbinfo" EntitySet="CpLbinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAddress_Client" Association="Self.FK_CustomerAddress_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleCount_Admin" Association="Self.FK_CycleCount_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="CycleCount" EntitySet="CycleCount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleCountDetailed_CpGlinfo" Association="Self.FK_CycleCountDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="CycleCountDetailed" EntitySet="CycleCountDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleCountDetailed_CycleCount" Association="Self.FK_CycleCountDetailed_CycleCount">
+            <End Role="CycleCount" EntitySet="CycleCount" />
+            <End Role="CycleCountDetailed" EntitySet="CycleCountDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationManagement_Cangku" Association="Self.FK_LocationManagement_Cangku">
+            <End Role="Cangku" EntitySet="Cangku" />
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationManagement_LocationManagementType" Association="Self.FK_LocationManagement_LocationManagementType">
+            <End Role="LocationManagementType" EntitySet="LocationManagementType" />
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movement_Admin" Association="Self.FK_Movement_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Movement" EntitySet="Movement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_CpGlinfo" Association="Self.FK_MovementDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_LocationManagement" Association="Self.FK_MovementDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_LocationManagement1" Association="Self.FK_MovementDetailed_LocationManagement1">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_Movement" Association="Self.FK_MovementDetailed_Movement">
+            <End Role="Movement" EntitySet="Movement" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Returns_Admin" Association="Self.FK_Returns_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Returns" EntitySet="Returns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnsDetailed_CpGlinfo" Association="Self.FK_ReturnsDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="ReturnsDetailed" EntitySet="ReturnsDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnsDetailed_LocationManagement" Association="Self.FK_ReturnsDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="ReturnsDetailed" EntitySet="ReturnsDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnsDetailed_Returns" Association="Self.FK_ReturnsDetailed_Returns">
+            <End Role="Returns" EntitySet="Returns" />
+            <End Role="ReturnsDetailed" EntitySet="ReturnsDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemoval_Admin" Association="Self.FK_StockRemoval_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemoval_Supplier" Association="Self.FK_StockRemoval_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemovalDetailed_CpGlinfo" Association="Self.FK_StockRemovalDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="StockRemovalDetailed" EntitySet="StockRemovalDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemovalDetailed_LocationManagement" Association="Self.FK_StockRemovalDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="StockRemovalDetailed" EntitySet="StockRemovalDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemovalDetailed_StockRemoval" Association="Self.FK_StockRemovalDetailed_StockRemoval">
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+            <End Role="StockRemovalDetailed" EntitySet="StockRemovalDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_Admin" Association="Self.FK_Storage_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_Supplier" Association="Self.FK_Storage_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageDetailed_CpLbinfo" Association="Self.FK_StorageDetailed_CpLbinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="StorageDetailed" EntitySet="StorageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageDetailed_LocationManagement" Association="Self.FK_StorageDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="StorageDetailed" EntitySet="StorageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageDetailed_Storage" Association="Self.FK_StorageDetailed_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="StorageDetailed" EntitySet="StorageDetailed" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StorageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PassWord" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RealName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateIp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateUser" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="LoginCount" Type="Int32" />
+          <Property Name="Picture" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status_id" Type="Int32" />
+          <Property Name="DepartNum_id" Type="Int32" />
+          <Property Name="RoleNum" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="SysDepart" Relationship="Self.FK_Admin_SysDepart" FromRole="Admin" ToRole="SysDepart" />
+          <NavigationProperty Name="SysRole" Relationship="Self.FK_Admin_SysRole" FromRole="Admin" ToRole="SysRole" />
+          <NavigationProperty Name="SysStatus" Relationship="Self.FK_Admin_SysStatus" FromRole="Admin" ToRole="SysStatus" />
+          <NavigationProperty Name="Authority" Relationship="Self.FK_Authority_Admin" FromRole="Admin" ToRole="Authority" />
+          <NavigationProperty Name="Breakage" Relationship="Self.FK_Breakage_Admin" FromRole="Admin" ToRole="Breakage" />
+          <NavigationProperty Name="CpLbinfo" Relationship="Self.FK_CpLbinfo_Admin" FromRole="Admin" ToRole="CpLbinfo" />
+          <NavigationProperty Name="CycleCount" Relationship="Self.FK_CycleCount_Admin" FromRole="Admin" ToRole="CycleCount" />
+          <NavigationProperty Name="Movement" Relationship="Self.FK_Movement_Admin" FromRole="Admin" ToRole="Movement" />
+          <NavigationProperty Name="Returns" Relationship="Self.FK_Returns_Admin" FromRole="Admin" ToRole="Returns" />
+          <NavigationProperty Name="StockRemoval" Relationship="Self.FK_StockRemoval_Admin" FromRole="Admin" ToRole="StockRemoval" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Storage_Admin" FromRole="Admin" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="Authority">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="NodeId" Type="Int32" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Authority_Admin" FromRole="Authority" ToRole="Admin" />
+          <NavigationProperty Name="Function" Relationship="Self.FK_Authority_Function" FromRole="Authority" ToRole="Function" />
+        </EntityType>
+        <EntityType Name="Breakage">
+          <Key>
+            <PropertyRef Name="BreakageID" />
+          </Key>
+          <Property Name="BreakageID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BreakageType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssociatedNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BreakageCount" Type="Int32" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="operationType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreationTime" Type="DateTime" Precision="3" />
+          <Property Name="DataState" Type="Boolean" />
+          <Property Name="StateText" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Breakage_Admin" FromRole="Breakage" ToRole="Admin" />
+          <NavigationProperty Name="BreakageDetailed" Relationship="Self.FK_BreakageDetailed_Breakage" FromRole="Breakage" ToRole="BreakageDetailed" />
+        </EntityType>
+        <EntityType Name="BreakageDetailed">
+          <Key>
+            <PropertyRef Name="BreakageDetailedID" />
+          </Key>
+          <Property Name="BreakageDetailedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BreakageIDS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BreakageNumber" Type="Int32" />
+          <Property Name="Batch" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <NavigationProperty Name="Breakage" Relationship="Self.FK_BreakageDetailed_Breakage" FromRole="BreakageDetailed" ToRole="Breakage" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_BreakageDetailed_CpGlinfo" FromRole="BreakageDetailed" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_BreakageDetailed_LocationManagement" FromRole="BreakageDetailed" ToRole="LocationManagement" />
+        </EntityType>
+        <EntityType Name="Cangku">
+          <Key>
+            <PropertyRef Name="Ckid" />
+          </Key>
+          <Property Name="Ckid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CKName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CpGlinfo_Cangku" FromRole="Cangku" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_LocationManagement_Cangku" FromRole="Cangku" ToRole="LocationManagement" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KhID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KhName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="beizhu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="chuanzhen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="youxiang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CpGlinfo_Client" FromRole="Client" ToRole="CpGlinfo" />
+          <NavigationProperty Name="CustomerAddress" Relationship="Self.FK_CustomerAddress_Client" FromRole="Client" ToRole="CustomerAddress" />
+        </EntityType>
+        <EntityType Name="CpGlinfo">
+          <Key>
+            <PropertyRef Name="CpID" />
+          </Key>
+          <Property Name="CpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cpbh" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CpXsName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CpSx" Type="Int32" />
+          <Property Name="CpXx" Type="Int32" />
+          <Property Name="CpPrice" Type="Int32" />
+          <Property Name="Specification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CpLb" Type="Int32" />
+          <Property Name="CpJlName" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CkId" Type="Int32" />
+          <Property Name="KwId" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="BreakageDetailed" Relationship="Self.FK_BreakageDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="BreakageDetailed" />
+          <NavigationProperty Name="Cangku" Relationship="Self.FK_CpGlinfo_Cangku" FromRole="CpGlinfo" ToRole="Cangku" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_CpGlinfo_Client" FromRole="CpGlinfo" ToRole="Client" />
+          <NavigationProperty Name="CpLbinfo" Relationship="Self.FK_CpGlinfo_CpLbinfo" FromRole="CpGlinfo" ToRole="CpLbinfo" />
+          <NavigationProperty Name="JLinfo" Relationship="Self.FK_CpGlinfo_JLinfo" FromRole="CpGlinfo" ToRole="JLinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_CpGlinfo_LocationManagement" FromRole="CpGlinfo" ToRole="LocationManagement" />
+          <NavigationProperty Name="CycleCountDetailed" Relationship="Self.FK_CycleCountDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="CycleCountDetailed" />
+          <NavigationProperty Name="MovementDetailed" Relationship="Self.FK_MovementDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="MovementDetailed" />
+          <NavigationProperty Name="ReturnsDetailed" Relationship="Self.FK_ReturnsDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="ReturnsDetailed" />
+          <NavigationProperty Name="StockRemovalDetailed" Relationship="Self.FK_StockRemovalDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="StockRemovalDetailed" />
+          <NavigationProperty Name="StorageDetailed" Relationship="Self.FK_StorageDetailed_CpLbinfo" FromRole="CpGlinfo" ToRole="StorageDetailed" />
+        </EntityType>
+        <EntityType Name="CpLbinfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CpId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CpLbName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="Int32" />
+          <Property Name="CpTime" Type="DateTime" Precision="3" />
+          <Property Name="remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Delit" Type="Boolean" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_CpLbinfo_Admin" FromRole="CpLbinfo" ToRole="Admin" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CpGlinfo_CpLbinfo" FromRole="CpLbinfo" ToRole="CpGlinfo" />
+        </EntityType>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KehuID" Type="Int32" />
+          <Property Name="CustomerAddressID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerAddressName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lianxiren" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_CustomerAddress_Client" FromRole="CustomerAddress" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="CycleCount">
+          <Key>
+            <PropertyRef Name="CycleCountID" />
+          </Key>
+          <Property Name="CycleCountID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CycleCountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssociatedNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="StateText" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="CreationTime" Type="DateTime" Precision="3" />
+          <Property Name="dataState" Type="Boolean" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_CycleCount_Admin" FromRole="CycleCount" ToRole="Admin" />
+          <NavigationProperty Name="CycleCountDetailed" Relationship="Self.FK_CycleCountDetailed_CycleCount" FromRole="CycleCount" ToRole="CycleCountDetailed" />
+        </EntityType>
+        <EntityType Name="CycleCountDetailed">
+          <Key>
+            <PropertyRef Name="CycleCountDetailedID" />
+          </Key>
+          <Property Name="CycleCountDetailedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CycleCountDS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="CycleCountNum" Type="Int32" />
+          <Property Name="LessthanNum" Type="Int32" />
+          <Property Name="Batch" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CycleCountDetailed_CpGlinfo" FromRole="CycleCountDetailed" ToRole="CpGlinfo" />
+          <NavigationProperty Name="CycleCount" Relationship="Self.FK_CycleCountDetailed_CycleCount" FromRole="CycleCountDetailed" ToRole="CycleCount" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="NodeId" />
+          </Key>
+          <Property Name="NodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NodeURL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="ParentNodeId" Type="Int32" />
+          <Property Name="ADDTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Authority" Relationship="Self.FK_Authority_Function" FromRole="Function" ToRole="Authority" />
+        </EntityType>
+        <EntityType Name="JLinfo">
+          <Key>
+            <PropertyRef Name="Jlid" />
+          </Key>
+          <Property Name="Jlid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jlbh" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="JlName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Delit" Type="Boolean" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CpGlinfo_JLinfo" FromRole="JLinfo" ToRole="CpGlinfo" />
+        </EntityType>
+        <EntityType Name="LocationManagement">
+          <Key>
+            <PropertyRef Name="kwID" />
+          </Key>
+          <Property Name="kwID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kwName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CangKu" Type="Int32" />
+          <Property Name="kwType" Type="Int32" />
+          <Property Name="Zhuangtai" Type="Int32" />
+          <Property Name="Isdefault" Type="Int32" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Shuju" Type="Boolean" />
+          <NavigationProperty Name="BreakageDetailed" Relationship="Self.FK_BreakageDetailed_LocationManagement" FromRole="LocationManagement" ToRole="BreakageDetailed" />
+          <NavigationProperty Name="Cangku1" Relationship="Self.FK_LocationManagement_Cangku" FromRole="LocationManagement" ToRole="Cangku" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CpGlinfo_LocationManagement" FromRole="LocationManagement" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagementType" Relationship="Self.FK_LocationManagement_LocationManagementType" FromRole="LocationManagement" ToRole="LocationManagementType" />
+          <NavigationProperty Name="MovementDetailed" Relationship="Self.FK_MovementDetailed_LocationManagement" FromRole="LocationManagement" ToRole="MovementDetailed" />
+          <NavigationProperty Name="MovementDetailed1" Relationship="Self.FK_MovementDetailed_LocationManagement1" FromRole="LocationManagement" ToRole="MovementDetailed" />
+          <NavigationProperty Name="ReturnsDetailed" Relationship="Self.FK_ReturnsDetailed_LocationManagement" FromRole="LocationManagement" ToRole="ReturnsDetailed" />
+          <NavigationProperty Name="StockRemovalDetailed" Relationship="Self.FK_StockRemovalDetailed_LocationManagement" FromRole="LocationManagement" ToRole="StockRemovalDetailed" />
+          <NavigationProperty Name="StorageDetailed" Relationship="Self.FK_StorageDetailed_LocationManagement" FromRole="LocationManagement" ToRole="StorageDetailed" />
+        </EntityType>
+        <EntityType Name="LocationManagementType">
+          <Key>
+            <PropertyRef Name="KwID" />
+          </Key>
+          <Property Name="KwID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KwName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_LocationManagement_LocationManagementType" FromRole="LocationManagementType" ToRole="LocationManagement" />
+        </EntityType>
+        <EntityType Name="Movement">
+          <Key>
+            <PropertyRef Name="MovementID" />
+          </Key>
+          <Property Name="MovementID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MovementType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Associatednumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MovementCount" Type="Int32" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="StateText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreationTime" Type="DateTime" Precision="3" />
+          <Property Name="DataState" Type="Boolean" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Movement_Admin" FromRole="Movement" ToRole="Admin" />
+          <NavigationProperty Name="MovementDetailed" Relationship="Self.FK_MovementDetailed_Movement" FromRole="Movement" ToRole="MovementDetailed" />
+        </EntityType>
+        <EntityType Name="MovementDetailed">
+          <Key>
+            <PropertyRef Name="MovementDetailedID" />
+          </Key>
+          <Property Name="MovementDetailedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovementIDS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MovementNumber" Type="Int32" />
+          <Property Name="Batch" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <Property Name="WarehouseIDs" Type="Int32" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_MovementDetailed_CpGlinfo" FromRole="MovementDetailed" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_MovementDetailed_LocationManagement" FromRole="MovementDetailed" ToRole="LocationManagement" />
+          <NavigationProperty Name="LocationManagement1" Relationship="Self.FK_MovementDetailed_LocationManagement1" FromRole="MovementDetailed" ToRole="LocationManagement" />
+          <NavigationProperty Name="Movement" Relationship="Self.FK_MovementDetailed_Movement" FromRole="MovementDetailed" ToRole="Movement" />
+        </EntityType>
+        <EntityType Name="Returns">
+          <Key>
+            <PropertyRef Name="ReturnsID" />
+          </Key>
+          <Property Name="ReturnsID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReturnsType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssociatedNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="StateText" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreationTime" Type="DateTime" Precision="3" />
+          <Property Name="DataState" Type="Boolean" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Returns_Admin" FromRole="Returns" ToRole="Admin" />
+          <NavigationProperty Name="ReturnsDetailed" Relationship="Self.FK_ReturnsDetailed_Returns" FromRole="Returns" ToRole="ReturnsDetailed" />
+        </EntityType>
+        <EntityType Name="ReturnsDetailed">
+          <Key>
+            <PropertyRef Name="ReturnsdetailedID" />
+          </Key>
+          <Property Name="ReturnsdetailedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReturnsIDS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <Property Name="CheckNum" Type="Int32" />
+          <Property Name="QuestionNum" Type="Int32" />
+          <Property Name="Batch" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_ReturnsDetailed_CpGlinfo" FromRole="ReturnsDetailed" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_ReturnsDetailed_LocationManagement" FromRole="ReturnsDetailed" ToRole="LocationManagement" />
+          <NavigationProperty Name="Returns" Relationship="Self.FK_ReturnsDetailed_Returns" FromRole="ReturnsDetailed" ToRole="Returns" />
+        </EntityType>
+        <EntityType Name="StockRemoval">
+          <Key>
+            <PropertyRef Name="StockRemovalID" />
+          </Key>
+          <Property Name="StockRemovalID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StockRemovalType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="AssociatedNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoodsCount" Type="Int32" />
+          <Property Name="Summoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="OperationType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreationTime" Type="DateTime" Precision="3" />
+          <Property Name="DataState" Type="Boolean" />
+          <Property Name="StateText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_StockRemoval_Admin" FromRole="StockRemoval" ToRole="Admin" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_StockRemoval_Supplier" FromRole="StockRemoval" ToRole="Supplier" />
+          <NavigationProperty Name="StockRemovalDetailed" Relationship="Self.FK_StockRemovalDetailed_StockRemoval" FromRole="StockRemoval" ToRole="StockRemovalDetailed" />
+        </EntityType>
+        <EntityType Name="StockRemovalDetailed">
+          <Key>
+            <PropertyRef Name="StockRemovalDetailedID" />
+          </Key>
+          <Property Name="StockRemovalDetailedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StockRemovalIDS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StockRemovalNumber" Type="Int32" />
+          <Property Name="Summoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <Property Name="Batch" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_StockRemovalDetailed_CpGlinfo" FromRole="StockRemovalDetailed" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_StockRemovalDetailed_LocationManagement" FromRole="StockRemovalDetailed" ToRole="LocationManagement" />
+          <NavigationProperty Name="StockRemoval" Relationship="Self.FK_StockRemovalDetailed_StockRemoval" FromRole="StockRemovalDetailed" ToRole="StockRemoval" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="StorageID" />
+          </Key>
+          <Property Name="StorageID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StorageType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="AssociatedNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoodsCount" Type="Int32" />
+          <Property Name="Summoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="OperationType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreationTime" Type="DateTime" Precision="3" />
+          <Property Name="DataState" Type="Boolean" />
+          <Property Name="StateText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Storage_Admin" FromRole="Storage" ToRole="Admin" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Storage_Supplier" FromRole="Storage" ToRole="Supplier" />
+          <NavigationProperty Name="StorageDetailed" Relationship="Self.FK_StorageDetailed_Storage" FromRole="Storage" ToRole="StorageDetailed" />
+        </EntityType>
+        <EntityType Name="StorageDetailed">
+          <Key>
+            <PropertyRef Name="StoragedetailedID" />
+          </Key>
+          <Property Name="StoragedetailedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StorageIDS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StorageNumber" Type="Int32" />
+          <Property Name="Summoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <Property Name="Batch" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_StorageDetailed_CpLbinfo" FromRole="StorageDetailed" ToRole="CpGlinfo" />
+          <NavigationProperty Name="LocationManagement" Relationship="Self.FK_StorageDetailed_LocationManagement" FromRole="StorageDetailed" ToRole="LocationManagement" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_StorageDetailed_Storage" FromRole="StorageDetailed" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="GysID" />
+          </Key>
+          <Property Name="GysID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GysType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GysName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChuangZhen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacts" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Describe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="StockRemoval" Relationship="Self.FK_StockRemoval_Supplier" FromRole="Supplier" ToRole="StockRemoval" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Storage_Supplier" FromRole="Supplier" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="SysDepart">
+          <Key>
+            <PropertyRef Name="SysDepartID" />
+          </Key>
+          <Property Name="SysDepartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DepartName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_SysDepart" FromRole="SysDepart" ToRole="Admin" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="SysRoleID" />
+          </Key>
+          <Property Name="SysRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_SysRole" FromRole="SysRole" ToRole="Admin" />
+        </EntityType>
+        <EntityType Name="SysStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_SysStatus" FromRole="SysStatus" ToRole="Admin" />
+        </EntityType>
+        <Association Name="FK_Admin_SysDepart">
+          <End Role="SysDepart" Type="Self.SysDepart" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDepart">
+              <PropertyRef Name="SysDepartID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="DepartNum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="SysRoleID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="RoleNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_SysStatus">
+          <End Role="SysStatus" Type="Self.SysStatus" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authority_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Authority" Type="Self.Authority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Authority">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breakage_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Breakage" Type="Self.Breakage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Breakage">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpLbinfo_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="CpLbinfo" Type="Self.CpLbinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="CpLbinfo">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleCount_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="CycleCount" Type="Self.CycleCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="CycleCount">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movement_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Movement">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Returns_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Returns" Type="Self.Returns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Returns">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemoval_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="StockRemoval">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authority_Function">
+          <End Role="Function" Type="Self.Function" Multiplicity="0..1" />
+          <End Role="Authority" Type="Self.Authority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function">
+              <PropertyRef Name="NodeId" />
+            </Principal>
+            <Dependent Role="Authority">
+              <PropertyRef Name="NodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BreakageDetailed_Breakage">
+          <End Role="Breakage" Type="Self.Breakage" Multiplicity="0..1" />
+          <End Role="BreakageDetailed" Type="Self.BreakageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breakage">
+              <PropertyRef Name="BreakageID" />
+            </Principal>
+            <Dependent Role="BreakageDetailed">
+              <PropertyRef Name="BreakageIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BreakageDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="BreakageDetailed" Type="Self.BreakageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="BreakageDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BreakageDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="BreakageDetailed" Type="Self.BreakageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="BreakageDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_Cangku">
+          <End Role="Cangku" Type="Self.Cangku" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cangku">
+              <PropertyRef Name="Ckid" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="CkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationManagement_Cangku">
+          <End Role="Cangku" Type="Self.Cangku" Multiplicity="0..1" />
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cangku">
+              <PropertyRef Name="Ckid" />
+            </Principal>
+            <Dependent Role="LocationManagement">
+              <PropertyRef Name="CangKu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAddress_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerAddress">
+              <PropertyRef Name="KehuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_CpLbinfo">
+          <End Role="CpLbinfo" Type="Self.CpLbinfo" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpLbinfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="CpLb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_JLinfo">
+          <End Role="JLinfo" Type="Self.JLinfo" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JLinfo">
+              <PropertyRef Name="Jlid" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="CpJlName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CpGlinfo_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="CpGlinfo">
+              <PropertyRef Name="KwId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleCountDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="CycleCountDetailed" Type="Self.CycleCountDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="CycleCountDetailed">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnsDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="ReturnsDetailed" Type="Self.ReturnsDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="ReturnsDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemovalDetailed_CpGlinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="StockRemovalDetailed" Type="Self.StockRemovalDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="StockRemovalDetailed">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageDetailed_CpLbinfo">
+          <End Role="CpGlinfo" Type="Self.CpGlinfo" Multiplicity="0..1" />
+          <End Role="StorageDetailed" Type="Self.StorageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CpGlinfo">
+              <PropertyRef Name="CpID" />
+            </Principal>
+            <Dependent Role="StorageDetailed">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleCountDetailed_CycleCount">
+          <End Role="CycleCount" Type="Self.CycleCount" Multiplicity="0..1" />
+          <End Role="CycleCountDetailed" Type="Self.CycleCountDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CycleCount">
+              <PropertyRef Name="CycleCountID" />
+            </Principal>
+            <Dependent Role="CycleCountDetailed">
+              <PropertyRef Name="CycleCountDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationManagement_LocationManagementType">
+          <End Role="LocationManagementType" Type="Self.LocationManagementType" Multiplicity="0..1" />
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagementType">
+              <PropertyRef Name="KwID" />
+            </Principal>
+            <Dependent Role="LocationManagement">
+              <PropertyRef Name="kwType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_LocationManagement1">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="WarehouseIDs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnsDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="ReturnsDetailed" Type="Self.ReturnsDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="ReturnsDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemovalDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="StockRemovalDetailed" Type="Self.StockRemovalDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="StockRemovalDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageDetailed_LocationManagement">
+          <End Role="LocationManagement" Type="Self.LocationManagement" Multiplicity="0..1" />
+          <End Role="StorageDetailed" Type="Self.StorageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationManagement">
+              <PropertyRef Name="kwID" />
+            </Principal>
+            <Dependent Role="StorageDetailed">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovementDetailed_Movement">
+          <End Role="Movement" Type="Self.Movement" Multiplicity="0..1" />
+          <End Role="MovementDetailed" Type="Self.MovementDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movement">
+              <PropertyRef Name="MovementID" />
+            </Principal>
+            <Dependent Role="MovementDetailed">
+              <PropertyRef Name="MovementIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnsDetailed_Returns">
+          <End Role="Returns" Type="Self.Returns" Multiplicity="0..1" />
+          <End Role="ReturnsDetailed" Type="Self.ReturnsDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Returns">
+              <PropertyRef Name="ReturnsID" />
+            </Principal>
+            <Dependent Role="ReturnsDetailed">
+              <PropertyRef Name="ReturnsIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemoval_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="GysID" />
+            </Principal>
+            <Dependent Role="StockRemoval">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockRemovalDetailed_StockRemoval">
+          <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="0..1" />
+          <End Role="StockRemovalDetailed" Type="Self.StockRemovalDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockRemoval">
+              <PropertyRef Name="StockRemovalID" />
+            </Principal>
+            <Dependent Role="StockRemovalDetailed">
+              <PropertyRef Name="StockRemovalIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="GysID" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageDetailed_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="StorageDetailed" Type="Self.StorageDetailed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="StorageDetailed">
+              <PropertyRef Name="StorageIDS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StorageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Authority" EntityType="Self.Authority" />
+          <EntitySet Name="Breakage" EntityType="Self.Breakage" />
+          <EntitySet Name="BreakageDetailed" EntityType="Self.BreakageDetailed" />
+          <EntitySet Name="Cangku" EntityType="Self.Cangku" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="CpGlinfo" EntityType="Self.CpGlinfo" />
+          <EntitySet Name="CpLbinfo" EntityType="Self.CpLbinfo" />
+          <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" />
+          <EntitySet Name="CycleCount" EntityType="Self.CycleCount" />
+          <EntitySet Name="CycleCountDetailed" EntityType="Self.CycleCountDetailed" />
+          <EntitySet Name="Function" EntityType="Self.Function" />
+          <EntitySet Name="JLinfo" EntityType="Self.JLinfo" />
+          <EntitySet Name="LocationManagement" EntityType="Self.LocationManagement" />
+          <EntitySet Name="LocationManagementType" EntityType="Self.LocationManagementType" />
+          <EntitySet Name="Movement" EntityType="Self.Movement" />
+          <EntitySet Name="MovementDetailed" EntityType="Self.MovementDetailed" />
+          <EntitySet Name="Returns" EntityType="Self.Returns" />
+          <EntitySet Name="ReturnsDetailed" EntityType="Self.ReturnsDetailed" />
+          <EntitySet Name="StockRemoval" EntityType="Self.StockRemoval" />
+          <EntitySet Name="StockRemovalDetailed" EntityType="Self.StockRemovalDetailed" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" />
+          <EntitySet Name="StorageDetailed" EntityType="Self.StorageDetailed" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="SysDepart" EntityType="Self.SysDepart" />
+          <EntitySet Name="SysRole" EntityType="Self.SysRole" />
+          <EntitySet Name="SysStatus" EntityType="Self.SysStatus" />
+          <AssociationSet Name="FK_Admin_SysDepart" Association="Self.FK_Admin_SysDepart">
+            <End Role="SysDepart" EntitySet="SysDepart" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_SysRole" Association="Self.FK_Admin_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_SysStatus" Association="Self.FK_Admin_SysStatus">
+            <End Role="SysStatus" EntitySet="SysStatus" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authority_Admin" Association="Self.FK_Authority_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Authority" EntitySet="Authority" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breakage_Admin" Association="Self.FK_Breakage_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Breakage" EntitySet="Breakage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpLbinfo_Admin" Association="Self.FK_CpLbinfo_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="CpLbinfo" EntitySet="CpLbinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleCount_Admin" Association="Self.FK_CycleCount_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="CycleCount" EntitySet="CycleCount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movement_Admin" Association="Self.FK_Movement_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Movement" EntitySet="Movement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Returns_Admin" Association="Self.FK_Returns_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Returns" EntitySet="Returns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemoval_Admin" Association="Self.FK_StockRemoval_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_Admin" Association="Self.FK_Storage_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authority_Function" Association="Self.FK_Authority_Function">
+            <End Role="Function" EntitySet="Function" />
+            <End Role="Authority" EntitySet="Authority" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BreakageDetailed_Breakage" Association="Self.FK_BreakageDetailed_Breakage">
+            <End Role="Breakage" EntitySet="Breakage" />
+            <End Role="BreakageDetailed" EntitySet="BreakageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BreakageDetailed_CpGlinfo" Association="Self.FK_BreakageDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="BreakageDetailed" EntitySet="BreakageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BreakageDetailed_LocationManagement" Association="Self.FK_BreakageDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="BreakageDetailed" EntitySet="BreakageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_Cangku" Association="Self.FK_CpGlinfo_Cangku">
+            <End Role="Cangku" EntitySet="Cangku" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationManagement_Cangku" Association="Self.FK_LocationManagement_Cangku">
+            <End Role="Cangku" EntitySet="Cangku" />
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_Client" Association="Self.FK_CpGlinfo_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAddress_Client" Association="Self.FK_CustomerAddress_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_CpLbinfo" Association="Self.FK_CpGlinfo_CpLbinfo">
+            <End Role="CpLbinfo" EntitySet="CpLbinfo" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_JLinfo" Association="Self.FK_CpGlinfo_JLinfo">
+            <End Role="JLinfo" EntitySet="JLinfo" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CpGlinfo_LocationManagement" Association="Self.FK_CpGlinfo_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleCountDetailed_CpGlinfo" Association="Self.FK_CycleCountDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="CycleCountDetailed" EntitySet="CycleCountDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_CpGlinfo" Association="Self.FK_MovementDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnsDetailed_CpGlinfo" Association="Self.FK_ReturnsDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="ReturnsDetailed" EntitySet="ReturnsDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemovalDetailed_CpGlinfo" Association="Self.FK_StockRemovalDetailed_CpGlinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="StockRemovalDetailed" EntitySet="StockRemovalDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageDetailed_CpLbinfo" Association="Self.FK_StorageDetailed_CpLbinfo">
+            <End Role="CpGlinfo" EntitySet="CpGlinfo" />
+            <End Role="StorageDetailed" EntitySet="StorageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleCountDetailed_CycleCount" Association="Self.FK_CycleCountDetailed_CycleCount">
+            <End Role="CycleCount" EntitySet="CycleCount" />
+            <End Role="CycleCountDetailed" EntitySet="CycleCountDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationManagement_LocationManagementType" Association="Self.FK_LocationManagement_LocationManagementType">
+            <End Role="LocationManagementType" EntitySet="LocationManagementType" />
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_LocationManagement" Association="Self.FK_MovementDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_LocationManagement1" Association="Self.FK_MovementDetailed_LocationManagement1">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnsDetailed_LocationManagement" Association="Self.FK_ReturnsDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="ReturnsDetailed" EntitySet="ReturnsDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemovalDetailed_LocationManagement" Association="Self.FK_StockRemovalDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="StockRemovalDetailed" EntitySet="StockRemovalDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageDetailed_LocationManagement" Association="Self.FK_StorageDetailed_LocationManagement">
+            <End Role="LocationManagement" EntitySet="LocationManagement" />
+            <End Role="StorageDetailed" EntitySet="StorageDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovementDetailed_Movement" Association="Self.FK_MovementDetailed_Movement">
+            <End Role="Movement" EntitySet="Movement" />
+            <End Role="MovementDetailed" EntitySet="MovementDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnsDetailed_Returns" Association="Self.FK_ReturnsDetailed_Returns">
+            <End Role="Returns" EntitySet="Returns" />
+            <End Role="ReturnsDetailed" EntitySet="ReturnsDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemoval_Supplier" Association="Self.FK_StockRemoval_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockRemovalDetailed_StockRemoval" Association="Self.FK_StockRemovalDetailed_StockRemoval">
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+            <End Role="StockRemovalDetailed" EntitySet="StockRemovalDetailed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_Supplier" Association="Self.FK_Storage_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageDetailed_Storage" Association="Self.FK_StorageDetailed_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="StorageDetailed" EntitySet="StorageDetailed" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StorageModelStoreContainer" CdmEntityContainer="StorageEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="StorageModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateIp" ColumnName="CreateIp" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+                <ScalarProperty Name="DepartNum_id" ColumnName="DepartNum_id" />
+                <ScalarProperty Name="RoleNum" ColumnName="RoleNum" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authority">
+            <EntityTypeMapping TypeName="StorageModel.Authority">
+              <MappingFragment StoreEntitySet="Authority">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="NodeId" ColumnName="NodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Breakage">
+            <EntityTypeMapping TypeName="StorageModel.Breakage">
+              <MappingFragment StoreEntitySet="Breakage">
+                <ScalarProperty Name="BreakageID" ColumnName="BreakageID" />
+                <ScalarProperty Name="BreakageType" ColumnName="BreakageType" />
+                <ScalarProperty Name="AssociatedNumber" ColumnName="AssociatedNumber" />
+                <ScalarProperty Name="BreakageCount" ColumnName="BreakageCount" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="operationType" ColumnName="operationType" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="StateText" ColumnName="StateText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BreakageDetailed">
+            <EntityTypeMapping TypeName="StorageModel.BreakageDetailed">
+              <MappingFragment StoreEntitySet="BreakageDetailed">
+                <ScalarProperty Name="BreakageDetailedID" ColumnName="BreakageDetailedID" />
+                <ScalarProperty Name="BreakageIDS" ColumnName="BreakageIDS" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="BreakageNumber" ColumnName="BreakageNumber" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cangku">
+            <EntityTypeMapping TypeName="StorageModel.Cangku">
+              <MappingFragment StoreEntitySet="Cangku">
+                <ScalarProperty Name="Ckid" ColumnName="Ckid" />
+                <ScalarProperty Name="CKName" ColumnName="CKName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="StorageModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KhID" ColumnName="KhID" />
+                <ScalarProperty Name="KhName" ColumnName="KhName" />
+                <ScalarProperty Name="beizhu" ColumnName="beizhu" />
+                <ScalarProperty Name="chuanzhen" ColumnName="chuanzhen" />
+                <ScalarProperty Name="youxiang" ColumnName="youxiang" />
+                <ScalarProperty Name="Hone" ColumnName="Hone" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CpGlinfo">
+            <EntityTypeMapping TypeName="StorageModel.CpGlinfo">
+              <MappingFragment StoreEntitySet="CpGlinfo">
+                <ScalarProperty Name="CpID" ColumnName="CpID" />
+                <ScalarProperty Name="Cpbh" ColumnName="Cpbh" />
+                <ScalarProperty Name="CpXsName" ColumnName="CpXsName" />
+                <ScalarProperty Name="CpSx" ColumnName="CpSx" />
+                <ScalarProperty Name="CpXx" ColumnName="CpXx" />
+                <ScalarProperty Name="CpPrice" ColumnName="CpPrice" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="CpLb" ColumnName="CpLb" />
+                <ScalarProperty Name="CpJlName" ColumnName="CpJlName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CkId" ColumnName="CkId" />
+                <ScalarProperty Name="KwId" ColumnName="KwId" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CpLbinfo">
+            <EntityTypeMapping TypeName="StorageModel.CpLbinfo">
+              <MappingFragment StoreEntitySet="CpLbinfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CpId" ColumnName="CpId" />
+                <ScalarProperty Name="CpLbName" ColumnName="CpLbName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CpTime" ColumnName="CpTime" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="Delit" ColumnName="Delit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerAddress">
+            <EntityTypeMapping TypeName="StorageModel.CustomerAddress">
+              <MappingFragment StoreEntitySet="CustomerAddress">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KehuID" ColumnName="KehuID" />
+                <ScalarProperty Name="CustomerAddressID" ColumnName="CustomerAddressID" />
+                <ScalarProperty Name="CustomerAddressName" ColumnName="CustomerAddressName" />
+                <ScalarProperty Name="Lianxiren" ColumnName="Lianxiren" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CycleCount">
+            <EntityTypeMapping TypeName="StorageModel.CycleCount">
+              <MappingFragment StoreEntitySet="CycleCount">
+                <ScalarProperty Name="CycleCountID" ColumnName="CycleCountID" />
+                <ScalarProperty Name="CycleCountType" ColumnName="CycleCountType" />
+                <ScalarProperty Name="AssociatedNumber" ColumnName="AssociatedNumber" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="StateText" ColumnName="StateText" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="dataState" ColumnName="dataState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CycleCountDetailed">
+            <EntityTypeMapping TypeName="StorageModel.CycleCountDetailed">
+              <MappingFragment StoreEntitySet="CycleCountDetailed">
+                <ScalarProperty Name="CycleCountDetailedID" ColumnName="CycleCountDetailedID" />
+                <ScalarProperty Name="CycleCountDS" ColumnName="CycleCountDS" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="CycleCountNum" ColumnName="CycleCountNum" />
+                <ScalarProperty Name="LessthanNum" ColumnName="LessthanNum" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Function">
+            <EntityTypeMapping TypeName="StorageModel.Function">
+              <MappingFragment StoreEntitySet="Function">
+                <ScalarProperty Name="NodeId" ColumnName="NodeId" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="NodeURL" ColumnName="NodeURL" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="ParentNodeId" ColumnName="ParentNodeId" />
+                <ScalarProperty Name="ADDTime" ColumnName="ADDTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JLinfo">
+            <EntityTypeMapping TypeName="StorageModel.JLinfo">
+              <MappingFragment StoreEntitySet="JLinfo">
+                <ScalarProperty Name="Jlid" ColumnName="Jlid" />
+                <ScalarProperty Name="Jlbh" ColumnName="Jlbh" />
+                <ScalarProperty Name="JlName" ColumnName="JlName" />
+                <ScalarProperty Name="Delit" ColumnName="Delit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationManagement">
+            <EntityTypeMapping TypeName="StorageModel.LocationManagement">
+              <MappingFragment StoreEntitySet="LocationManagement">
+                <ScalarProperty Name="kwID" ColumnName="kwID" />
+                <ScalarProperty Name="kwName" ColumnName="kwName" />
+                <ScalarProperty Name="CangKu" ColumnName="CangKu" />
+                <ScalarProperty Name="kwType" ColumnName="kwType" />
+                <ScalarProperty Name="Zhuangtai" ColumnName="Zhuangtai" />
+                <ScalarProperty Name="Isdefault" ColumnName="Isdefault" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Shuju" ColumnName="Shuju" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationManagementType">
+            <EntityTypeMapping TypeName="StorageModel.LocationManagementType">
+              <MappingFragment StoreEntitySet="LocationManagementType">
+                <ScalarProperty Name="KwID" ColumnName="KwID" />
+                <ScalarProperty Name="KwName" ColumnName="KwName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movement">
+            <EntityTypeMapping TypeName="StorageModel.Movement">
+              <MappingFragment StoreEntitySet="Movement">
+                <ScalarProperty Name="MovementID" ColumnName="MovementID" />
+                <ScalarProperty Name="MovementType" ColumnName="MovementType" />
+                <ScalarProperty Name="Associatednumber" ColumnName="Associatednumber" />
+                <ScalarProperty Name="MovementCount" ColumnName="MovementCount" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="StateText" ColumnName="StateText" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovementDetailed">
+            <EntityTypeMapping TypeName="StorageModel.MovementDetailed">
+              <MappingFragment StoreEntitySet="MovementDetailed">
+                <ScalarProperty Name="MovementDetailedID" ColumnName="MovementDetailedID" />
+                <ScalarProperty Name="MovementIDS" ColumnName="MovementIDS" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="MovementNumber" ColumnName="MovementNumber" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="WarehouseIDs" ColumnName="WarehouseIDs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Returns">
+            <EntityTypeMapping TypeName="StorageModel.Returns">
+              <MappingFragment StoreEntitySet="Returns">
+                <ScalarProperty Name="ReturnsID" ColumnName="ReturnsID" />
+                <ScalarProperty Name="ReturnsType" ColumnName="ReturnsType" />
+                <ScalarProperty Name="AssociatedNumber" ColumnName="AssociatedNumber" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="StateText" ColumnName="StateText" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReturnsDetailed">
+            <EntityTypeMapping TypeName="StorageModel.ReturnsDetailed">
+              <MappingFragment StoreEntitySet="ReturnsDetailed">
+                <ScalarProperty Name="ReturnsdetailedID" ColumnName="ReturnsdetailedID" />
+                <ScalarProperty Name="ReturnsIDS" ColumnName="ReturnsIDS" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="CheckNum" ColumnName="CheckNum" />
+                <ScalarProperty Name="QuestionNum" ColumnName="QuestionNum" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockRemoval">
+            <EntityTypeMapping TypeName="StorageModel.StockRemoval">
+              <MappingFragment StoreEntitySet="StockRemoval">
+                <ScalarProperty Name="StockRemovalID" ColumnName="StockRemovalID" />
+                <ScalarProperty Name="StockRemovalType" ColumnName="StockRemovalType" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="AssociatedNumber" ColumnName="AssociatedNumber" />
+                <ScalarProperty Name="GoodsCount" ColumnName="GoodsCount" />
+                <ScalarProperty Name="Summoney" ColumnName="Summoney" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="StateText" ColumnName="StateText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockRemovalDetailed">
+            <EntityTypeMapping TypeName="StorageModel.StockRemovalDetailed">
+              <MappingFragment StoreEntitySet="StockRemovalDetailed">
+                <ScalarProperty Name="StockRemovalDetailedID" ColumnName="StockRemovalDetailedID" />
+                <ScalarProperty Name="StockRemovalIDS" ColumnName="StockRemovalIDS" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StockRemovalNumber" ColumnName="StockRemovalNumber" />
+                <ScalarProperty Name="Summoney" ColumnName="Summoney" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage">
+            <EntityTypeMapping TypeName="StorageModel.Storage">
+              <MappingFragment StoreEntitySet="Storage">
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="StorageType" ColumnName="StorageType" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="AssociatedNumber" ColumnName="AssociatedNumber" />
+                <ScalarProperty Name="GoodsCount" ColumnName="GoodsCount" />
+                <ScalarProperty Name="Summoney" ColumnName="Summoney" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="DataState" ColumnName="DataState" />
+                <ScalarProperty Name="StateText" ColumnName="StateText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageDetailed">
+            <EntityTypeMapping TypeName="StorageModel.StorageDetailed">
+              <MappingFragment StoreEntitySet="StorageDetailed">
+                <ScalarProperty Name="StoragedetailedID" ColumnName="StoragedetailedID" />
+                <ScalarProperty Name="StorageIDS" ColumnName="StorageIDS" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StorageNumber" ColumnName="StorageNumber" />
+                <ScalarProperty Name="Summoney" ColumnName="Summoney" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="StorageModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="GysID" ColumnName="GysID" />
+                <ScalarProperty Name="GysType" ColumnName="GysType" />
+                <ScalarProperty Name="GysName" ColumnName="GysName" />
+                <ScalarProperty Name="Hone" ColumnName="Hone" />
+                <ScalarProperty Name="ChuangZhen" ColumnName="ChuangZhen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysDepart">
+            <EntityTypeMapping TypeName="StorageModel.SysDepart">
+              <MappingFragment StoreEntitySet="SysDepart">
+                <ScalarProperty Name="SysDepartID" ColumnName="SysDepartID" />
+                <ScalarProperty Name="DepartNum" ColumnName="DepartNum" />
+                <ScalarProperty Name="DepartName" ColumnName="DepartName" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRole">
+            <EntityTypeMapping TypeName="StorageModel.SysRole">
+              <MappingFragment StoreEntitySet="SysRole">
+                <ScalarProperty Name="SysRoleID" ColumnName="SysRoleID" />
+                <ScalarProperty Name="RoleNum" ColumnName="RoleNum" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysStatus">
+            <EntityTypeMapping TypeName="StorageModel.SysStatus">
+              <MappingFragment StoreEntitySet="SysStatus">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

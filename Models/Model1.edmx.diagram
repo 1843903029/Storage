@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="27a3743ff51a4b40b45884de77a95edd" Name="Diagram1">
+        <EntityTypeShape EntityType="StorageModel.Admin" Width="1.5" PointX="1.5" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Authority" Width="1.5" PointX="3.75" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Breakage" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.BreakageDetailed" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Cangku" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Client" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.CpGlinfo" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.CpLbinfo" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.CustomerAddress" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.CycleCount" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.CycleCountDetailed" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Function" Width="1.5" PointX="1.5" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.JLinfo" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.LocationManagement" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.LocationManagementType" Width="1.5" PointX="3.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Movement" Width="1.5" PointX="9" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.MovementDetailed" Width="1.5" PointX="11.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Returns" Width="1.5" PointX="6" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.ReturnsDetailed" Width="1.5" PointX="8.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.StockRemoval" Width="1.5" PointX="9" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.StockRemovalDetailed" Width="1.5" PointX="11.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Storage" Width="1.5" PointX="9" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.StorageDetailed" Width="1.5" PointX="11.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.Supplier" Width="1.5" PointX="6.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.SysDepart" Width="1.5" PointX="1.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.SysRole" Width="1.5" PointX="1.5" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StorageModel.SysStatus" Width="1.5" PointX="1.5" PointY="36.75" IsExpanded="true" />
+        <AssociationConnector Association="StorageModel.FK_Admin_SysDepart" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Admin_SysRole" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Admin_SysStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Authority_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Breakage_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CpLbinfo_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CycleCount_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Movement_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Returns_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StockRemoval_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Storage_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Authority_Function" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_BreakageDetailed_Breakage" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_BreakageDetailed_CpGlinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_BreakageDetailed_LocationManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CpGlinfo_Cangku" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_LocationManagement_Cangku" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CpGlinfo_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CustomerAddress_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CpGlinfo_CpLbinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CpGlinfo_JLinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CpGlinfo_LocationManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CycleCountDetailed_CpGlinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_MovementDetailed_CpGlinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_ReturnsDetailed_CpGlinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StockRemovalDetailed_CpGlinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StorageDetailed_CpLbinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_CycleCountDetailed_CycleCount" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_LocationManagement_LocationManagementType" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_MovementDetailed_LocationManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_MovementDetailed_LocationManagement1" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_ReturnsDetailed_LocationManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StockRemovalDetailed_LocationManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StorageDetailed_LocationManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_MovementDetailed_Movement" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_ReturnsDetailed_Returns" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StockRemoval_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StockRemovalDetailed_StockRemoval" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_Storage_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StorageDetailed_Storage" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
