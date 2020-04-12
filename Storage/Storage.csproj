@@ -272,6 +272,8 @@
     <Content Include="Views\LLQ\CpGl.cshtml" />
     <Content Include="Views\LLQ\Cplb.cshtml" />
     <Content Include="Views\LLQ\Jldw.cshtml" />
+    <Content Include="Views\LL\Index.cshtml" />
+    <Content Include="Views\LLJ\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -282,8 +284,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\LLJ\" />
-    <Folder Include="Views\LL\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
