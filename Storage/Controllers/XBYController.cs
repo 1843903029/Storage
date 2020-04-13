@@ -23,6 +23,11 @@ namespace Storage.Controllers
             return View();
         }
 
+        public ActionResult RuKuList(int PageSize, int PageIndex, int State)
+        {
+            return Json(BLL.XBY.StorageManager.RuKuList(PageSize, PageIndex, State), JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 出库管理页面
         /// </summary>
