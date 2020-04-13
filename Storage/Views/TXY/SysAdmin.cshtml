@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
     <div style="border:0px solid #4cff00;width:95%;">
@@ -25,6 +26,7 @@
                 </table>
                 <table>
                     <tr>
+
                         <td><strong style="margin-left:20px">用户管理</strong></td>
                         <td> <input style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
@@ -85,6 +87,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
+                        <td style="width:20px;"><input type="checkbox" /></td>
                         <td>用户名</td>
                         <td>编号</td>
                         <td>真名</td>
@@ -170,12 +173,17 @@
                     </tr>
                 </table>
             </div>
-            </div>
+            @*分页*@
+            <div id="pageDemo">
 
             </div>
+        </div>
+
+    </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
 <script>
     $(function () {
         $("#btnSubhh").click(function () {

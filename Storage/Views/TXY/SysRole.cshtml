@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>SysRole</title>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
     <div style="border:0px solid #4cff00;width:95%;">
@@ -43,6 +44,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
+                        <td style="width:20px;"><input type="checkbox" /></td>
                         <td>序号</td>
                         <td>角色编号</td>
                         <td>角色名</td>
@@ -51,12 +53,23 @@
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody id="tb1"></tbody>
+                <tbody id="tb1">
+                    <tr>
+                        <td style="width:20px;"><input type="checkbox" /></td>
+                        <td>1</td>
+                        <td>000003</td>
+                        <td>门卫</td>
+                        <td>2016-1-1</td>
+                        <td></td>
+                        <td><a href="#">编辑</a>&nbsp;<a href="#">删除</a>&nbsp;<a href="#">权限分配</a></td>
+                    </tr>
+                </tbody>
             </table>
             <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px" hidden>
                 <div class="tab-pane active" id="widget_tab1">
                     <table class="formtab_user">
                         <tbody>
+
                             <tr>
                                 <td>角色编号</td>
                                 <td>
@@ -81,15 +94,64 @@
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
+
             </div>
+            @*分页*@
+            <div id="pageDemo">
+
             </div>
+        </div>
     </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
 <script>
     $(function () {
+        var PageIndex = 1;
+        var PageSize = 6;
+        var PageCount = 0;
+        var rows = 0;
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'pageDemo'
+                , count: rows//总条数
+                , limit: 2//每页显示数
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+
+                    //设置当前页
+                    PageIndex = obj.curr;
+                    //设置每页显示
+                    PageSize = obj.limit;
+                    get();
+                }
+            });
+        });
+        function get() {
+            $.ajax({
+                type: "POST",
+                url: "/TXY/GetAll",
+                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",SysRole:{SysRoleID:'" + $("#SysRoleID").val()+"'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $("#tb1 tr").remove();
+                    rows = result.PageCount;
+                    $.each(result.DataList, function (index, data) {
+                        $("#tb1").append("<tr><td>" + data.SysRoleID + "</td ><td>" + data.RoleNum + "</td ><td>" + data.RoleName + "</td><td>" + data.CreateTime + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'>权限分配</a></td></tr>");
+                    })
+                },
+                erro: function (ex) {
+                    alert(ex.responseText);
+                }
+            })
+        }
         $("#btnSubhh").click(function () {
             if ($("#jbox-content").css("display") == "none") {
                 $("#jbox-content").show();
