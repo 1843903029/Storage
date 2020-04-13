@@ -10,11 +10,11 @@ namespace DAL.TXY
 {
     public class SysRoleService
     {
-        public static models.PageList fy(int pageIndex, int pageSize, SysRole role)
+        public static Models.PageList fy(int pageIndex, int pageSize, SysRole role)
         {
             StorageEntities b = new StorageEntities();
             var query = from p in b.SysRole select p;
-            models.PageList li = new models.PageList();
+            Models.PageList li = new Models.PageList();
             var list = from p in query
                        orderby p.SysRoleID ascending
                        select new

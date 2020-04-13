@@ -19,7 +19,7 @@ namespace BLL.TXY
             }
             return rows / pageSize + 1;
         }
-        public static models.PageList fy(int pageIndex, int pageSize, SysRole role)
+        public static Models.PageList fy(int pageIndex, int pageSize, SysRole role)
         {
 
             return DAL.TXY.SysRoleService.fy(pageIndex, pageSize, role);
