@@ -275,6 +275,7 @@
     <Content Include="Views\LLQ\Jldw.cshtml" />
     <Content Include="Views\LL\Index.cshtml" />
     <Content Include="Views\LLJ\Index.cshtml" />
+    <Content Include="Views\TXY\Rgion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

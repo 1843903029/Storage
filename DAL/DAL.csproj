@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TXY\AdminService.cs" />
     <Compile Include="TXY\SysRoleService.cs" />
     <Compile Include="XBY\StorageService.cs" />
   </ItemGroup>
