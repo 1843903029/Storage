@@ -37,6 +37,11 @@ namespace Storage.Controllers
             return View();
         }
 
+        public ActionResult ChuKuList(int PageIndex, int PageSize, int State)
+        {
+            return Json(BLL.XBY.StockRemovalManager.ChuKuList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 报损管理页面
         /// </summary>
