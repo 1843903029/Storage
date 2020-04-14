@@ -291,7 +291,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\LL\GYSguanli.cshtml" />
     <Content Include="Views\LL\KHguanli.cshtml" />
-    <Content Include="Views\TXY\Rgion.cshtml" />
+    <Content Include="Views\TXY\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

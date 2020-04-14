@@ -15,9 +15,14 @@ namespace Storage.Controllers
         {
             return View();
         }
-        public ActionResult Rgion(Admin a)
+        //登录
+        public ActionResult Rogin(Admin a)
         {
                 return Json(BLL.TXY.AdminManager.Rogin(a), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Login()
+        {
+            return View();
         }
         //fenye
         public ActionResult Indexs(int PageSize)
