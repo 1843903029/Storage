@@ -4,48 +4,51 @@
     Layout = "~/Views/MainPage.cshtml";
 }
 
-<div>
-    <table>
-        <tr>
-            <td><a href="#">首页<</a></td>
-            <td>基本信息<</td>
-            <td>客户管理</td>
-        </tr>
-    </table>
-    <div>
-        <h4>客户管理</h4>
-        <div style="float:right;display:inline-block;">
-            @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
-                <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
+<div style="border:0px solid #4cff00;width:95%;">
+    <div style="padding:15px;border:1px solid red">
+        <div>
+            <table>
+                <tr>
+                    <td><a href="#">首页<</a></td>
+                    <td>基本信息<</td>
+                    <td>客户管理</td>
+                </tr>
+            </table>
+            <div>
+                <h4>客户管理</h4>
+                <div style="float:right;display:inline-block;">
+                    @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
+                        <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
+                </div>
+            </div>
+
+            <table action="javascript:void(0)" class="form-horizontal">
+                <tr>
+                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择客户编号或名称"></td>
+
+                    <td>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                    </td>
+
+                </tr>
+            </table>
+            <div class="widget" hidden>
+
+            </div>
         </div>
-    </div>
-
-    <table action="javascript:void(0)" class="form-horizontal">
-        <tr>
-            <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择客户编号或名称"></td>
-
-            <td>
-                <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
-            </td>
-
-        </tr>
-    </table>
-    <div class="widget" hidden>
-
+        <table style="width:100%;" class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>客户编号</td>
+                    <td>客户名称</td>
+                    <td>电话</td>
+                    <td>传真</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody id="tb1"></tbody>
+        </table>
     </div>
 </div>
-<table style="width:100%;" class="table table-bordered">
-    <thead>
-        <tr>
-            <td>客户编号</td>
-            <td>客户名称</td>
-            <td>电话</td>
-            <td>传真</td>
-            <td>操作</td>
-        </tr>
-    </thead>
-    <tbody id="tb1"></tbody>
-</table>
-
 
 
