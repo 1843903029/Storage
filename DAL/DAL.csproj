@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LLQ\CplbService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TXY\SysRoleService.cs" />
     <Compile Include="XBY\StorageService.cs" />
@@ -56,7 +57,6 @@
   <ItemGroup>
     <Folder Include="bin\Release\" />
     <Folder Include="LLJ\" />
-    <Folder Include="LLQ\" />
     <Folder Include="LL\" />
   </ItemGroup>
   <ItemGroup>
