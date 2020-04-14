@@ -1,6 +1,7 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Cplb";
+    Layout = "~/Views/MainPage.cshtml";
 }
 
 <!DOCTYPE html>
@@ -14,6 +15,8 @@
     <div style="border:0px solid #4cff00;width:95%;">
         <div style="padding:15px;border:1px solid red">
             <div>
+
+
                 <table>
                     <tr>
                         <td><a href="#">首页<</a></td>
@@ -29,6 +32,7 @@
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-warning" type="button" value="导出" /></td>
                     </tr>
                 </table>
+
                 <table action="javascript:void(0)" class="form-horizontal">
                     <tr>
                         <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入类别编号或者名称"></td>
@@ -40,6 +44,7 @@
                         </td>
                     </tr>
                 </table>
+
                 <div class="widget" hidden>
                     <table>
                         <tr>
@@ -81,21 +86,19 @@
                 </div>
             </div>
             <table style="width:100%;" class="table table-bordered">
-                <thead>
-                <thead>
-                    <tr class="widget-title">
-                        <th style="width: 8px;"><input type="checkbox" class="group-checkable" onclick="Category.SelectAll(this)" /></th>
-                        <th class="hidden-480">类别编号</th>
-                        <th class="hidden-480">类别名称</th>
-                        <th class="hidden-480">创建人</th>
-                        <th class="hidden-480">创建时间</th>
-                        <th class="hidden-480">备注</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-
-                <tbody id="tb1"></tbody>
-            </table>
+                    <thead>
+                        <tr class="widget-title">
+                            <th style="width: 8px;"><input type="checkbox" class="group-checkable" onclick="Category.SelectAll(this)" /></th>
+                            <th class="hidden-480">类别编号</th>
+                            <th class="hidden-480">类别名称</th>
+                            <th class="hidden-480">创建人</th>
+                            <th class="hidden-480">创建时间</th>
+                            <th class="hidden-480">备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb1"></tbody>
+                </table>
             <div hidden id="yyyyy" style="margin-left:500px;">
                 <table class="formtab_user">
                     <tbody>
@@ -124,11 +127,16 @@
                     </tr>
                 </table>
             </div>
+            @*分页*@
+            <div id="pageDemo">
+
+            </div>
         </div>
     </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
 <script>
     $(function () {
         $("#btnSubhh").click(function () {
@@ -151,6 +159,4 @@
             }
         })
     });
-
 </script>
-

@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "KHguanli";
     Layout = "~/Views/MainPage.cshtml";
 }
+
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
         <div>
@@ -10,11 +11,11 @@
                 <tr>
                     <td><a href="#">首页<</a></td>
                     <td>基本信息<</td>
-                    <td>库位管理</td>
+                    <td>客户管理</td>
                 </tr>
             </table>
             <div>
-                <h4>库位管理</h4>
+                <h4>客户管理</h4>
                 <div style="float:right;display:inline-block;">
                     @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
                         <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
@@ -23,9 +24,8 @@
 
             <table action="javascript:void(0)" class="form-horizontal">
                 <tr>
-                    <td>仓库:<input id="txtSearch" type="text" class="input-group" placeholder="请选择仓库"></td>
-                    <td>类型:<input id="txtSearch" type="text" class="input-group" placeholder="请选择"></td>
-                    <td>库位:<input id="txtSearch" type="text" class="input-group" placeholder=""></td>
+                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择客户编号或名称"></td>
+
                     <td>
                         <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
                     </td>
@@ -39,14 +39,10 @@
         <table style="width:100%;" class="table table-bordered">
             <thead>
                 <tr>
-                    <td>序号</td>
-                    <td>库位编号</td>
-                    <td>库位名</td>
-                    <td>所在仓库</td>
-                    <td>库位类型</td>
-                    <td>是否禁用</td>
-                    <td>是否默认</td>
-                    <td>创建时间</td>
+                    <td>客户编号</td>
+                    <td>客户名称</td>
+                    <td>电话</td>
+                    <td>传真</td>
                     <td>操作</td>
                 </tr>
             </thead>
@@ -54,3 +50,5 @@
         </table>
     </div>
 </div>
+
+
