@@ -16,7 +16,7 @@ namespace Storage
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "XBY", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "TXY", action = "Rgion", id = UrlParameter.Optional }
             );
         }
     }
