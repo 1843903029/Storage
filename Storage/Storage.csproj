@@ -292,6 +292,7 @@
     <Content Include="Views\LL\GYSguanli.cshtml" />
     <Content Include="Views\LL\KHguanli.cshtml" />
     <Content Include="Views\TXY\Login.cshtml" />
+    <Content Include="Views\XBY\ChuKuXF1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
