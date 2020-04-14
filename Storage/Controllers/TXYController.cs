@@ -15,6 +15,8 @@ namespace Storage.Controllers
         {
             return View();
         }
+
+
         //登录
         public ActionResult Rogin(Admin a)
         {
@@ -24,6 +26,10 @@ namespace Storage.Controllers
         {
             return View();
         }
+
+
+
+
         //fenye
         public ActionResult Indexs(int PageSize)
         {
@@ -34,6 +40,11 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.SysRoleManager.fy(PageIndex, PageSize, role), JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
         public ActionResult SysRole()
         {
             return View();
