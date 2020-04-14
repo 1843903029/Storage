@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StorageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StorageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -94,6 +94,7 @@
           <Property Name="CpSx" Type="int" />
           <Property Name="CpXx" Type="int" />
           <Property Name="CpPrice" Type="int" />
+          <Property Name="CpShuLiang" Type="int" />
           <Property Name="Specification" Type="varchar" MaxLength="50" />
           <Property Name="CpLb" Type="int" />
           <Property Name="CpJlName" Type="int" />
@@ -1016,8 +1017,7 @@
             <End Role="StorageDetailed" EntitySet="StorageDetailed" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StorageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1151,6 +1151,7 @@
           <NavigationProperty Name="ReturnsDetailed" Relationship="Self.FK_ReturnsDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="ReturnsDetailed" />
           <NavigationProperty Name="StockRemovalDetailed" Relationship="Self.FK_StockRemovalDetailed_CpGlinfo" FromRole="CpGlinfo" ToRole="StockRemovalDetailed" />
           <NavigationProperty Name="StorageDetailed" Relationship="Self.FK_StorageDetailed_CpLbinfo" FromRole="CpGlinfo" ToRole="StorageDetailed" />
+          <Property Name="CpShuLiang" Type="Int32" />
         </EntityType>
         <EntityType Name="CpLbinfo">
           <Key>
@@ -2206,6 +2207,7 @@
           <EntitySetMapping Name="CpGlinfo">
             <EntityTypeMapping TypeName="StorageModel.CpGlinfo">
               <MappingFragment StoreEntitySet="CpGlinfo">
+                <ScalarProperty Name="CpShuLiang" ColumnName="CpShuLiang" />
                 <ScalarProperty Name="CpID" ColumnName="CpID" />
                 <ScalarProperty Name="Cpbh" ColumnName="Cpbh" />
                 <ScalarProperty Name="CpXsName" ColumnName="CpXsName" />

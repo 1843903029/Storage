@@ -13,5 +13,13 @@ namespace Storage.Controllers
         {
             return View();
         }
+        public ActionResult GYSguanli()
+        {
+            return View();
+        }
+        public ActionResult KHguanli()
+        {
+            return View();
+        }
     }
 }

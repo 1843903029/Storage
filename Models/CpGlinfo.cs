@@ -39,6 +39,7 @@ namespace Models
         public Nullable<int> KwId { get; set; }
         public string remark { get; set; }
         public Nullable<bool> State { get; set; }
+        public Nullable<int> CpShuLiang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BreakageDetailed> BreakageDetailed { get; set; }
