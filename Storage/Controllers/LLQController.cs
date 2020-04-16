@@ -17,23 +17,58 @@ namespace Storage.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 计量单位分页
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public ActionResult Jldws(int PageSize)
+        {
+            return Json(BLL.LLQ.JldwManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetJldwAll(int PageIndex, int PageSize, Models.JLinfo jldw)
+        {
+            return Json(BLL.LLQ.JldwManager.Jldw(PageIndex, PageSize, jldw), JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult Cplb()
         {
             return View();
         }
 
-        public ActionResult Indexs(int PageSize)
+        /// <summary>
+        /// 产品类别分页
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public ActionResult Cplbs(int PageSize)
         {
             return Json(BLL.LLQ.CplbManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetAll(int PageIndex, int PageSize, Models.CpLbinfo Cplb)
+        public ActionResult GetCplbAll(int PageIndex, int PageSize, Models.CpLbinfo Cplb)
         {
             return Json(BLL.LLQ.CplbManager.lb(PageIndex, PageSize, Cplb), JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult CpGl()
         {
             return View();
+        }
+        
+        /// <summary>
+        /// 产品管理分页
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public ActionResult CpGls(int PageSize)
+        {
+            return Json(BLL.LLQ.CpGlManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetCpGlAll(int PageIndex, int PageSize, Models.CpGlinfo Cpgl)
+        {
+            return Json(BLL.LLQ.CpGlManager.CpGl(PageIndex, PageSize, Cpgl), JsonRequestBehavior.AllowGet);
         }
     }
 }
