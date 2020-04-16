@@ -35,10 +35,10 @@ namespace Storage.Controllers
         {
             return Json(BLL.TXY.SysRoleManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetAll(int PageIndex, int PageSize, Models.SysRole role)
+        public ActionResult GetAll(int PageIndex, int PageSize)
         {
 
-            return Json(BLL.TXY.SysRoleManager.fy(PageIndex, PageSize, role), JsonRequestBehavior.AllowGet);
+            return Json(BLL.TXY.SysRoleManager.fenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
 
 

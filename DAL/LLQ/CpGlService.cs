@@ -7,34 +7,39 @@ using Models;
 
 namespace DAL.LLQ
 {
-    public class CplbService
+    public class CpGlService
     {
-        public static Models.PageList lb(int pageIndex, int pageSize, CpLbinfo Cplb)
+        public static Models.PageList CpGl(int pageIndex, int pageSize, CpGlinfo Cpgl)
         {
             StorageEntities b = new StorageEntities();
-            var query = from p in b.CpLbinfo select p;
+            var query = from p in b.CpGlinfo select p;
             Models.PageList li = new Models.PageList();
             var list = from p in query
-                       orderby p.ID ascending
+                       orderby p.CkId ascending
                        select new
                        {
-                           ID = p.ID,
-                           CpLbName = p.CpLbName,
-                           UserName = p.UserName,//管理员的名称
-                           CpTime = p.CpTime,
+                           CkId = p.CkId,
+                           Cpbh = p.Cpbh,
+                           CpXsName = p.CpXsName,
+                           CpSx = p.CpSx,
+                           CpXx = p.CpXx,
+                           CpPrice = p.CpPrice,
+                           Specification = p.Specification,
+                           CpLbName = p.CpLbinfo.CpLbName,      //产品类别的名称
+                           CpJlName = p.JLinfo.JlName,           //计量单位的名称
                            remark = p.remark
-                           
+
                        };
             li.DataList = list.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             int rows = query.Count();
             li.PageCount = rows;// % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
             return li;
         }
+
         public static int GetRows()
         {
             StorageEntities entity = new StorageEntities();
-            return entity.CpLbinfo.Count();
+            return entity.JLinfo.Count();
         }
-
     }
 }

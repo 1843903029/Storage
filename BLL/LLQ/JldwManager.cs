@@ -6,24 +6,22 @@ using System.Threading.Tasks;
 using Models;
 using DAL;
 
-namespace BLL.TXY
+namespace BLL.LLQ
 {
-   public class SysRoleManager
+   public  class JldwManager
     {
-       
-        public static Models.PageList fenye(int pageIndex, int pageSize)
-        {
-
-            return DAL.TXY.SysRoleService.fenye(pageIndex, pageSize);
-        }
         public static int GetCount(int pageSize)
         {
-            int rows = DAL.TXY.SysRoleService.GetRows();
+            int rows = DAL.LLQ.JldwService.GetRows();
             if (rows % pageSize == 0)
             {
                 return rows / pageSize;
             }
             return rows / pageSize + 1;
+        }
+        public static Models.PageList Jldw(int pageIndex, int pageSize, JLinfo Jldw)
+        {
+            return DAL.LLQ.JldwService.Jldw(pageIndex, pageSize, Jldw);
         }
     }
 }

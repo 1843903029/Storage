@@ -54,15 +54,7 @@
                     </tr>
                 </thead>
                 <tbody id="tb1">
-                    <tr>
-                        <td style="width:20px;"><input type="checkbox" /></td>
-                        <td>1</td>
-                        <td>000003</td>
-                        <td>门卫</td>
-                        <td>2016-1-1</td>
-                        <td></td>
-                        <td><a href="#">编辑</a>&nbsp;<a href="#">删除</a>&nbsp;<a href="#">权限分配</a></td>
-                    </tr>
+
                 </tbody>
             </table>
             <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px" hidden>
@@ -110,6 +102,7 @@
 <script src="~/layui/layui.js"></script>
 <script>
     $(function () {
+        get()
         var PageIndex = 1;
         var PageSize = 6;
         var PageCount = 0;
@@ -137,14 +130,14 @@
             $.ajax({
                 type: "POST",
                 url: "/TXY/GetAll",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",SysRole:{SysRoleID:'" + $("#SysRoleID").val()+"'}}",
+                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td>" + data.SysRoleID + "</td ><td>" + data.RoleNum + "</td ><td>" + data.RoleName + "</td><td>" + data.CreateTime + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'>权限分配</a></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.SysRoleID + "</td ><td>" + data.RoleNum + "</td ><td>" + data.RoleName + "</td><td>" + data.CreateTime + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'>权限分配</a></td></tr>");
                     })
                 },
                 erro: function (ex) {
