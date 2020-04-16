@@ -13,11 +13,12 @@
                     <td>库位管理</td>
                 </tr>
             </table>
-            <div>
+            <div style="height:70px;">
                 <h4>库位管理</h4>
-                <div style="float:right;display:inline-block;">
-                    @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
-                        <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
+                <div style="float:right;display:inline;">
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">新增</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                        @*<input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
                 </div>
             </div>
 
@@ -39,6 +40,7 @@
         <table style="width:100%;" class="table table-bordered">
             <thead>
                 <tr>
+                    <td style="width:20px;"><input type="checkbox" /></td>
                     <td>序号</td>
                     <td>库位编号</td>
                     <td>库位名</td>
@@ -54,3 +56,39 @@
         </table>
     </div>
 </div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(function () {
+        select1();
+
+    })
+
+    function select1() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/KwselectAll",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#tb1").append("<tr><td style='width:20px;'><input type='checkbox' /></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CangKu + "</td><td>" + data.kwType + "</td><td>" + data.Zhuangtai + "</td><td>" + data.Isdefault + "</td><td>" + ConvertTime(data.Time) + "</td><td>" + data.Shuju + "</td></tr>");
+
+                   
+
+
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+
+            }
+        });
+    }
+    function ConvertTime(time) {
+
+        var date = new Date(parseInt(time.substr(6)));
+        return date.toLocaleDateString();
+    }
+</script>
