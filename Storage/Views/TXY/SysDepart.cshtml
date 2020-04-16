@@ -97,6 +97,51 @@
 <script src="~/layui/layui.js"></script>
 <script>
     $(function () {
+        get()
+        var PageIndex = 1;
+        var PageSize = 6;
+        var PageCount = 0;
+        var rows = 0;
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'pageDemo'
+                , count: rows//总条数
+                , limit: 2//每页显示数
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+
+                    //设置当前页
+                    PageIndex = obj.curr;
+                    //设置每页显示
+                    PageSize = obj.limit;
+                    get();
+                }
+            });
+        });
+        function get() {
+            $.ajax({
+                type: "POST",
+                url: "/TXY/GetAllSysDepart",
+                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",d:{SysDepartID:'" + $("#hhh").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $("#tb1 tr").remove();
+                    rows = result.PageCount;
+                    $.each(result.DataList, function (index, data) {
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + data.CreateTime + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'>权限分配</a></td></tr>");
+                    })
+                },
+                erro: function (ex) {
+                    alert(ex.responseText);
+                }
+            })
+        }
+
+
         $("#btnSubhh").click(function () {
             if ($("#jbox-content").css("display") == "none") {
                 $("#jbox-content").show();

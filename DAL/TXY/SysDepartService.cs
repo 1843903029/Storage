@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 
-
 namespace DAL.TXY
 {
-    public class SysRoleService
+    public class SysDepartService
     {
-        public static PageList SysRolefenye(int pageIndex, int pageSize,SysRole r)
+        public static PageList SysDepartfenye(int pageIndex, int pageSize,SysDepart d)
         {
             StorageEntities entity = new StorageEntities();
             //实例化分页的类
@@ -18,18 +17,18 @@ namespace DAL.TXY
             //var obj = from p in entity.Books orderby p.Id descending select p;
             //return obj.Take(10).ToList();
             //匿名类型
-            var obj = from p in entity.SysRole
-                      orderby p.SysRoleID descending
+            var obj = from p in entity.SysDepart
+                      orderby p.SysDepartID descending
                       select new
                       {
-                          Admin = r.Admin,
-                          RoleNum = r.RoleNum,
-                          CreateTime = r.CreateTime,
-                          IsDelete = r.IsDelete,
-                          Remark = r.Remark,
-                          RoleName = r.RoleName,
-                          SysRoleID = r.SysRoleID,
+                          Admin = d.Admin,
+                          CreateTime = d.CreateTime,
+                          DepartName = d.DepartName,
+                          DepartNum = d.DepartNum,
+                          IsDelete = d.IsDelete,
+                          SysDepartID =d.SysDepartID,
                           
+
 
 
                       };

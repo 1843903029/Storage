@@ -10,9 +10,26 @@ namespace BLL.TXY
 {
     public class AdminManager
     {
+        //登录
         public static IQueryable Rogin(Admin a)
         {
             return DAL.TXY.AdminService.Rogin(a);
         }
+        //fenye
+        public static PageList Adminfenye(int pageIndex, int pageSize, Admin a)
+        {
+            return DAL.TXY.AdminService.Adminfenye(pageIndex, pageSize, a);
         }
+        public static int GetCount(int pageSize)
+        {
+            int rows = DAL.TXY.SysRoleService.GetRows();
+            if (rows % pageSize == 0)
+            {
+                return rows / pageSize;
+            }
+            return rows / pageSize + 1;
+        }
+
+
+    }
 }

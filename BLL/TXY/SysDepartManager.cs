@@ -8,13 +8,11 @@ using DAL;
 
 namespace BLL.TXY
 {
-   public class SysRoleManager
+    public class SysDepartManager
     {
-       
-        public static Models.PageList SysRolefenye(int pageIndex, int pageSize,SysRole r)
+        public static PageList SysDepartfenye(int pageIndex, int pageSize, SysDepart d)
         {
-
-            return DAL.TXY.SysRoleService.SysRolefenye(pageIndex, pageSize,r);
+            return DAL.TXY.SysDepartService.SysDepartfenye(pageIndex,pageSize,d);
         }
         public static int GetCount(int pageSize)
         {

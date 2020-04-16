@@ -48,6 +48,7 @@
     <Compile Include="LLQ\JldwService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TXY\AdminService.cs" />
+    <Compile Include="TXY\SysDepartService.cs" />
     <Compile Include="TXY\SysRoleService.cs" />
     <Compile Include="XBY\BreakageService.cs" />
     <Compile Include="XBY\CycleCountService.cs" />
