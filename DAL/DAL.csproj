@@ -47,6 +47,8 @@
     <Compile Include="LLQ\CplbService.cs" />
     <Compile Include="LLQ\JldwService.cs" />
     <Compile Include="LL\Class1.cs" />
+    <Compile Include="LL\Class2.cs" />
+    <Compile Include="LL\Class3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TXY\AdminService.cs" />
     <Compile Include="TXY\SysRoleService.cs" />
