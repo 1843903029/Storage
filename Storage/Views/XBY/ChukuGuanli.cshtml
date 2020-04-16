@@ -16,13 +16,13 @@
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
         <button class="btn btn-default">所有</button>
-        <button class="btn btn-default" id="daish">待审核</button>
-        <button class="btn btn-default" id="shenhetg">审核通过</button>
-        <button class="btn btn-default" id="shenhesb">审核失败</button>
+        <button class="btn btn-default">待审核</button>
+        <button class="btn btn-default">审核通过</button>
+        <button class="btn btn-default">审核失败</button>
         <input class="btn btn-primary" id="xxzz" type="button" value="新增" style="width:80px;margin-left:52%" />
+      
 
-
-        <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
+        <input class="btn btn-danger" type="button" value="删除" style="width:80px;" onclick="(<Script>window.open('WebForm7.aspx','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=750,height=470,left=80,top=40');</script>)" />
         <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
         <div style="padding-top:8px;display:flex;margin-bottom:20px">
@@ -38,26 +38,22 @@
 
         <div style="">
             <table style="width:100%;" class="table table-striped">
-                <thead>
-                    <tr style="font-weight:600">
-                        <td><input type='checkbox' /></td>
-                        <td>出库单编号</td>
-                        <td>出库类型</td>
-                        <td>客户名称</td>
-                        <td>关联订单</td>
-                        <td>总数量</td>
-                        <td>总金额</td>
-                        <td>状态</td>
-                        <td>操作方式</td>
-                        <td>制单人</td>
-                        <td>创建时间</td>
-                        <td>操作</td>
-                    </tr>
-                </thead>
-                <tbody id="tt"></tbody>
+                <tr style="font-weight:600">
+                    <td>出库单编号</td>
+                    <td>出库类型</td>
+                    <td>客户名称</td>
+                    <td>关联订单</td>
+                    <td>总数量</td>
+                    <td>总金额</td>
+                    <td>状态</td>
+                    <td>操作方式</td>
+                    <td>制单人</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </tr>
             </table>
 
-
+          
 
             @*layui分页*@
             <div id="pageDome">
@@ -76,70 +72,40 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 10;
-    var rowss = 0;
-    var state = 2;
+    //$(function () {
+    //    xianshifenye();
+
+    //    layui.use(['laypage', 'layer'], function () {
+    //        var laypage = layui.laypage
+    //            , layer = layui.layer;
+
+    //        //完整功能
+    //        laypage.render({
+    //            elem: 'pageDome'
+    //            , count: rowss
+    //            , limit: 3
+    //            , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+    //            , jump: function (obj) {
+    //                pageIndex = obj.curr;
+    //                pageSize = obj.limit;
+    //                xianshifenye();
+    //            }
+    //        });
+    //    });
+
     $(function () {
-        rukuList(state);
 
-        layui.use(['laypage', 'layer'], function () {
-            var laypage = layui.laypage
-                , layer = layui.layer;
+        $("#xxzz").click(function () {
+            //alert("1")
+            Url.Action("ChuKuXF1", "XBY");
 
-            //完整功能
-            laypage.render({
-                elem: 'pageDome'
-                , count: rowss
-                , limit: 3
-                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-                , jump: function (obj) {
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
-                    rukuList(state);
-                }
-            });
+     })
+
+
+
         });
 
 
-        $("#daish").click(function () {
-            rukuList(2);
-        })
-        $("#shenhetg").click(function () {
-            rukuList(1);
-        })
-        $("#shenhesb").click(function () {
-            rukuList(0);
-        })
-
-    })
-
-
-    function rukuList(dss) {
-        $.ajax({
-            type: "POST",
-            url: "/XBY/ChuKuList",
-            data: "{PageIndex:" + pageIndex + ",pageSize:" + pageSize + ",State:" + dss + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $("#tt tr").remove();
-                rowss = result.PageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td>caozuo</td></tr>");
-                });
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
-
-            }
-        });
-    }
-
-    function ConvertDate(date) {
-        var time = new Date(parseInt(date.substr(6)));
-        return time.toLocaleDateString();
-    }
 </script>
 
 

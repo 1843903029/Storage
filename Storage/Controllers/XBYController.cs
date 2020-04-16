@@ -47,12 +47,6 @@ namespace Storage.Controllers
             return View();
         }
 
-
-        public ActionResult BaoSunList(int PageIndex, int PageSize, int State)
-        {
-            return Json(BLL.XBY.BreakageManager.BaoSunList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
-        }
-
         /// <summary>
         /// 报损管理页面
         /// </summary>
@@ -60,11 +54,6 @@ namespace Storage.Controllers
         public ActionResult BaoSunGuanli()
         {
             return View();
-        }
-
-        public ActionResult YiKuList(int PageIndex, int PageSize, int State)
-        {
-            return Json(BLL.XBY.MovementManager.YiKuList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -77,11 +66,6 @@ namespace Storage.Controllers
             return View();
         }
 
-        public ActionResult PanDianList(int PageIndex, int PageSize, int State)
-        {
-            return Json(BLL.XBY.CycleCountManager.PanDianList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
-        }
-
         /// <summary>
         /// 盘点管理页面
         /// </summary>
@@ -91,14 +75,8 @@ namespace Storage.Controllers
             return View();
         }
 
-
-        public ActionResult TuiHuoList(int PageIndex, int PageSize, int State)
-        {
-            return Json(BLL.XBY.ReturnsManager.TuiHuoList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
-        }
-
         /// <summary>
-        /// 退货管理页面
+        /// 退货管理页面2
         /// </summary>
         /// <returns></returns>
         public ActionResult TuiHuoGuanli()

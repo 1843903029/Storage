@@ -35,7 +35,7 @@ namespace DAL.XBY
                           GoodsCount = p.GoodsCount,
                           Summoney = p.Summoney,
                           State = p.State,
-                          EmployeeID = p.Admin.UserName,
+                          EmployeeID = p.EmployeeID,
                           OperationType = p.OperationType,
                           CreationTime = p.CreationTime,
                           DataState = p.DataState,
