@@ -48,10 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TXY\AdminManager.cs" />
     <Compile Include="TXY\SysRoleManager.cs" />
-    <Compile Include="XBY\BreakageManager.cs" />
-    <Compile Include="XBY\CycleCountManager.cs" />
-    <Compile Include="XBY\MovementManager.cs" />
-    <Compile Include="XBY\ReturnsManager.cs" />
     <Compile Include="XBY\StockRemovalManager.cs" />
     <Compile Include="XBY\StorageManager.cs" />
   </ItemGroup>

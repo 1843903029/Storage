@@ -15,19 +15,19 @@
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
         <button class="btn btn-default">所有</button>
-        <button class="btn btn-default" id="daish">待审核</button>
-        <button class="btn btn-default" id="shenhetg">审核通过</button>
-        <button class="btn btn-default" id="shenhesb">审核失败</button>
+        <button class="btn btn-default">待审核</button>
+        <button class="btn btn-default">审核通过</button>
+        <button class="btn btn-default">审核失败</button>
         <input class="btn btn-primary" type="button" value="新增" style="width:80px;margin-left:52%" />
         <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
         <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
         <div style="padding-top:8px;display:flex;margin-bottom:20px">
-            <input type="text" class="form-control" placeholder="请输入退货单号" style="width:170px;margin-right:10px" />
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入退货单号" style="width:170px;margin-right:10px" />
             <div style="padding-top:6px;margin-right:5px;">时间</div>
-            <input type="password" class="form-control" style="width:170px;margin-right:10px">
+            <input type="password" class="form-control" id="exampleInputPassword1" style="width:170px;margin-right:10px">
             <div style="padding-top:6px;margin-right:5px;">-</div>
-            <input type="password" class="form-control" style="width:170px;margin-right:10px">
+            <input type="password" class="form-control" id="exampleInputPassword1" style="width:170px;margin-right:10px">
 
             <input class="btn btn-info" type="button" value="搜索" style="width:80px;margin-right:5px" />
             <input class="btn btn-primary" type="button" value="高级搜索" style="width:100px;" />
@@ -35,20 +35,39 @@
 
         <div style="">
             <table style="width:100%;" class="table table-striped">
-                <thead>
-                    <tr style="font-weight:600">
-                        <td><input type='checkbox' /></td>
-                        <td>退货单</td>
-                        <td>退货类型</td>
-                        <td>退货数量</td>
-                        <td>关联单号</td>
-                        <td>状态</td>
-                        <td>制单人</td>
-                        <td>创建时间</td>
-                        <td>操作</td>
-                    </tr>
-                </thead>
-                <tbody id="tt"></tbody>
+                <tr style="font-weight:600">
+                    <td>退货单</td>
+                    <td>退货类型</td>
+                    <td>退货数量</td>
+                    <td>关联单号</td>
+                    <td>状态</td>
+                    <td>制单人</td>
+                    <td>操作方式</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </tr>
+                <tr>
+                    <td>退货单</td>
+                    <td>退货类型</td>
+                    <td>退货数量</td>
+                    <td>关联单号</td>
+                    <td>状态</td>
+                    <td>制单人</td>
+                    <td>操作方式</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </tr>
+                <tr>
+                    <td>退货单</td>
+                    <td>退货类型</td>
+                    <td>退货数量</td>
+                    <td>关联单号</td>
+                    <td>状态</td>
+                    <td>制单人</td>
+                    <td>操作方式</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </tr>
             </table>
 
             @*layui分页*@
@@ -63,12 +82,8 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 10;
-    var rowss = 0;
-    var state = 2;
     $(function () {
-        rukuList(state);
+        xianshifenye();
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -83,50 +98,10 @@
                 , jump: function (obj) {
                     pageIndex = obj.curr;
                     pageSize = obj.limit;
-                    rukuList(state);
+                    xianshifenye();
                 }
             });
         });
-
-
-        $("#daish").click(function () {
-            rukuList(2);
-        })
-        $("#shenhetg").click(function () {
-            rukuList(1);
-        })
-        $("#shenhesb").click(function () {
-            rukuList(0);
-        })
-
-    })
-
-
-    function rukuList(dss) {
-        $.ajax({
-            type: "POST",
-            url: "/XBY/TuiHuoList",
-            data: "{PageIndex:" + pageIndex + ",pageSize:" + pageSize + ",State:" + dss + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $("#tt tr").remove();
-                rowss = result.PageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td>caozuo</td></tr>");
-                });
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
-
-            }
-        });
-    }
-
-    function ConvertDate(date) {
-        var time = new Date(parseInt(date.substr(6)));
-        return time.toLocaleDateString();
-    }
 </script>
 
 
