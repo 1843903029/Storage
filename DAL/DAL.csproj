@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LLQ\CplbService.cs" />
+    <Compile Include="LLQ\JldwService.cs" />
     <Compile Include="LL\clientService.cs" />
     <Compile Include="LL\supplierService.cs" />
     <Compile Include="LL\Location-managementService.cs" />
