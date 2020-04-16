@@ -26,6 +26,7 @@ namespace DAL.XBY
                       orderby p.StorageID ascending
                       select new
                       {
+
                           //[StorageID], [StorageType], [SupplierID], [AssociatedNumber], [GoodsCount],
                           //[Summoney], [State], [EmployeeID], [OperationType], [CreationTime], [DataState], [StateText]
                           StorageID = p.StorageID,
