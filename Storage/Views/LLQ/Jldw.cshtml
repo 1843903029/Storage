@@ -10,8 +10,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Jldw</title>
-    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
     <div style="border:0px solid #4cff00;width:95%;">
@@ -46,10 +44,10 @@
         <table style="width:100%;" class="table table-bordered">
             <thead>
                 <tr>
-                    <td class="hidden-480">序号</td>
-                    <td class="hidden-480">编号</td>
-                    <td class="hidden-480">名称</td>
-                    <td>操作</td>
+                    <th class="hidden-480">序号</th>
+                    <th class="hidden-480">编号</th>
+                    <th class="hidden-480">名称</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody id="tb1"></tbody>
@@ -73,11 +71,9 @@
                         <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
                         <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
                     </tr>
-            </table>
-            @*分页*@
-            <div id="pageDemo">
+               
 
-            </div>
+            </table>
         </div>
     </div>
 </body>
@@ -105,9 +101,6 @@
             }
         })
     });
-
-
-
 
 </script>
 
