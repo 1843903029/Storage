@@ -35,9 +35,6 @@
                     <td>
                         <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
                     </td>
-                    <td>
-                        <button style="margin-left:10px" id="btnHSearch" data-toggle="dropdown" class="btn btn-primary">高级搜索<span class="caret"></span></button>
-                    </td>
                 </tr>
             </table>
         </div><div class="jbox-button-panel" style="height:25px;padding:5px 0 5px 0;text-align: right;"><span class="jbox-bottom-text" style="float:left;display:block;line-height:25px;"></span><button class="jbox-button jbox-button-focus" value="true" style="padding:0px 10px 0px 10px;">确定</button><button class="jbox-button" value="false" style="padding:0px 10px 0px 10px;">关闭</button></div>
@@ -71,7 +68,7 @@
                         <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
                         <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
                     </tr>
-               
+
 
             </table>
         </div>
@@ -80,7 +77,13 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
+    var pageIndex = 1;
+    var pageSize = 10;
+    var rowss = 0;
+    var state = 2;
     $(function () {
+        Jldws();
+
         $("#btnSubhh").click(function () {
             if ($("#yyyyy").css("display") == "none") {
                 $("#yyyyy").show();
@@ -100,7 +103,48 @@
                 $(".widget").hide();
             }
         })
-    });
+
+        rukuList(state);
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'pageDome'
+                , count: rowss
+                , limit: 3
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    rukuList(state);
+                }
+            });
+        });
+    })
+
+
+    function Jldws() {
+
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/Jldws",
+            data: "{PageIndex:" + pageIndex + ",pageSize:" + pageSize + ",jldw:{Jlbh:'" + $("#txtSearch").val()+"'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                //获取总条数
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td>" + data.Jlid + "</td><td>" + data.Jlbh + "</td><td>" + data.JlName + "</td><td>" + data.JlName + "</td><td>操作</td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        });
+    }
 
 </script>
 
