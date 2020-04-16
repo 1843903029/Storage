@@ -7,23 +7,21 @@ using Models;
 
 namespace DAL.LLQ
 {
-    public class CplbService
+   public  class JldwService
     {
-        public static Models.PageList lb(int pageIndex, int pageSize, CpLbinfo Cplb)
+        public static Models.PageList Jldw(int pageIndex, int pageSize, JLinfo jldw)
         {
             StorageEntities b = new StorageEntities();
-            var query = from p in b.CpLbinfo select p;
+            var query = from p in b.JLinfo select p;
             Models.PageList li = new Models.PageList();
             var list = from p in query
-                       orderby p.ID ascending
+                       orderby p.Jlid ascending
                        select new
                        {
-                           ID = p.ID,
-                           CpLbName = p.CpLbName,
-                           UserName = p.UserName,
-                           CpTime = p.CpTime,
-                           remark = p.remark
-                           
+                        Jlid = p.Jlid,
+                        Jlbh = p.Jlbh,
+                        JlName = p.JlName
+
                        };
             li.DataList = list.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             int rows = query.Count();
@@ -34,7 +32,7 @@ namespace DAL.LLQ
         public static int GetRows()
         {
             StorageEntities entity = new StorageEntities();
-            return entity.CpLbinfo.Count();
+            return entity.JLinfo.Count();
         }
 
     }

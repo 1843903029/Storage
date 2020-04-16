@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LLQ\CplbManager.cs" />
+    <Compile Include="LLQ\JldwManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TXY\AdminManager.cs" />
     <Compile Include="TXY\SysRoleManager.cs" />
