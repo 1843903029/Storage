@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LLJ\admManger.cs" />
-    <Compile Include="LLJ\CdanManager.cs" />
+    <Compile Include="LLQ\CpGlManager.cs" />
+    <Compile Include="LLQ\JldwManager.cs" />
     <Compile Include="LLQ\CplbManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TXY\AdminManager.cs" />
@@ -67,6 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="LLJ\" />
     <Folder Include="LL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
