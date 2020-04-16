@@ -30,7 +30,6 @@ namespace DAL.LLQ
             li.PageCount = rows;// % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
             return li;
         }
-
         public static int GetRows()
         {
             StorageEntities entity = new StorageEntities();

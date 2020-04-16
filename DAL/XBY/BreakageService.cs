@@ -7,50 +7,45 @@ using Models;
 
 namespace DAL.XBY
 {
-    public class StockRemovalService
+    public class BreakageService
     {
         /// <summary>
-        /// 出库分页查询
+        /// 报损分页查询
         /// </summary>
         /// <param name="PageIndex"></param>
         /// <param name="PageSize"></param>
         /// <param name="State"></param>
         /// <returns></returns>
-        public static PageList ChuKuList(int PageIndex, int PageSize, int State)
+        public static PageList BaoSunList(int PageIndex, int PageSize, int State)
         {
             StorageEntities ent = new StorageEntities();
 
-            var obj = from p in ent.StockRemoval
+            var obj = from p in ent.Breakage
                       where p.State == State
                       && p.DataState == true
-                      orderby p.StockRemovalID ascending
+                      orderby p.BreakageID ascending
                       select new
                       {
-                          //[StockRemovalID], [StockRemovalType], [SupplierID], [AssociatedNumber], [GoodsCount], [Summoney]
-                          //, [State], [EmployeeID], [OperationType], [CreationTime], [DataState], [StateText]
-                          StockRemovalID = p.StockRemovalID,
-                          StockRemovalType = p.StockRemovalType,
-                          SupplierID = p.SupplierID,
+                          //[BreakageID], [BreakageType], [AssociatedNumber], [BreakageCount],
+                          //[State], [EmployeeID], [operationType], [CreationTime], [DataState], [StateText]
+                          BreakageID = p.BreakageID,
+                          BreakageType = p.BreakageType,
                           AssociatedNumber = p.AssociatedNumber,
-                          GoodsCount = p.GoodsCount,
-                          Summoney = p.Summoney,
+                          BreakageCount = p.BreakageCount,
                           State = p.State,
                           EmployeeID = p.Admin.UserName,
-                          OperationType = p.OperationType,
+                          operationType = p.operationType,
                           CreationTime = p.CreationTime,
                           DataState = p.DataState,
-                          StateText = p.StateText,
+                          StateText = p.StateText
                       };
             PageList list = new PageList();
             list.DataList = obj;
-                //.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+            //.Skip((PageIndex - 1) * PageSize).Take(PageSize);
             list.PageCount = obj.Count();
 
             return list;
 
         }
-
-
-
     }
 }

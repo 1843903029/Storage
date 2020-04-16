@@ -14,12 +14,11 @@
                     <td>供应商管理</td>
                 </tr>
             </table>
-            <div style=" height:70px;">
+            <div>
                 <h4>供应商管理</h4>
                 <div style="float:right;display:inline-block;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">新增</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                    @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
+                        <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
                 </div>
             </div>
 
@@ -40,12 +39,10 @@
         <table style="width:100%;" class="table table-bordered">
             <thead>
                 <tr>
-                    <td style="width:20px;"><input type="checkbox" /></td>
                     <td>供应商编号</td>
                     <td>供应商类型</td>
                     <td>供应商名称</td>
                     <td>电话</td>
-                    <td>传真</td>
                     <td>Email</td>
                     <td>联系人</td>
                     <td>地址</td>
@@ -57,39 +54,3 @@
         </table>
     </div>
 </div>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
-<script>
-    $(function () {
-        select1();
-
-    })
-
-    function select1() {
-        $.ajax({
-            type: "POST",
-            url: "/LL/GysselectAll",
-            data: "{}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $.each(result, function (index, data) {
-                    $("#tb1").append("<tr><td style='width:20px;'><input type='checkbox' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Email + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>" + data.State + "</td></tr>");
-
-
-
-
-                });
-            },
-            error: function (ex) {
-                alert(ex.responseText);
-
-            }
-        });
-    }
-    function ConvertTime(time) {
-
-        var date = new Date(parseInt(time.substr(6)));
-        return date.toLocaleDateString();
-    }
-</script>

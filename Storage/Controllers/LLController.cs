@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Models;
-using BLL;
 
 namespace Storage.Controllers
 {
@@ -23,17 +21,5 @@ namespace Storage.Controllers
         {
             return View();
         }
-        public ActionResult KwselectAll() {
-            return Json(BLL.LL.Location_managementBLL.selectAll(),JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GysselectAll()
-        {
-            return Json(BLL.LL.supplierBLL.selectAll(), JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult KhselectAll()
-        {
-            return Json(BLL.LL.clientBLL.selectAll(), JsonRequestBehavior.AllowGet);
-        }
-
     }
 }
