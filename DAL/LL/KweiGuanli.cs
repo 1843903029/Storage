@@ -19,7 +19,8 @@ namespace DAL.LL
                       orderby p.kwID
                       select new
                       {
-                          kwID = p.kwID
+                          kwID = p.kwID,
+                         kwType =p.kwType
                       };
             PageList list = new PageList();
             list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
