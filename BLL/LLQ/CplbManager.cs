@@ -10,6 +10,12 @@ namespace BLL.LLQ
 {
     public class CplbManager
     {
+        public static Models.PageList lbfenye(int pageIndex, int pageSize)
+        {
+            return DAL.LLQ.CplbService.lbfenye( pageIndex,  pageSize);
+        }
+
+
         public static int GetCount(int pageSize)
         {
             int rows = DAL.LLQ.CplbService.GetRows();

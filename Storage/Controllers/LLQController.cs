@@ -16,19 +16,15 @@ namespace Storage.Controllers
         {
             return View();
         }
-
         /// <summary>
         /// 计量单位分页
         /// </summary>
+        /// <param name="PageIndex"></param>
         /// <param name="PageSize"></param>
         /// <returns></returns>
-        public ActionResult Jldws(int PageSize)
+        public ActionResult GetJldwAll(int PageIndex, int PageSize)
         {
-            return Json(BLL.LLQ.JldwManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetJldwAll(int PageIndex, int PageSize, Models.JLinfo jldw)
-        {
-            return Json(BLL.LLQ.JldwManager.Jldw(PageIndex, PageSize, jldw), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.JldwManager.Jldwfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -40,15 +36,12 @@ namespace Storage.Controllers
         /// <summary>
         /// 产品类别分页
         /// </summary>
+        /// <param name="PageIndex"></param>
         /// <param name="PageSize"></param>
         /// <returns></returns>
-        public ActionResult Cplbs(int PageSize)
+        public ActionResult GetCplbAll(int PageIndex, int PageSize)
         {
-            return Json(BLL.LLQ.CplbManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetCplbAll(int PageIndex, int PageSize, Models.CpLbinfo Cplb)
-        {
-            return Json(BLL.LLQ.CplbManager.lb(PageIndex, PageSize, Cplb), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.CplbManager.lbfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -56,19 +49,16 @@ namespace Storage.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// 产品管理分页
         /// </summary>
+        /// <param name="PageIndex"></param>
         /// <param name="PageSize"></param>
         /// <returns></returns>
-        public ActionResult CpGls(int PageSize)
+        public ActionResult GetCpGlAll(int PageIndex, int PageSize)
         {
-            return Json(BLL.LLQ.CpGlManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetCpGlAll(int PageIndex, int PageSize, Models.CpGlinfo Cpgl)
-        {
-            return Json(BLL.LLQ.CpGlManager.CpGl(PageIndex, PageSize, Cpgl), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.CpGlManager.CpGlfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
     }
 }

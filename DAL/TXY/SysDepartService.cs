@@ -22,10 +22,6 @@ namespace DAL.TXY
                           DepartNum = p.DepartNum,
                           IsDelete = p.IsDelete,
                           SysDepartID =p.SysDepartID,
-                          
-
-
-
                       };
             PageList list = new PageList();
             list.DataList = obj;

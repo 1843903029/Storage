@@ -10,6 +10,11 @@ namespace BLL.LLQ
 {
    public  class JldwManager
     {
+        public static PageList Jldwfenye(int pageIndex, int pageSize)
+        {
+            return DAL.LLQ.JldwService.Jldwfenye(pageIndex, pageSize);
+        }
+
         public static int GetCount(int pageSize)
         {
             int rows = DAL.LLQ.JldwService.GetRows();
