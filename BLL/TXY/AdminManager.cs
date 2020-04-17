@@ -16,20 +16,9 @@ namespace BLL.TXY
             return DAL.TXY.AdminService.Rogin(a);
         }
         //fenye
-        public static PageList Adminfenye(int pageIndex, int pageSize, Admin a)
+        public static PageList Adminfenye(int pageIndex, int pageSize,int Stuate)
         {
-            return DAL.TXY.AdminService.Adminfenye(pageIndex, pageSize, a);
+            return DAL.TXY.AdminService.Adminfenye(pageIndex, pageSize, Stuate);
         }
-        public static int GetCount(int pageSize)
-        {
-            int rows = DAL.TXY.SysRoleService.GetRows();
-            if (rows % pageSize == 0)
-            {
-                return rows / pageSize;
-            }
-            return rows / pageSize + 1;
-        }
-
-
     }
 }

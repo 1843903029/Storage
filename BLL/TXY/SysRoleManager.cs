@@ -11,19 +11,10 @@ namespace BLL.TXY
    public class SysRoleManager
     {
        
-        public static Models.PageList SysRolefenye(int pageIndex, int pageSize,SysRole r)
+        public static Models.PageList SysRolefenye(int pageIndex, int pageSize)
         {
 
-            return DAL.TXY.SysRoleService.SysRolefenye(pageIndex, pageSize,r);
-        }
-        public static int GetCount(int pageSize)
-        {
-            int rows = DAL.TXY.SysRoleService.GetRows();
-            if (rows % pageSize == 0)
-            {
-                return rows / pageSize;
-            }
-            return rows / pageSize + 1;
+            return DAL.TXY.SysRoleService.SysRolefenye(pageIndex, pageSize);
         }
     }
 }
