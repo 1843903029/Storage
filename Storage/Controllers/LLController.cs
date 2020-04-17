@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models;
+using BLL;
 
 namespace Storage.Controllers
 {
@@ -20,6 +22,12 @@ namespace Storage.Controllers
         public ActionResult KHguanli()
         {
             return View();
+        }
+
+
+        public ActionResult Listfenye(int pageindex,int pagesize)
+        {
+            return Json(BLL.LL.KweiGuanliManager.Listfenye(pageindex, pagesize), JsonRequestBehavior.AllowGet);
         }
     }
 }

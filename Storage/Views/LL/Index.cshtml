@@ -3,6 +3,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/MainPage.cshtml";
 }
+
+
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
         <div>
@@ -39,6 +43,7 @@
         <table style="width:100%;" class="table table-bordered">
             <thead>
                 <tr>
+                    <td><input type='checkbox' /></td>
                     <td>序号</td>
                     <td>库位编号</td>
                     <td>库位名</td>
@@ -52,5 +57,69 @@
             </thead>
             <tbody id="tb1"></tbody>
         </table>
+        @*layui分页*@
+        <div id="pageDome">
+
+        </div>
     </div>
 </div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    var pageIndex = 1;
+    var pageSize = 10;
+    var rowss = 0;
+    $(function () {
+        rukuList();
+
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+
+            //完整功能
+            laypage.render({
+                elem: 'pageDome'
+                , count: rowss
+                , limit: 3
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    rukuList();
+                }
+            });
+        });
+
+
+       
+
+    })
+
+
+    function rukuList() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/Listfenye",
+            data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tt tr").remove();
+                rowss = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td>caozuo</td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+    function ConvertDate(date) {
+        var time = new Date(parseInt(date.substr(6)));
+        return time.toLocaleDateString();
+    }
+</script>
