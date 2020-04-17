@@ -105,6 +105,7 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
+                console.log("1");
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
