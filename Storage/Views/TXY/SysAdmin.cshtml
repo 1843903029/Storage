@@ -213,6 +213,23 @@
                 }
             });
         });
+        function count() {
+            $.ajax({
+                type: "POST",
+                url: "/TXY/Indexs",
+                data: "{PageSize:" + PageSize + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    PageCount = result;
+                    get();
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
         function get(dss) {
             $.ajax({
                 type: "POST",
@@ -224,7 +241,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum_id + "</td><td>" + data.RoleNum + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'  class='btn btn-warning'>权限分配</a></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum + "</td><td>" + data.RoleNum + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'  class='btn btn-warning'>权限分配</a></td></tr>");
                     })
                 },
                 erro: function (ex) {

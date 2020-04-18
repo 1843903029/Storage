@@ -55,7 +55,10 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.AdminManager.Adminfenye(PageIndex, PageSize, Stuate), JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult Indexs(int PageSize)
+        {
+            return Json(BLL.TXY.AdminManager.GetCount(PageSize), JsonRequestBehavior.AllowGet);
+        }
 
 
 

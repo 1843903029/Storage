@@ -20,5 +20,14 @@ namespace BLL.TXY
         {
             return DAL.TXY.AdminService.Adminfenye(pageIndex, pageSize, Stuate);
         }
+        public static int GetCount(int pageSize)
+        {
+            int rows = DAL.TXY.AdminService.GetRows();
+            if (rows % pageSize == 0)
+            {
+                return rows / pageSize;
+            }
+            return rows / pageSize + 1;
+        }
     }
 }

@@ -54,8 +54,8 @@ namespace DAL.TXY
             StorageEntities entity = new StorageEntities();
             //匿名类型
             var obj = from p in entity.Admin
-                      where p.SysStatus.StatusID== Stuate &&
-                      p.IsDelete==true
+                      where p.SysStatus.StatusID == Stuate &&
+                      p.IsDelete == true
                       orderby p.AdminID ascending
                       select new
                       {
@@ -65,10 +65,12 @@ namespace DAL.TXY
                           Email = p.Email,
                           Phone = p.Phone,
                           LoginCount = p.LoginCount,
-                          DepartNum_id = p.DepartNum_id,
-                          RoleNum = p.RoleNum,
+                          //DepartNum_id = p.DepartNum_id,
+                          //RoleNum = p.RoleNum,
                           IsDelete = p.IsDelete,
-                          Stuate = p.SysStatus.StatusID
+                          Stuate = p.SysStatus.StatusID,
+                          DepartNum=p.SysDepart.DepartNum,
+                          RoleNum= p.SysRole.RoleNum,
 
                          
                       };
