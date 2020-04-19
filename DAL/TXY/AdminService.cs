@@ -49,54 +49,34 @@ namespace DAL.TXY
                       };
             return obj;
         }
-        public static PageList Adminfenye(int pageIndex, int pageSize,Admin a)
+        public static PageList Adminfenye(int pageIndex, int pageSize,int Stuate)
         {
             StorageEntities entity = new StorageEntities();
-            //实例化分页的类
-            PageList list = new PageList();
-            //var obj = from p in entity.Books orderby p.Id descending select p;
-            //return obj.Take(10).ToList();
             //匿名类型
             var obj = from p in entity.Admin
-                      orderby p.AdminID descending
+                      where p.SysStatus.StatusID == Stuate &&
+                      p.IsDelete == true
+                      orderby p.AdminID ascending
                       select new
                       {
-                          AdminID = a.AdminID,
-                          Authority = a.Authority,
-                          Breakage = a.Breakage,
-                          CpLbinfo = a.CpLbinfo,
-                          CreateIp = a.CreateIp,
-                          CreateTime = a.CreateTime,
-                          CreateUser = a.CreateUser,
-                          CycleCount = a.CycleCount,
-                          DepartNum_id = a.DepartNum_id,
-                          Email = a.Email,
-                          IsDelete = a.IsDelete,
-                          LoginCount = a.LoginCount,
-                          Movement = a.Movement,
-                          PassWord = a.PassWord,
-                          Phone = a.Phone,
-                          Picture = a.Picture,
-                          RealName = a.RealName,
-                          Remark = a.Remark,
-                          Returns = a.Returns,
-                          RoleNum = a.RoleNum,
-                          Status_id = a.Status_id,
-                          StockRemoval = a.StockRemoval,
-                          Storage = a.Storage,
-                          SysDepart = a.SysDepart,
-                          SysRole = a.SysRole,
-                          SysStatus = a.SysStatus,
-                          UpdateTime = a.UpdateTime,
-                          UserCode = a.UserCode,
-                          UserName = a.UserName,
+                          UserName = p.UserName,
+                          UserCode = p.UserCode,
+                          RealName = p.RealName,
+                          Email = p.Email,
+                          Phone = p.Phone,
+                          LoginCount = p.LoginCount,
+                          //DepartNum_id = p.DepartNum_id,
+                          //RoleNum = p.RoleNum,
+                          IsDelete = p.IsDelete,
+                          Stuate = p.SysStatus.StatusID,
+                          DepartNum=p.SysDepart.DepartNum,
+                          RoleNum= p.SysRole.RoleNum,
+
+                         
                       };
-            // return 
-            //设置分页数据
-            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            //设置总页数
-            int rows = entity.SysRole.Count();
-            list.PageCount = rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
+            PageList list = new PageList();
+            list.DataList = obj;
+            list.PageCount = obj.Count();
 
             return list;
         }

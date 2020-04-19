@@ -9,6 +9,34 @@ namespace DAL.LLQ
 {
     public class CpGlService
     {
+        public static Models.PageList CpGlfenye(int pageIndex, int pageSize)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.CpGlinfo
+                      where p.State == true
+                      orderby p.Cpbh ascending
+                      select new
+                      {
+                          CkId = p.CkId,
+                          Cpbh = p.Cpbh,
+                          CpXsName = p.CpXsName,
+                          CpSx = p.CpSx,
+                          CpXx = p.CpXx,
+                          CpPrice = p.CpPrice,
+                          Specification = p.Specification,
+                          CpLbName = p.CpLbinfo.CpLbName,      //产品类别的名称
+                          CpJlName = p.JLinfo.JlName,           //计量单位的名称
+                          remark = p.remark
+                      };
+            PageList list = new PageList();
+            list.DataList = obj;
+            list.PageCount = obj.Count();
+
+            return list;
+        }
+
+
+
         public static Models.PageList CpGl(int pageIndex, int pageSize, CpGlinfo Cpgl)
         {
             StorageEntities b = new StorageEntities();

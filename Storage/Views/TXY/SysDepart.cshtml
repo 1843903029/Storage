@@ -102,7 +102,7 @@
         var PageSize = 6;
         var PageCount = 0;
         var rows = 0;
-        layui.use(['laypage', 'layer'], function () {
+        layui.use(['laypage','layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
             //完整功能
@@ -125,18 +125,18 @@
             $.ajax({
                 type: "POST",
                 url: "/TXY/GetAllSysDepart",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",d:{SysDepartID:'" + $("#hhh").val() + "'}}",
+                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + data.CreateTime + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'>权限分配</a></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
                     })
                 },
-                erro: function (ex) {
-                    alert(ex.responseText);
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
                 }
             })
         }
@@ -154,5 +154,8 @@
             $("#jbox-content").hide();
         });
     });
-
+    function ConvertDate(date) {
+        var time = new Date(parseInt(date.substr(6)));
+        return time.toLocaleDateString();
+    }
 </script>
