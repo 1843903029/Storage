@@ -3,6 +3,7 @@
     ViewBag.Title = "GYSguanli";
     Layout = "~/Views/MainPage.cshtml";
 }
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
 
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
@@ -14,11 +15,12 @@
                     <td>供应商管理</td>
                 </tr>
             </table>
-            <div>
+            <div style="height:70px;">
                 <h4>供应商管理</h4>
-                <div style="float:right;display:inline-block;">
-                    @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
-                        <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
+                <div style="float:right;display:inline;">
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">新增</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
                 </div>
             </div>
 
@@ -39,11 +41,13 @@
         <table style="width:100%;" class="table table-bordered">
             <thead>
                 <tr>
+                    <td><input type='checkbox' /></td>
                     <td>供应商编号</td>
                     <td>供应商类型</td>
                     <td>供应商名称</td>
                     <td>电话</td>
                     <td>Email</td>
+                    <td>传真</td>
                     <td>联系人</td>
                     <td>地址</td>
                     <td>描述</td>
@@ -52,5 +56,68 @@
             </thead>
             <tbody id="tb1"></tbody>
         </table>
+        @*layui分页*@
+        <div id="pageDome">
+
+        </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    var pageIndex = 1;
+    var pageSize = 10;
+    var rowss = 0;
+    $(function () {
+        rukuList();
+
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+
+            //完整功能
+            laypage.render({
+                elem: 'pageDome'
+                , count: rowss
+                , limit: 3
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    rukuList();
+                }
+            });
+        });
+
+
+
+
+    })
+
+
+    function rukuList() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/Listfenye2",
+            data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                console.log("1");
+                $("#tt tr").remove();
+                rowss = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>"+data.state+"</td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+    function ConvertDate(date) {
+        var time = new Date(parseInt(date.substr(6)));
+        return time.toLocaleDateString();
+    }
+</script>

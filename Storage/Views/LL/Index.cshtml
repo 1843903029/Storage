@@ -17,11 +17,11 @@
                     <td>库位管理</td>
                 </tr>
             </table>
-            <div>
+            <div style="height:70px;">
                 <h4>库位管理</h4>
-                <div style="float:right;display:inline-block;">
-                    @*<input style="margin-left:1200px;" id="btnSubhh"  type="button" value="新增" />
-                        <input style="margin-left:10px;" id="btnSub"  type="button" value="导出" />*@
+                <div style="float:right;display:inline;">
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">新增</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
     function rukuList() {
         $.ajax({
             type: "POST",
-            url: "/LL/Listfenye",
+            url: "/LL/Listfenye1",
             data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
             dataType: "json",
             contentType: "application/json",
@@ -109,7 +109,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td>caozuo</td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CKName + "</td><td>" + data.kwType + "</td><td>" + data.Zhuangtai + "</td><td>" + data.Isdefault + "</td><td>" + ConvertDate(data.Time) + "</td><td>" + data.Shuju + "</td><td>caozuo</td></tr>");
                 });
             },
             error: function (ex) {

@@ -20,7 +20,13 @@ namespace DAL.LL
                       select new
                       {
                           kwID = p.kwID,
-                         kwType =p.kwType
+                          kwName = p.kwName,
+                          kwType = p.LocationManagementType.KwName,
+                          CKName=p.Cangku1.CKName,
+                          Zhuangtai=p.Zhuangtai,
+                          Isdefault=p.Isdefault,
+                          Time=p.Time,
+                          Shuju = p.Shuju
                       };
             PageList list = new PageList();
             list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);

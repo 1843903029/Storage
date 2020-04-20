@@ -25,9 +25,17 @@ namespace Storage.Controllers
         }
 
 
-        public ActionResult Listfenye(int pageindex,int pagesize)
+        public ActionResult Listfenye1(int pageindex,int pagesize)
         {
             return Json(BLL.LL.KweiGuanliManager.Listfenye(pageindex, pagesize), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Listfenye2(int pageindex, int pagesize)
+        {
+            return Json(BLL.LL.GYSguanliManager.Listfenye(pageindex, pagesize), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Listfenye3(int pageindex, int pagesize)
+        {
+            return Json(BLL.LL.KHguanliManager.Listfenye(pageindex, pagesize), JsonRequestBehavior.AllowGet);
         }
     }
 }
