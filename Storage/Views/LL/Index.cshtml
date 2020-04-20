@@ -6,7 +6,7 @@
 
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
-
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
         <div>
@@ -20,9 +20,63 @@
             <div style="height:70px;">
                 <h4>库位管理</h4>
                 <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">新增</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="xzshow()">新增</a>
                     <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
                 </div>
+            </div>
+            <div id="xzdiv" hidden>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>库位编号</td>
+                            <td>
+                                <input id="txtUserCode" name="txtUserCode" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                            </td>
+                            <td>库位名称</td>
+                            <td>
+                                <input id="txtUserName" name="txtUserName" type="text" placeholder="请输入库位名称" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>库位类型</td>
+                            <td>
+                                <select id="" name="" class="input-medium" style="width:164px;">
+                                    <option value="">请选择库位类型</option>
+                                    <option value="1">正式库区</option>
+                                    <option value="2">待入库区</option>
+                                    <option value="3">待检库区</option>
+                                    <option value="4">待出库区</option>
+                                    <option value="5">报损库区</option>
+                                </select>
+                            </td>
+                            <td>仓库</td>
+                            <td>
+                                <select id="" name="" class="input-medium"  style="width:164px;">
+                                    <option value="">请选择仓库</option>
+                                    <option value="1">产品仓库</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否默认</td>
+                            <td>
+                                <select id="" name="" class="input-medium" style="width:164px;">
+                                    <option value="">请选择</option>
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+
+                    </tbody>
+                    <tr style="float:right;margin-top:100px;">
+                        <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
+                        <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                    </tr>
+                </table>
+
+
             </div>
 
             <table action="javascript:void(0)" class="form-horizontal">
@@ -66,6 +120,7 @@
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
 <script>
     var pageIndex = 1;
     var pageSize = 10;
@@ -95,7 +150,18 @@
        
 
     })
+    function xzshow() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['添加库位', 'font-size:18px'],
+            area: ['650px', '359px'],
+            shadeClose: true,
+            content:$('#xzdiv')
+        });
 
+        
+    }
 
     function rukuList() {
         $.ajax({
