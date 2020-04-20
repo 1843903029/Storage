@@ -28,6 +28,16 @@ namespace Storage.Controllers
             return Json(BLL.XBY.StorageManager.RuKuList(PageSize, PageIndex, State), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SuoYouRuKuList(int PageSize, int PageIndex)
+        {
+            return Json(BLL.XBY.StorageManager.RuKuList(PageSize, PageIndex), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MoHuRuKuList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            return Json(BLL.XBY.StorageManager.MoHuRuKuList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 出库管理页面
         /// </summary>
@@ -42,6 +52,17 @@ namespace Storage.Controllers
             return Json(BLL.XBY.StockRemovalManager.ChuKuList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SuoYouChuKuList(int PageIndex, int PageSize)
+        {
+            return Json(BLL.XBY.StockRemovalManager.ChuKuList(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult MoHuChuKuList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            return Json(BLL.XBY.StockRemovalManager.MoHuChuKuList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ChuKuXF1()
         {
             return View();
@@ -51,6 +72,16 @@ namespace Storage.Controllers
         public ActionResult BaoSunList(int PageIndex, int PageSize, int State)
         {
             return Json(BLL.XBY.BreakageManager.BaoSunList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SuoYouBaoSunList(int PageIndex, int PageSize)
+        {
+            return Json(BLL.XBY.BreakageManager.BaoSunList(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MoHuBaoSunList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            return Json(BLL.XBY.BreakageManager.MoHuBaoSunList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -65,6 +96,15 @@ namespace Storage.Controllers
         public ActionResult YiKuList(int PageIndex, int PageSize, int State)
         {
             return Json(BLL.XBY.MovementManager.YiKuList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SuoYouYiKuList(int PageIndex, int PageSize)
+        {
+            return Json(BLL.XBY.MovementManager.YiKuList(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult MoHuYiKuList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            return Json(BLL.XBY.MovementManager.MoHuYiKuList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -82,6 +122,16 @@ namespace Storage.Controllers
             return Json(BLL.XBY.CycleCountManager.PanDianList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SuoYouPanDianList(int PageIndex, int PageSize)
+        {
+            return Json(BLL.XBY.CycleCountManager.PanDianList(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MoHuPanDianList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            return Json(BLL.XBY.CycleCountManager.MoHuPanDianList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 盘点管理页面
         /// </summary>
@@ -97,6 +147,16 @@ namespace Storage.Controllers
             return Json(BLL.XBY.ReturnsManager.TuiHuoList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SuoYouTuiHuoList(int PageIndex, int PageSize)
+        {
+            return Json(BLL.XBY.ReturnsManager.TuiHuoList(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult MoHuTuiHuoList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            return Json(BLL.XBY.ReturnsManager.MoHuTuiHuoList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
+        }
         /// <summary>
         /// 退货管理页面
         /// </summary>

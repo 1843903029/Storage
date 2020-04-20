@@ -13,7 +13,7 @@
 </div>
 <div style="border:0px solid #4cff00;width:95%;">
     <div style="padding:15px;border:1px solid red">
-        <button class="btn btn-default">所有</button>
+        <button class="btn btn-default" onclick="Suoyou()">所有</button>
         <button class="btn btn-default" id="daish">待审核</button>
         <button class="btn btn-default" id="shenhetg">审核通过</button>
         <button class="btn btn-default" id="shenhesb">审核失败</button>
@@ -22,13 +22,13 @@
         <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
         <div style="padding-top:8px;display:flex;margin-bottom:20px">
-            <input type="text" class="form-control" placeholder="请输入入库单号" style="width:170px;margin-right:10px" />
+            <input type="text" class="form-control" id="danhaoh" placeholder="请输入入库单号" style="width:170px;margin-right:10px" />
             <div style="padding-top:6px;margin-right:5px;">时间</div>
-            <input type="password" class="form-control" style="width:170px;margin-right:10px">
+            <input  class="form-control" id="time1" style="width:170px;margin-right:10px">
             <div style="padding-top:6px;margin-right:5px;">-</div>
-            <input type="password" class="form-control" style="width:170px;margin-right:10px">
+            <input  class="form-control" id="time2" style="width:170px;margin-right:10px">
 
-            <input class="btn btn-info" type="button" value="搜索" style="width:80px;margin-right:5px" />
+            <input class="btn btn-info" type="button" onclick="MoHurukuList()" value="搜索" style="width:80px;margin-right:5px" />
             <input class="btn btn-primary" type="button" value="高级搜索" style="width:100px;" />
         </div>
 
@@ -105,6 +105,48 @@
     })
 
 
+    function Suoyou()
+    {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+
+            //完整功能
+            laypage.render({
+                elem: 'pageDome'
+                , count: rowss
+                , limit: 3
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    SuoyouList();
+                }
+            });
+        });
+    }
+
+    function SuoyouList() {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/SuoYouRuKuList",
+            data: "{PageSize:" + pageSize + ",PageIndex:" + pageIndex + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tt tr").remove();
+                rowss = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
     function rukuList(dss) {
         $.ajax({
             type: "POST",
@@ -116,7 +158,28 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td>" + data.StateText + "</td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+    function MoHurukuList() {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/MoHuRuKuList",
+            data: "{PageSize:" + pageSize + ",PageIndex:" + pageIndex + ",Danhao:'" + $("#danhaoh").val() + "',time1:'" + $("#time1").val() + "',time2:'" + $("#time2").val() + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tt tr").remove();
+                rowss = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {

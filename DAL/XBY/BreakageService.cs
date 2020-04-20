@@ -47,5 +47,101 @@ namespace DAL.XBY
             return list;
 
         }
+
+
+        /// <summary>
+        /// 所有报损分页查询
+        /// </summary>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public static PageList SuoYouBaoSunList(int PageIndex, int PageSize)
+        {
+            StorageEntities ent = new StorageEntities();
+
+            var obj = from p in ent.Breakage
+                      where p.DataState == true
+                      orderby p.BreakageID ascending
+                      select new
+                      {
+                          //[BreakageID], [BreakageType], [AssociatedNumber], [BreakageCount],
+                          //[State], [EmployeeID], [operationType], [CreationTime], [DataState], [StateText]
+                          BreakageID = p.BreakageID,
+                          BreakageType = p.BreakageType,
+                          AssociatedNumber = p.AssociatedNumber,
+                          BreakageCount = p.BreakageCount,
+                          State = p.State,
+                          EmployeeID = p.Admin.UserName,
+                          operationType = p.operationType,
+                          CreationTime = p.CreationTime,
+                          DataState = p.DataState,
+                          StateText = p.StateText
+                      };
+            PageList list = new PageList();
+            list.DataList = obj;
+            //.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+            list.PageCount = obj.Count();
+
+            return list;
+
+        }
+
+
+        /// <summary>
+        /// 模糊查询分页
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="Danhao"></param>
+        /// <param name="time1"></param>
+        /// <param name="time2"></param>
+        /// <returns></returns>
+        public static PageList MoHuBaoSunList(int PageSize, int PageIndex, string Danhao, string time1, string time2)
+        {
+            StorageEntities ent = new StorageEntities();
+            PageList list = new PageList();
+            var obj = from p in ent.Breakage
+                      where p.DataState == true
+                      orderby p.BreakageID ascending
+                      select new
+                      {
+                          //[BreakageID], [BreakageType], [AssociatedNumber], [BreakageCount],
+                          //[State], [EmployeeID], [operationType], [CreationTime], [DataState], [StateText]
+                          BreakageID = p.BreakageID,
+                          BreakageType = p.BreakageType,
+                          AssociatedNumber = p.AssociatedNumber,
+                          BreakageCount = p.BreakageCount,
+                          State = p.State,
+                          EmployeeID = p.Admin.UserName,
+                          operationType = p.operationType,
+                          CreationTime = p.CreationTime,
+                          DataState = p.DataState,
+                          StateText = p.StateText
+                      };
+
+            list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+            int rows = obj.Count();
+
+
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(Danhao))
+            {
+                obj = obj.Where(p => p.BreakageID == Danhao);
+                list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+                rows = obj.Count();
+                return list;
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(time1) && !string.IsNullOrEmpty(time2))
+            {
+                obj = obj.Where(p => p.CreationTime > Convert.ToDateTime(time1) && p.CreationTime < Convert.ToDateTime(time2));
+                list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+                rows = obj.Count();
+                return list;
+
+            }
+            return list;
+
+
+        }
+
     }
 }
