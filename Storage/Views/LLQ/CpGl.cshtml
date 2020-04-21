@@ -55,6 +55,7 @@
                         <td>下限</td>
                         <td>价格</td>
                         <td>规格</td>
+                        <td>数量</td>
                         <td>类别</td>
                         <td>单位</td>
                         <td>备注</td>
@@ -217,7 +218,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CkId + "</td><td>" + data.Cpbh + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td>操作</td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.Cpbh + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td>删除</td></tr>");
                     });
                 },
                 erro: function (ex) {
@@ -246,8 +247,7 @@
             }
         })
     });
-
-
+    
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();

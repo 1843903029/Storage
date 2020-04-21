@@ -15,19 +15,6 @@ namespace BLL.LLQ
             return DAL.LLQ.CplbService.lbfenye( pageIndex,  pageSize);
         }
 
-
-        public static int GetCount(int pageSize)
-        {
-            int rows = DAL.LLQ.CplbService.GetRows();
-            if (rows % pageSize == 0)
-            {
-                return rows / pageSize;
-            }
-            return rows / pageSize + 1;
-        }
-        public static Models.PageList lb(int pageIndex, int pageSize, CpLbinfo Cplb)
-        {
-            return DAL.LLQ.CplbService.lb(pageIndex, pageSize, Cplb);
-        }
+        
     }
 }

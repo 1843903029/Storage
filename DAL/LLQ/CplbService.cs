@@ -22,7 +22,8 @@ namespace DAL.LLQ
                           CpLbName = p.CpLbName,
                           UserName = p.UserName,//管理员的名称
                           CpTime = p.CpTime,
-                          remark = p.remark
+                          remark = p.remark,
+                          Delit = p.Delit//是否删除
                       };
             PageList list = new PageList();
             list.DataList = obj;
@@ -31,33 +32,12 @@ namespace DAL.LLQ
             return list;
         }
 
-        public static Models.PageList lb(int pageIndex, int pageSize, CpLbinfo Cplb)
-        {
-            StorageEntities b = new StorageEntities();
-            var query = from p in b.CpLbinfo select p;
-            Models.PageList li = new Models.PageList();
-            var list = from p in query
-                       orderby p.ID ascending
-                       select new
-                       {
-                           ID = p.ID,
-                           CpId = p.CpId,
-                           CpLbName = p.CpLbName,
-                           UserName = p.UserName,//管理员的名称
-                           CpTime = p.CpTime,
-                           remark = p.remark
-                           
-                       };
-            li.DataList = list.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            int rows = query.Count();
-            li.PageCount = rows;// % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
-            return li;
-        }
-        public static int GetRows()
-        {
-            StorageEntities entity = new StorageEntities();
-            return entity.CpLbinfo.Count();
-        }
+
+
+
+
+
+        
 
     }
 }
