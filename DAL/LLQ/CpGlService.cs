@@ -17,20 +17,20 @@ namespace DAL.LLQ
                       orderby p.Cpbh ascending
                       select new
                       {
-                          CpID= p.CpID,
+                          CpID = p.CpID,
                           Cpbh = p.Cpbh,
                           CpXsName = p.CpXsName,
                           CpSx = p.CpSx,
                           CpXx = p.CpXx,
                           CpPrice = p.CpPrice,
                           CpShuLiang = p.CpShuLiang,
-                          Specification = p.Specification,      
-                          UserId = p.UserId,                    //客户 用户名
-                          CpLbName = p.CpLbinfo.CpLbName,      //产品类别的名称
-                          CkId=p.CkId,                      //仓库的id
-                          KwId=p.KwId,                      //仓库库位的名称
+                          Specification = p.Specification,
+                          UserName = p.Client.KhName,                   //客户 用户名
+                          CpLbName = p.CpLbinfo.CpLbName,                //产品类别的名称
+                          CkName = p.Cangku.CKName,                      //仓库的名称
+                          KwName = p.LocationManagement.kwName,          //仓库库位的名称
                           JlName = p.JLinfo.JlName,           //计量单位的名称
-                          State=p.State,                    //是否删除
+                          State = p.State,                    //是否删除
                           remark = p.remark
                       };
             PageList list = new PageList();
@@ -44,15 +44,6 @@ namespace DAL.LLQ
         //{
 
         //}
-
-
-
-
-
-
-
-
-
 
 
 

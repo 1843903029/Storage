@@ -9,6 +9,12 @@ namespace DAL.LLQ
 {
   public  class JldwService
     {
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public static PageList Jldwfenye(int pageIndex, int pageSize)
         {
             StorageEntities b = new StorageEntities();
@@ -28,6 +34,7 @@ namespace DAL.LLQ
 
             return list;
         }
+        
 
     }
 }
