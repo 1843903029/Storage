@@ -20,7 +20,9 @@ namespace Storage.Controllers
         //登录
         public ActionResult Rogin(Admin a)
         {
-                return Json(BLL.TXY.AdminManager.Rogin(a), JsonRequestBehavior.AllowGet);
+            @Session["user"] = a;
+            return Json(BLL.TXY.AdminManager.Rogin(a), JsonRequestBehavior.AllowGet);
+           
         }
         public ActionResult Login()
         {
@@ -37,10 +39,19 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.SysRoleManager.SysRolefenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SysRoledelete(SysRole role)
+        {
+
+            return Json(BLL.TXY.SysRoleManager.SysRoledelete(role), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
 
 
         //SysDepartfenye
-        
+
         public ActionResult GetAllSysDepart(int PageIndex, int PageSize)
         {
 

@@ -165,9 +165,40 @@
             $("#jbox-content").hide();
         });
     });
+    //删除
+    //$("#btnSub").click(function () {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Dome/Edit",
+    //        data: "{Role:" + role + "}",
+    //        dataType: "json",
+    //        contentType: "application/json",
+    //        success: function (result) {
+    //            if (result > 0) {
+    //                alert("修改成功");
+    //                location.href = '/Dome/Index';
+    //            }
+    //            else {
+    //                alert("修改失败");
+
+    //            }
+    //        },
+    //        error: function (ex) {
+    //            alert(ex.responseText);
+    //        }
+    //    });
+
+
+    });
+
+
+
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();
     }
+
+
+    
 </script>
