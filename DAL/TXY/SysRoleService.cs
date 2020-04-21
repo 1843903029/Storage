@@ -38,5 +38,14 @@ namespace DAL.TXY
 
             return list;
         }
+        //删除
+        public static int SysRoledelete(SysRole role)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.SysRole where p.SysRoleID == role.SysRoleID select p).First();
+            obj.IsDelete = role.IsDelete;
+            return entity.SaveChanges();
+
+        }
     }
 }
