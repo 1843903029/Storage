@@ -57,15 +57,15 @@
 
                 </tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px" hidden>
-                <div class="tab-pane active" id="widget_tab1">
+            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-300px;background-color:aliceblue" hidden>
+                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
                     <table class="formtab_user">
                         <tbody>
 
                             <tr>
                                 <td>角色编号</td>
                                 <td>
-                                    <input id="txtRoleNum" name="txtRoleNum" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                                    <input id="txtRoleNum" name="txtRoleNum" type="text"  class="input-medium" >
                                 </td>
                             </tr>
                             <tr>
@@ -81,8 +81,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
-                                <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                                <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
+                                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -102,9 +102,9 @@
 <script src="~/layui/layui.js"></script>
 <script>
     $(function () {
-      
+        get();
         var PageIndex = 1;
-        var PageSize = 6;
+        var PageSize = 5;
         var PageCount = 0;
         var rows = 0;
         layui.use(['laypage', 'layer'], function () {
@@ -138,14 +138,9 @@
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
                         $("#tb1").append(
+                            "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                        
 
-
-                            "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
-
-
-
-
-                            //"<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='aaa'>" + data.SysRoleID + "</td ><td>" + data.RoleNum + "</td ><td>" + data.RoleName + "</td><td>" + data.CreateTime + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'>权限分配</a></td></tr>");
                     })
                 },
                 error: function (ex) {
@@ -166,31 +161,56 @@
         });
     });
     //删除
-    //$("#btnSub").click(function () {
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/Dome/Edit",
-    //        data: "{Role:" + role + "}",
-    //        dataType: "json",
-    //        contentType: "application/json",
-    //        success: function (result) {
-    //            if (result > 0) {
-    //                alert("修改成功");
-    //                location.href = '/Dome/Index';
-    //            }
-    //            else {
-    //                alert("修改失败");
+    function btnSub () {
+        var id = $("[name='txtRoleNum']").val();
+        var aaa = false;
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysRole",
+            data: "{Role:" + id+ "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result >0) {
+                    alert("删除成功");
+                    get();
+                }
+                else {
+                    alert("删除失败");
 
-    //            }
-    //        },
-    //        error: function (ex) {
-    //            alert(ex.responseText);
-    //        }
-    //    });
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        });
 
+    };
 
-    });
+    //新增
+    function add() {
+        
+        var d = new Date();
+        var time = d.getTime();
+        var IsDelete = true;
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysRoleadd",
+            data: "{role:{RoleNum:'" + $("#txtRoleNum").val() + "',RoleName:'" + $("#txtRoleName").val() + "',Remark:'" + $("#txtRemark").val() + "',CreateTime:'" + time+ "',IsDelete:'" + IsDelete + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("添加成功")
+                    get();
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
 
+            }
+        });
+    }
 
 
 

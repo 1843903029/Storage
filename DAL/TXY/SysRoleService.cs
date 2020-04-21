@@ -43,9 +43,16 @@ namespace DAL.TXY
         {
             StorageEntities entity = new StorageEntities();
             var obj = (from p in entity.SysRole where p.SysRoleID == role.SysRoleID select p).First();
-            obj.IsDelete = role.IsDelete;
+            obj.IsDelete =role.IsDelete;
             return entity.SaveChanges();
 
+        }
+        //新增
+        public static int SysRoleadd(SysRole role)
+        {
+            StorageEntities entity = new StorageEntities();
+            entity.SysRole.Add(role);
+            return entity.SaveChanges();
         }
     }
 }

@@ -44,7 +44,12 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.SysRoleManager.SysRoledelete(role), JsonRequestBehavior.AllowGet);
         }
+        //新增
+        public ActionResult SysRoleadd(SysRole role)
+        {
 
+            return Json(BLL.TXY.SysRoleManager.SysRoleadd(role), JsonRequestBehavior.AllowGet);
+        }
 
 
 

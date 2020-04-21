@@ -20,5 +20,9 @@ namespace BLL.TXY
         {
             return DAL.TXY.SysRoleService.SysRoledelete(role);
         }
+        public static int SysRoleadd(SysRole role)
+        {
+            return DAL.TXY.SysRoleService.SysRoleadd(role);
+        }
         }
 }
