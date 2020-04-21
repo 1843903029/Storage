@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "ChukuGuanliAdd";
+    Layout = "~/Views/MainPage.cshtml";
+}
+
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
+
+<div style=" border:0px solid #4cff00;width:95%;">
+    <div style="height:50px;background-color:#e7e7e7;">
+        <div style="width:150px;margin-left:15px;font-weight:600;padding-top:15px;color:#373737">新增出库单</div>
+    </div>
+</div>
+<div style="border:0px solid #4cff00;width:95%;">
+    <div style="padding:15px;border:1px solid #808080">
+        <div style="margin:10px;border:1px solid #e7e7e7;padding:5px;padding-bottom:22px;">
+            <div style="display:flex">
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">出库单编号</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">出库单类型</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">关联订单号</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">发货日期</div>
+            </div>
+            <div style="display:flex">
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
+                    <input type="text" class="form-control" placeholder="可不填自动生成" readonly>
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
+                    <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
+                    <input type="text" class="form-control">
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div style="display:flex">
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">客户编号</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">客户名称</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">客户地址</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">客户联系方式</div>
+            </div>
+            <div style="display:flex">
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control" placeholder="输入关键字搜索">
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control">
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control">
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div style="display:flex">
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">联系人</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">制单人</div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;">备注</div>
+            </div>
+            <div style="display:flex">
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control">
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control">
+                </div>
+                <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
+                    <input type="text" class="form-control">
+                </div>
+
+            </div>
+        </div>
+
+        <div style="margin:10px;border:1px solid #e7e7e7;padding:5px;padding-bottom:22px;">
+            <table class="table table-striped table-bordered table-hover" id="tabInfo">
+                <thead>
+                    <tr class="widget-title">
+                        <th class="hidden-480">产品名称</th>
+                        <th class="hidden-480">产品条码</th>
+                        <th class="hidden-480">规格</th>
+                        <th class="hidden-480">批次</th>
+                        <th class="hidden-480">单价</th>
+                        <th class="hidden-480">入库数</th>
+                        <th class="hidden-480">总价</th>
+                        <th class="hidden-480">出库数量</th>
+                        <th class="hidden-480">库位</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tb1"></tbody>
+            </table>
+            <table class="table table-striped table-bordered table-hover" id="tabInfo">
+                <thead>
+                    <tr class="widget-title">
+                        <th class="hidden-480">产品编号</th>
+                        <th class="hidden-480">产品名称</th>
+                        <th class="hidden-480">产品单价</th>
+                        <th class="hidden-480">库位</th>
+                        <th class="hidden-480">现有库存</th>
+                    </tr>
+                </thead>
+                <tbody id="tb2"></tbody>
+            </table>
+            @*layui分页*@
+            <div id="pageDome">
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="button" class="btn">取消</button>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
+<script>
+    var pageIndex = 1;
+    var pageSize = 5;
+    var pageCount = 0;
+    var rowss = 0;
+    $(function () {
+        rukuList();
+
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+
+            //完整功能
+            laypage.render({
+                elem: 'pageDome'
+                , count: rowss
+                , limit: 5
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    rukuList();
+                }
+            });
+        });
+
+    })
+
+
+
+
+    function rukuList() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/GetCpGlAll",
+            data: "{PageIndex:" + pageIndex + ",PageSize:" + pageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb2 tr").remove();
+                rowss = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb2").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpPrice + "</td><td>" + data.ddd + "</td><td>" + data.CpShuLiang + "</td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+
+
+    function ConvertDate(date) {
+        var time = new Date(parseInt(date.substr(6)));
+        return time.toLocaleDateString();
+    }
+</script>
+
+

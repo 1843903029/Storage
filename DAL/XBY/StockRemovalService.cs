@@ -42,8 +42,7 @@ namespace DAL.XBY
                           StateText = p.StateText,
                       };
             PageList list = new PageList();
-            list.DataList = obj;
-            //.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+            list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
             list.PageCount = obj.Count();
 
             return list;
@@ -82,8 +81,7 @@ namespace DAL.XBY
                           StateText = p.StateText,
                       };
             PageList list = new PageList();
-            list.DataList = obj;
-            //.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+            list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
             list.PageCount = obj.Count();
 
             return list;

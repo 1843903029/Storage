@@ -45,5 +45,18 @@ namespace BLL.XBY
         {
             return DAL.XBY.StorageService.MoHuRuKuList(PageSize, PageIndex, Danhao, time1, time2);
         }
+
+
+
+        /// <summary>
+        /// 添加入库单
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public static int ADDRuku(Storage zhu,List<StorageDetailed> xiang)
+        {
+            return DAL.XBY.StorageService.ADDRuku(zhu, xiang);
+        }
         }
 }

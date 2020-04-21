@@ -40,8 +40,7 @@ namespace DAL.XBY
                           DataState = p.DataState
                       };
             PageList list = new PageList();
-            list.DataList = obj;
-            //.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+            list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
             list.PageCount = obj.Count();
 
             return list;

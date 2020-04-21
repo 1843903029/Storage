@@ -146,6 +146,21 @@ namespace DAL.XBY
 
         }
 
+        /// <summary>
+        /// 添加入库单
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public static int ADDRuku(Storage zhu, List<StorageDetailed> xiang)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.Storage.Add(zhu);
+            ent.StorageDetailed.AddRange(xiang);
+            return ent.SaveChanges();
+            
+        }
+
 
 
     }

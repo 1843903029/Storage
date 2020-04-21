@@ -57,6 +57,7 @@
     <Compile Include="TXY\SysDepartService.cs" />
     <Compile Include="TXY\SysRoleService.cs" />
     <Compile Include="XBY\BreakageService.cs" />
+    <Compile Include="XBY\CangKuCaoZuoService.cs" />
     <Compile Include="XBY\CycleCountService.cs" />
     <Compile Include="XBY\MovementService.cs" />
     <Compile Include="XBY\ReturnsService.cs" />
