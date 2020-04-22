@@ -14,10 +14,11 @@ namespace DAL.LL
         public static PageList Listfenye(int pageindex, int pagesize)
         {
             var obj = from p in s.Client
-                      where p.State == true
+                      //where p.State == true
                       orderby p.KhID
                       select new
                       {
+                          ID=p.ID,
                           KhID = p.KhID,
                           KhName = p.KhName,
                           beizhu = p.beizhu,
@@ -32,5 +33,12 @@ namespace DAL.LL
             list.PageCount = obj.Count();
             return list;
         }
+
+        public static int del( int id) {
+            Client c = s.Client.Find(id);
+            s.Client.Remove(c);
+            return s.SaveChanges();
+
         }
+    }
 }
