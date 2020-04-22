@@ -40,8 +40,14 @@ namespace Storage.Controllers
         public ActionResult delKH(int id) {
             return Json(BLL.LL.KHguanliManager.del(id),JsonRequestBehavior.AllowGet);
         }
+        public ActionResult delGYS(int id)
+        {
+            return Json(BLL.LL.GYSguanliManager.del(id), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult KWAdd(LocationManagement lo)
         {
+            lo.Shuju = true;
+            lo.Isdefault = 2;
             return Json(BLL.LL.KweiGuanliManager.add(lo), JsonRequestBehavior.AllowGet);
         }
     }

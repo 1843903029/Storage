@@ -115,7 +115,7 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var pageIndex = 1;
-    var pageSize = 10;
+    var pageSize = 12;
     var rowss = 0;
     $(function () {
         $("#xzdiv").hide();
@@ -134,7 +134,7 @@
                 , jump: function (obj) {
                     pageIndex = obj.curr;
                     pageSize = obj.limit;
-                    rukuList();
+                    
                 }
             });
         });
@@ -157,7 +157,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>"+data.state+"</td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>" + data.state + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /></td> </tr>");
                 });
             },
             error: function (ex) {
@@ -182,6 +182,28 @@
 
 
     }
+    function del(id) {
+        $.ajax({
+            type: "POST",
+            url: "/LL/delGYS",
+            data: "{id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    window.location.reload();
+                } else {
+                    alert("删除失败");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();
