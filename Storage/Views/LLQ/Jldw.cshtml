@@ -122,7 +122,7 @@
                 //获取总条数
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.Jlbh + "</td><td>" + data.JlName + "</td><td>操作</td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.Jlbh + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
                 });
             },
             error: function (ex) {

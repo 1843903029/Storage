@@ -47,14 +47,26 @@ namespace BLL.XBY
         }
 
 
-
         /// <summary>
-        /// 添加入库单
+        /// 通过单号查询入库信息
         /// </summary>
-        /// <param name="xiang"></param>
-        /// <param name="zhu"></param>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="State"></param>
         /// <returns></returns>
-        public static int ADDRuku(Storage zhu,List<StorageDetailed> xiang)
+        public static IQueryable RuKuList(string Danhao)
+        {
+            return DAL.XBY.StorageService.RuKuList(Danhao);
+        }
+
+
+            /// <summary>
+            /// 添加入库单
+            /// </summary>
+            /// <param name="xiang"></param>
+            /// <param name="zhu"></param>
+            /// <returns></returns>
+            public static int ADDRuku(Storage zhu,List<StorageDetailed> xiang)
         {
             return DAL.XBY.StorageService.ADDRuku(zhu, xiang);
         }

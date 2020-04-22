@@ -72,6 +72,7 @@
         <AssociationConnector Association="StorageModel.FK_StockRemovalDetailed_StockRemoval" ManuallyRouted="false" />
         <AssociationConnector Association="StorageModel.FK_Storage_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="StorageModel.FK_StorageDetailed_Storage" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_StockRemoval_Supplier1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

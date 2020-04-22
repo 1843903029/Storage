@@ -19,6 +19,7 @@ namespace Models
         {
             this.CpGlinfo = new HashSet<CpGlinfo>();
             this.CustomerAddress = new HashSet<CustomerAddress>();
+            this.StockRemoval = new HashSet<StockRemoval>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,7 @@ namespace Models
         public virtual ICollection<CpGlinfo> CpGlinfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerAddress> CustomerAddress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockRemoval> StockRemoval { get; set; }
     }
 }

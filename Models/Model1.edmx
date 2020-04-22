@@ -721,11 +721,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StockRemoval_Supplier">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="StockRemoval" Type="Self.StockRemoval" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="GysID" />
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="StockRemoval">
               <PropertyRef Name="SupplierID" />
@@ -981,7 +981,7 @@
             <End Role="StockRemoval" EntitySet="StockRemoval" />
           </AssociationSet>
           <AssociationSet Name="FK_StockRemoval_Supplier" Association="Self.FK_StockRemoval_Supplier">
-            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Client" EntitySet="Client" />
             <End Role="StockRemoval" EntitySet="StockRemoval" />
           </AssociationSet>
           <AssociationSet Name="FK_StockRemovalDetailed_CpGlinfo" Association="Self.FK_StockRemovalDetailed_CpGlinfo">
@@ -1121,6 +1121,7 @@
           <Property Name="State" Type="Boolean" />
           <NavigationProperty Name="CpGlinfo" Relationship="Self.FK_CpGlinfo_Client" FromRole="Client" ToRole="CpGlinfo" />
           <NavigationProperty Name="CustomerAddress" Relationship="Self.FK_CustomerAddress_Client" FromRole="Client" ToRole="CustomerAddress" />
+          <NavigationProperty Name="StockRemoval" Relationship="StorageModel.FK_StockRemoval_Supplier1" FromRole="Client" ToRole="StockRemoval" />
         </EntityType>
         <EntityType Name="CpGlinfo">
           <Key>
@@ -1343,6 +1344,7 @@
           <NavigationProperty Name="Admin" Relationship="Self.FK_StockRemoval_Admin" FromRole="StockRemoval" ToRole="Admin" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_StockRemoval_Supplier" FromRole="StockRemoval" ToRole="Supplier" />
           <NavigationProperty Name="StockRemovalDetailed" Relationship="Self.FK_StockRemovalDetailed_StockRemoval" FromRole="StockRemoval" ToRole="StockRemovalDetailed" />
+          <NavigationProperty Name="Client" Relationship="StorageModel.FK_StockRemoval_Supplier1" FromRole="StockRemoval" ToRole="Client" />
         </EntityType>
         <EntityType Name="StockRemovalDetailed">
           <Key>
@@ -2112,7 +2114,23 @@
             <End Role="Storage" EntitySet="Storage" />
             <End Role="StorageDetailed" EntitySet="StorageDetailed" />
           </AssociationSet>
+          <AssociationSet Name="FK_StockRemoval_Supplier1" Association="StorageModel.FK_StockRemoval_Supplier1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="StockRemoval" EntitySet="StockRemoval" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_StockRemoval_Supplier1">
+          <End Type="StorageModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="StorageModel.StockRemoval" Role="StockRemoval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockRemoval">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
