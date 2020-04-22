@@ -37,5 +37,6 @@ namespace Models
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockRemovalDetailed> StockRemovalDetailed { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

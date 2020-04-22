@@ -15,6 +15,6 @@ namespace BLL.LLQ
             return DAL.LLQ.CplbService.lbfenye( pageIndex,  pageSize);
         }
 
-        
+
     }
 }

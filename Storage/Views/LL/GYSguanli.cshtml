@@ -18,7 +18,7 @@
             <div style="height:70px;">
                 <h4>供应商管理</h4>
                 <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">新增</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
                     <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
                     <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
                 </div>
@@ -56,6 +56,56 @@
             </thead>
             <tbody id="tb1"></tbody>
         </table>
+        <div id="xzdiv">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>库位编号</td>
+                        <td>
+                            <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" class="input-medium">
+                        </td>
+                        <td>库位名称</td>
+                        <td>
+                            <input id="kwName" name="kwName" type="text" placeholder="请输入库位名称" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>库位类型</td>
+                        <td>
+                            <select id="kwType" name="kwType" class="input-medium" style="width:164px;">
+                                <option value="">请选择库位类型</option>
+                                <option value="1">正式库区</option>
+                                <option value="2">待入库区</option>
+                                <option value="3">待检库区</option>
+                                <option value="4">待出库区</option>
+                                <option value="5">报损库区</option>
+                            </select>
+                        </td>
+                        <td>仓库</td>
+                        <td>
+                            <select id="CKName" name="CKName" class="input-medium" style="width:164px;">
+                                <option value="">请选择仓库</option>
+                                <option value="1">产品仓库</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否默认</td>
+                        <td>
+                            <select id="Zhuangtai" name="Zhuangtai" class="input-medium" style="width:164px;">
+                                <option value="">请选择</option>
+                                <option value="1">是</option>
+                                <option value="2">否</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+        </div>
         @*layui分页*@
         <div id="pageDome">
 
@@ -65,9 +115,10 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var pageIndex = 1;
-    var pageSize = 10;
+    var pageSize = 12;
     var rowss = 0;
     $(function () {
+        $("#xzdiv").hide();
         rukuList();
 
         layui.use(['laypage', 'layer'], function () {
@@ -83,7 +134,7 @@
                 , jump: function (obj) {
                     pageIndex = obj.curr;
                     pageSize = obj.limit;
-                    rukuList();
+                    
                 }
             });
         });
@@ -106,8 +157,45 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>"+data.state+"</td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>" + data.state + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /></td> </tr>");
                 });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+    function xzshow() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['添加库位', 'font-size:18px'],
+            area: ['650px', '359px'],
+            shadeClose: true,
+            content: $('#xzdiv').html(),
+            btn: ['确定', '取消'],
+            yes: function () {
+
+            },
+        });
+
+
+    }
+    function del(id) {
+        $.ajax({
+            type: "POST",
+            url: "/LL/delGYS",
+            data: "{id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    window.location.reload();
+                } else {
+                    alert("删除失败");
+                }
             },
             error: function (ex) {
                 alert("Error:" + ex.responseText);

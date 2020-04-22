@@ -34,11 +34,15 @@ namespace DAL.LLQ
                           remark = p.remark
                       };
             PageList list = new PageList();
-            list.DataList = obj;
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
-
             return list;
         }
+
+     
+
+
+
 
         //public static int CpGlAdd(Models.CpGlinfo cpgl)
         //{

@@ -13,5 +13,9 @@ namespace BLL.LL
         {
             return DAL.LL.KHguanli.Listfenye(pageindex,pagesize);
         }
+        public static int del(int id)
+        {
+            return DAL.LL.KHguanli.del(id);
+        }
         }
 }

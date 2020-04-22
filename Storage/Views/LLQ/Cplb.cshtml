@@ -136,7 +136,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpId + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td>操作</td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpId + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
                     });
                 },
                 erro: function (ex) {

@@ -47,5 +47,27 @@ namespace BLL.XBY
         {
             return DAL.XBY.StockRemovalService.MoHuChuKuList(PageSize, PageIndex, Danhao, time1, time2);
         }
-    }
+
+        /// <summary>
+        /// 通过单号查询入库信息
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="State"></param>
+        /// <returns></returns>
+        public static IQueryable ChuKuList(string Danhao)
+        {
+            return DAL.XBY.StockRemovalService.ChuKuList(Danhao);
+        }
+
+        /// <summary>
+        /// 查找客户地址
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable chadizhi(int id)
+        {
+            return DAL.XBY.StockRemovalService.chadizhi(id);
+        }
+        }
 }

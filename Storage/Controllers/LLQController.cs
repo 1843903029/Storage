@@ -12,10 +12,34 @@ namespace Storage.Controllers
     public class LLQController : Controller
     {
         // GET: LLQ
+        /// <summary>
+        /// 计量单位的页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Jldw()
         {
             return View();
         }
+       
+        /// <summary>
+        /// 产品类别的页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Cplb()
+        {
+            return View();
+        }
+        
+        /// <summary>
+        /// 产品管理的页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CpGl()
+        {
+            return View();
+        }
+
+
         /// <summary>
         /// 计量单位分页
         /// </summary>
@@ -27,11 +51,6 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.JldwManager.Jldwfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
 
-
-        public ActionResult Cplb()
-        {
-            return View();
-        }
 
         /// <summary>
         /// 产品类别分页
@@ -45,10 +64,6 @@ namespace Storage.Controllers
         }
 
 
-        public ActionResult CpGl()
-        {
-            return View();
-        }
 
         /// <summary>
         /// 产品管理分页

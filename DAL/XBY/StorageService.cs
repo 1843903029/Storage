@@ -147,6 +147,83 @@ namespace DAL.XBY
         }
 
 
+        /// <summary>
+        /// 通过单号查询入库信息
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="State"></param>
+        /// <returns></returns>
+        public static IQueryable RuKuList(string Danhao)
+        {
+            StorageEntities ent = new StorageEntities();
+
+            PageList list = new PageList();
+            var obj = from p in ent.Storage
+                      where p.DataState == true
+                      && p.StorageID == Danhao
+                      orderby p.StorageID ascending
+                      select new
+                      {
+
+                          //[StorageID], [StorageType], [SupplierID], [AssociatedNumber], [GoodsCount],
+                          //[Summoney], [State], [EmployeeID], [OperationType], [CreationTime], [DataState], [StateText]
+                          StorageID = p.StorageID,
+                          StorageType = p.StorageType,
+                          SupplierID = p.SupplierID,
+                          SupplierName = p.Supplier.GysName,
+                          lianxiren = p.Supplier.Contacts,
+                          dianhua = p.Supplier.Hone,
+                          AssociatedNumber = p.AssociatedNumber,
+                          GoodsCount = p.GoodsCount,
+                          Summoney = p.Summoney,
+                          State = p.State,
+                          EmployeeID = p.Admin.UserName,
+                          OperationType = p.OperationType,
+                          CreationTime = p.CreationTime,
+                          DataState = p.DataState,
+                          StateText = p.StateText,
+                          xiangbiao = from pp in p.StorageDetailed
+                                      select new
+                                      {
+                                          //[StoragedetailedID], [StorageIDS], [productID], [Price],
+                                          //[StorageNumber], [Summoney], [WarehouseID], [Batch]
+                                          StoragedetailedID = pp.StoragedetailedID,
+                                          StorageIDS = pp.StorageIDS,
+                                          productID = pp.productID,
+                                          productName=pp.CpGlinfo.CpXsName,
+                                          cptiaoma=pp.CpGlinfo.Cpbh,
+                                          cpguige=pp.CpGlinfo.Specification,
+                                          cpjiage=pp.CpGlinfo.CpPrice,
+                                          Price = pp.Price,
+                                          StorageNumber = pp.StorageNumber,
+                                          Summoney = pp.Summoney,
+                                          WarehouseID = pp.WarehouseID,
+                                          kuweiname=pp.LocationManagement.kwName,
+                                          Batch = pp.Batch
+                                      }
+                      };
+
+            return obj;
+
+        }
+
+        /// <summary>
+        /// 添加入库单
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public static int ADDRuku(Storage zhu, List<StorageDetailed> xiang)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.Storage.Add(zhu);
+            ent.StorageDetailed.AddRange(xiang);
+            return ent.SaveChanges();
+
+        }
+
+
 
     }
 }

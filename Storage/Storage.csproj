@@ -295,6 +295,12 @@
     <Content Include="Views\TXY\Login.cshtml" />
     <Content Include="Views\XBY\ChuKuXF1.cshtml" />
     <Content Include="Views\LLJ\aa.cshtml" />
+    <Content Include="Views\XBY\RukuGuanliAdd.cshtml" />
+    <Content Include="Views\XBY\ChukuGuanliAdd.cshtml" />
+    <Content Include="Views\XBY\BaoSunGuanliAdd.cshtml" />
+    <Content Include="Views\XBY\YiKuGuanliAdd.cshtml" />
+    <Content Include="Views\XBY\PanDianGuanliAdd.cshtml" />
+    <Content Include="Views\XBY\TuiHuoGuanliAdd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

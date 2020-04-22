@@ -13,5 +13,9 @@ namespace BLL.LL
         {
             return DAL.LL.GYSguanli.Listfenye(pageindex,pagesize);
         }
+        public static int del(int id)
+        {
+            return DAL.LL.GYSguanli.del(id);
+        }
         }
 }

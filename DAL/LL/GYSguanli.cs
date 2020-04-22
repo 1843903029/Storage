@@ -33,5 +33,12 @@ namespace DAL.LL
             list.PageCount = obj.Count();
             return list;
         }
+        public static int del(int id)
+        {
+            Supplier c = s.Supplier.Find(id);
+            s.Supplier.Remove(c);
+            return s.SaveChanges();
+
+        }
     }
 }

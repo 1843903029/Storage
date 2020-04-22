@@ -11,10 +11,11 @@ namespace DAL.LL
 {
     public class KweiGuanli
     {
+        static StorageEntities s = new StorageEntities();
         public static PageList Listfenye(int pageindex,int pagesize)
         {
-            StorageEntities ent = new StorageEntities();
-            var obj = from p in ent.LocationManagement
+            
+            var obj = from p in s.LocationManagement
                       where p.Shuju == true
                       orderby p.kwID
                       select new
@@ -32,6 +33,10 @@ namespace DAL.LL
             list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
             list.PageCount = obj.Count();
             return list;
+        }
+        public static int add(LocationManagement lo) {
+            s.LocationManagement.Add(lo);
+            return s.SaveChanges();
         }
     }
 }
