@@ -14,12 +14,7 @@ namespace BLL.LLQ
         {
             return DAL.LLQ.CpGlService.CpGlfenye(pageIndex, pageSize);
         }
-
-
-
-
-
-
+        
 
 
 
