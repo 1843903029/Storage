@@ -48,6 +48,18 @@ namespace Storage.Controllers
         }
 
         /// <summary>
+        /// 通过单号查详情
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="Danhao"></param>
+        /// <returns></returns>
+        public ActionResult IDRuku(string Danhao)
+        {
+            return Json(BLL.XBY.StorageManager.RuKuList( Danhao), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// 通过文字找到编号
         /// </summary>
         /// <param name="text"></param>
@@ -98,6 +110,18 @@ namespace Storage.Controllers
         public ActionResult ChukuGuanliAdd()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 通过单号查详情
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="Danhao"></param>
+        /// <returns></returns>
+        public ActionResult IDChuku(string Danhao)
+        {
+            return Json(BLL.XBY.StockRemovalManager.ChuKuList(Danhao), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChuKuList(int PageIndex, int PageSize, int State)

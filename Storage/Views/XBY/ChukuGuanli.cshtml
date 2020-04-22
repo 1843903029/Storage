@@ -19,7 +19,7 @@
         <button class="btn btn-default" id="daish">待审核</button>
         <button class="btn btn-default" id="shenhetg">审核通过</button>
         <button class="btn btn-default" id="shenhesb">审核失败</button>
-        <input class="btn btn-primary" id="xxzz" type="button" value="新增" style="width:80px;margin-left:52%" />
+        <input class="btn btn-primary" id="xxzz" type="button" onclick="TiaoADD()" value="新增" style="width:80px;margin-left:52%" />
 
 
         <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
@@ -69,6 +69,61 @@
     </div>
 </div>
 
+<div id="hideID3" hidden="hidden">
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <td>出库单号</td>
+                <td class="rukdh"></td>
+                <td>类型</td>
+                <td class="ruklx"></td>
+                <td>状态</td>
+                <td class="rukzt"></td>
+            </tr>
+            <tr>
+                <td>客户编号</td>
+                <td class="rukgysid"></td>
+                <td>客户  名称</td>
+                <td class="rukgysname"></td>
+                <td>联系人</td>
+                <td class="ruklianxiren"></td>
+            </tr>
+            <tr>
+                <td>关联订单号</td>
+                <td class="rukgldd"></td>
+                <td>创建人</td>
+                <td class="rukcjr"></td>
+                <td>创建时间</td>
+                <td class="rukgltime"></td>
+            </tr>
+            <tr>
+                <td>电话</td>
+                <td class="rukdianhua"></td>
+                <td>地址</td>
+                <td class="rukbeizhu" colspan="3"></td>
+            </tr>
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>产品名称</td>
+                    <td>产品条码</td>
+                    <td>产品编号</td>
+                    <td>批次</td>
+                    <td>单价</td>
+                    <td>总价</td>
+                    <td>规格</td>
+                    <td>出库数</td>
+                    <td>出库库位</td>
+                </tr>
+            </thead>
+            <tbody id="xiangqingbiao"></tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-group" onclick="guanbi()">关闭</button>
+</div>
+
 
 
 
@@ -114,6 +169,87 @@
 
     })
 
+
+    function show3(rid) {
+        layui.use('layer', function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                title: ['入库单详细', 'font-size:18px'],
+                area: ['850px', '400px'],
+                shadeClose: true,
+                content: $('#hideID3') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+            });
+
+        });
+
+        $.ajax({
+            type: "post",
+            url: "/XBY/IDChuku",
+            data: "{Danhao:'" + rid + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $(".rukdh").text(data.StockRemovalID);
+                    $(".ruklx").text(data.StockRemovalType);
+                    if (data.State == 2) {
+                        $(".rukzt").text("待审核");
+                    }
+                    if (data.State == 1) {
+                        $(".rukzt").text("审核通过");
+                    }
+                    if (data.State == 0) {
+                        $(".rukzt").text("审核失败");
+                    }
+                    $(".rukgysid").text(data.SupplierID);
+
+                    $(".rukgysname").text(data.SupplierName);
+                    $(".ruklianxiren").text(data.lianxiren);
+                    $(".rukgldd").text(data.AssociatedNumber);
+                    $(".rukcjr").text(data.EmployeeID);
+                    $(".rukgltime").text(ConvertDate(data.CreationTime));
+                    $(".rukdianhua").text(data.dianhua);
+                    $(".rukbeizhu").text(data.StateText);
+
+                    $.each(data.xiangbiao, function (index, data1) {
+                        $("#xiangqingbiao").append("<tr><td>" + data1.productName + "</td><td>" + data1.cptiaoma + "</td><td>" + data1.cpguige + "</td><td>" + data1.Batch + " </td><td>" + data.Price + "</td><td>" + data1.StorageNumber + "</td><td>" + data1.Summoney + "</td><td>" + data1.kuweiname + "</td></tr>")
+                    })
+                });
+
+
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+    function guanbi() {
+        layer.closeAll('page');
+        $(".rukdh").text();
+        $(".ruklx").text();
+        $(".rukzt").text();
+        $(".rukgysid").text();
+
+        $(".rukgysname").text();
+        $(".ruklianxiren").text();
+        $(".rukgldd").text();
+        $(".rukcjr").text();
+        $(".rukgltime").text();
+        $(".rukdianhua").text();
+        $(".rukbeizhu").text();
+        $("#xiangqingbiao").html("");
+    }
+
+    //跳转到新增入库单号
+    function TiaoADD() {
+        location.href = '/XBY/ChukuGuanliAdd'
+    }
+
+
     function Suoyou() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -145,7 +281,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -167,7 +303,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -189,7 +325,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {

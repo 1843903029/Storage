@@ -113,8 +113,8 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary" id="baocun" onclick="ADD()">保存</button>
-            <button type="button" class="btn">取消</button>
+            <button type="submit" class="btn btn-primary"  onclick="ADD()">保存</button>
+            <button type="button" class="btn" onclick="fanhuiRuKu()">取消</button>
         </div>
 
 
@@ -181,23 +181,7 @@
         //    票种名称name 原价pre_price 现价price 张数total
         $("#baocun").click(function () {
             // $(document).ready(function () {
-            var num = $("#tb1 tr").length;
-            var info = [];
-            for (var i = 0; i < num; i++) {
-                var obj = {};
-                obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text()
-                obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
-                obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
-                obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
-                alert($("#tb1 tr").eq(i).children("td").eq(6).text());
-                //$("#tb1 tr").eq(i).children("td").eq(7).text()
-                obj.WarehouseID = 1;
-                obj.StorageIDS = 154777;
-                console.log(obj)
-                info.push(obj);
-            }
-            console.log(info)
-            // })
+           
         });
 
 
@@ -232,6 +216,10 @@
         }
     }
 
+    //返回到入库查询页面
+    function fanhuiRuKu() {
+        location.href = '/XBY/RukuGuanli'
+    }
 
     function ZhaoID(jj) {
         $.ajax({
@@ -319,10 +307,27 @@
 
 
     function ADD() {
+        var num = $("#tb1 tr").length;
+        for (var i = 0; i < num; i++) {
+            var obj = {};
+            obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text()
+            obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
+            obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
+            obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
+            alert($("#tb1 tr").eq(i).children("td").eq(6).text());
+            //$("#tb1 tr").eq(i).children("td").eq(7).text()
+            obj.WarehouseID = 1;
+            obj.StorageIDS = 154777;
+            console.log(obj)
+            info.push(obj);
+        }
+        console.log(info)
+            // })
+
         $.ajax({
             type: "POST",
             url: "/XBY/ADDRuku",
-            data: "{zhu:{StorageID:'"+154777+"',StorageType:'" + $("#rukuleixing1").val() + "',SupplierID:'" + 1 + "',EmployeeID:'" + 1 + "'},xiang:'" + info + "'}",
+            data: "{zhu:{StorageID:'" + 154777 + "',StorageType:'" + $("#rukuleixing1").val() + "',SupplierID:'" + 1 + "',EmployeeID:'" + 1 + "'},xiang:{" + info + "}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {

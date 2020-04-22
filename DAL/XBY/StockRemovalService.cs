@@ -148,5 +148,61 @@ namespace DAL.XBY
 
         }
 
+
+        /// <summary>
+        /// 通过单号查询CHU库信息
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="State"></param>
+        /// <returns></returns>
+        public static IQueryable ChuKuList(string Danhao)
+        {
+            StorageEntities ent = new StorageEntities();
+
+            PageList list = new PageList();
+            var obj = from p in ent.StockRemoval
+                      where p.DataState == true
+                      && p.StockRemovalID == Danhao
+                      orderby p.StockRemovalID ascending
+                      select new
+                      {
+
+                          //[StorageID], [StorageType], [SupplierID], [AssociatedNumber], [GoodsCount],
+                          //[Summoney], [State], [EmployeeID], [OperationType], [CreationTime], [DataState], [StateText]
+                          StockRemovalID = p.StockRemovalID,
+                          StockRemovalType = p.StockRemovalType,
+                          SupplierID = p.SupplierID,
+                          AssociatedNumber = p.AssociatedNumber,
+                          GoodsCount = p.GoodsCount,
+                          Summoney = p.Summoney,
+                          State = p.State,
+                          EmployeeID = p.Admin.UserName,
+                          OperationType = p.OperationType,
+                          CreationTime = p.CreationTime,
+                          DataState = p.DataState,
+                          StateText = p.StateText,
+                          xiangbiao = from pp in p.StockRemovalDetailed
+                                      select new
+                                      {
+                                          //[StockRemovalDetailedID], [StockRemovalIDS], [ProductID], 
+                                          //[Price], [StockRemovalNumber], [Summoney], [WarehouseID], [Batch]
+                                          StoragedetailedID = pp.StockRemovalDetailedID,
+                                          StorageIDS = pp.StockRemovalIDS,
+                                          productID = pp.ProductID,
+                                          Price = pp.Price,
+                                          StockRemovalNumber = pp.StockRemovalNumber,
+                                          Summoney = pp.Summoney,
+                                          WarehouseID = pp.WarehouseID,
+                                          Batch = pp.Batch,
+                                          
+                                      }
+                      };
+
+            return obj;
+
+        }
+
+
     }
 }
