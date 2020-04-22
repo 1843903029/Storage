@@ -59,5 +59,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.StockRemovalService.ChuKuList(Danhao);
         }
+
+        /// <summary>
+        /// 查找客户地址
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable chadizhi(int id)
+        {
+            return DAL.XBY.StockRemovalService.chadizhi(id);
+        }
         }
 }

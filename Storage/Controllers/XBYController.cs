@@ -56,7 +56,7 @@ namespace Storage.Controllers
         /// <returns></returns>
         public ActionResult IDRuku(string Danhao)
         {
-            return Json(BLL.XBY.StorageManager.RuKuList( Danhao), JsonRequestBehavior.AllowGet);
+            return Json(BLL.XBY.StorageManager.RuKuList(Danhao), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -122,6 +122,16 @@ namespace Storage.Controllers
         public ActionResult IDChuku(string Danhao)
         {
             return Json(BLL.XBY.StockRemovalManager.ChuKuList(Danhao), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 查地址
+        /// </summary>
+        /// <param name="Danhao"></param>
+        /// <returns></returns>
+        public ActionResult chadizhi(int id)
+        {
+            return Json(BLL.XBY.StockRemovalManager.chadizhi(id), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChuKuList(int PageIndex, int PageSize, int State)

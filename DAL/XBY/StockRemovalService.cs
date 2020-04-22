@@ -173,6 +173,8 @@ namespace DAL.XBY
                           StockRemovalID = p.StockRemovalID,
                           StockRemovalType = p.StockRemovalType,
                           SupplierID = p.SupplierID,
+                          KhName = p.Client.KhName,
+                          dianhua = p.Client.Hone,
                           AssociatedNumber = p.AssociatedNumber,
                           GoodsCount = p.GoodsCount,
                           Summoney = p.Summoney,
@@ -191,16 +193,44 @@ namespace DAL.XBY
                                           StorageIDS = pp.StockRemovalIDS,
                                           productID = pp.ProductID,
                                           Price = pp.Price,
+                                          productName = pp.CpGlinfo.CpXsName,
+                                          cptiaoma = pp.CpGlinfo.Cpbh,
+                                          cpid = pp.CpGlinfo.CpID,
+                                          cpjiage = pp.CpGlinfo.CpPrice,
+                                          guige = pp.CpGlinfo.Specification,
                                           StockRemovalNumber = pp.StockRemovalNumber,
                                           Summoney = pp.Summoney,
+                                          kuweiname = pp.LocationManagement.kwName,
                                           WarehouseID = pp.WarehouseID,
                                           Batch = pp.Batch,
                                           
+
                                       }
                       };
 
             return obj;
 
+        }
+
+
+        /// <summary>
+        /// 查找客户地址
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable chadizhi(int id)
+        {
+            StorageEntities ent = new StorageEntities();
+
+            var obj = from p in ent.CustomerAddress
+                      where p.KehuID == id
+                      select new
+                      {
+                          CustomerAddressName = p.CustomerAddressName
+                      };
+            return obj.Take(1);
+
+                  
         }
 
 
