@@ -37,6 +37,11 @@ namespace DAL.LLQ
             list.DataList = obj;
             list.PageCount = obj.Count();
 
+            //li.DataList = list.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //int rows = query.Count();
+            //li.PageCount = rows;// % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
+            //return li;
+
             return list;
         }
 
