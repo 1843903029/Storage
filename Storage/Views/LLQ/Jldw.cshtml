@@ -14,15 +14,8 @@
     <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
-    <div style="border:0px solid #4cff00;width:95%;">
+    <div style="border:0px solid #4cff00;width:100%;">
         <div style="padding:15px;border:1px solid red">
-            <table>
-                <tr>
-                    <td><a href="#">首页<</a></td>
-                    <td>基本资料<</td>
-                    <td>计量单位</td>
-                </tr>
-            </table>
             <table>
                 <tr>
                     <td><strong style="margin-left:20px">计量单位</strong></td>
@@ -39,7 +32,6 @@
                     </td>
                 </tr>
             </table>
-            <div class="jbox-button-panel" style="height:25px;padding:5px 0 5px 0;text-align: right;"><span class="jbox-bottom-text" style="float:left;display:block;line-height:25px;"></span><button class="jbox-button jbox-button-focus" value="true" style="padding:0px 10px 0px 10px;">确定</button><button class="jbox-button" value="false" style="padding:0px 10px 0px 10px;">关闭</button></div>
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
@@ -52,25 +44,25 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px" hidden>
+            <div id="jbox-content" style="height: 136px; border:0px solid #4cff00; position: static; margin-left:500px" hidden>
                 <div class="tab-pane active" id="widget_tab1">
                     <table class="formtab_user">
-                            <tr>
-                                <td>编号</td>
-                                <td>
-                                    <input id="txtJlid" name="txtJlid" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled" value="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>名称</td>
-                                <td>
-                                    <input id="txtJlName" name="txtJlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
-                                <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
-                            </tr>
+                        <tr>
+                            <td>编号</td>
+                            <td>
+                                <input id="txtJlid" name="txtJlid" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>名称</td>
+                            <td>
+                                <input id="txtJlName" name="txtJlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
+                            <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                        </tr>
                     </table>
                 </div>
             </div>

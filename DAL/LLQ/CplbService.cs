@@ -26,18 +26,18 @@ namespace DAL.LLQ
                           Delit = p.Delit//是否删除
                       };
             PageList list = new PageList();
-            list.DataList = obj;
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
 
             return list;
         }
 
+       
 
 
 
 
 
-        
 
     }
 }
