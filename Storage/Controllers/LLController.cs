@@ -37,5 +37,12 @@ namespace Storage.Controllers
         {
             return Json(BLL.LL.KHguanliManager.Listfenye(pageindex, pagesize), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult delKH(int id) {
+            return Json(BLL.LL.KHguanliManager.del(id),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult KWAdd(LocationManagement lo)
+        {
+            return Json(BLL.LL.KweiGuanliManager.add(lo), JsonRequestBehavior.AllowGet);
+        }
     }
 }

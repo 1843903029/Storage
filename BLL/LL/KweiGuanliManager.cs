@@ -13,5 +13,9 @@ namespace BLL.LL
         {
             return DAL.LL.KweiGuanli.Listfenye(pageindex, pagesize);
         }
-    }
+        public static int add(LocationManagement lo)
+        {
+            return DAL.LL.KweiGuanli.add(lo);
+        }
+        }
 }
