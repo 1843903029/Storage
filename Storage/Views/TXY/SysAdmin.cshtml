@@ -101,17 +101,18 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div hidden id="yyyyy" style="margin-left:500px;">
-                <table class="formtab_user">
+            <div hidden id="yyyyy" style="margin-left:500px; margin-left:300px;position:absolute;margin-top:-200px; margin-left:500px;background-color:aliceblue">
+                <table class="formtab_user" style="margin-top:30px">
                     <tbody>
                         <tr>
-                            <td>用户编号</td>
-                            <td>
-                                <input id="txtUserCode" name="txtUserCode" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
-                            </td>
+                            <td hidden><input id="AdminID" name="AdminID" type="text"></td>
                             <td>用户名</td>
                             <td>
                                 <input id="txtUserName" name="txtUserName" type="text" placeholder="请输入用户名" class="input-medium">
+                            </td>
+                            <td>用户编号</td>
+                            <td>
+                                <input id="txtUserCode" name="txtUserCode" type="text" class="input-medium">
                             </td>
                         </tr>
                         <tr>
@@ -150,26 +151,33 @@
                             <td>
                                 <select id="ddlDepart" name="ddlDepart" class="input-medium" style="width:164px;">
                                     <option value="">请选择部门</option>
-                                    <option value="000001">质量部门</option>
-                                    <option value="000002">仓库部门</option>
-                                    <option value="000003">采购部门</option>
+                                    <option value="1">质量部门</option>
+                                    <option value="2">仓库部门</option>
+                                    <option value="3">采购部门</option>
                                 </select>
                             </td>
                             <td>角色</td>
                             <td>
                                 <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
                                     <option value="">请选择角色</option>
-                                    <option value="DR_0000">系统管理员</option>
-                                    <option value="000001">仓管员</option>
-                                    <option value="000002">采购员</option>
-                                    <option value="000003">门卫</option>
+                                    <option value="0">系统管理员</option>
+                                    <option value="1">仓管员</option>
+                                    <option value="2">采购员</option>
+                                    <option value="3">门卫</option>
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td>创建时间</td>
+                            <td>
+                                <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
                     </tbody>
                     <tr>
-                        <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
-                        <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                        <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
+                        <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
                     </tr>
                 </table>
             </div>
@@ -187,7 +195,7 @@
 <script>
     var Stuate = 1
     var PageIndex = 1;
-    var PageSize = 6;
+    var PageSize = 10;
     var PageCount = 0;
     var rows = 0;
     $(function () {
@@ -201,7 +209,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 2//每页显示数
+                , limit: 5//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -230,32 +238,6 @@
                 }
             });
         }
-        function get(dss) {
-            $.ajax({
-                type: "POST",
-                url: "/TXY/GetAllAdmin",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",Stuate:" + dss + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    $("#tb1 tr").remove();
-                    rows = result.PageCount;
-                    $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum + "</td><td>" + data.RoleNum + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'  class='btn btn-warning'>权限分配</a></td></tr>");
-                    })
-                },
-                erro: function (ex) {
-                    alert(ex.responseText);
-                }
-            })
-        }
-
-
-
-
-
-
-
 
         $("#btnSubhh").click(function () {
             if ($("#yyyyy").css("display") == "none") {
@@ -277,5 +259,75 @@
             }
         })
     });
+    function get(dss) {
+        $.ajax({
+            type: "POST",
+            url: "/TXY/GetAllAdmin",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",Stuate:" + dss + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum + "</td><td>" + data.RoleNum + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.AdminID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'  class='btn btn-warning'>权限分配</a></td></tr>");
+                })
+            },
+            erro: function (ex) {
+                alert(ex.responseText);
+            }
+        })
+    }
+    //删除
+    function btnSub(AdminID) {
+        alert(AdminID);
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysAdmindelete",
+            data: "{AdminID:'" + AdminID + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    get(dss);
+                }
+                else {
+                    alert("删除失败");
 
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+
+        });
+        get(dss);
+    };
+
+    //新增
+    function add() {
+
+        var aa = $("#textCreateTime").val();
+        var IsDelete = true;
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysAdminadd",
+            data: "{admin:{UserName:'" + $("#txtUserName").val() + "',UserCode:'" + $("#txtUserCode").val() + "',Password:'" + $("#txtPassword").val() + "',RealName:'" + $("#txtRealName").val() + "',Email:'" + $("#txtEmail").val() + "',Phone:'" + $("#txtPhone").val() + "',Mobile:'" + $("#txtMobile").val() + "',DepartNum:'" + $("#ddlDepart").val() + "',RoleNum:'" + $("#ddlRole").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("添加成功")
+                    get(dss);
+                    window.location.href = "/TXY/SysAdmin";
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+        get(dss);
+    }
 </script>

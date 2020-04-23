@@ -55,31 +55,31 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px" hidden>
-                <div class="tab-pane active" id="widget_tab1">
+            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-200px; margin-left:500px;background-color:aliceblue" hidden>
+                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
                     <table class="formtab_user">
                         <tbody>
                             <tr>
-                                <td>角色编号</td>
+                                <td>部门编号</td>
                                 <td>
-                                    <input id="txtRoleNum" name="txtRoleNum" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                                    <input id="txtDepartNum" name="txtDepartNum" type="text" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
-                                <td>角色名称</td>
+                                <td>部门名称</td>
                                 <td>
-                                    <input id="txtRoleName" name="txtRoleName" type="text" placeholder="请输入角色名称" class="input-medium">
+                                    <input id="txtDepartName" name="txtDepartName" type="text" placeholder="请输入角色名称" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
-                                <td>备注</td>
+                                <td>创建时间</td>
                                 <td>
-                                    <input id="txtRemark" name="txtRemark" type="text" class="input-medium">
+                                    <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
-                                <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
-                                <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                                <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
+                                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -96,12 +96,11 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
 <script>
+    var PageIndex = 1;
+    var PageSize = 10;
+    var PageCount = 0;
+    var rows = 5;
     $(function () {
-        get()
-        var PageIndex = 1;
-        var PageSize = 6;
-        var PageCount = 0;
-        var rows = 0;
         layui.use(['laypage','layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -109,7 +108,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 2//每页显示数
+                , limit: 5//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -121,27 +120,6 @@
                 }
             });
         });
-        function get() {
-            $.ajax({
-                type: "POST",
-                url: "/TXY/GetAllSysDepart",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    $("#tb1 tr").remove();
-                    rows = result.PageCount;
-                    $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
-                    })
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
-                }
-            })
-        }
-
-
         $("#btnSubhh").click(function () {
             if ($("#jbox-content").css("display") == "none") {
                 $("#jbox-content").show();
@@ -154,6 +132,77 @@
             $("#jbox-content").hide();
         });
     });
+    //分页查询
+    function get() {
+        $.ajax({
+            type: "POST",
+            url: "/TXY/GetAllSysDepart",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysDepartID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
+    //删除
+    function btnSub(SysDepartID) {
+        alert(SysDepartID);
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysDepartdelete",
+            data: "{SysDepartID:'" + SysDepartID + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    get();
+                }
+                else {
+                    alert("删除失败");
+
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+
+        });
+        get();
+    };
+
+    //新增
+    function add() {
+        var aa = $("#textCreateTime").val();
+        var IsDelete = true;
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysDepartadd",
+            data: "{depart:{DepartNum:'" + $("#txtDepartNum").val() + "',DepartName:'" + $("#txtDepartName").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("添加成功")
+                    get();
+                    window.location.href = "/TXY/SysDepart";
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+        get();
+    }
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();

@@ -14,7 +14,7 @@ namespace DAL.LLQ
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.CpGlinfo
                       where p.State == true
-                      orderby p.Cpbh ascending
+                      orderby p.CpID descending
                       select new
                       {
                           CpID = p.CpID,
@@ -52,7 +52,7 @@ namespace DAL.LLQ
         }
 
         //删除
-        public static int CplbDet(Models.CpGlinfo cpgl)
+        public static int CpGlDet(Models.CpGlinfo cpgl)
         {
             StorageEntities entity = new StorageEntities();
             var obj = (from p in entity.CpGlinfo where p.CpID == cpgl.CpID select p).First();

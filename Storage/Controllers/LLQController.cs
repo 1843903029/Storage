@@ -57,13 +57,13 @@ namespace Storage.Controllers
         /// <returns></returns>
         public ActionResult JldwAdd(JLinfo jldw)
         {
-            jldw.Delit = false;
+            jldw.Delit = true;
             return Json(BLL.LLQ.JldwManager.JldwAdd(jldw),JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult JldwDet(JLinfo jldw)
         {
-            jldw.Delit = true;
+            jldw.Delit = false;
             return Json(BLL.LLQ.JldwManager.JldwDet(jldw), JsonRequestBehavior.AllowGet);
         }
 
@@ -78,15 +78,16 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CplbManager.lbfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
+        //新增
         public ActionResult CplbAdd(CpLbinfo cplb)
         {
-            cplb.Delit = false;
+            cplb.Delit = true;
             return Json(BLL.LLQ.CplbManager.CplbAdd(cplb), JsonRequestBehavior.AllowGet);
         }
-
+        //删除
         public ActionResult CplbDet(CpLbinfo cplb)
         {
-            cplb.Delit = true;
+            cplb.Delit = false;
             return Json(BLL.LLQ.CplbManager.CplbDet(cplb), JsonRequestBehavior.AllowGet);
         }
 
@@ -101,11 +102,18 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CpGlManager.CpGlfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
-
+        //新增
         public ActionResult CpGlAdd(CpGlinfo cpgl)
         {
-            cpgl.State = false;
+            cpgl.State = true;
             return Json(BLL.LLQ.CpGlManager.CpGlAdd(cpgl), JsonRequestBehavior.AllowGet);
         }
+        //删除
+        public ActionResult CpGlDet(CpGlinfo cpgl )
+        {
+            cpgl.State = false;
+            return Json(BLL.LLQ.CpGlManager.CpGlDet(cpgl), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

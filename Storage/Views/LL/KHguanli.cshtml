@@ -57,45 +57,34 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>库位编号</td>
+                        <td>编号</td>
                         <td>
-                            <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" class="input-medium">
+                            <input id="KhID" name="KhID" type="text"  class="input-medium">
                         </td>
-                        <td>库位名称</td>
+                        <td>名称</td>
                         <td>
-                            <input id="kwName" name="kwName" type="text" placeholder="请输入库位名称" class="input-medium">
+                            <input id="KhName" name="KhName" type="text"  class="input-medium">
                         </td>
-                    </tr>
-                    <tr>
-                        <td>库位类型</td>
+                        <td>备注</td>
                         <td>
-                            <select id="kwType" name="kwType" class="input-medium" style="width:164px;">
-                                <option value="">请选择库位类型</option>
-                                <option value="1">正式库区</option>
-                                <option value="2">待入库区</option>
-                                <option value="3">待检库区</option>
-                                <option value="4">待出库区</option>
-                                <option value="5">报损库区</option>
-                            </select>
-                        </td>
-                        <td>仓库</td>
-                        <td>
-                            <select id="CKName" name="CKName" class="input-medium" style="width:164px;">
-                                <option value="">请选择仓库</option>
-                                <option value="1">产品仓库</option>
-                            </select>
+                            <input id="beizhu" name="beizhu" type="text"  class="input-medium">
                         </td>
                     </tr>
                     <tr>
-                        <td>是否默认</td>
+                        <td>传真</td>
                         <td>
-                            <select id="Zhuangtai" name="Zhuangtai" class="input-medium" style="width:164px;">
-                                <option value="">请选择</option>
-                                <option value="1">是</option>
-                                <option value="2">否</option>
-                            </select>
+                            <input id="chuanzhen" name="chuanzhen" type="text"  class="input-medium">
+                        </td>
+                        <td>Eamil</td>
+                        <td>
+                            <input id="youxiang" name="youxiang" type="text"  class="input-medium">
+                        </td>
+                        <td>电话</td>
+                        <td>
+                            <input id="Hone" name="Hone" type="text"  class="input-medium">
                         </td>
                     </tr>
+                   
 
 
                 </tbody>
@@ -115,8 +104,9 @@
     var pageSize = 10;
     var rowss = 0;
     $(function () {
-        $("#xzdiv").hide();
         rukuList();
+        $("#xzdiv").hide();
+        
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -150,11 +140,11 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
-                console.log("1");
-                $("#tt tr").remove();
+                //console.log("1");
+                //$("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.KhID + "</td><td>" + data.KhName + "</td><td>" + data.Hone + "</td><td>" + data.chuanzhen + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.ID + ")' /></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.KhID + "</td><td>" + data.KhName + "</td><td>" + data.Hone + "</td><td>" + data.chuanzhen + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.ID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='' /></td></tr>");
                 });
             },
             error: function (ex) {
@@ -168,17 +158,44 @@
             type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['添加库位', 'font-size:18px'],
-            area: ['650px', '359px'],
+            area: ['684px', '365px'],
             shadeClose: true,
             content: $('#xzdiv').html(),
             btn: ['确定', '取消'],
             yes: function () {
-
+                add();
             },
         });
 
 
     }
+    function add() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/KHAdd",
+            //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
+            //data: "{lo:" + jsons + "}",
+            data: "{c:{KhID:'" + $("#KhID").val() + "',KhName:'" + $("#KhName").val() + "',beizhu:'" + $("#beizhu").val() + "',chuanzhen:'" + $("#chuanzhen").val() + "',youxiang:'" + $("#youxiang").val() + "',Hone:'" + $("#Hone").val()+ "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert($("#KhID").val());
+                    alert("添加成功");
+                    //location.href = '/AJAXDemo/Index';
+                }
+                else {
+                    alert("添加失败");
+
+                }
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
     function del(id) {
         $.ajax({
             type: "POST",

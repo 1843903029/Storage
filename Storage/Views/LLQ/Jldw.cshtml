@@ -19,7 +19,7 @@
             <table>
                 <tr>
                     <td><strong style="margin-left:20px">计量单位</strong></td>
-                    <td> <input style="margin-left:750px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                    <td> <input style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
@@ -36,15 +36,17 @@
                 <thead>
                     <tr>
                         <td style="width:20px;"><input type="checkbox" /></td>
-                        <td class="hidden-480">序号</td>
-                        <td class="hidden-480">名称</td>
+                        <td >序号</td>
+                        <td >名称</td>
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody id="tb1"></tbody>
+                <tbody id="tb1">
+
+                </tbody>
             </table>
-            <div id="jbox-content" style="height: 136px; border:0px solid #4cff00; position: static; margin-left:500px" hidden>
-                <div class="tab-pane active" id="widget_tab1">
+            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-300px;background-color:aliceblue" hidden>
+                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
                     <table class="formtab_user">
                         <tr>
                             <td>编号</td>
@@ -59,8 +61,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
-                            <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
+                            <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="JldwAdd()" value="确认" /></td>
+                            <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
                         </tr>
                     </table>
                 </div>
@@ -75,72 +77,72 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 6;
-    var rowss = 0;
-    var state = 2;
+
     $(function () {
         GetJldwAll();
+
+        var pageIndex = 1;
+        var pageSize = 6;
+        var PageCount = 0;
+        var rows = 0;
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
             //完整功能
             laypage.render({
-                elem: 'pageDome'
-                , count: rowss
-                , limit: 3
+                elem: 'pageDemo'
+                , count: rows//总条数
+                , limit: 2//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
-                    rukuList(state);
+
+                    //设置当前页
+                    PageIndex = obj.curr;
+                    //设置每页显示
+                    PageSize = obj.limit;
+                    get();
                 }
             });
         });
-    })
 
-    function GetJldwAll() {
-        s
-        $.ajax({
-            type: "POST",
-            url: "/LLQ/GetJldwAll",
-            data: "{PageIndex:" + pageIndex + ",pageSize:" + pageSize + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $("#tb1 tr").remove();
-                //获取总条数
-                rows = result.PageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
-                });
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
+
+        function GetJldwAll() {
+            s
+            $.ajax({
+                type: "POST",
+                url: "/LLQ/GetJldwAll",
+                data: "{PageIndex:" + pageIndex + ",pageSize:" + pageSize + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $("#tb1 tr").remove();
+                    //获取总条数
+                    rows = result.PageCount;
+                    $.each(result.DataList, function (index, data) {
+                        $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete'id='dit' title='删除'></i></td></tr>");
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+                }
+            });
+        }
+
+
+        $("#btnSubhh").click(function () {
+            if ($("#jbox-content").css("display") == "none") {
+                $("#jbox-content").show();
+
+            } else {
+                $("#jbox-content").hide();
             }
         });
-    }
-
-
-    $("#btnSubhh").click(function () {
-        if ($("#yyyyy").css("display") == "none") {
-            $("#yyyyy").show();
-        } else {
-            $("#yyyyy").hide();
-        }
+        $("#Button1_1").click(function () {
+            $("#jbox-content").hide();
+        });
     });
-    $("#Button1_1").click(function () {
-        $("#yyyyy").hide();
-    });
-    $("#btnHSearch").click(function () {
-        if ($(".widget").css("display") == "none") {
-            $(".widget").show();
 
-        } else {
-            $(".widget").hide();
-        }
-    })
     function JldwAdd() {
         $.ajax({
             type: "POST",
@@ -151,23 +153,24 @@
             success: function (result) {
                 if (result > 0) {
                     alert("新增成功");
+                    GetJldwAll();
                 }
             },
             error: function (ex) {
                 alert("Error:" + ex.responseText);
-
             }
         });
     }
 
-    $("#btnSub").click(function () {
+    function JldwDet() {
+        var id = $("[name='txtJlid']").val();
         $.ajax({
             //请求方式
             type: "POST",
             //发送请求的地址 /控制器名/动作方法名
-            url: "/AJAXDemo/JldwDet",
+            url: "/LLQ/JldwDet",
             //发送到服务器的数据(方法参数)
-            data: "",
+            data: "{jldw:"+id+"}",
             //服务器返回的数据类型
             dataType: "json",
             //发送信息至服务器时内容编码类型
@@ -175,12 +178,11 @@
             //请求成功后的回调函数
             success: function (result) {
                 if (result > 0) {
-                    alert("修改成功");
+                    alert("删除成功");
                     GetJldwAll();
                 }
                 else {
-                    alert("修改失败");
-                    GetJldwAll();
+                    alert("删除失败");
                 }
             },
             //请求失败后的回调函数
@@ -188,7 +190,7 @@
                 alert(ex.responseText);
             }
         });
-    });
+    };
 
 
     function ConvertDate(date) {
