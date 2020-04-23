@@ -28,16 +28,14 @@ namespace DAL.LLJ
                           CreateTime=p.CreateTime,
 
                       };
+         
+
             PageList list = new PageList();
-            list.DataList = obj;
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
-
-            //list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            ////设置总页数
-            //int rows = ent.SysRole.Count();
-            //list.PageCount = rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
-
             return list;
+
+           
         }
         //删除
         public static int caidandel(SysDepart cd)
