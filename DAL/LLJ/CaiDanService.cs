@@ -38,11 +38,14 @@ namespace DAL.LLJ
            
         }
         //删除
-        public static int caidandel(SysDepart cd)
+        public static int caidandel(int SysDepartID)
         {
             StorageEntities entity = new StorageEntities();
-            var obj = (from p in entity.SysDepart where p.SysDepartID == cd.SysDepartID select p).First();
-            obj.IsDelete = cd.IsDelete;
+            var aa = entity.SysDepart.Find(SysDepartID);
+            aa.SysDepartID = SysDepartID;
+            aa.IsDelete = false;
+            //var obj = (from p in entity.SysDepart where p.SysDepartID == cd.SysDepartID select p).First();
+            //obj.IsDelete = cd.IsDelete;
             return entity.SaveChanges();
 
         }

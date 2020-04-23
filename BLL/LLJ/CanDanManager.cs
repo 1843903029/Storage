@@ -15,9 +15,9 @@ namespace BLL.LLJ
 
             return DAL.LLJ.CaiDanService.caidan(pageIndex, pageSize);
         }
-        public static int caidandel(SysDepart cd)
+        public static int caidandel(int SysDepartID)
         {
-            return DAL.LLJ.CaiDanService.caidandel(cd);
+            return DAL.LLJ.CaiDanService.caidandel(SysDepartID);
         }
         public static int caidanadd(SysDepart cd)
         {
