@@ -35,7 +35,7 @@
                                 </td>
                                 <td>库位名称</td>
                                 <td>
-                                    <input id="kwName" name="kwName" type="text" placeholder="请输入库位名称" class="input-medium">
+                                    <input id="kwName" name="kwName" type="text" placeholder="请输入库位名称" >
                                 </td>
                             </tr>
                             <tr>
@@ -52,7 +52,7 @@
                                 </td>
                                 <td>仓库</td>
                                 <td>
-                                    <select id="CKName" name="CKName" class="input-medium" style="width:164px;">
+                                    <select id="CKName" name="CKName"  style="width:164px;">
                                         <option value="">请选择仓库</option>
                                         <option value="1">产品仓库</option>
                                     </select>
@@ -61,20 +61,21 @@
                             <tr>
                                 <td>是否默认</td>
                                 <td>
-                                    <select id="Zhuangtai" name="Zhuangtai" class="input-medium" style="width:164px;">
+                                    <select id="Zhuangtai" name="Zhuangtai"  style="width:164px;">
                                         <option value="">请选择</option>
                                         <option value="1">是</option>
                                         <option value="2">否</option>
                                     </select>
                                 </td>
                                 <td>创建时间</td>
-                                <td><input id="Time" name="Time" type="text" placeholder="请输入当前时间" class="input-medium"></td>
+                                <td><input id="Time" name="Time" type="text" placeholder="请输入当前时间" ></td>
                             </tr>
-
+                            
 
 
                         </tbody>
                     </table>
+                    <input id="Button1" type="button" value="button"  onclick="add()"/>
                     </form>
 
 </div>
@@ -167,23 +168,24 @@
 
         
     }
-    function add(lo) {
+    function add() {
 
         //获取对应表单下的表单元素的值  注意:此方法返回的是JSON对象而非JSON字符串
-        var data = $("#form1").serializeArray();
-        var obj = {};
-        $.each(data, function (a, b) {
-            obj[b.name] = b.value;
-        });
-        var jsons = JSON.stringify(obj);
+        //var data = $("#form1").serializeArray();
+        //var obj = {};
+        //$.each(data, function (a, b) {
+        //    obj[b.name] = b.value;
+        //});
+        //var jsons = JSON.stringify(obj);
         $.ajax({
             //请求方式
             type: "POST",
             //发送请求的地址 /控制器名/动作方法名
             url: "/LL/KWAdd",
             //发送到服务器的数据(方法参数)
-            //data: "{book:{Title:'" + $("[name='Title']").val() + "',Author:'" + $("[name='Author']").val() + "',UnitPrice:'" + $("[name='UnitPrice']").val() + "',CategoryId:'" + $("[name='CategoryId']").val() + "',PublisherId:'" + $("[name='PublisherId']").val() + "'}}",
-            data: "{lo:" + jsons + "}",
+            //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
+            //data: "{lo:" + jsons + "}",
+            data: "{lo:{kwName:'" + $("#kwName1").val() + "',CKName:'" + $("#CKName").val() + "',kwType:'" + $("#kwType").val() + "',Time:'" + $("#Time").val()+ "'}}",
             //服务器返回的数据类型
             dataType: "json",
             //发送信息至服务器时内容编码类型
