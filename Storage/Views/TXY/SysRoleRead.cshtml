@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/MainPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SysRoleRead</title>
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="jbox-content" style="height: 136px; margin-left:500px;margin-top:-300px;background-color:aliceblue" >
+        <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
+            <table class="formtab_user">
+                <tbody>
+
+                    <tr>
+                        <td>角色编号</td>
+                        <td>
+                            <input id="txtRoleNum" name="txtRoleNum" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>角色名称</td>
+                        <td>
+                            <input id="txtRoleName" name="txtRoleName" type="text" placeholder="请输入角色名称" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="txtRemark" name="txtRemark" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>修改时间</td>
+                        <td>
+                            <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
+                        <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</body>
+</html>
