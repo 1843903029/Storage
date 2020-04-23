@@ -37,9 +37,31 @@ namespace BLL.XBY
         /// <param name="text"></param>
         /// <returns></returns>
 
-        public static IQueryable textkuw(string text)
+        public static IQueryable Textkuw(string text)
         {
-            return DAL.XBY.CangKuCaoZuoService.textkuw(text);
+            return DAL.XBY.CangKuCaoZuoService.Textkuw(text);
         }
+
+
+
+        /// <summary>
+        /// 供应商查询
+        /// </summary>
+        /// <returns></returns>
+        public static IQueryable gysList()
+        {
+            return DAL.XBY.CangKuCaoZuoService.Listfenye();
+        }
+
+        /// <summary>
+        /// 通过供应商id找到供应商信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable IdGys(int id)
+        {
+            return DAL.XBY.CangKuCaoZuoService.IdGys(id);
+        }
+
         }
 }

@@ -184,6 +184,8 @@ namespace DAL.XBY
                           DataState = p.DataState,
                           StateText = p.StateText,
                           xiangbiao = from pp in p.StorageDetailed
+                                      where pp.StorageIDS == Danhao
+                                      orderby pp.StoragedetailedID ascending
                                       select new
                                       {
                                           //[StoragedetailedID], [StorageIDS], [productID], [Price],
@@ -208,17 +210,30 @@ namespace DAL.XBY
 
         }
 
+
+
         /// <summary>
-        /// 添加入库单
+        /// 添加入库主表
         /// </summary>
-        /// <param name="xiang"></param>
         /// <param name="zhu"></param>
         /// <returns></returns>
-        public static int ADDRuku(Storage zhu, List<StorageDetailed> xiang)
+        public static int ADDRuku(Storage zhu)
         {
             StorageEntities ent = new StorageEntities();
             ent.Storage.Add(zhu);
-            ent.StorageDetailed.AddRange(xiang);
+            return ent.SaveChanges();
+
+        }
+
+        /// <summary>
+        /// 添加入库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public static int ADDRukuXiang(StorageDetailed xiang)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.StorageDetailed.Add(xiang);
             return ent.SaveChanges();
 
         }
