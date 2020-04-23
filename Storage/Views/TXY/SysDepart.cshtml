@@ -10,6 +10,14 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SysDepart</title>
+    <style>
+        .input-medium {
+            width: 250px;
+            height: 35px;
+            margin-left: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
@@ -55,7 +63,7 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-200px; margin-left:500px;background-color:aliceblue" hidden>
+            <div id="jbox-content" style="height: 136px;height: 300px;width:500px;   position: static; margin-left:500px;position:absolute;margin-top:-300px; margin-left:500px;background-color:aliceblue" hidden>
                 <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
                     <table class="formtab_user">
                         <tbody>
@@ -78,8 +86,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
-                                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
+                                <td><input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" /></td>
+                                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -144,7 +152,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysDepartID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysDepartID + ")' /><a class='btn btn-warning' href='javascript:Eite()'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
                 })
             },
             error: function (ex) {
@@ -202,6 +210,42 @@
             }
         });
         get();
+    }
+    function Eite() {
+        layer.prompt({
+            //formType: 2,
+            value: '',
+            title: '编辑部门',
+            area: ['200px', '30px'] //自定义文本域宽高
+            ,btn: ['确定', '取消'],
+             success: function (layero) {
+                layero.find(".layui-layer-content").prepend('<div style="margin-bottom: 15px;">部门名称</div>')
+            }
+        }, function (value, index, elem) {
+           // alert(value); //得到value
+            layer.close(index);
+        });
+    }
+
+    function update(SysDepartID) {
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysDepartEit",
+            data: "{SysDepartID: " + SysDepartID + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    get();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
     }
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));

@@ -62,5 +62,31 @@ namespace DAL.TXY
         //    entity.SysRole.Add(role);
         //    return entity.SaveChanges();
         //}
+        public static IQueryable SysRoleGetById(int SysRoleID)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.SysRole
+                      where p.SysRoleID == SysRoleID&&p.IsDelete==true
+                      select new
+                      {
+                          SysRoleID = p.SysRoleID,
+                          IsDelete = p.IsDelete,
+                          RoleName = p.RoleName,
+                          RoleNum = p.RoleNum,
+                      };
+            return obj;
+        }
+
+        public static int SysRoleEdit(SysRole role)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.SysRole where p.SysRoleID == role.SysRoleID select p).First();
+            obj.RoleNum = role.RoleNum;
+            obj.RoleName = role.RoleName;
+            obj.Remark = role.Remark;
+
+            return entity.SaveChanges();
+
+        }
     }
 }

@@ -24,5 +24,15 @@ namespace BLL.TXY
         {
             return DAL.TXY.SysRoleService.SysRoleadd(role);
         }
+        public static IQueryable SysRoleGetById(int SysRoleID)
+        {
+            return DAL.TXY.SysRoleService.SysRoleGetById(SysRoleID);
         }
+
+        public static int SysRoleEdit(SysRole role)
+        {
+            return DAL.TXY.SysRoleService.SysRoleEdit(role);
+
+        }
+    }
 }

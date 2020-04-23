@@ -25,5 +25,10 @@ namespace BLL.TXY
         {
             return DAL.TXY.SysDepartService.SysDepartadd(depart);
         }
-    }
+        //修改
+        public static int SysDepartEit(int SysDepartID, string DepartName)
+        {
+            return DAL.TXY.SysDepartService.SysDepartEit(SysDepartID, DepartName);
+        }
+        }
 }

@@ -52,11 +52,18 @@ namespace Storage.Controllers
             return Json(BLL.TXY.SysRoleManager.SysRoleadd(role), JsonRequestBehavior.AllowGet);
         }
 
-        //修改
-        public ActionResult SysRoleRead()
+        //读取
+        public ActionResult SysRoleGetById(int SysRoleID)
         {
 
-            return View(); 
+            return Json(BLL.TXY.SysRoleManager.SysRoleGetById(SysRoleID), JsonRequestBehavior.AllowGet);
+        }
+
+        //修改
+        public ActionResult SysRoleEdit(SysRole role)
+        {
+
+            return Json(BLL.TXY.SysRoleManager.SysRoleEdit(role), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -81,7 +88,12 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.SysDepartManager.SysDepartadd(depart), JsonRequestBehavior.AllowGet);
         }
+        //修改
+        public ActionResult SysDepartEit(int SysDepartID, string DepartName)
+        {
 
+            return Json(BLL.TXY.SysDepartManager.SysDepartEit(SysDepartID,DepartName), JsonRequestBehavior.AllowGet);
+        }
 
 
 

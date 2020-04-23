@@ -44,5 +44,14 @@ namespace DAL.TXY
             h.SysDepart.Add(depart);
             return h.SaveChanges();
         }
+        //修改
+        public static int SysDepartEit(int SysDepartID, string DepartName)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.SysDepart where p.SysDepartID == SysDepartID select p).First();
+            obj.DepartName = DepartName;
+            return entity.SaveChanges();
+
+        }
     }
 }
