@@ -37,7 +37,6 @@
                     <tr>
                         <td style="width:20px;"><input type="checkbox" /></td>
                         <td class="hidden-480">序号</td>
-                        <td class="hidden-480">编号</td>
                         <td class="hidden-480">名称</td>
                         <td>操作</td>
                     </tr>
@@ -114,7 +113,7 @@
                 //获取总条数
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.Jlbh + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
                 });
             },
             error: function (ex) {
@@ -142,7 +141,24 @@
             $(".widget").hide();
         }
     })
+    function JldwAdd() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/JldwAdd",
+            data: "{jldw:{Jlid:'" + $("#txtJlid").val() + "',JlName:'" + $("#txtJlName").val() + "}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("新增成功");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
 
+            }
+        });
+    }
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));

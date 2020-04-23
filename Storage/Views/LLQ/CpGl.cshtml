@@ -49,7 +49,6 @@
                     <tr>
                         <td style="width:20px;"><input type="checkbox" /></td>
                         <td>序号</td>
-                        <td>编号</td>
                         <td>显示名</td>
                         <td>上限</td>
                         <td>下限</td>
@@ -71,21 +70,21 @@
                             <tr>
                                 <td>产品编号</td>
                                 <td>
-                                    <input id="txtUserCode" name="txtUserCode" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                                    <input id="txtCpID" name="txtCpID" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
                                 </td>
                                 <td>产品条码</td>
                                 <td>
-                                    <input id="txtUserName" name="txtUserName" type="text" class="input-medium">
+                                    <input id="txtCpbh" name="txtCpbh" type="text" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
                                 <td>产品名称</td>
                                 <td>
-                                    <input id="txtPassword" name="txtPassword" type="password" class="input-medium">
+                                    <input id="txtCpXsName" name="txtCpXsName" type="password" class="input-medium">
                                 </td>
                                 <td>产品类别</td>
                                 <td>
-                                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
+                                    <select id="CpLbName" name="CpLbName" class="input-medium" style="width:164px;">
                                         <option value="">请选择类别</option>
                                         <option value="DR_0000">儿童</option>
                                         <option value="000001">娱乐</option>
@@ -97,21 +96,21 @@
                             <tr>
                                 <td>预警上限</td>
                                 <td>
-                                    <input id="txtUserCode" name="txtUserCode" type="text" placeholder="0" class="input-medium">
+                                    <input id="txtCpSx" name="txtCpSx" type="text" placeholder="0" class="input-medium">
                                 </td>
                                 <td>预警下限</td>
                                 <td>
-                                    <input id="txtUserName" name="txtUserName" type="text" placeholder="0" class="input-medium">
+                                    <input id="txtCpXx" name="txtCpXx" type="text" placeholder="0" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
                                 <td>规格</td>
                                 <td>
-                                    <input id="txtPassword" name="txtPassword" type="password" class="input-medium">
+                                    <input id="txtSpecification" name="txtSpecification" type="password" class="input-medium">
                                 </td>
                                 <td>单位</td>
                                 <td>
-                                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
+                                    <select id="CpJlName" name="CpJlName" class="input-medium" style="width:164px;">
                                         <option value="">请选择单位</option>
                                         <option value="DR_0000">千克</option>
                                         <option value="000001">吨</option>
@@ -123,11 +122,11 @@
                             <tr>
                                 <td>价格</td>
                                 <td>
-                                    <input id="txtPassword" name="txtPassword" type="password" class="input-medium">
+                                    <input id="txtCpPrice" name="txtCpPrice" type="password" class="input-medium">
                                 </td>
                                 <td>客户</td>
                                 <td>
-                                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
+                                    <select id="khName" name="khName" class="input-medium" style="width:164px;">
                                         <option value="">请选择客户</option>
                                         <option value="DR_0000">阿里巴巴</option>
                                         <option value="000001">腾讯</option>
@@ -138,7 +137,7 @@
                             <tr>
                                 <td>默认仓库</td>
                                 <td>
-                                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
+                                    <select id="CkId" name="CkId" class="input-medium" style="width:164px;">
                                         <option value="">请选择仓库</option>
                                         <option value="DR_0000">系统管理员</option>
                                         <option value="000001">仓管员</option>
@@ -148,7 +147,7 @@
                                 </td>
                                 <td>默认库位</td>
                                 <td>
-                                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
+                                    <select id="KwId" name="KwId" class="input-medium" style="width:164px;">
                                         <option value="">请选择库位</option>
                                         <option value="DR_0000">系统管理员</option>
                                         <option value="000001">仓管员</option>
@@ -158,9 +157,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>电话</td>
+                                <td>产品数量</td>
                                 <td>
-                                    <input id="txtPhone" name="txtPhone" type="text" placeholder="" class="input-medium">
+                                    <input id="txtCpShuLiang" name="txtCpShuLiang" type="text" placeholder="" class="input-medium">
+                                </td>
+                                <td>备注</td>
+                                <td>
+                                    <input id="txtremark" name="txtremark" type="text" placeholder="" class="input-medium">
                                 </td>
                             </tr>
                         </tbody>
@@ -218,7 +221,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.Cpbh + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
                     });
                 },
                 erro: function (ex) {
@@ -247,7 +250,27 @@
             }
         })
     });
-    
+
+    function CpGlAdd() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/CpGlAdd",
+            data: "{cpgl:{CpId:'" + $("#txtCpId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("新增成功");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();

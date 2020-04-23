@@ -21,5 +21,16 @@ namespace BLL.LLQ
             return DAL.LLQ.JldwService.Jldwfenye(pageIndex, pageSize);
         }
 
+        /// <summary>
+        /// 计量单位新增
+        /// </summary>
+        /// <param name="jldw"></param>
+        /// <returns></returns>
+        public static int JldwAdd(Models.JLinfo jldw)
+        {
+            return DAL.LLQ.JldwService.JldwAdd(jldw);
+        }
+
+
     }
 }

@@ -50,6 +50,17 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.JldwManager.Jldwfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 计量单位添加
+        /// </summary>
+        /// <param name="jldw"></param>
+        /// <returns></returns>
+        public ActionResult JldwAdd(JLinfo jldw)
+        {
+            jldw.Delit = false;
+            return Json(BLL.LLQ.JldwManager.JldwAdd(jldw),JsonRequestBehavior.AllowGet);
+        }
+
 
 
         /// <summary>
@@ -62,7 +73,11 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CplbManager.lbfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult CplbAdd(CpLbinfo cplb)
+        {
+            cplb.Delit = false;
+            return Json(BLL.LLQ.CplbManager.CplbAdd(cplb), JsonRequestBehavior.AllowGet);
+        }
 
 
         /// <summary>
@@ -74,6 +89,12 @@ namespace Storage.Controllers
         public ActionResult GetCpGlAll(int PageIndex, int PageSize)
         {
             return Json(BLL.LLQ.CpGlManager.CpGlfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CpGlAdd(CpGlinfo cpgl)
+        {
+            cpgl.State = false;
+            return Json(BLL.LLQ.CpGlManager.CpGlAdd(cpgl), JsonRequestBehavior.AllowGet);
         }
     }
 }

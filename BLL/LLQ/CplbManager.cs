@@ -16,5 +16,10 @@ namespace BLL.LLQ
         }
 
 
+        public static int CplbAdd(Models.CpLbinfo cplb)
+        {
+            return DAL.LLQ.CplbService.CplbAdd(cplb);
+        }
+
     }
 }

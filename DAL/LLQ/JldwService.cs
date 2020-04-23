@@ -35,6 +35,22 @@ namespace DAL.LLQ
         }
 
 
+        public static int JldwAdd(Models.JLinfo jldw)
+        {
+            StorageEntities b = new StorageEntities();
+            b.JLinfo.Add(jldw);
+            return b.SaveChanges();
+        }
+
+        //删除
+        public static int JldwDet(Models.JLinfo jldw)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.JLinfo where p.Jlid == jldw.Jlid select p).First();
+            obj. = role.IsDelete;
+            return entity.SaveChanges();
+
+        }
 
 
     }

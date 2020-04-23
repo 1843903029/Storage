@@ -39,15 +39,17 @@ namespace DAL.LLQ
             return list;
         }
 
-     
-
-
-
-
-        //public static int CpGlAdd(Models.CpGlinfo cpgl)
-        //{
-
-        //}
+        /// <summary>
+        /// 产品管理新增
+        /// </summary>
+        /// <param name="cpgl"></param>
+        /// <returns></returns>
+        public static int CpGlAdd(Models.CpGlinfo cpgl)
+        {
+            StorageEntities b = new StorageEntities();
+            b.CpGlinfo.Add(cpgl);
+            return b.SaveChanges();
+        }
 
 
 

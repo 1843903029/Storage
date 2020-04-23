@@ -14,8 +14,13 @@ namespace BLL.LLQ
         {
             return DAL.LLQ.CpGlService.CpGlfenye(pageIndex, pageSize);
         }
-        
 
+        public static int CpGlAdd(Models.CpGlinfo cpgl)
+        {
+            StorageEntities b = new StorageEntities();
+            b.CpGlinfo.Add(cpgl);
+            return b.SaveChanges();
+        }
 
 
     }

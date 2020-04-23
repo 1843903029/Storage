@@ -166,6 +166,26 @@
         })
     });
 
+    function CplbAdd() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/CplbAdd",
+            data: "{cplb:{CpId:'" + $("#txtCpId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("新增成功");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();
