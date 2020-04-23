@@ -60,15 +60,24 @@ namespace BLL.XBY
         }
 
 
-            /// <summary>
-            /// 添加入库单
-            /// </summary>
-            /// <param name="xiang"></param>
-            /// <param name="zhu"></param>
-            /// <returns></returns>
-            public static int ADDRuku(Storage zhu,List<StorageDetailed> xiang)
+        /// <summary>
+        /// 添加入库单
+        /// </summary>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public static int ADDRuku(Storage zhu)
         {
-            return DAL.XBY.StorageService.ADDRuku(zhu, xiang);
+            return DAL.XBY.StorageService.ADDRuku(zhu);
+        }
+
+        /// <summary>
+        /// 添加入库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public static int ADDRukuXiang(StorageDetailed xiang)
+        {
+            return DAL.XBY.StorageService.ADDRukuXiang(xiang);
         }
         }
-}
+    }

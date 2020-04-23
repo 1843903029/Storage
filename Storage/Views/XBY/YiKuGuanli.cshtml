@@ -5,6 +5,7 @@
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 
 
 <div style=" border:0px solid #4cff00;width:95%;">
@@ -18,16 +19,16 @@
         <button class="btn btn-default" id="daish">待审核</button>
         <button class="btn btn-default" id="shenhetg">审核通过</button>
         <button class="btn btn-default" id="shenhesb">审核失败</button>
-        <input class="btn btn-primary" type="button" value="新增" style="width:80px;margin-left:52%" />
+        <input class="btn btn-primary" type="button" value="新增" onclick="TiaoADD()" style="width:80px;margin-left:52%" />
         <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
         <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
         <div style="padding-top:8px;display:flex;margin-bottom:20px">
-            <input  id="danhaoh" type="text" class="form-control"  placeholder="请输入移库单号" style="width:170px;margin-right:10px" />
+            <input id="danhaoh" type="text" class="form-control" placeholder="请输入移库单号" style="width:170px;margin-right:10px" />
             <div style="padding-top:6px;margin-right:5px;">时间</div>
-            <input id="time1" class="form-control"  style="width:170px;margin-right:10px">
+            <input id="time1" class="form-control" style="width:170px;margin-right:10px">
             <div style="padding-top:6px;margin-right:5px;">-</div>
-            <input id="time2" class="form-control"  style="width:170px;margin-right:10px">
+            <input id="time2" class="form-control" style="width:170px;margin-right:10px">
 
             <input class="btn btn-info" onclick="MoHuYiKuList()" type="button" value="搜索" style="width:80px;margin-right:5px" />
             <input class="btn btn-primary" type="button" value="高级搜索" style="width:100px;" />
@@ -61,7 +62,52 @@
     </div>
 </div>
 
+<div id="hideID3" style="display:none">
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <td>移库单号</td>
+                <td class="rukdh"></td>
+                <td>移库人</td>
+                <td class="bsr"></td>
+                <td>创建时间</td>
+                <td class="chuangjiantime"></td>
+            </tr>
+            <tr>
+                <td>当前状态</td>
+                <td class="dangqianhzt" colspan="5"></td>
+            </tr>
+            <tr>
+                <td>报损描述</td>
+                <td class="rukgldd" colspan="5"></td>
+            </tr>
+            <tr>
+                <td>审核备注</td>
+                <td class="shenhebeizhu" colspan="5"></td>
+            </tr>
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>产品编号</td>
+                    <td>产品条码</td>
+                    <td>产品名称</td>
+                    <td>批次</td>
+                    <td>移库数量</td>
+                    <td>原库位</td>
+                    <td>目标库位</td>
+                </tr>
+            </thead>
+            <tbody id="xiangqingbiae"></tbody>
+        </table>
+    </div>
+</div>
+
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
+
 <script>
     var pageIndex = 1;
     var pageSize = 10;
@@ -101,6 +147,98 @@
 
     })
 
+
+    function show3(rid) {
+
+        $("#xiangqingbiae tr").remove();
+        layui.use('layer', function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                title: ['报损单详细', 'font-size:18px'],
+                area: ['850px', '400px'],
+                shadeClose: true,
+                content: $('#hideID3'), //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                btn: ['按钮', '退出'],
+                btn1: function (index, layero) {
+                    // 按钮1的逻辑
+                },
+                btn2: function (index, layero) {
+                    // 按钮2的逻辑
+                },
+                cancel: function () {
+                    // 右上角关闭事件的逻辑
+                }
+
+            });
+
+        });
+        $.ajax({
+            type: "post",
+            url: "/XBY/YiKucha",
+            data: "{id:'" + rid + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $(".rukdh").text(data.MovementID);
+                    $(".bsr").text(data.EmployeeID);
+                    $(".chuangjiantime").text(ConvertDate(data.CreationTime));
+
+                    if (data.State == 2) {
+                        $(".dangqianhzt").text("待审核");
+                    }
+                    if (data.State == 1) {
+                        $(".dangqianhzt").text("审核通过");
+                    }
+                    if (data.State == 0) {
+                        $(".dangqianhzt").text("审核失败");
+                    }
+                    $(".shenhebeizhu").text(data.StateText);//审核备注
+
+
+                    $.each(data.xiangbiao, function (index, data1) {
+
+                        $("#xiangqingbiae").append("<tr><td>" + data1.cptiaoma + "</td><td>" + data1.cptiaoma + "</td><td>" + data1.productName + "</td><td>" + data1.Batch + " </td><td>" + data1.MovementNumber + "</td><td>" + fanhuicangk(data1.WarehouseID) + "</td><td>" + fanhuicangk(data1.WarehouseIDs) + "</td></tr>")
+                    })
+                });
+
+
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+    function fanhuicangk(id) {
+        if (id == 1) {
+            return "成品库位";
+        }
+        if (id == 2) {
+            return "报损库位";
+        }
+        if (id == 3) {
+            return "待出库位";
+        }
+        if (id == 4) {
+            return "待检库位";
+        }
+        if (id == 5) {
+            return "待入库位";
+        }
+    }
+
+   
+    //跳转到新增移库单号
+    function TiaoADD() {
+        location.href = '/XBY/BaoSunGuanliAdd'
+    }
+
+
+
     function Suoyou() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -132,7 +270,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -154,7 +292,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -175,7 +313,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
                 });
             },
             error: function (ex) {

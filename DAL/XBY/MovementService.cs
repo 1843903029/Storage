@@ -137,7 +137,62 @@ namespace DAL.XBY
 
             }
             return list;
+            
+        }
 
+        // <summary>
+        /// 通过单号查询移库信息
+        /// </summary>
+        /// <returns></returns>
+        public static IQueryable YiKucha(string Danhao)
+        {
+            StorageEntities ent = new StorageEntities();
+
+            PageList list = new PageList();
+            var obj = from p in ent.Movement
+                      where p.DataState == true
+                      && p.MovementID == Danhao
+                      orderby p.MovementID ascending
+                      select new
+                      {
+
+                          //[StorageID], [StorageType], [SupplierID], [AssociatedNumber], [GoodsCount],
+                          //[Summoney], [State], [EmployeeID], [OperationType], [CreationTime], [DataState], [StateText]
+                          MovementID = p.MovementID,
+                          MovementType = p.MovementType,
+                          Associatednumber = p.Associatednumber,
+                          MovementCount = p.MovementCount,
+                          State = p.State,
+                          EmployeeID = p.EmployeeID,
+                          name = p.Admin.UserName,
+                          StateText = p.StateText,
+                          CreationTime = p.CreationTime,
+                          DataState = p.DataState,
+                          xiangbiao = from pp in p.MovementDetailed
+                                      where pp.MovementIDS == Danhao
+                                      select new
+                                      {
+                                          //[MovementDetailedID], [MovementIDS], [ProductID], [Price],
+                                          //[MovementNumber], [Batch], [WarehouseID], [WarehouseIDs]
+                                          MovementDetailedID = pp.MovementDetailedID,
+                                          MovementIDS = pp.MovementIDS,
+                                          ProductID = pp.ProductID,
+                                          productName = pp.CpGlinfo.CpXsName,
+                                          cptiaoma = pp.CpGlinfo.Cpbh,
+                                          cpguige = pp.CpGlinfo.Specification,
+                                          cpjiage = pp.CpGlinfo.CpPrice,
+                                          cpid=pp.CpGlinfo.CpID,
+
+                                          Price = pp.Price,
+                                          MovementNumber = pp.MovementNumber,
+                                          WarehouseID = pp.WarehouseID,
+                                          Batch = pp.Batch,
+                                          kuweiname = pp.LocationManagement.kwName,
+                                          WarehouseIDs = pp.WarehouseIDs
+                                      }
+                      };
+
+            return obj;
 
         }
 

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LLJ\CanDanManager.cs" />
     <Compile Include="LL\GYSguanliManager.cs" />
     <Compile Include="LLQ\CpGlManager.cs" />
     <Compile Include="LLQ\JldwManager.cs" />
@@ -71,8 +72,6 @@
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LLJ\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

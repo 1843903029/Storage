@@ -34,17 +34,48 @@ namespace Storage.Controllers
             return View();
         }
 
+
+        public ActionResult GYSlist()
+        {
+            return Json(BLL.XBY.CangKuCaoZuoManager.gysList(), JsonRequestBehavior.AllowGet);
+        }
+
+
         /// <summary>
-        /// 添加入库单
+        /// 通过供应商id找到供应商信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult IdGys(int id)
+        {
+            return Json(BLL.XBY.CangKuCaoZuoManager.IdGys(id), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 添加入库主表
         /// </summary>
         /// <param name="xiang"></param>
         /// <param name="zhu"></param>
         /// <returns></returns>
-        public ActionResult ADDRuku(Models.Storage zhu, List<StorageDetailed> xiang)
+        public ActionResult ADDRuku(Models.Storage zhu)
         {
             //Random a = new Random();
             //zhu.StorageID = a.Next().ToString();
-            return Json(BLL.XBY.StorageManager.ADDRuku(zhu, xiang), JsonRequestBehavior.AllowGet);
+            zhu.State = 2;
+            zhu.OperationType = "电脑";
+            zhu.CreationTime = DateTime.Now;
+            zhu.DataState = true;
+            return Json(BLL.XBY.StorageManager.ADDRuku(zhu), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 添加入库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public ActionResult ADDRukuxiang(StorageDetailed xiang)
+        {
+            return Json(BLL.XBY.StorageManager.ADDRukuXiang(xiang), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -58,6 +89,7 @@ namespace Storage.Controllers
         {
             return Json(BLL.XBY.StorageManager.RuKuList(Danhao), JsonRequestBehavior.AllowGet);
         }
+        
 
         /// <summary>
         /// 通过文字找到编号
@@ -73,9 +105,9 @@ namespace Storage.Controllers
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public ActionResult textkuw(string text)
+        public ActionResult Textkuw(string text)
         {
-            return Json(BLL.XBY.CangKuCaoZuoManager.textkuw(text), JsonRequestBehavior.AllowGet);
+            return Json(BLL.XBY.CangKuCaoZuoManager.Textkuw(text), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -171,6 +203,11 @@ namespace Storage.Controllers
             return Json(BLL.XBY.BreakageManager.MoHuBaoSunList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Baoxuncha(string id)
+        {
+            return Json(BLL.XBY.BreakageManager.Baoxuncha(id), JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 报损管理页面
         /// </summary>
@@ -189,6 +226,8 @@ namespace Storage.Controllers
             return View();
         }
 
+        
+
         public ActionResult YiKuList(int PageIndex, int PageSize, int State)
         {
             return Json(BLL.XBY.MovementManager.YiKuList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
@@ -203,6 +242,11 @@ namespace Storage.Controllers
             return Json(BLL.XBY.MovementManager.MoHuYiKuList(PageSize, PageIndex, Danhao, time1, time2), JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult YiKucha(string id)
+        {
+            return Json(BLL.XBY.MovementManager.YiKucha(id), JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// 移库管理页面
@@ -222,6 +266,7 @@ namespace Storage.Controllers
             return View();
         }
 
+        
 
         public ActionResult PanDianList(int PageIndex, int PageSize, int State)
         {

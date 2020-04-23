@@ -185,6 +185,7 @@ namespace DAL.XBY
                           DataState = p.DataState,
                           StateText = p.StateText,
                           xiangbiao = from pp in p.StockRemovalDetailed
+                                      where pp.StockRemovalIDS == Danhao
                                       select new
                                       {
                                           //[StockRemovalDetailedID], [StockRemovalIDS], [ProductID], 

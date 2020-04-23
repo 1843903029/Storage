@@ -23,7 +23,7 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control" placeholder="可不填自动生成" readonly>
+                    <input type="text" class="form-control" id="rukudanhsuiji" placeholder="可不填自动生成" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <select class="form-control" id="rukuleixing1">
@@ -50,16 +50,18 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control" placeholder="输入关键字搜索">
+                    <input type="text" class="form-control" id="gysbh" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <select class="form-control" id="gysname" onchange="IdGys(this)">
+                        <option value="0">请选择</option>
+                    </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="gyslianxiren" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="gysdianhua" readonly>
                 </div>
             </div>
             <div style="display:flex">
@@ -69,10 +71,10 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="zhidanTime">
                 </div>
                 <div style="text-align:left;width:620px;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="beizhuxinxi">
                 </div>
 
             </div>
@@ -113,7 +115,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary"  onclick="ADD()">保存</button>
+            <button type="submit" class="btn btn-primary" onclick="ADD()">保存</button>
             <button type="button" class="btn" onclick="fanhuiRuKu()">取消</button>
         </div>
 
@@ -176,14 +178,19 @@
     var pageCount = 0;
     var rowss = 0;
     var info = [];
+    var danhapsuiji;
+
+    var rukuzongshu;
+    var rukuzongjia;
     $(function () {
 
-        //    票种名称name 原价pre_price 现价price 张数total
-        $("#baocun").click(function () {
-            // $(document).ready(function () {
-           
-        });
+        gysList();//供应商下拉框
+        var addtime = new Date();
+        $("#zhidanTime").val(addtime.toLocaleDateString());//赋值当前日期到页面
 
+
+        //   根据当前时间和随机数生成流水号
+        suijidanhao();
 
 
         rukuList();
@@ -211,9 +218,10 @@
     function www(ff) {
         var num = $("#tb1 tr").length;
         for (var i = 0; i < num; i++) {
-            alert(ff);
             $("#" + ff + "").text($("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text());
+
         }
+
     }
 
     //返回到入库查询页面
@@ -243,7 +251,7 @@
     function ZhaoIDkuwei(ii) {
         $.ajax({
             type: "POST",
-            url: "/XBY/textkuw",
+            url: "/XBY/Textkuw",
             data: "{text:'" + ii + "'}",
             dataType: "json",
             contentType: "application/json",
@@ -306,6 +314,50 @@
     }
 
 
+    function gysList() {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/GYSlist",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#gysname").append("<option value='" + data.GysID + "'>" + data.GysName + "</option>");
+
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+    function IdGys() {
+        //alert(document.getElementById("gysname").value);
+        $.ajax({
+            type: "POST",
+            url: "/XBY/IdGys",
+            data: "{id:'" + document.getElementById("gysname").value + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#gysbh").val(data.GysID);
+                    $("#gyslianxiren").val(data.Contacts);
+                    $("#gysdianhua").val(data.Hone);
+
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+
+
     function ADD() {
         var num = $("#tb1 tr").length;
         for (var i = 0; i < num; i++) {
@@ -314,32 +366,85 @@
             obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
             obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
             obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
-            alert($("#tb1 tr").eq(i).children("td").eq(6).text());
+            //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
             //$("#tb1 tr").eq(i).children("td").eq(7).text()
             obj.WarehouseID = 1;
-            obj.StorageIDS = 154777;
+            obj.StorageIDS = danhapsuiji;
             console.log(obj)
             info.push(obj);
+
+
         }
         console.log(info)
-            // })
+        // })
 
-        $.ajax({
-            type: "POST",
-            url: "/XBY/ADDRuku",
-            data: "{zhu:{StorageID:'" + 154777 + "',StorageType:'" + $("#rukuleixing1").val() + "',SupplierID:'" + 1 + "',EmployeeID:'" + 1 + "'},xiang:{" + info + "}}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                if (result > 0) {
-                    alert("新增成功");
-                }
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
+        //alert(info.length);
+        //alert(info[0].productID);
 
+        if ($("#gysbh").val() == "") {
+            alert("请选择供应商后添加！");
+        }
+        else {
+            for (var i = 0; i < info.length; i++) {
+                rukuzongshu += info[i].StorageNumber ;
+                rukuzongjia += info[i].Summoney;
             }
-        });
+
+
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ADDRuku",
+                data: "{zhu:{StorageID:'" + danhapsuiji + "',StorageType:'" + $("#rukuleixing1").val() + "',SupplierID:'" + $("#gysbh").val() + "',EmployeeID:'" + 1 + "',GoodsCount:'" + rukuzongshu + "',Summoney:'" + rukuzongjia + "',StateText:'" + $("#beizhuxinxi").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    AddXiang();
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+
+    }
+
+    function AddXiang() {
+        for (var i = 0; i < info.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ADDRukuxiang",
+                data: "{xiang:{StorageIDS:'" + info[i].StorageIDS + "',productID:'" + info[i].productID + "',Price:'" + info[i].Price + "',StorageNumber:'" + info[i].StorageNumber + "',Summoney:'" + info[i].Summoney + "',WarehouseID:'" + info[i].WarehouseID + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+        alert("添加成功");
+        location.href = "/XBY/RukuGuanli"
+    }
+
+
+    //   根据当前时间和随机数生成流水号
+    function suijidanhao() {
+        var now = new Date()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hour = now.getHours()
+        var minutes = now.getMinutes()
+        var seconds = now.getSeconds()
+        //month = now.setTimeDateFmt(month)
+        //hour = now.setTimeDateFmt(hour)
+        //minutes = now.setTimeDateFmt(minutes)
+        //seconds = this.setTimeDateFmt(seconds)
+        danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
+        $("#rukudanhsuiji").val(danhapsuiji);
     }
 
 
