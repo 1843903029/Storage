@@ -50,5 +50,12 @@ namespace Storage.Controllers
             lo.Isdefault = 2;
             return Json(BLL.LL.KweiGuanliManager.add(lo), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult KHAdd(Client c)
+        {
+            c.State = true;
+            c.Time = "2020-03-09";
+            return Json(BLL.LL.KHguanliManager.add(c), JsonRequestBehavior.AllowGet);
+        }
     }
 }

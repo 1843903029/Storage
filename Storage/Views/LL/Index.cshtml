@@ -20,7 +20,7 @@
             <div style="height:70px;">
                 <h4>库位管理</h4>
                 <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="">新增</a>
+                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="xzshow()">新增</a>
                     <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
                 </div>
             </div>
@@ -177,22 +177,17 @@
         //    obj[b.name] = b.value;
         //});
         //var jsons = JSON.stringify(obj);
-        $.ajax({
-            //请求方式
+        $.ajax({  
             type: "POST",
-            //发送请求的地址 /控制器名/动作方法名
             url: "/LL/KWAdd",
-            //发送到服务器的数据(方法参数)
             //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
             //data: "{lo:" + jsons + "}",
-            data: "{lo:{kwName:'" + $("#kwName1").val() + "',CKName:'" + $("#CKName").val() + "',kwType:'" + $("#kwType").val() + "',Time:'" + $("#Time").val()+ "'}}",
-            //服务器返回的数据类型
+            data: "{lo:{kwName:'" + $("#kwName").val() + "',CKName:'" + $("#CKName").val() + "',kwType:'" + $("#kwType").val() + "',Time:'" + $("#Time").val()+ "'}}",
             dataType: "json",
-            //发送信息至服务器时内容编码类型
             contentType: "application/json",
-            //请求成功后的回调函数
             success: function (result) {
                 if (result > 0) {
+                    alert($("#kwName").text());
                     alert("添加成功");
                     //location.href = '/AJAXDemo/Index';
                 }

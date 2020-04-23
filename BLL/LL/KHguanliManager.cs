@@ -17,5 +17,9 @@ namespace BLL.LL
         {
             return DAL.LL.KHguanli.del(id);
         }
+        public static int add(Client c) {
+
+            return DAL.LL.KHguanli.add(c);
+        }
         }
 }
