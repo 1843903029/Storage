@@ -86,13 +86,13 @@
                     <tr class="widget-title">
                         <th class="hidden-480">产品名称</th>
                         <th class="hidden-480">产品条码</th>
-                        <th class="hidden-480">规格</th>
+                        <th class="hidden-480">产品编号</th>
                         <th class="hidden-480">批次</th>
                         <th class="hidden-480">单价</th>
-                        <th class="hidden-480">入库数</th>
                         <th class="hidden-480">总价</th>
-                        <th class="hidden-480">出库数量</th>
-                        <th class="hidden-480">库位</th>
+                        <th class="hidden-480">规格</th>
+                        <th class="hidden-480">出库数</th>
+                        <th class="hidden-480">库存</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -168,7 +168,44 @@
                 $("#tb2 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb2").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpPrice + "</td><td>" + data.ddd + "</td><td>" + data.CpShuLiang + "</td></tr>");
+                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpPrice + "</td><td>" + data.ddd + "</td><td>" + data.CpShuLiang + "</td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+
+    function www(ff) {
+        var num = $("#tb1 tr").length;
+        for (var i = 0; i < num; i++) {
+            if (true) {
+                if ($("#tb1 tr").eq(i).children("td").eq(7).children("input").val() < $("#tb1 tr").eq(i).children("td").eq(8).text()) {
+                    $("#" + ff + "").text($("#tb1 tr").eq(i).children("td").eq(7).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text());
+                } else
+                {
+                    alert("库存没这么多！");
+                    $("#tb1 tr").eq(i).children("td").eq(7).children("input").val(1);
+                }
+            }
+            
+        }
+    }
+
+    function SelectChanPin(id) {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/IDCanPin",
+            data: "{id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#tb1").append("<tr><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.CpID + "</td><td></td><td>" + data.CpPrice + "</td><td id='" + data.Cpbh + "'></td><td>" + data.Specification + "</td><td><input id='RukuShu' type='text' onchange='www(" + data.Cpbh + ")' /></td><td>" + data.CpShuLiang + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+
                 });
             },
             error: function (ex) {
@@ -185,5 +222,3 @@
         return time.toLocaleDateString();
     }
 </script>
-
-

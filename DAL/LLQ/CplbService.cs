@@ -32,11 +32,27 @@ namespace DAL.LLQ
             return list;
         }
 
-       
+        /// <summary>
+        /// 产品类别新增
+        /// </summary>
+        /// <param name="cplb"></param>
+        /// <returns></returns>
+        public static int CplbAdd(Models.CpLbinfo cplb)
+        {
+            StorageEntities b = new StorageEntities();
+            b.CpLbinfo.Add(cplb);
+            return b.SaveChanges();
+        }
 
+        //删除
+        public static int CplbDet(Models.CpLbinfo cplb)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.CpLbinfo where p.ID == cplb.ID select p).First();
+            obj.Delit =cplb.Delit;
+            return entity.SaveChanges();
 
-
-
+        }
 
 
     }

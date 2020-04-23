@@ -24,10 +24,25 @@ namespace DAL.TXY
                           SysDepartID =p.SysDepartID,
                       };
             PageList list = new PageList();
-            list.DataList = obj;
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
-
             return list;
+        }
+        //删除
+        public static int SysDepartdelete(int SysDepartID)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.SysDepart where p.SysDepartID == SysDepartID select p).First();
+            obj.IsDelete = false;
+            return entity.SaveChanges();
+
+        }
+        //新增
+        public static int SysDepartadd(SysDepart depart)
+        {
+            StorageEntities h = new StorageEntities();
+            h.SysDepart.Add(depart);
+            return h.SaveChanges();
         }
     }
 }

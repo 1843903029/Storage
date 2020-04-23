@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<div id="hideID3" hidden="hidden">
+<div id="hideID3" style="display:none">
     <div>
         <table class="table table-bordered">
             <tr>
@@ -121,7 +121,6 @@
             <tbody id="xiangqingbiae"></tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-group" onclick="guanbianniu()">关闭</button>
 </div>
 
 
@@ -171,6 +170,8 @@
 
 
     function show3(rid) {
+
+        $("#xiangqingbiae tr").remove();
         layui.use('layer', function () { //独立版的layer无需执行这一句
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
 
@@ -180,7 +181,17 @@
                 title: ['出库单详细', 'font-size:18px'],
                 area: ['850px', '400px'],
                 shadeClose: true,
-                content: $('#hideID3') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                content: $('#hideID3'), //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                btn: ['按钮', '退出'],
+                btn1: function (index, layero) {
+                    // 按钮1的逻辑
+                },
+                btn2: function (index, layero) {
+                    // 按钮2的逻辑
+                },
+                cancel: function () {
+                    // 右上角关闭事件的逻辑
+                }
             });
 
         });
@@ -227,24 +238,9 @@
         });
     }
 
+
+
     
-
-    function guanbianniu() {
-        layer.closeAll('page');
-        $(".rukdh").text();
-        $(".ruklx").text();
-        $(".rukzt").text();
-        $(".rukgysid").text();
-
-        $(".rukgysname").text();
-        $(".ruklianxiren").text();
-        $(".rukgldd").text();
-        $(".rukcjr").text();
-        $(".rukgltime").text();
-        $(".rukdianhua").text();
-        $(".rukbeizhu").text();
-        $("#xiangqingbiae").html("");
-    }
 
     //跳转到新增chu库单号
     function TiaoADD() {
@@ -342,6 +338,3 @@
         return time.toLocaleDateString();
     }
 </script>
-
-
-

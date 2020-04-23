@@ -18,7 +18,7 @@
         <button class="btn btn-default" id="daish">待审核</button>
         <button class="btn btn-default" id="shenhetg">审核通过</button>
         <button class="btn btn-default" id="shenhesb">审核失败</button>
-        <input class="btn btn-primary" type="button" value="新增" style="width:80px;margin-left:52%" />
+        <input class="btn btn-primary" type="button" onclick="TiaoADD()" value="新增" style="width:80px;margin-left:52%" />
         <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
         <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
@@ -60,6 +60,9 @@
     </div>
 </div>
 
+
+
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var pageIndex = 1;
@@ -99,6 +102,15 @@
         })
 
     })
+
+
+   
+
+    //跳转到新增盘点单号
+    function TiaoADD() {
+        location.href = '/XBY/PanDianGuanliAdd'
+    }
+
     function Suoyou() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage

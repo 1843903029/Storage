@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LLJ\CaiDanService.cs" />
     <Compile Include="LLQ\CpGlService.cs" />
     <Compile Include="LLQ\CplbService.cs" />
     <Compile Include="LLQ\JldwService.cs" />
@@ -72,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
-    <Folder Include="LLJ\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>

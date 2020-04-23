@@ -138,9 +138,63 @@ namespace DAL.XBY
 
             }
             return list;
+        }
 
+
+        /// <summary>
+        /// 通过单号查询报损信息
+        /// </summary>
+        /// <returns></returns>
+        public static IQueryable Baoxuncha(string Danhao)
+        {
+            StorageEntities ent = new StorageEntities();
+
+            PageList list = new PageList();
+            var obj = from p in ent.Breakage
+                      where p.DataState == true
+                      && p.BreakageID == Danhao
+                      orderby p.BreakageID ascending
+                      select new
+                      {
+
+                          //[StorageID], [StorageType], [SupplierID], [AssociatedNumber], [GoodsCount],
+                          //[Summoney], [State], [EmployeeID], [OperationType], [CreationTime], [DataState], [StateText]
+                          BreakageID = p.BreakageID,
+                          BreakageType = p.BreakageType,
+                          AssociatedNumber = p.AssociatedNumber,
+                          BreakageCount = p.BreakageCount,
+                          State = p.State,
+                          EmployeeID = p.Admin.UserName,
+                          operationType = p.operationType,
+                          CreationTime = p.CreationTime,
+                          DataState = p.DataState,
+                          StateText = p.StateText,
+                          xiangbiao = from pp in p.BreakageDetailed
+                                      where pp.BreakageIDS==Danhao
+                                      select new
+                                      {
+                                          //[BreakageDetailedID], [BreakageIDS], 
+                                          //[ProductID], [Price], [BreakageNumber], [Batch], [WarehouseID]
+                                          BreakageDetailedID = pp.BreakageDetailedID,
+                                          BreakageIDS = pp.BreakageIDS,
+                                          ProductID = pp.ProductID,
+                                          productName = pp.CpGlinfo.CpXsName,
+                                          cptiaoma = pp.CpGlinfo.Cpbh,
+                                          cpguige = pp.CpGlinfo.Specification,
+                                          cpjiage = pp.CpGlinfo.CpPrice,
+                                          Price = pp.Price,
+                                          BreakageNumber = pp.BreakageNumber,
+                                          Summoney = pp.BreakageNumber,
+                                          Batch = pp.Batch,
+                                          kuweiname = pp.LocationManagement.kwName,
+                                          WarehouseID = pp.WarehouseID
+                                      }
+                      };
+
+            return obj;
 
         }
+
 
     }
 }

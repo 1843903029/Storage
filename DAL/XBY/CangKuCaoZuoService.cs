@@ -73,7 +73,7 @@ namespace DAL.XBY
                           remark = p.remark
                       };
 
-       
+
             return obj;
         }
 
@@ -84,7 +84,7 @@ namespace DAL.XBY
         /// <param name="text"></param>
         /// <returns></returns>
 
-        public static IQueryable textkuw(string text)
+        public static IQueryable Textkuw(string text)
         {
             StorageEntities ent = new StorageEntities();
             var obj = from p in ent.LocationManagement
@@ -102,7 +102,64 @@ namespace DAL.XBY
                           Time = p.Time,
                           Shuju = p.Shuju
                       };
-            
+
+            return obj;
+        }
+
+
+
+        /// <summary>
+        /// 供应商查询
+        /// </summary>
+        /// <returns></returns>
+        public static IQueryable Listfenye()
+        {
+            StorageEntities ent = new StorageEntities();
+            var obj = from p in ent.Supplier
+                      where p.State == true
+                      orderby p.GysID ascending
+                      select new
+                      {
+                          GysID = p.GysID,
+                          GysType = p.GysType,
+                          GysName = p.GysName,
+                          Hone = p.Hone,
+                          ChuangZhen = p.ChuangZhen,
+                          Email = p.Email,
+                          Contacts = p.Contacts,
+                          Address = p.Address,
+                          Describe = p.Describe,
+                          State = p.State
+                      };
+            return obj;
+        }
+
+
+        /// <summary>
+        /// 通过供应商id找到供应商信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable IdGys(int id)
+        {
+            StorageEntities ent = new StorageEntities();
+            var obj = from p in ent.Supplier
+                      where p.State == true
+                      && p.GysID == id
+                      orderby p.GysID ascending
+                      select new
+                      {
+                          GysID = p.GysID,
+                          GysType = p.GysType,
+                          GysName = p.GysName,
+                          Hone = p.Hone,
+                          ChuangZhen = p.ChuangZhen,
+                          Email = p.Email,
+                          Contacts = p.Contacts,
+                          Address = p.Address,
+                          Describe = p.Describe,
+                          State = p.State
+                      };
             return obj;
         }
     }

@@ -39,17 +39,27 @@ namespace DAL.LLQ
             return list;
         }
 
-     
+        /// <summary>
+        /// 产品管理新增
+        /// </summary>
+        /// <param name="cpgl"></param>
+        /// <returns></returns>
+        public static int CpGlAdd(Models.CpGlinfo cpgl)
+        {
+            StorageEntities b = new StorageEntities();
+            b.CpGlinfo.Add(cpgl);
+            return b.SaveChanges();
+        }
 
+        //删除
+        public static int CpGlDet(Models.CpGlinfo cpgl)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.CpGlinfo where p.CpID == cpgl.CpID select p).First();
+            obj.State = cpgl.State;
+            return entity.SaveChanges();
 
-
-
-        //public static int CpGlAdd(Models.CpGlinfo cpgl)
-        //{
-
-        //}
-
-
+        }
 
     }
 }

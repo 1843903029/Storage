@@ -16,9 +16,9 @@ namespace BLL.TXY
 
             return DAL.TXY.SysRoleService.SysRolefenye(pageIndex, pageSize);
         }
-        public static int SysRoledelete(SysRole role)
+        public static int SysRoledelete(int SysRoleID)
         {
-            return DAL.TXY.SysRoleService.SysRoledelete(role);
+            return DAL.TXY.SysRoleService.SysRoledelete(SysRoleID);
         }
         public static int SysRoleadd(SysRole role)
         {

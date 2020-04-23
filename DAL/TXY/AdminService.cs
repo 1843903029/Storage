@@ -59,6 +59,7 @@ namespace DAL.TXY
                       orderby p.AdminID ascending
                       select new
                       {
+                          AdminID = p.AdminID,
                           UserName = p.UserName,
                           UserCode = p.UserCode,
                           RealName = p.RealName,
@@ -75,15 +76,30 @@ namespace DAL.TXY
                          
                       };
             PageList list = new PageList();
-            list.DataList = obj;
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
-
             return list;
         }
         public static int GetRows()
         {
             StorageEntities entity = new StorageEntities();
             return entity.SysRole.Count();
+        }
+        //删除
+        public static int SysAdmindelete(int AdminID)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.Admin where p.AdminID == AdminID select p).First();
+            obj.IsDelete = false;
+            return entity.SaveChanges();
+
+        }
+        //新增
+        public static int SysAdminadd(Admin admin)
+        {
+            StorageEntities h = new StorageEntities();
+            h.Admin.Add(admin);
+            return h.SaveChanges();
         }
     }
 }

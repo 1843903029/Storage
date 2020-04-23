@@ -46,7 +46,14 @@ namespace BLL.XBY
         {
             return DAL.XBY.MovementService.MoHuYiKuList(PageSize, PageIndex, Danhao, time1, time2);
         }
+        // <summary>
+        /// 通过单号查询移库信息
+        /// </summary>
+        /// <returns></returns>
+        public static IQueryable YiKucha(string Danhao)
+        {
+            return DAL.XBY.MovementService.YiKucha(Danhao);
+        } 
 
-       
         }
 }

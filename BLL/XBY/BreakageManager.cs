@@ -46,5 +46,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.BreakageService.MoHuBaoSunList(PageSize, PageIndex, Danhao, time1, time2);
         }
+
+        /// <summary>
+        /// 通过单号查询报损信息
+        /// </summary>
+        /// <returns></returns>
+        public static IQueryable Baoxuncha(string Danhao)
+        {
+            return DAL.XBY.BreakageService.Baoxuncha(Danhao);
+        }
+
         }
 }

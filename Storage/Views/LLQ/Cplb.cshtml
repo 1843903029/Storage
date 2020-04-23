@@ -136,7 +136,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpId + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpId + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' id='dit' title='删除'></i></td></tr>");
                     });
                 },
                 erro: function (ex) {
@@ -165,6 +165,55 @@
             }
         })
     });
+
+    function CplbAdd() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/CplbAdd",
+            data: "{cplb:{CpId:'" + $("#txtCpId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("新增成功");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+       $("#dit").click(function () {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //发送请求的地址 /控制器名/动作方法名
+            url: "/LLQ/CplbDet",
+            //发送到服务器的数据(方法参数)
+            data: "",
+            //服务器返回的数据类型
+            dataType: "json",
+            //发送信息至服务器时内容编码类型
+            contentType: "application/json",
+            //请求成功后的回调函数
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    GetCplbAll();
+                }
+                else {
+                    alert("修改失败");
+                }
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    });
+
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
