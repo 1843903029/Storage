@@ -27,32 +27,40 @@ namespace DAL.TXY
                           
 
                       };
-            PageList list = new PageList();
-            list.DataList = obj;
-            list.PageCount = obj.Count();
+            //PageList list = new PageList();
+            //list.DataList = obj;
+            //list.PageCount = obj.Count();
 
             //list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             ////设置总页数
             //int rows = ent.SysRole.Count();
             //list.PageCount = rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
-
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            list.PageCount = obj.Count();
             return list;
         }
         //删除
-        public static int SysRoledelete(SysRole role)
+        public static int SysRoledelete(int SysRoleID)
         {
             StorageEntities entity = new StorageEntities();
-            var obj = (from p in entity.SysRole where p.SysRoleID == role.SysRoleID select p).First();
-            obj.IsDelete =role.IsDelete;
+            var obj = (from p in entity.SysRole where p.SysRoleID ==SysRoleID select p).First();
+            obj.IsDelete =false;
             return entity.SaveChanges();
 
         }
         //新增
         public static int SysRoleadd(SysRole role)
         {
-            StorageEntities entity = new StorageEntities();
-            entity.SysRole.Add(role);
-            return entity.SaveChanges();
+            StorageEntities h = new StorageEntities();
+            h.SysRole.Add(role);
+            return h.SaveChanges();
         }
+        //public static int SysRoleadd(SysRole role)
+        //{
+        //    StorageEntities entity = new StorageEntities();
+        //    entity.SysRole.Add(role);
+        //    return entity.SaveChanges();
+        //}
     }
 }

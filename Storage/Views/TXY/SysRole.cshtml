@@ -53,11 +53,9 @@
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody id="tb1">
-
-                </tbody>
+                <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-300px;background-color:aliceblue" hidden>
+            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-200px;background-color:aliceblue" hidden>
                 <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
                     <table class="formtab_user">
                         <tbody>
@@ -65,7 +63,7 @@
                             <tr>
                                 <td>角色编号</td>
                                 <td>
-                                    <input id="txtRoleNum" name="txtRoleNum" type="text"  class="input-medium" >
+                                    <input id="txtRoleNum" name="txtRoleNum" type="text" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
@@ -81,6 +79,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>创建时间</td>
+                                <td>
+                                    <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
                                 <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
                             </tr>
@@ -88,6 +92,7 @@
                     </table>
                 </div>
             </div>
+           
             @*分页*@
             <div id="pageDemo">
 
@@ -99,12 +104,11 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
 <script>
+    var PageIndex = 1;
+    var PageSize = 10;
+    var PageCount = 0;
+    var rows = 5;
     $(function () {
-        get();
-        var PageIndex = 1;
-        var PageSize = 5;
-        var PageCount = 0;
-        var rows = 0;
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -112,7 +116,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 2//每页显示数
+                , limit: 5//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -124,28 +128,7 @@
                 }
             });
         });
-        function get() {
-            $.ajax({
-                type: "POST",
-                url: "/TXY/GetAllSysRole",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    $("#tb1 tr").remove();
-                    rows = result.PageCount;
-                    $.each(result.DataList, function (index, data) {
-                        $("#tb1").append(
-                            "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysRoleID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
-                        
-
-                    })
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
-                }
-            })
-        }
+       
         $("#btnSubhh").click(function () {
             if ($("#jbox-content").css("display") == "none") {
                 $("#jbox-content").show();
@@ -157,15 +140,39 @@
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
+      
     });
-    //删除
-    function btnSub () {
-        var id = $("[name='txtRoleNum']").val();
-        var aaa = false;
+    //分页查询
+    function get() {
+
         $.ajax({
             type: "POST",
-            url: "/TXY/SysRole",
-            data: "{Role:" + id+ "}",
+            url: "/TXY/GetAllSysRole",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append(
+                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysRoleID + ")' /><a class='btn btn-warning' id='butten' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+
+
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
+    //删除
+    function btnSub(SysRoleID) {
+        alert(SysRoleID);
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysRoledelete",
+            data: "{SysRoleID:'" + SysRoleID + "'}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
@@ -181,26 +188,27 @@
             error: function (ex) {
                 alert("Error:" + ex.responseText);
             }
+            
         });
-
+        get();
     };
 
     //新增
     function add() {
-        
-        var d = new Date();
-        var time = d.getTime();
+
+        var aa = $("#textCreateTime").val();
         var IsDelete = true;
         $.ajax({
             type: "POST",
             url: "/TXY/SysRoleadd",
-            data: "{role:{RoleNum:'" + $("#txtRoleNum").val() + "',RoleName:'" + $("#txtRoleName").val() + "',Remark:'" + $("#txtRemark").val() + "',CreateTime:'" + time+ "',IsDelete:'" + IsDelete + "'}}",
+            data: "{role:{RoleNum:'" + $("#txtRoleNum").val() + "',RoleName:'" + $("#txtRoleName").val() + "',Remark:'" + $("#txtRemark").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("添加成功")
                     get();
+                    window.location.href = "/TXY/SysRole";
                 }
             },
             error: function (ex) {
@@ -208,6 +216,7 @@
 
             }
         });
+        get();
     }
 
 
@@ -217,6 +226,6 @@
         return time.toLocaleDateString();
     }
 
-
+   
     
 </script>

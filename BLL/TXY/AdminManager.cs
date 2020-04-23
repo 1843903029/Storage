@@ -29,5 +29,16 @@ namespace BLL.TXY
             }
             return rows / pageSize + 1;
         }
+        //删除
+        public static int SysAdmindelete(int AdminID)
+        {
+            return DAL.TXY.AdminService.SysAdmindelete(AdminID);
+
+        }
+        //新增
+        public static int SysAdminadd(Admin admin)
+        {
+            return DAL.TXY.AdminService.SysAdminadd(admin);
+        }
     }
 }
