@@ -17,20 +17,20 @@ namespace Storage.Controllers
         }
         //SysDepart
 
-        public ActionResult GetAllSysRole(int PageIndex, int PageSize)
+        public ActionResult GetAllSysRole(int PageIndex=1, int PageSize=2)
         {
 
             return Json(BLL.LLJ.CanDanManager.SysRolefenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult caidandel(SysDepart cd)
+        public ActionResult caidandel(int SysDepartID)
         {
 
-            return Json(BLL.LLJ.CanDanManager.caidandel(cd), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLJ.CanDanManager.caidandel(SysDepartID), JsonRequestBehavior.AllowGet);
         }
         //新增
         public ActionResult caidanadd(SysDepart cd)
         {
-
+            cd.CreateTime = DateTime.Now;
             return Json(BLL.LLJ.CanDanManager.caidanadd(cd), JsonRequestBehavior.AllowGet);
         }
 

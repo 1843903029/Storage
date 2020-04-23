@@ -63,7 +63,7 @@
                             <tr>
                                 <td>菜单编号</td>
                                 <td>
-                                    <input id="txtRoleNum" name="txtRoleNum" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                                    <input id="txtRoleNum" name="txtRoleNum" type="text" placeholder="自动生成,可不填" class="input-medium" @*disabled="disabled"*@>
                                 </td>
                             </tr>
                             <tr>
@@ -79,7 +79,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input id="Button1" type="button" style="margin-left:0px" value="确认" /></td>
+                                <td><input id="Button1" type="button" onclick="add()" style="margin-left:0px" value="确认" /></td>
                                 <td><input id="Button1_1" type="button" style="margin-left:10px" value="取消" /></td>
                             </tr>
                         </tbody>
@@ -97,7 +97,35 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
 <script>
+    var PageIndex = 1;
+    var PageSize = 4;
+    var PageCount = 0;
+    var rows = 0;
     $(function () {
+        get()
+        
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'pageDemo'
+                , count: rows//总条数
+                , limit: 2//每页显示数
+                , layout: ['DepartNum', 'DepartName', 'IsDelete', 'CreateTime']
+                , jump: function (obj) {
+
+                    //设置当前页
+                    PageIndex = obj.curr;
+                    //设置每页显示
+                    PageSize = obj.limit;
+                    get();
+                }
+            });
+        });
+       
+
+
         $("#btnSubhh").click(function () {
             if ($("#jbox-content").css("display") == "none") {
                 $("#jbox-content").show();
@@ -110,6 +138,80 @@
             $("#jbox-content").hide();
         });
     });
+    function get() {
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/GetAllSysRole",
+            data: "{PageIndex:'" + PageIndex + "',PageSize:'" + PageSize + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox'/></td><td id='hhh'>" + data.ID + "</td><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.ID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
+    //删除
+    function Del(id) {
+        //var id = $("[name='txtRolegbf5Num']").val();
+        var aaa = false;
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/caidandel",
+            data: "{SysDepartID:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    get();
+                }
+                else {
+                    alert("删除失败");
 
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        });
+
+    };
+    //新增
+    function add()      {
+        var d = new Date();
+        var time = d.getTime();
+        var IsDelete = true;
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/caidanadd",
+            data: "{cd:{DepartNum:'" + $("#txtRoleNum").val() + "',DepartName:'" + $("#txtRoleName").val() + "',Remark:'" + $("#txtRemark").val() + "',IsDelete:'" + IsDelete + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) { 
+                if (result > 0) {
+                    alert("添加成功")
+                   // caidanadd();
+                    get();
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+
+    function ConvertDate(date) {
+        var time = new Date(parseInt(date.substr(4)));
+        return time.toLocaleDateString();
+    }
 </script>
 

@@ -14,7 +14,7 @@ namespace DAL.LLQ
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.CpLbinfo
                       where p.Delit == true
-                      orderby p.ID ascending
+                      orderby p.ID descending
                       select new
                       {
                           ID = p.ID,

@@ -14,7 +14,7 @@ namespace DAL.LLQ
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.CpGlinfo
                       where p.State == true
-                      orderby p.Cpbh ascending
+                      orderby p.CpID descending
                       select new
                       {
                           CpID = p.CpID,

@@ -40,5 +40,10 @@ namespace DAL.LL
             return s.SaveChanges();
 
         }
-    }
+        public static int add(Client c)
+        {
+            s.Client.Add(c);
+            return s.SaveChanges();
+        }
+        }
 }
