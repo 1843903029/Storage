@@ -17,11 +17,14 @@ namespace BLL.LLQ
 
         public static int CpGlAdd(Models.CpGlinfo cpgl)
         {
-            StorageEntities b = new StorageEntities();
-            b.CpGlinfo.Add(cpgl);
-            return b.SaveChanges();
+            return DAL.LLQ.CpGlService.CpGlAdd(cpgl);
         }
 
+        //删除
+        public static int CplbDet(Models.CpGlinfo cpgl)
+        {
+            return DAL.LLQ.CpGlService.CplbDet(cpgl);
+        }
 
     }
 }

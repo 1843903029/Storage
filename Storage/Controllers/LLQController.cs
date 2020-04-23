@@ -84,6 +84,12 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.CplbManager.CplbAdd(cplb), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult CplbDet(CpLbinfo cplb)
+        {
+            cplb.Delit = true;
+            return Json(BLL.LLQ.CplbManager.CplbDet(cplb), JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// 产品管理分页

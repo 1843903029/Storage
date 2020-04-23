@@ -15,11 +15,19 @@ namespace BLL.LLQ
             return DAL.LLQ.CplbService.lbfenye( pageIndex,  pageSize);
         }
 
-
+        //新增
         public static int CplbAdd(Models.CpLbinfo cplb)
         {
             return DAL.LLQ.CplbService.CplbAdd(cplb);
         }
+
+        //删除
+        public static int CplbDet(Models.CpLbinfo cplb)
+        {
+            return DAL.LLQ.CplbService.CplbDet(cplb);
+
+        }
+
 
     }
 }

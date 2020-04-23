@@ -44,6 +44,16 @@ namespace DAL.LLQ
             return b.SaveChanges();
         }
 
+        //删除
+        public static int CplbDet(Models.CpLbinfo cplb)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.CpLbinfo where p.ID == cplb.ID select p).First();
+            obj.Delit =cplb.Delit;
+            return entity.SaveChanges();
+
+        }
+
 
     }
 }
