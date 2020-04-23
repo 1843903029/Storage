@@ -47,7 +47,7 @@ namespace DAL.LLQ
         {
             StorageEntities entity = new StorageEntities();
             var obj = (from p in entity.JLinfo where p.Jlid == jldw.Jlid select p).First();
-            obj. = role.IsDelete;
+            obj.Delit = jldw.Delit;
             return entity.SaveChanges();
 
         }

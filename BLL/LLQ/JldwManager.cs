@@ -31,6 +31,13 @@ namespace BLL.LLQ
             return DAL.LLQ.JldwService.JldwAdd(jldw);
         }
 
+        //删除
+        public static int JldwDet(Models.JLinfo jldw)
+        {
+            return DAL.LLQ.JldwService.JldwDet(jldw);
+        }
+
+
 
     }
 }

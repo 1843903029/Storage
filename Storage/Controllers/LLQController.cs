@@ -61,6 +61,11 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.JldwManager.JldwAdd(jldw),JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult JldwDet(JLinfo jldw)
+        {
+            jldw.Delit = true;
+            return Json(BLL.LLQ.JldwManager.JldwDet(jldw), JsonRequestBehavior.AllowGet);
+        }
 
 
         /// <summary>

@@ -159,6 +159,39 @@
             }
         });
     }
+    
+        $("#btnSub").click(function () {
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //发送请求的地址 /控制器名/动作方法名
+                url: "/AJAXDemo/JldwDet",
+                //发送到服务器的数据(方法参数)
+                data: "",
+                //服务器返回的数据类型
+                dataType: "json",
+                //发送信息至服务器时内容编码类型
+                contentType: "application/json",
+                //请求成功后的回调函数
+                success: function (result) {
+                    if (result > 0) {
+                        alert("修改成功");
+                        
+                    }
+                    else {
+                        alert("修改失败");
+                        GetJldwAll();
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+
+
+        });
+
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
