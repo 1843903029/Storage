@@ -113,7 +113,7 @@
                 //获取总条数
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete' title='删除'></i></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i><i class='layui-icon layui-icon-delete'id='dit' title='删除'></i></td></tr>");
                 });
             },
             error: function (ex) {
@@ -165,7 +165,7 @@
             //请求方式
             type: "POST",
             //发送请求的地址 /控制器名/动作方法名
-            url: "/AJAXDemo/JldwDet",
+            url: "/LLQ/JldwDet",
             //发送到服务器的数据(方法参数)
             data: "",
             //服务器返回的数据类型
@@ -180,7 +180,6 @@
                 }
                 else {
                     alert("修改失败");
-                    GetJldwAll();
                 }
             },
             //请求失败后的回调函数

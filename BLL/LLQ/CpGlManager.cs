@@ -21,9 +21,9 @@ namespace BLL.LLQ
         }
 
         //删除
-        public static int CplbDet(Models.CpGlinfo cpgl)
+        public static int CpGlDet(Models.CpGlinfo cpgl)
         {
-            return DAL.LLQ.CpGlService.CplbDet(cpgl);
+            return DAL.LLQ.CpGlService.CpGlDet(cpgl);
         }
 
     }

@@ -78,12 +78,13 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CplbManager.lbfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
+        //新增
         public ActionResult CplbAdd(CpLbinfo cplb)
         {
             cplb.Delit = false;
             return Json(BLL.LLQ.CplbManager.CplbAdd(cplb), JsonRequestBehavior.AllowGet);
         }
-
+        //删除
         public ActionResult CplbDet(CpLbinfo cplb)
         {
             cplb.Delit = true;
@@ -101,11 +102,18 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CpGlManager.CpGlfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
-
+        //新增
         public ActionResult CpGlAdd(CpGlinfo cpgl)
         {
             cpgl.State = false;
             return Json(BLL.LLQ.CpGlManager.CpGlAdd(cpgl), JsonRequestBehavior.AllowGet);
         }
+        //删除
+        public ActionResult CpGlDet(CpGlinfo cpgl )
+        {
+            cpgl.State = true;
+            return Json(BLL.LLQ.CpGlManager.CpGlDet(cpgl), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
