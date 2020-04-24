@@ -34,7 +34,7 @@ namespace DAL.LLQ
             return list;
         }
 
-
+        //新增
         public static int JldwAdd(Models.JLinfo jldw)
         {
             StorageEntities b = new StorageEntities();
@@ -51,6 +51,21 @@ namespace DAL.LLQ
             return entity.SaveChanges();
 
         }
+
+        public static IQueryable JldwGetById(int Jlid)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.JLinfo
+                      where p.Jlid == Jlid && p.Delit == true
+                      select new
+                      {
+                          Jlid = p.Jlid,
+                          Jlbh = p.Jlbh,
+                          JlName = p.JlName
+                      };
+            return obj;
+        }
+
 
 
     }

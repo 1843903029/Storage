@@ -31,13 +31,25 @@ namespace BLL.LLQ
             return DAL.LLQ.JldwService.JldwAdd(jldw);
         }
 
-        //删除
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="jldw"></param>
+        /// <returns></returns>
         public static int JldwDet(Models.JLinfo jldw)
         {
             return DAL.LLQ.JldwService.JldwDet(jldw);
         }
 
-
+        /// <summary>
+        /// 根据id查询
+        /// </summary>
+        /// <param name="Jlid"></param>
+        /// <returns></returns>
+        public static IQueryable JldwGetById(int Jlid)
+        {
+            return DAL.LLQ.JldwService.JldwGetById(Jlid);
+        }
 
     }
 }

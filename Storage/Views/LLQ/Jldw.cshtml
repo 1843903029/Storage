@@ -10,6 +10,14 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Jldw</title>
+    <style>
+        .input-medium {
+            width: 250px;
+            height: 35px;
+            margin-left: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
@@ -36,14 +44,12 @@
                 <thead>
                     <tr>
                         <td style="width:20px;"><input type="checkbox" /></td>
-                        <td >序号</td>
-                        <td >名称</td>
+                        <td>序号</td>
+                        <td>名称</td>
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody id="tb1">
-
-                </tbody>
+                <tbody id="tb1"></tbody>
             </table>
             <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-300px;background-color:aliceblue" hidden>
                 <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
@@ -67,6 +73,24 @@
                     </table>
                 </div>
             </div>
+
+            <form class="formtab_user1" hidden>
+                <div id="jbox-content1" style="height: 300px;width:500px;  position: static; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue">
+                    <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
+                        <table>
+                            <tr>
+                                <td>名称</td>
+                                <td>
+                                    <input id="Jlid" type="hidden">
+                                    <input id="JlName" name="JlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+            </form>
             @*分页*@
             <div id="pageDemo">
 
@@ -191,6 +215,44 @@
             }
         });
     };
+
+    function reads() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['编辑', 'font-size:18px'],
+            area: ['400px', '359px'],
+            shadeClose: true,
+            content: $('#jbox-content1').html(),
+            btn: ['确定', '取消'],
+            yes: function () {
+
+            },
+        });
+
+    }
+
+    function JldwGetById(Jlid) {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/JldwGetById",
+            data: "{Jlid:" + Jlid + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (Index, data) {
+                    $("[name='txtJlName']").val(data.JlName);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+
+
+
 
 
     function ConvertDate(date) {
