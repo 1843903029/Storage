@@ -20,7 +20,7 @@ namespace DAL.LLQ
             StorageEntities b = new StorageEntities();
             var obj = from p in b.JLinfo
                       where p.Delit == true
-                      orderby p.Jlid descending
+                      orderby p.Jlid ascending
                       select new
                       {
                           Jlid = p.Jlid,
