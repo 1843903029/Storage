@@ -67,6 +67,11 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.JldwManager.JldwDet(jldw), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult JldwGetById(int Jlid)
+        {
+            return Json(BLL.LLQ.JldwManager.JldwGetById(Jlid), JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// 产品类别分页
