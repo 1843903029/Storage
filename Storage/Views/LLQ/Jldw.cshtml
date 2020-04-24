@@ -52,45 +52,43 @@
                 <tbody id="tb1"></tbody>
             </table>
             <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-300px;background-color:aliceblue" hidden>
-                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                    <table class="formtab_user">
-                        <tr>
-                            <td>编号</td>
-                            <td>
-                                <input id="txtJlid" name="txtJlid" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled" value="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>名称</td>
-                            <td>
-                                <input id="txtJlName" name="txtJlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="JldwAdd()" value="确认" /></td>
-                            <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
-                        </tr>
-                    </table>
-                </div>
+                                <table class="formtab_user">
+                    <tr>
+                        <td>编号</td>
+                        <td>
+                            <input id="txtJlid" name="txtJlid" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>名称</td>
+                        <td>
+                            <input id="txtJlName" name="txtJlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="JldwAdd()" value="确认" /></td>
+                        <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
+                    </tr>
+                </table>
             </div>
 
-            <form class="formtab_user1" hidden>
-                <div id="jbox-content1" style="height: 300px;width:500px;  position: static; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue">
-                    <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                        <table>
-                            <tr>
-                                <td>名称</td>
-                                <td>
-                                    <input id="Jlid" type="hidden">
-                                    <input id="JlName" name="JlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
-                                </td>
-                            </tr>
-                        </table>
+            @*<form class="formtab_user1" hidden>
+                    <div id="jbox-content1" style="height: 300px;width:500px;  position: static; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue">
+                        <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
+                            <table>
+                                <tr>
+                                    <td>名称</td>
+                                    <td>
+                                        <input id="Jlid" type="hidden">
+                                        <input id="JlName" name="JlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
 
                     </div>
-
-                </div>
-            </form>
+                </form>*@
             @*分页*@
             <div id="pageDemo">
 
@@ -132,7 +130,7 @@
 
 
         function GetJldwAll() {
-            s
+
             $.ajax({
                 type: "POST",
                 url: "/LLQ/GetJldwAll",
@@ -194,7 +192,7 @@
             //发送请求的地址 /控制器名/动作方法名
             url: "/LLQ/JldwDet",
             //发送到服务器的数据(方法参数)
-            data: "{jldw:"+id+"}",
+            data: "{jldw:" + id + "}",
             //服务器返回的数据类型
             dataType: "json",
             //发送信息至服务器时内容编码类型
