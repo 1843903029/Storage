@@ -45,7 +45,7 @@
                 <table>
                     <tr>
                         <td><strong style="margin-left:20px">用户管理</strong></td>
-                        <td> <input style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                        <td> <a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
@@ -73,43 +73,7 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 300px;width:500px;  position: static; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue" hidden>
-                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                    <table class="formtab_user">
-                        <tbody>
 
-                            <tr>
-                                <td>角色编号</td>
-                                <td>
-                                    <input id="txtRoleNum" name="txtRoleNum" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>角色名称</td>
-                                <td>
-                                    <input id="txtRoleName" name="txtRoleName" type="text" placeholder="请输入角色名称" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>备注</td>
-                                <td>
-                                    <input id="txtRemark" name="txtRemark" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>
-                                    <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" /></td>
-                                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             @*<form class="formtab_user1" hidden>*@
 
             @*</form>*@
@@ -120,10 +84,44 @@
         </div>
     </div>
 
+    <div id="jbox-content"  hidden>
+        
+            <table class="formtab_user">
+                <tbody>
 
+                    <tr>
+                        <td>角色编号</td>
+                        <td>
+                            <input id="txtRoleNum" name="txtRoleNum" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>角色名称</td>
+                        <td>
+                            <input id="txtRoleName" name="txtRoleName" type="text" placeholder="请输入角色名称" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="txtRemark" name="txtRemark" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>创建时间</td>
+                        <td>
+                            <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" /></td>
+                        <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" /></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
     <div id="hide11" @*style="height: 300px;width:500px; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue"*@ hidden="hidden">
         <form class="navbar-form navbar-left" role="search">
-            @*<div class="tab-pane active" id="widget_tab1" style="margin-top:30px">*@
 
             <dl>
                 <dd>角色编号</dd>
@@ -144,10 +142,9 @@
                     <input id="Remark1" name="Remark" type="text" class="input-medium">
                 </dd>
             </dl>
-            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" /></dd>
-               <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
-           
-            @*</div>*@
+            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" />
+            <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
+
         </form>
     </div>
 </body>
@@ -158,9 +155,9 @@
     var PageIndex = 1;
     var PageSize = 10;
     var PageCount = 0;
-    var rows = 5;
+    var rows = 0;
     $(function () {
-        
+        get();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -168,7 +165,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 5//每页显示数
+                , limit: 3//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -182,14 +179,14 @@
         });
         
 
-        $("#btnSubhh").click(function () {
-            if ($("#jbox-content").css("display") == "none") {
-                $("#jbox-content").show();
+        //$("#btnSubhh").click(function () {
+        //    if ($("#jbox-content").css("display") == "none") {
+        //        $("#jbox-content").show();
 
-            } else {
-                $("#jbox-content").hide();
-            }
-        });
+        //    } else {
+        //        $("#jbox-content").hide();
+        //    }
+        //});
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
@@ -209,7 +206,7 @@
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
                     $("#tb1").append(
-                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "<td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysRoleID + ")' /><a class='btn btn-warning' id='butten' href='javascript:reads(" + data.SysRoleID+")'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysRoleID + ")' /></i><a  href='javascript:reads(" + data.SysRoleID + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
                     
                 })
             },
@@ -309,6 +306,21 @@
     };
 
     //新增
+
+    function xzshow() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['新增角色', 'font-size:18px'],
+            area: ['500px', '360px'],
+            shadeClose: true,
+            content: $('#jbox-content'),
+            shade: 0,
+
+        });
+
+
+    }
     function add() {
 
         var aa = $("#textCreateTime").val();

@@ -53,5 +53,39 @@ namespace DAL.TXY
             return entity.SaveChanges();
 
         }
+        //模糊查询
+        public static IQueryable SysDepartQuery(string DepartName)
+        {
+            StorageEntities entity = new StorageEntities();
+
+            //var obj = from p in entity.SysDepart
+            //          where p.DepartName.IndexOf(DepartName) != -1 && p.IsDelete == true
+            //          orderby p.SysDepartID
+            //          select new
+            //          {
+            //              SysDepartID = p.SysDepartID,
+            //              DepartNum = p.DepartNum,
+            //              DepartName = p.DepartName,
+            //              IsDelete = p.IsDelete,
+            //              CreateTime = p.CreateTime
+            //          };
+            var obj = from p in entity.SysDepart
+                      select new
+                      {
+                          CreateTime = p.CreateTime,
+                          DepartName = p.DepartName,
+                          DepartNum = p.DepartNum,
+                          IsDelete = p.IsDelete,
+                          SysDepartID = p.SysDepartID,
+                      };
+            if (!string.IsNullOrEmpty(DepartName))
+            {
+                obj = obj.Where(p => p.DepartName.Contains(DepartName));
+            }
+
+
+            return obj;
+
+        }
     }
 }

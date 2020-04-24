@@ -30,5 +30,10 @@ namespace BLL.TXY
         {
             return DAL.TXY.SysDepartService.SysDepartEit(SysDepartID, DepartName);
         }
+        //模糊查询
+        public static IQueryable SysDepartQuery(string DepartName)
+        {
+            return DAL.TXY.SysDepartService.SysDepartQuery(DepartName);
+        }
         }
 }

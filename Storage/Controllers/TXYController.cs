@@ -94,8 +94,12 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.SysDepartManager.SysDepartEit(SysDepartID,DepartName), JsonRequestBehavior.AllowGet);
         }
+        //模糊查询
+        public ActionResult SysDepartQuery(string DepartName)
+        {
 
-
+            return Json(BLL.TXY.SysDepartManager.SysDepartQuery(DepartName), JsonRequestBehavior.AllowGet);
+        }
 
 
 

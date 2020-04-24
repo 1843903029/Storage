@@ -10,6 +10,12 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <style>
+        .input-medium {
+        margin-top:10px;
+        margin-left:10px;
+        }
+    </style>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
@@ -28,7 +34,7 @@
                     <tr>
 
                         <td><strong style="margin-left:20px">用户管理</strong></td>
-                        <td> <input style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                        <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
@@ -101,86 +107,7 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div hidden id="yyyyy" style="margin-left:500px; margin-left:300px;position:absolute;margin-top:-200px; margin-left:500px;background-color:aliceblue">
-                <table class="formtab_user" style="margin-top:30px">
-                    <tbody>
-                        <tr>
-                            <td hidden><input id="AdminID" name="AdminID" type="text"></td>
-                            <td>用户名</td>
-                            <td>
-                                <input id="txtUserName" name="txtUserName" type="text" placeholder="请输入用户名" class="input-medium">
-                            </td>
-                            <td>用户编号</td>
-                            <td>
-                                <input id="txtUserCode" name="txtUserCode" type="text" class="input-medium">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>密码</td>
-                            <td>
-                                <input id="txtPassword" name="txtPassword" type="password" placeholder="请输入密码" class="input-medium">
-                            </td>
-                            <td>确认密码</td>
-                            <td>
-                                <input id="txtConfirm" name="txtConfirm" type="password" placeholder="请输入确认密码" class="input-medium">
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>真名</td>
-                            <td>
-                                <input id="txtRealName" name="txtRealName" type="text" placeholder="" class="input-medium">
-                            </td>
-                            <td>Email</td>
-                            <td>
-                                <input id="txtEmail" name="txtEmail" type="text" placeholder="" class="input-medium">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>电话</td>
-                            <td>
-                                <input id="txtPhone" name="txtPhone" type="text" placeholder="" class="input-medium">
-                            </td>
-                            <td>手机</td>
-                            <td>
-                                <input id="txtMobile" name="txtMobile" type="text" placeholder="" class="input-medium">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>部门</td>
-                            <td>
-                                <select id="ddlDepart" name="ddlDepart" class="input-medium" style="width:164px;">
-                                    <option value="">请选择部门</option>
-                                    <option value="1">质量部门</option>
-                                    <option value="2">仓库部门</option>
-                                    <option value="3">采购部门</option>
-                                </select>
-                            </td>
-                            <td>角色</td>
-                            <td>
-                                <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
-                                    <option value="">请选择角色</option>
-                                    <option value="0">系统管理员</option>
-                                    <option value="1">仓管员</option>
-                                    <option value="2">采购员</option>
-                                    <option value="3">门卫</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>创建时间</td>
-                            <td>
-                                <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
-                            </td>
-                        </tr>
-                        <tr>
-                    </tbody>
-                    <tr>
-                        <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="add()" value="确认" /></td>
-                        <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
-                    </tr>
-                </table>
-            </div>
             @*分页*@
             <div id="pageDemo">
 
@@ -188,7 +115,88 @@
         </div>
 
     </div>
+    <div hidden id="yyyyy" >
+        <table class="formtab_user">
+            <tr>
+                <td hidden><input id="AdminID" name="AdminID" type="text"></td>
+                <td>用户名</td>
+                <td>
+                    <input id="txtUserName" name="txtUserName" type="text" placeholder="请输入用户名" class="input-medium">
+                </td>
+                <td>用户编号</td>
+                <td>
+                    <input id="txtUserCode" name="txtUserCode" type="text" class="input-medium">
+                </td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td>
+                    <input id="txtPassword" name="txtPassword" type="password" placeholder="请输入密码" class="input-medium">
+                </td>
+                <td>确认密码</td>
+                <td>
+                    <input id="txtConfirm" name="txtConfirm" type="password" placeholder="请输入确认密码" class="input-medium">
+                </td>
+            </tr>
+
+            <tr>
+                <td>真名</td>
+                <td>
+                    <input id="txtRealName" name="txtRealName" type="text" placeholder="" class="input-medium">
+                </td>
+                <td>Email</td>
+                <td>
+                    <input id="txtEmail" name="txtEmail" type="text" placeholder="" class="input-medium">
+                </td>
+            </tr>
+            <tr>
+                <td>电话</td>
+                <td>
+                    <input id="txtPhone" name="txtPhone" type="text" placeholder="" class="input-medium">
+                </td>
+                <td>手机</td>
+                <td>
+                    <input id="txtMobile" name="txtMobile" type="text" placeholder="" class="input-medium">
+                </td>
+            </tr>
+            <tr>
+                <td>部门</td>
+                <td>
+                    <select id="ddlDepart" name="ddlDepart" class="input-medium" style="width:164px;">
+                        <option value="">请选择部门</option>
+                        <option value="1">质量部门</option>
+                        <option value="2">仓库部门</option>
+                        <option value="3">采购部门</option>
+                    </select>
+                </td>
+                <td>角色</td>
+                <td>
+                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
+                        <option value="">请选择角色</option>
+                        <option value="0">系统管理员</option>
+                        <option value="1">仓管员</option>
+                        <option value="2">采购员</option>
+                        <option value="3">门卫</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>创建时间</td>
+                <td>
+                    <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="Button1" type="button" class="btn-success" style="margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" />
+                <td/>
+                <td> <input id="Button1_1" type="button" class="btn-info" style="margin-top:15px;width:50px;height:30px" value="取消" />
+                <td/>
+            </tr>
+        </table>
+    </div>
 </body>
+
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
@@ -205,11 +213,12 @@
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
+
             //完整功能
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 5//每页显示数
+                , limit: 3//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -221,32 +230,15 @@
                 }
             });
         });
-        function count() {
-            $.ajax({
-                type: "POST",
-                url: "/TXY/Indexs",
-                data: "{PageSize:" + PageSize + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    PageCount = result;
-                    get();
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
 
-                }
-            });
-        }
+        //$("#btnSubhh").click(function () {
+        //    if ($("#yyyyy").css("display") == "none") {
+        //        $("#yyyyy").show();
 
-        $("#btnSubhh").click(function () {
-            if ($("#yyyyy").css("display") == "none") {
-                $("#yyyyy").show();
-
-            } else {
-                $("#yyyyy").hide();
-            }
-        });
+        //    } else {
+        //        $("#yyyyy").hide();
+        //    }
+        //});
         $("#Button1_1").click(function () {
             $("#yyyyy").hide();
         });
@@ -270,7 +262,9 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum + "</td><td>" + data.RoleNum + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.AdminID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#'  class='btn btn-warning'>权限分配</a></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum + "</td><td>" + data.RoleNum + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='#'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+
+                    
                 })
             },
             erro: function (ex) {
@@ -306,13 +300,32 @@
     };
 
     //新增
+
+
+    function xzshow() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['新增用户', 'font-size:18px'],
+            area: ['500px', '300px'],
+            shadeClose: true,
+            content: $('#yyyyy'),
+            shade: 0,
+
+        });
+
+
+    }
+
     function add() {
+        var UserCode = $("#txtUserCode").val();
+        var name = $("#txtUserName").val()
         var aa = $("#textCreateTime").val();
         var IsDelete = true;
         $.ajax({
             type: "POST",
             url: "/TXY/SysAdminadd",
-            data: "{admin:{UserName:'" + $("#txtUserName").val() + "',UserCode:'" + $("#txtUserCode").val() + "',Password:'" + $("#txtPassword").val() + "',RealName:'" + $("#txtRealName").val() + "',Email:'" + $("#txtEmail").val() + "',Phone:'" + $("#txtPhone").val() + "',Mobile:'" + $("#txtMobile").val() + "',DepartNum:'" + $("#ddlDepart").val() + "',RoleNum:'" + $("#ddlRole").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
+            data: "{admin:{UserName:" + name + ",UserCode:" + UserCode+ ",Password:'" + $("#txtPassword").val() + "',RealName:'" + $("#txtRealName").val() + "',Email:'" + $("#txtEmail").val() + "',Phone:'" + $("#txtPhone").val() + "',Mobile:'" + $("#txtMobile").val() + "',DepartNum:'" + $("#ddlDepart").val() + "',RoleNum:'" + $("#ddlRole").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {

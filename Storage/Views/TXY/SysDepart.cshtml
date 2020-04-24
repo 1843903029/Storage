@@ -36,16 +36,16 @@
                 <table>
                     <tr>
                         <td><strong style="margin-left:20px">用户管理</strong></td>
-                        <td> <input style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                        <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
                 </table>
                 <table action="javascript:void(0)" class="form-horizontal">
                     <tr>
-                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入用户名或者工号"></td>
+                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入用户名"></td>
                         <td>
-                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="SysDepartQuery()">搜索</a>
                         </td>
                     </tr>
                 </table>
@@ -63,41 +63,39 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;height: 300px;width:500px;   position: static; margin-left:500px;position:absolute;margin-top:-300px; margin-left:500px;background-color:aliceblue" hidden>
-                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                    <table class="formtab_user">
-                        <tbody>
-                            <tr>
-                                <td>部门编号</td>
-                                <td>
-                                    <input id="txtDepartNum" name="txtDepartNum" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>部门名称</td>
-                                <td>
-                                    <input id="txtDepartName" name="txtDepartName" type="text" placeholder="请输入角色名称" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>
-                                    <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" /></td>
-                                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
             @*分页*@
             <div id="pageDemo">
 
             </div>
         </div>
+    </div>
+    <div id="jbox-content" @*style="height: 136px;height: 300px;width:500px;   position: static; margin-left:500px;position:absolute;margin-top:-300px; margin-left:500px;background-color:aliceblue"*@ hidden="hidden">
+        @*<div class="tab-pane active" id="widget_tab1" style="margin-top:30px">*@
+            <form class="navbar-form navbar-left" role="search">
+                    <dl>
+                        <dd>部门编号</dd>
+                        <dd>
+                            <input id="txtDepartNum" name="txtDepartNum" type="text" class="input-medium">
+                        </dd>
+                    <dl/>
+                    <dl>
+                        <dd>部门名称</dd>
+                        <dd>
+                            <input id="txtDepartName" name="txtDepartName" type="text" placeholder="请输入角色名称" class="input-medium">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dd>创建时间</dd>
+                        <dd>
+                            <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                        </dd>
+                    </dl>
+                        <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" />
+                       <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
+                   
+            </form>
+        @*</div>*@
     </div>
 </body>
 </html>
@@ -106,9 +104,10 @@
 <script>
     var PageIndex = 1;
     var PageSize = 10;
-    var PageCount = 0;
-    var rows = 5;
+    var rows = 0;
     $(function () {
+        get();
+
         layui.use(['laypage','layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -116,7 +115,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 5//每页显示数
+                , limit: 3//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -128,14 +127,14 @@
                 }
             });
         });
-        $("#btnSubhh").click(function () {
-            if ($("#jbox-content").css("display") == "none") {
-                $("#jbox-content").show();
+        //$("#btnSubhh").click(function () {
+        //    if ($("#jbox-content").css("display") == "none") {
+        //        $("#jbox-content").show();
 
-            } else {
-                $("#jbox-content").hide();
-            }
-        });
+        //    } else {
+        //        $("#jbox-content").hide();
+        //    }
+        //});
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
@@ -152,7 +151,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysDepartID + ")' /><a class='btn btn-warning' href='javascript:Eite(" + data.SysDepartID + ")'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysDepartID + ")' ></i><a  href='javascript:Eite(" + data.SysDepartID + ")'><i class='layui-icon layui-icon-edit' title='编辑'></i></a>&nbsp;<a href='#'><i  class='layui-icon layui-icon-console'></i></a></td></tr>");
                 })
             },
             error: function (ex) {
@@ -186,7 +185,20 @@
         });
         get();
     };
+    function xzshow() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['新增部门', 'font-size:18px'],
+            area: ['400px', '359px'],
+            shadeClose: true,
+            content: $('#jbox-content'),
+            shade: 0,
 
+        });
+
+
+    }
     //新增
     function add() {
         var aa = $("#textCreateTime").val();
@@ -246,6 +258,32 @@
             });
         });
         
+    }
+    //模糊查询
+    //错的
+    //哈哈
+    //难搞哦
+    function SysDepartQuery()
+    {
+        var Search = $("#txtSearch").val();
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysDepartQuery",
+            data: "{DepartName:" + Search + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysDepartID + ")' ></i><a  href='javascript:Eite(" + data.SysDepartID + ")'><i class='layui-icon layui-icon-edit' title='编辑'></i></a>&nbsp;<a href='#'><i  class='layui-icon layui-icon-console'></i></a></td></tr>");
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+
     }
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
