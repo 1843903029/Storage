@@ -35,11 +35,11 @@
                 </table>
                 <div style="height:70px;">
                     @*<h4>角色管理</h4>
-                <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:adds()" onclick="User.PageClick(1)">新增</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
-                </div>*@
+                        <div style="float:right;display:inline;">
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:adds()" onclick="User.PageClick(1)">新增</a>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                        </div>*@
                 </div>
 
                 <table>
@@ -110,41 +110,45 @@
                     </table>
                 </div>
             </div>
-            <form class="formtab_user1" hidden>
-                <div id="jbox-content1" style="height: 300px;width:500px;  position: static; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue" >
-                    <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                        <table>
-                            <tr>
-                                <td>角色编号</td>
-                                <td>
-                                    <input id="SysRoleID" type="hidden" />
-                                    <input id="RoleNum" name="RoleNum" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>角色名称</td>
-                                <td>
-                                    <input id="RoleName" name="RoleName" type="text" placeholder="请输入角色名称" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>备注</td>
-                                <td>
-                                    <input id="Remark" name="Remark" type="text" class="input-medium">
-                                </td>
-                            </tr>
+            @*<form class="formtab_user1" hidden>*@
 
-                        </table>
-
-                    </div>
-
-                </div>
-            </form>
+            @*</form>*@
             @*分页*@
             <div id="pageDemo">
 
             </div>
         </div>
+    </div>
+
+
+    <div id="hide11" @*style="height: 300px;width:500px; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue"*@ hidden="hidden">
+        <form class="navbar-form navbar-left" role="search">
+            @*<div class="tab-pane active" id="widget_tab1" style="margin-top:30px">*@
+
+            <dl>
+                <dd>角色编号</dd>
+                <dd>
+                    <input id="SysRoleID" type="text" hidden />
+                    <input id="RoleNum1" name="RoleNum" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>角色名称</dd>
+                <dd>
+                    <input id="RoleName1" name="RoleName" type="text" placeholder="请输入角色名称" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>备注</dd>
+                <dd>
+                    <input id="Remark1" name="Remark" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" /></dd>
+               <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
+           
+            @*</div>*@
+        </form>
     </div>
 </body>
 </html>
@@ -205,9 +209,8 @@
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
                     $("#tb1").append(
-                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "<td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysRoleID + ")' /><a class='btn btn-warning' id='butten' href='javascript:reads()'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
-
-
+                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "<td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysRoleID + ")' /><a class='btn btn-warning' id='butten' href='javascript:reads(" + data.SysRoleID+")'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                    
                 })
             },
             error: function (ex) {
@@ -216,22 +219,68 @@
         })
     }
 
-    function reads() {
+    function reads(SysRoleID) {
+        alert(SysRoleID);
             layer.open({
                 type: 1,
                 skin: 'layui-layer-demo',//样式类名
                 title: ['编辑角色', 'font-size:18px'],
                 area: ['400px', '359px'],
                 shadeClose: true,
-                content: $('#jbox-content1').html(),
-                btn: ['确定', '取消'],
-                yes: function () {
+                content: $('#hide11'),
+                shade: 0,
+               
+        });
 
-                },
-            });
-       
-    }
     
+
+
+            $.ajax({
+            type: "POST",
+            url: "/TXY/SysRoleGetById",
+            data: "{SysRoleID:" + SysRoleID + "}",
+            dataType: "json",
+            contentType: "application/json",
+                success: function (result) {
+                    console.log(result);
+                $.each(result, function (Index, data) {
+                    alert(data.RoleNum);
+                    $("#SysRoleID").val(data.SysRoleID);
+                    $("#RoleNum1").val(data.RoleNum);
+                    $("#RoleName1").val(data.RoleName);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    function update() {
+        var SysRoleID = $("#SysRoleID").val();
+        var RoleNum = $("#RoleNum1").val();
+        var RoleName = $("#RoleName1").val();
+        var Remark = $("#Remark1").val();
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysRoleEdit",
+            data: "{role:{SysRoleID:'" + SysRoleID+"',RoleNum:'" + RoleNum + "',RoleName:'" + RoleName + "',Remark:'" + Remark+"'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    get();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+
+
+    }
     //删除
     function btnSub(SysRoleID) {
         alert(SysRoleID);
@@ -285,24 +334,24 @@
         get();
     }
     //读取
-    function SysRoleGetById(SysRoleID) {
-        $.ajax({
-            type: "POST",
-            url: "/TXY/SysRoleGetById",
-            data: "{SysRoleID:" + SysRoleID + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $.each(result, function (Index, data) {
-                    $("[name='RoleNum']").val(data.RoleNum);
-                    $("[name='RoleName']").val(data.RoleName);
-                });
-            },
-            error: function (ex) {
-                alert(ex.responseText);
-            }
-        });
-    }
+    //function SysRoleGetById(SysRoleID) {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/TXY/SysRoleGetById",
+    //        data: "{SysRoleID:" + SysRoleID + "}",
+    //        dataType: "json",
+    //        contentType: "application/json",
+    //        success: function (result) {
+    //            $.each(result, function (Index, data) {
+    //                $("[name='RoleNum']").val(data.RoleNum);
+    //                $("[name='RoleName']").val(data.RoleName);
+    //            });
+    //        },
+    //        error: function (ex) {
+    //            alert(ex.responseText);
+    //        }
+    //    });
+    //}
 
 
     function ConvertDate(date) {

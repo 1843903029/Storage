@@ -66,7 +66,7 @@ namespace DAL.TXY
         {
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.SysRole
-                      where p.SysRoleID == SysRoleID&&p.IsDelete==true
+                      where p.SysRoleID == SysRoleID
                       select new
                       {
                           SysRoleID = p.SysRoleID,

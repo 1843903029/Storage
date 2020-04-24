@@ -152,7 +152,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysDepartID + ")' /><a class='btn btn-warning' href='javascript:Eite()'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='btnSub(" + data.SysDepartID + ")' /><a class='btn btn-warning' href='javascript:Eite(" + data.SysDepartID + ")'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
                 })
             },
             error: function (ex) {
@@ -211,7 +211,7 @@
         });
         get();
     }
-    function Eite() {
+    function Eite(SysDepartID) {
         layer.prompt({
             //formType: 2,
             value: '',
@@ -222,30 +222,30 @@
                 layero.find(".layui-layer-content").prepend('<div style="margin-bottom: 15px;">部门名称</div>')
             }
         }, function (value, index, elem) {
-           // alert(value); //得到value
+            //alert(value); //得到value
             layer.close(index);
-        });
-    }
 
-    function update(SysDepartID) {
-        $.ajax({
-            type: "POST",
-            url: "/TXY/SysDepartEit",
-            data: "{SysDepartID: " + SysDepartID + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                if (result > 0) {
-                    alert("修改成功");
-                    get();
-                } else {
-                    alert("修改失败");
+
+            $.ajax({
+                type: "POST",
+                url: "/TXY/SysDepartEit",
+                data: "{SysDepartID: " + SysDepartID + ",DepartName:'" + value + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("修改成功");
+                        get();
+                    } else {
+                        alert("修改失败");
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
                 }
-            },
-            error: function (ex) {
-                alert(ex.responseText);
-            }
+            });
         });
+        
     }
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
