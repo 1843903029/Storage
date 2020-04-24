@@ -132,5 +132,18 @@ namespace DAL.XBY
 
         }
 
+        /// <summary>
+        /// 删除盘点单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuPanDian(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            CycleCount obj = ent.CycleCount.Find(id);
+            obj.dataState = false;
+            return ent.SaveChanges();
+        }
+
     }
 }

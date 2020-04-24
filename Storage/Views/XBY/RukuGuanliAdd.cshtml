@@ -54,7 +54,7 @@
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
                     <select class="form-control" id="gysname" onchange="IdGys(this)">
-                        <option value="0">请选择</option>
+                        <option value="请选择">请选择</option>
                     </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
@@ -180,8 +180,7 @@
     var info = [];
     var danhapsuiji;
 
-    var rukuzongshu;
-    var rukuzongjia;
+
     $(function () {
 
         gysList();//供应商下拉框
@@ -335,27 +334,34 @@
     }
     function IdGys() {
         //alert(document.getElementById("gysname").value);
-        $.ajax({
-            type: "POST",
-            url: "/XBY/IdGys",
-            data: "{id:'" + document.getElementById("gysname").value + "'}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $.each(result, function (index, data) {
-                    $("#gysbh").val(data.GysID);
-                    $("#gyslianxiren").val(data.Contacts);
-                    $("#gysdianhua").val(data.Hone);
+        if (document.getElementById("gysname").value != "请选择") {
 
-                });
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
+            $.ajax({
+                type: "POST",
+                url: "/XBY/IdGys",
+                data: "{id:'" + document.getElementById("gysname").value + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $.each(result, function (index, data) {
+                        $("#gysbh").val(data.GysID);
+                        $("#gyslianxiren").val(data.Contacts);
+                        $("#gysdianhua").val(data.Hone);
 
-            }
-        });
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            $("#gysbh").val(null);
+            $("#gyslianxiren").val(null);
+            $("#gysdianhua").val(null);
+
+        }
     }
-
 
 
     function ADD() {
@@ -385,10 +391,14 @@
             alert("请选择供应商后添加！");
         }
         else {
+            var rukuzongshu = 0;//定义总数量
+            var rukuzongjia = 0;//定义总价
             for (var i = 0; i < info.length; i++) {
-                rukuzongshu += info[i].StorageNumber ;
-                rukuzongjia += info[i].Summoney;
+                rukuzongshu += parseInt(info[i].StorageNumber) ;
+                rukuzongjia += parseInt(info[i].Summoney);
             }
+            //alert(rukuzongshu);
+            //alert(rukuzongjia);
 
 
             $.ajax({

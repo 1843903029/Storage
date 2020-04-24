@@ -79,5 +79,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.StorageService.ADDRukuXiang(xiang);
         }
+
+        /// <summary>
+        /// 删除入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuRuKu(string id)
+        {
+            return DAL.XBY.StorageService.ShanChuRuKu(id);
+        }
         }
     }

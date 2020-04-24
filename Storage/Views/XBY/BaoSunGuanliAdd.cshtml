@@ -5,6 +5,7 @@
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 
 
 <div style=" border:0px solid #4cff00;width:95%;">
@@ -140,7 +141,7 @@
                 $("#tb2 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.kuwei+ "</td><td>" + data.CpShuLiang + "</td></tr>");
+                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.KwName+ "</td><td>" + data.CpShuLiang + "</td></tr>");
                 });
             },
             error: function (ex) {

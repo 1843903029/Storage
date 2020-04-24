@@ -45,5 +45,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.ReturnsService.MoHuTuiHuoList(PageSize, PageIndex, Danhao, time1, time2);
         }
-    }
+
+        /// <summary>
+        /// 删除退货单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuTuiHuo(string id)
+        {
+            return DAL.XBY.ReturnsService.ShanChuTuiHuo(id);
+        }
+        }
 }

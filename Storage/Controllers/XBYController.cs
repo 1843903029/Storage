@@ -78,6 +78,11 @@ namespace Storage.Controllers
             return Json(BLL.XBY.StorageManager.ADDRukuXiang(xiang), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ShanChuRuKu(string id)
+        {
+            return Json(BLL.XBY.StorageManager.ShanChuRuKu(id), JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 通过单号查详情
         /// </summary>
@@ -142,6 +147,43 @@ namespace Storage.Controllers
         public ActionResult ChukuGuanliAdd()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 查询所有客户信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult KeHuList()
+        {
+            return Json(BLL.XBY.CangKuCaoZuoManager.KeHu(), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 通过id 查询对应客户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult KeHuID(int id)
+        {
+            return Json(BLL.XBY.CangKuCaoZuoManager.IdKh(id), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        ///  通过地址id找到地电话
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult IdDz(int id)
+        {
+            return Json(BLL.XBY.CangKuCaoZuoManager.IdDz(id), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 删除出库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShanChuChuKu(string id)
+        {
+            return Json(BLL.XBY.StockRemovalManager.ShanChuChuKu(id), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -226,7 +268,16 @@ namespace Storage.Controllers
             return View();
         }
 
-        
+
+        /// <summary>
+        /// 删除报损单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShanChuBaoSun(string id)
+        {
+            return Json(BLL.XBY.BreakageManager.ShanChuBaoSun(id), JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult YiKuList(int PageIndex, int PageSize, int State)
         {
@@ -266,7 +317,17 @@ namespace Storage.Controllers
             return View();
         }
 
-        
+
+        /// <summary>
+        /// 删除移库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShanChuYiKu(string id)
+        {
+            return Json(BLL.XBY.MovementManager.ShanChuYiKu(id), JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult PanDianList(int PageIndex, int PageSize, int State)
         {
@@ -302,6 +363,16 @@ namespace Storage.Controllers
         }
 
 
+        /// <summary>
+        /// 删除盘点单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShanChuPanDian(string id)
+        {
+            return Json(BLL.XBY.CycleCountManager.ShanChuPanDian(id), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult TuiHuoList(int PageIndex, int PageSize, int State)
         {
             return Json(BLL.XBY.ReturnsManager.TuiHuoList(PageIndex, PageSize, State), JsonRequestBehavior.AllowGet);
@@ -333,6 +404,19 @@ namespace Storage.Controllers
         public ActionResult TuiHuoGuanliAdd()
         {
             return View();
+        }
+
+
+
+
+        /// <summary>
+        /// 删除盘点单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShanChuTuiHuo(string id)
+        {
+            return Json(BLL.XBY.ReturnsManager.ShanChuTuiHuo(id), JsonRequestBehavior.AllowGet);
         }
 
 

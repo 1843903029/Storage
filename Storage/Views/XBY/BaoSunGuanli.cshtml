@@ -5,6 +5,7 @@
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 
 
 <div style="border:0px solid #4cff00;width:95%;">
@@ -107,6 +108,7 @@
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
 <script>
     var pageIndex = 1;
     var pageSize = 10;
@@ -200,7 +202,7 @@
 
 
                     $.each(data.xiangbiao, function (index, data1) {
-                        $("#xiangqingbiae").append("<tr><td>" + data1.productName + "</td><td>" + data1.cptiaoma + "</td><td>" + data1.cpid + "</td><td>" + data1.Batch + " </td><td>" + data1.kuweiname + "</td><td>报损仓库</td><td>" + data1.BreakageNumber + "</td></tr>")
+                        $("#xiangqingbiae").append("<tr><td>" + data1.productName + "</td><td>" + data1.cptiaoma + "</td><td>" + data1.ProductID + "</td><td>" + data1.Batch + " </td><td>" + data1.kuweiname + "</td><td>报损仓库</td><td>" + data1.BreakageNumber + "</td></tr>")
                     })
                 });
 
@@ -254,7 +256,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.BreakageID + "</td><td>" + data.BreakageType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.BreakageCount + "</td><td>" + data.State + "</td><td>" + data.operationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.BreakageID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.BreakageID + "'/></td><td>" + data.BreakageID + "</td><td>" + data.BreakageType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.BreakageCount + "</td><td>" + data.State + "</td><td>" + data.operationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.BreakageID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuBaoSun(" + data.BreakageID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -276,7 +278,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.BreakageID + "</td><td>" + data.BreakageType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.BreakageCount + "</td><td>" + data.State + "</td><td>" + data.operationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.BreakageID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.BreakageID + "'/></td><td>" + data.BreakageID + "</td><td>" + data.BreakageType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.BreakageCount + "</td><td>" + data.State + "</td><td>" + data.operationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.BreakageID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuBaoSun(" + data.BreakageID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -297,7 +299,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.BreakageID + "</td><td>" + data.BreakageType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.BreakageCount + "</td><td>" + data.State + "</td><td>" + data.operationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.BreakageID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.BreakageID + "'/></td><td>" + data.BreakageID + "</td><td>" + data.BreakageType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.BreakageCount + "</td><td>" + data.State + "</td><td>" + data.operationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.BreakageID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuBaoSun(" + data.BreakageID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -305,6 +307,35 @@
 
             }
         });
+    }
+
+    //删除报损单
+    function ShanChuBaoSun(id) {
+        //$("#" + id + "").prop("checked", true);
+
+        //判断按钮是否选中
+        if ($("#" + id + "").is(":checked") == true) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ShanChuBaoSun",
+                data: "{id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        SuoyouList();//重新加载全部数据
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            alert("未选择数据！");
+        }
+
     }
 
     function ConvertDate(date) {

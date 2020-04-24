@@ -135,5 +135,18 @@ namespace DAL.XBY
 
         }
 
+        /// <summary>
+        /// 删除退货单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuTuiHuo(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            Returns obj = ent.Returns.Find(id);
+            obj.DataState = false;
+            return ent.SaveChanges();
+        }
+
     }
 }

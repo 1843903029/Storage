@@ -63,5 +63,36 @@ namespace BLL.XBY
             return DAL.XBY.CangKuCaoZuoService.IdGys(id);
         }
 
+
+        /// <summary>
+        /// 查询客户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable KeHu()
+        {
+            return DAL.XBY.CangKuCaoZuoService.KeHu();
+        }
+
+        /// <summary>
+        /// 通过客户id找到客户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable IdKh(int id)
+        {
+            return DAL.XBY.CangKuCaoZuoService.IdKh(id);
+        }
+
+        /// <summary>
+        /// 通过地址id找到地电话
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable IdDz(int id)
+        {
+            return DAL.XBY.CangKuCaoZuoService.IdDz(id);
+        }
+
         }
 }
