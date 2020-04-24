@@ -181,6 +181,7 @@
         var PageSize = 6;
         var PageCount = 0;
         var rows = 0;
+
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -196,7 +197,7 @@
                     PageIndex = obj.curr;
                     //设置每页显示
                     PageSize = obj.limit;
-                    get();
+                    GetCpGlAll();
                 }
             });
         });
@@ -211,7 +212,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' id='dit' title='删除'></i></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' onclick='CpGlDet()' title='删除'></i></td></tr>");
                     });
                 },
                 erro: function (ex) {

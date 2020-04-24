@@ -5,6 +5,7 @@
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 
 
 
@@ -129,6 +130,7 @@
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/layui/layui.js"></script>
 <script>
     var pageIndex = 1;
     var pageSize = 10;
@@ -279,7 +281,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -301,7 +303,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -313,6 +315,8 @@
     }
 
     function MoHuChuKuList() {
+        alert($("#time1").val());
+        alert($("#time2").val());
         $.ajax({
             type: "POST",
             url: "/XBY/MoHuChuKuList",
@@ -323,7 +327,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + data.State + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -332,6 +336,36 @@
             }
         });
     }
+
+    //删除入库单
+    function ShanChuChuku(id) {
+        //$("#" + id + "").prop("checked", true);
+
+        //判断按钮是否选中
+        if ($("#" + id + "").is(":checked") == true) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ShanChuChuKu",
+                data: "{id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        SuoyouList();//重新加载全部数据
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            alert("未选择数据！");
+        }
+
+    }
+
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));

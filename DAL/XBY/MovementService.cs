@@ -197,5 +197,18 @@ namespace DAL.XBY
         }
 
 
+        /// <summary>
+        /// 删除移库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuYiKu(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            Movement obj = ent.Movement.Find(id);
+            obj.DataState = false;
+            return ent.SaveChanges();
+        }
+
     }
 }

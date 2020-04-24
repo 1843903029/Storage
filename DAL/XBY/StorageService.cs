@@ -193,15 +193,15 @@ namespace DAL.XBY
                                           StoragedetailedID = pp.StoragedetailedID,
                                           StorageIDS = pp.StorageIDS,
                                           productID = pp.productID,
-                                          productName=pp.CpGlinfo.CpXsName,
-                                          cptiaoma=pp.CpGlinfo.Cpbh,
-                                          cpguige=pp.CpGlinfo.Specification,
-                                          cpjiage=pp.CpGlinfo.CpPrice,
+                                          productName = pp.CpGlinfo.CpXsName,
+                                          cptiaoma = pp.CpGlinfo.Cpbh,
+                                          cpguige = pp.CpGlinfo.Specification,
+                                          cpjiage = pp.CpGlinfo.CpPrice,
                                           Price = pp.Price,
                                           StorageNumber = pp.StorageNumber,
                                           Summoney = pp.Summoney,
                                           WarehouseID = pp.WarehouseID,
-                                          kuweiname=pp.LocationManagement.kwName,
+                                          kuweiname = pp.LocationManagement.kwName,
                                           Batch = pp.Batch
                                       }
                       };
@@ -236,6 +236,20 @@ namespace DAL.XBY
             ent.StorageDetailed.Add(xiang);
             return ent.SaveChanges();
 
+        }
+
+
+        /// <summary>
+        /// 删除入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuRuKu(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            Storage obj = ent.Storage.Find(id);
+            obj.DataState = false;
+            return ent.SaveChanges();
         }
 
 

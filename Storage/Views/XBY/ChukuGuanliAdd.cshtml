@@ -5,6 +5,7 @@
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 
 
 <div style=" border:0px solid #4cff00;width:95%;">
@@ -23,22 +24,22 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control" placeholder="可不填自动生成" readonly>
+                    <input type="text" class="form-control" id="ChuKuRandom" placeholder="可不填自动生成" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>销售提货出库</option>
+                        <option>采购退货出库</option>
+                        <option>领用出库</option>
+                        <option>接货出库</option>
+                        <option>借出换入</option>
                     </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <input type="text" class="form-control">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="FaHuoTime">
                 </div>
             </div>
             <div style="display:flex">
@@ -49,16 +50,20 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control" placeholder="输入关键字搜索">
+                    <input type="text" class="form-control" id="Khbh" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <select class="form-control" id="kehulist" onchange="IdKh()">
+                        <option value="请选择">请选择</option>
+                    </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <select class="form-control" id="Khdizhi" onchange="idDZ()">
+                        <option>请选择</option>
+                    </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="Khsdianhua" readonly>
                 </div>
             </div>
             <div style="display:flex">
@@ -84,6 +89,7 @@
             <table class="table table-striped table-bordered table-hover" id="tabInfo">
                 <thead>
                     <tr class="widget-title">
+                        <th class="hidden-480">产品编号</th>
                         <th class="hidden-480">产品名称</th>
                         <th class="hidden-480">产品条码</th>
                         <th class="hidden-480">产品编号</th>
@@ -133,6 +139,11 @@
     var rowss = 0;
     $(function () {
         rukuList();
+        KeHuList();//查询客户信息绑定到下拉框
+        var addtime = new Date();
+        $("#FaHuoTime").val(addtime.toLocaleDateString());//赋值当前日期到页面
+
+        suijidanhao();//随机单号生成
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -168,7 +179,7 @@
                 $("#tb2 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpPrice + "</td><td>" + data.ddd + "</td><td>" + data.CpShuLiang + "</td></tr>");
+                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpPrice + "</td><td>" + data.KwName + "</td><td>" + data.CpShuLiang + "</td></tr>");
                 });
             },
             error: function (ex) {
@@ -182,16 +193,15 @@
     function www(ff) {
         var num = $("#tb1 tr").length;
         for (var i = 0; i < num; i++) {
-            if (true) {
-                if ($("#tb1 tr").eq(i).children("td").eq(7).children("input").val() < $("#tb1 tr").eq(i).children("td").eq(8).text()) {
-                    $("#" + ff + "").text($("#tb1 tr").eq(i).children("td").eq(7).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text());
-                } else
-                {
-                    alert("库存没这么多！");
-                    $("#tb1 tr").eq(i).children("td").eq(7).children("input").val(1);
-                }
+            if ($("#tb1 tr").eq(i).children("td").eq(8).children("input").val() < $("#tb1 tr").eq(i).children("td").eq(9).text()) {
+                $("#" + ff + "").text($("#tb1 tr").eq(i).children("td").eq(8).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(5).text());
+            } else {
+                alert("库存没这么多！");
+                $("#tb1 tr").eq(i).children("td").eq(8).children("input").val("1");
+                return;
             }
-            
+
+
         }
     }
 
@@ -204,7 +214,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#tb1").append("<tr><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.CpID + "</td><td></td><td>" + data.CpPrice + "</td><td id='" + data.Cpbh + "'></td><td>" + data.Specification + "</td><td><input id='RukuShu' type='text' onchange='www(" + data.Cpbh + ")' /></td><td>" + data.CpShuLiang + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.CpID + "</td><td></td><td>" + data.CpPrice + "</td><td id='" + data.Cpbh + "'></td><td>" + data.Specification + "</td><td><input id='RukuShu' type='text' onchange='www(" + data.Cpbh + ")' /></td><td>" + data.CpShuLiang + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
 
                 });
             },
@@ -215,6 +225,101 @@
         });
     }
 
+
+    function KeHuList() {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/KeHuList",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#kehulist").append("<option value='" + data.ID + "'>" + data.KhName + "</option>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+    function IdKh() {
+        //alert(document.getElementById("gysname").value);
+        if (document.getElementById("kehulist").value != "请选择") {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/KeHuID",
+                data: "{id:'" + document.getElementById("kehulist").value + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $.each(result, function (index, data) {
+                        $("#Khbh").val(data.KhID);
+                        $("#Khdizhi option").remove();
+                        $("#Khdizhi").append("<option value='请选择'>请选择</option>");
+                        $("#Khsdianhua").val(null);
+                        $.each(data.dizhi, function (index, datadz) {
+                            $("#Khdizhi").append("<option value='" + datadz.ID + "'>" + datadz.CustomerAddressName + "</option>");
+                        })
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            $("#Khbh").val(null);
+            $("#Khdizhi option").remove();
+            $("#Khdizhi").append("<option value='请选择'>请选择</option>");
+            $("#Khsdianhua").val(null);
+        }
+    }
+
+    function idDZ() {
+        //alert(document.getElementById("Khdizhi").value);
+        if (document.getElementById("Khdizhi").value != "请选择") {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/IdDz",
+                data: "{id:'" + document.getElementById("Khdizhi").value + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $.each(result, function (index, data) {
+
+                        $("#Khsdianhua").val(data.phone);
+
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            $("#Khsdianhua").val(null);
+        }
+    }
+
+
+    //   根据当前时间和随机数生成流水号
+    function suijidanhao() {
+        var now = new Date()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hour = now.getHours()
+        var minutes = now.getMinutes()
+        var seconds = now.getSeconds()
+        //month = now.setTimeDateFmt(month)
+        //hour = now.setTimeDateFmt(hour)
+        //minutes = now.setTimeDateFmt(minutes)
+        //seconds = this.setTimeDateFmt(seconds)
+        danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
+        $("#ChuKuRandom").val(danhapsuiji);
+    }
 
 
     function ConvertDate(date) {

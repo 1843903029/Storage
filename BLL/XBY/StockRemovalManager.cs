@@ -69,5 +69,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.StockRemovalService.chadizhi(id);
         }
+        /// <summary>
+        /// 删除出库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuChuKu(string id)
+        {
+            return DAL.XBY.StockRemovalService.ShanChuChuKu(id);
+        }
+
         }
 }

@@ -56,5 +56,15 @@ namespace BLL.XBY
             return DAL.XBY.BreakageService.Baoxuncha(Danhao);
         }
 
+        /// <summary>
+        /// 删除报损单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuBaoSun(string id)
+        {
+            return DAL.XBY.BreakageService.ShanChuBaoSun(id);
+        }
+
         }
 }

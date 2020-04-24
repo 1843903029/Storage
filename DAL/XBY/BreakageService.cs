@@ -196,5 +196,18 @@ namespace DAL.XBY
         }
 
 
+        /// <summary>
+        /// 删除报损单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuBaoSun(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            Breakage obj = ent.Breakage.Find(id);
+            obj.DataState = false;
+            return ent.SaveChanges();
+        }
+
     }
 }

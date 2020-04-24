@@ -53,7 +53,17 @@ namespace BLL.XBY
         public static IQueryable YiKucha(string Danhao)
         {
             return DAL.XBY.MovementService.YiKucha(Danhao);
-        } 
+        }
+
+        /// <summary>
+        /// 删除移库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuYiKu(string id)
+        {
+            return DAL.XBY.MovementService.ShanChuYiKu(id);
+        }
 
         }
 }

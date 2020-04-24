@@ -46,5 +46,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.CycleCountService.MoHuPanDianList(PageSize, PageIndex, Danhao, time1, time2);
         }
+
+        /// <summary>
+        /// 删除盘点单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuPanDian(string id)
+        {
+            return DAL.XBY.CycleCountService.ShanChuPanDian(id);
+        }
         }
 }

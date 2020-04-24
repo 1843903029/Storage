@@ -162,5 +162,101 @@ namespace DAL.XBY
                       };
             return obj;
         }
+
+
+        /// <summary>
+        /// 查询客户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable KeHu()
+        {
+            StorageEntities ent = new StorageEntities();
+            var obj = from p in ent.Client
+                      where p.State == true
+                      orderby p.KhID ascending
+                      select new
+                      {
+                          ID = p.ID,
+                          KhID = p.KhID,
+                          KhName = p.KhName,
+                          beizhu = p.beizhu,
+                          Hone = p.Hone,
+                          chuanzhen = p.chuanzhen,
+                          youxiang = p.youxiang,
+                          Time = p.Time,
+                          State = p.State
+                      };
+            return obj;
+        }
+        /// <summary>
+        /// 通过客户id找到客户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable IdKh(int id)
+        {
+            StorageEntities ent = new StorageEntities();
+            var obj = from p in ent.Client
+                      where p.State == true
+                      && p.ID == id
+                      orderby p.KhID ascending
+                      select new
+                      {
+                          ID = p.ID,
+                          KhID = p.KhID,
+                          KhName = p.KhName,
+                          beizhu = p.beizhu,
+                          Hone = p.Hone,
+                          chuanzhen = p.chuanzhen,
+                          youxiang = p.youxiang,
+                          Time = p.Time,
+                          State = p.State,
+                          dizhi = from pp in p.CustomerAddress
+                                  where pp.KehuID == id
+                                  select new
+                                  {
+                                      //[ID], [KehuID], [CustomerAddressID],
+                                      //[CustomerAddressName], [Lianxiren], [phone], [State]
+                                      ID = pp.ID,
+                                      KehuID = pp.KehuID,
+                                      CustomerAddressID = pp.CustomerAddressID,
+                                      CustomerAddressName = pp.CustomerAddressName,
+                                      Lianxiren = pp.Lianxiren,
+                                      phone = pp.phone,
+                                      State = pp.State
+                                  }
+                      };
+            return obj;
+        }
+
+        /// <summary>
+        /// 通过地址id找到地电话
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IQueryable IdDz(int id)
+        {
+            StorageEntities ent = new StorageEntities();
+            var obj = from p in ent.CustomerAddress
+                      where p.State == true
+                      && p.ID == id
+                      orderby p.ID ascending
+                      select new
+                      {
+
+                          //[ID], [KehuID], [CustomerAddressID],
+                          //[CustomerAddressName], [Lianxiren], [phone], [State]
+                          ID = p.ID,
+                          KehuID = p.KehuID,
+                          CustomerAddressID = p.CustomerAddressID,
+                          CustomerAddressName = p.CustomerAddressName,
+                          Lianxiren = p.Lianxiren,
+                          phone = p.phone,
+                          State = p.State
+
+                      };
+            return obj;
+        }
     }
 }

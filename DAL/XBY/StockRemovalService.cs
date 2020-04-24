@@ -235,5 +235,20 @@ namespace DAL.XBY
         }
 
 
+        /// <summary>
+        /// 删除出库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ShanChuChuKu(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            StockRemoval obj = ent.StockRemoval.Find(id);
+            obj.DataState = false;
+            return ent.SaveChanges();
+        }
+
+
+
     }
 }

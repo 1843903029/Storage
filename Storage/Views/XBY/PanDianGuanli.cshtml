@@ -142,7 +142,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.CycleCountID + "</td><td>" + data.CycleCountType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.CycleCountID + "'/></td><td>" + data.CycleCountID + "</td><td>" + data.CycleCountType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuPanDian(" + data.CycleCountID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -163,7 +163,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.CycleCountID + "</td><td>" + data.CycleCountType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.CycleCountID + "'/></td><td>" + data.CycleCountID + "</td><td>" + data.CycleCountType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuPanDian(" + data.CycleCountID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -184,7 +184,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.CycleCountID + "</td><td>" + data.CycleCountType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.CycleCountID + "'/></td><td>" + data.CycleCountID + "</td><td>" + data.CycleCountType + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.State + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuPanDian(" + data.CycleCountID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -192,6 +192,35 @@
 
             }
         });
+    }
+
+    //删除盘点单
+    function ShanChuPanDian(id) {
+        //$("#" + id + "").prop("checked", true);
+
+        //判断按钮是否选中
+        if ($("#" + id + "").is(":checked") == true) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ShanChuPanDian",
+                data: "{id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        SuoyouList();//重新加载全部数据
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            alert("未选择数据！");
+        }
+
     }
 
 

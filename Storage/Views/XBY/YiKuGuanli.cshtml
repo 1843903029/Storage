@@ -270,7 +270,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -292,7 +292,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -313,7 +313,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + data.State + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>        </td></tr>");
                 });
             },
             error: function (ex) {
@@ -321,6 +321,35 @@
 
             }
         });
+    }
+
+    //删除移库单
+    function ShanChuYiKu(id) {
+        //$("#" + id + "").prop("checked", true);
+
+        //判断按钮是否选中
+        if ($("#" + id + "").is(":checked") == true) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ShanChuYiKu",
+                data: "{id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        SuoyouList();//重新加载全部数据
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        } else {
+            alert("未选择数据！");
+        }
+
     }
 
 
