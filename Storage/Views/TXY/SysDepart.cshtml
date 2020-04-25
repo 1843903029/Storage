@@ -269,7 +269,7 @@
         $.ajax({
             type: "POST",
             url: "/TXY/SysDepartQuery",
-            data: "{DepartName:" + Search + "}",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",DepartName:" + Search + "}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {

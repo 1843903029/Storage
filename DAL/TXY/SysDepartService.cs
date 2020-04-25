@@ -54,37 +54,39 @@ namespace DAL.TXY
 
         }
         //模糊查询
-        public static IQueryable SysDepartQuery(string DepartName)
+        public static IQueryable SysDepartQuery(int pageIndex, int pageSize,string DepartName)
         {
             StorageEntities entity = new StorageEntities();
-
-            //var obj = from p in entity.SysDepart
-            //          where p.DepartName.IndexOf(DepartName) != -1 && p.IsDelete == true
-            //          orderby p.SysDepartID
-            //          select new
-            //          {
-            //              SysDepartID = p.SysDepartID,
-            //              DepartNum = p.DepartNum,
-            //              DepartName = p.DepartName,
-            //              IsDelete = p.IsDelete,
-            //              CreateTime = p.CreateTime
-            //          };
+            
             var obj = from p in entity.SysDepart
+                      where p.DepartName.IndexOf(DepartName) != -1 
+                      && p.IsDelete == true
+                      orderby p.SysDepartID
                       select new
                       {
-                          CreateTime = p.CreateTime,
-                          DepartName = p.DepartName,
-                          DepartNum = p.DepartNum,
-                          IsDelete = p.IsDelete,
                           SysDepartID = p.SysDepartID,
+                          DepartNum = p.DepartNum,
+                          DepartName = p.DepartName,
+                          IsDelete = p.IsDelete,
+                          CreateTime = p.CreateTime
                       };
-            if (!string.IsNullOrEmpty(DepartName))
-            {
-                obj = obj.Where(p => p.DepartName.Contains(DepartName));
-            }
-
-
-            return obj;
+            //var obj = from p in entity.SysDepart
+            //          select new
+            //          {
+            //              CreateTime = p.CreateTime,
+            //              DepartName = p.DepartName,
+            //              DepartNum = p.DepartNum,
+            //              IsDelete = p.IsDelete,
+            //              SysDepartID = p.SysDepartID,
+            //          };
+            //if (!string.IsNullOrEmpty(DepartName))
+            //{
+            //    obj = obj.Where(p => p.DepartName.Contains(DepartName));
+            //}
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            list.PageCount = obj.Count();
+            return list.DataList;
 
         }
     }
