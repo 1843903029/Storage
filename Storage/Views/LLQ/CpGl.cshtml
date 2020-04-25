@@ -181,7 +181,6 @@
         var PageSize = 6;
         var PageCount = 0;
         var rows = 0;
-
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -212,7 +211,7 @@
                     $("#tb1 tr").remove();
                     rows = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' onclick='CpGlDet()' title='删除'></i></td></tr>");
+                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete'id='dit' title='删除'></i></td></tr>");
                     });
                 },
                 erro: function (ex) {
@@ -253,6 +252,8 @@
         });
     }
 
+
+
     function CpGlDet() {
         var id = $("[name='txtCpId']").val();
         $.ajax({
@@ -261,7 +262,7 @@
             //发送请求的地址 /控制器名/动作方法名
             url: "/LLQ/CpGlDet",
             //发送到服务器的数据(方法参数)
-            data: "{cpgl:"+id+"}",
+            data: "{cpgl:" + id + "}",
             //服务器返回的数据类型
             dataType: "json",
             //发送信息至服务器时内容编码类型
@@ -269,7 +270,7 @@
             //请求成功后的回调函数
             success: function (result) {
                 if (result > 0) {
-                    alert("修改成功");
+                    alert("成功");
                     GetCpGlAll();
                 }
                 else {
@@ -281,7 +282,7 @@
                 alert(ex.responseText);
             }
         });
-    });
+    };
 
 
     function ConvertDate(date) {
