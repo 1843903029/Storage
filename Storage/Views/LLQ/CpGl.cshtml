@@ -243,6 +243,7 @@
             success: function (result) {
                 if (result > 0) {
                     alert("新增成功");
+                    GetCpGlAll();
                 }
             },
             error: function (ex) {
@@ -270,11 +271,11 @@
             //请求成功后的回调函数
             success: function (result) {
                 if (result > 0) {
-                    alert("成功");
+                    alert("删除成功");
                     GetCpGlAll();
                 }
                 else {
-                    alert("修改失败");
+                    alert("删除失败");
                 }
             },
             //请求失败后的回调函数
