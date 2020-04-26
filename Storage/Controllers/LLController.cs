@@ -40,6 +40,10 @@ namespace Storage.Controllers
         public ActionResult delKH(int id) {
             return Json(BLL.LL.KHguanliManager.del(id),JsonRequestBehavior.AllowGet);
         }
+        public ActionResult delKW(int id)
+        {
+            return Json(BLL.LL.KweiGuanliManager.del(id), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult delGYS(int id)
         {
             return Json(BLL.LL.GYSguanliManager.del(id), JsonRequestBehavior.AllowGet);
@@ -50,8 +54,23 @@ namespace Storage.Controllers
             lo.Isdefault = 2;
             return Json(BLL.LL.KweiGuanliManager.add(lo), JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult KHAdd(Client c)
+        public ActionResult selectType()
+        {
+            return Json(BLL.LL.KweiGuanliManager.selectType(),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult selectCK()
+        {
+            return Json(BLL.LL.KweiGuanliManager.selectCK(), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult KWEdit(LocationManagement lo)
+        {
+            return Json(BLL.LL.KweiGuanliManager.KwEdit(lo),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult KWGetByID(int ID)
+        {
+            return Json(BLL.LL.KweiGuanliManager.KwGetById(ID),JsonRequestBehavior.AllowGet);
+        }
+            public ActionResult KHAdd(Client c)
         {
             c.State = true;
             c.Time = "2020-03-09";

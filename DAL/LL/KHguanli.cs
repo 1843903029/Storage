@@ -14,7 +14,7 @@ namespace DAL.LL
         public static PageList Listfenye(int pageindex, int pagesize)
         {
             var obj = from p in s.Client
-                      //where p.State == true
+                      where p.State == true
                       orderby p.KhID
                       select new
                       {
@@ -35,8 +35,8 @@ namespace DAL.LL
         }
 
         public static int del( int id) {
-            Client c = s.Client.Find(id);
-            s.Client.Remove(c);
+            var obj = s.Client.Find(id);
+            obj.State = false;
             return s.SaveChanges();
 
         }

@@ -35,40 +35,40 @@
                                 </td>
                                 <td>库位名称</td>
                                 <td>
-                                    <input id="kwName" name="kwName" type="text" placeholder="请输入库位名称" >
+                                    <input id="kwName1" name="kwName" type="text" placeholder="请输入库位名称" >
                                 </td>
                             </tr>
                             <tr>
                                 <td>库位类型</td>
                                 <td>
-                                    <select id="kwType" name="kwType"  style="width:164px;">
+                                    <select id="kwType1" name="kwType"  style="width:164px;">
                                         <option value="">请选择库位类型</option>
-                                        <option value="1">正式库区</option>
+                                        @*<option value="1">正式库区</option>
                                         <option value="2">待入库区</option>
                                         <option value="3">待检库区</option>
                                         <option value="4">待出库区</option>
-                                        <option value="5">报损库区</option>
+                                        <option value="5">报损库区</option>*@
                                     </select>
                                 </td>
                                 <td>仓库</td>
                                 <td>
-                                    <select id="CKName" name="CKName"  style="width:164px;">
+                                    <select id="CKName1" name="CKName"  style="width:164px;">
                                         <option value="">请选择仓库</option>
-                                        <option value="1">产品仓库</option>
+                                        @*<option value="1">产品仓库</option>*@
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>是否默认</td>
                                 <td>
-                                    <select id="Zhuangtai" name="Zhuangtai"  style="width:164px;">
+                                    <select id="Zhuangtai1" name="Zhuangtai"  style="width:164px;">
                                         <option value="">请选择</option>
                                         <option value="1">是</option>
                                         <option value="2">否</option>
                                     </select>
                                 </td>
                                 <td>创建时间</td>
-                                <td><input id="Time" name="Time" type="text" placeholder="请输入当前时间" ></td>
+                                <td><input id="Time1" name="Time" type="text" placeholder="请输入当前时间" ></td>
                             </tr>
                             
 
@@ -129,6 +129,8 @@
     $(function () {
         $("#xzdiv").hide();
         rukuList();
+        CK();
+        Type();
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -136,14 +138,16 @@
 
             //完整功能
             laypage.render({
-                elem: 'pageDome'
-                , count: rowss
-                , limit: 3
+                elem: 'pageDemo'
+                , count: rowss//总条数
+                , limit: 3//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
-                    
+
+                    //设置当前页
+                    PageIndex = obj.curr;
+                    //设置每页显示
+                    PageSize = obj.limit;
                 }
             });
         });
@@ -159,6 +163,7 @@
             title: ['添加库位', 'font-size:18px'],
             area: ['650px', '359px'],
             shadeClose: true,
+            shade: 0,
             content: $('#xzdiv').html(),
             btn: ['确定', '取消'],
             yes: function () {
@@ -168,6 +173,43 @@
 
         
     }
+    function Type() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/selectType",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='kwType']").append("<option value='" + data.KwID + "'>" + data.KwName + "</option>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    function CK() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/selectCK",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='CKName']").append("<option value='" + data.Ckid + "'>" + data.CKName + "</option>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
     function add() {
 
         //获取对应表单下的表单元素的值  注意:此方法返回的是JSON对象而非JSON字符串
@@ -229,6 +271,28 @@
         //    }
         //});
     }
+    function del(id) {
+        $.ajax({
+            type: "POST",
+            url: "/LL/delKW",
+            data: "{id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    window.location.reload();
+
+                } else {
+                    alert("删除失败");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
     function rukuList() {
         $.ajax({
             type: "POST",
@@ -237,11 +301,10 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
-                console.log("1");
-                $("#tt tr").remove();
+                $("#tb1 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CKName + "</td><td>" + data.kwType + "</td><td>" + data.Zhuangtai + "</td><td>" + data.Isdefault + "</td><td>" + ConvertDate(data.Time) + "</td><td>" + data.Shuju + "</td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CKName + "</td><td>" + data.kwType + "</td><td>" + data.Zhuangtai + "</td><td>" + data.Isdefault + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.kwID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.kwID + ");' /></td></tr>");
                 });
             },
             error: function (ex) {
@@ -251,6 +314,43 @@
         });
     }
 
+    function GetByID(id) {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['修改库位', 'font-size:18px'],
+            area: ['650px', '359px'],
+            shadeClose: true,
+            shade: 0,
+            content: $('#xzdiv').html(),
+            btn: ['确定', '取消'],
+            yes: function () {
+                
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "/LL/KWGetById",
+            data: "{kwID:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                //console.log(result);
+                $.each(result, function (Index, data) {
+
+                    $("#kwName1").val(data.kwName);
+                    $("#kwType1").val(data.KwTypeID);
+                    $("#CKName1").val(data.Ckid);
+                    $("#Zhuangtai1").val(data.Zhuangtai);
+                    $("#Time1").val(data.Time);
+                    
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();

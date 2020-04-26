@@ -157,7 +157,7 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td>" + data.state + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /></td> </tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /></td> </tr>");
                 });
             },
             error: function (ex) {
@@ -193,6 +193,7 @@
                 if (result > 0) {
                     alert("删除成功");
                     window.location.reload();
+
                 } else {
                     alert("删除失败");
                 }

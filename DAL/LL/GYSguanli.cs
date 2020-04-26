@@ -36,7 +36,7 @@ namespace DAL.LL
         public static int del(int id)
         {
             Supplier c = s.Supplier.Find(id);
-            s.Supplier.Remove(c);
+            c.State = false;
             return s.SaveChanges();
 
         }
