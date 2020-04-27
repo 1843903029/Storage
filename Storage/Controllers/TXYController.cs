@@ -65,6 +65,12 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.SysRoleManager.SysRoleEdit(role), JsonRequestBehavior.AllowGet);
         }
+        //模糊查询
+        public ActionResult SysRoleQuery(int PageIndex, int PageSize, string RoleName)
+        {
+
+            return Json(BLL.TXY.SysRoleManager.SysRoleQuery(PageIndex, PageSize, RoleName), JsonRequestBehavior.AllowGet);
+        }
 
 
 
@@ -95,10 +101,10 @@ namespace Storage.Controllers
             return Json(BLL.TXY.SysDepartManager.SysDepartEit(SysDepartID,DepartName), JsonRequestBehavior.AllowGet);
         }
         //模糊查询
-        public ActionResult SysDepartQuery(int pageIndex, int pageSize,string DepartName)
+        public ActionResult SysDepartQuery(int PageIndex, int PageSize,string DepartName)
         {
 
-            return Json(BLL.TXY.SysDepartManager.SysDepartQuery(pageIndex,pageSize,DepartName), JsonRequestBehavior.AllowGet);
+            return Json(BLL.TXY.SysDepartManager.SysDepartQuery(PageIndex,PageSize,DepartName), JsonRequestBehavior.AllowGet);
         }
 
 

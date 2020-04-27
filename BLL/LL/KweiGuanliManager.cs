@@ -13,9 +13,30 @@ namespace BLL.LL
         {
             return DAL.LL.KweiGuanli.Listfenye(pageindex, pagesize);
         }
-        public static int add(LocationManagement lo)
+        public static IQueryable selectType()
+        {
+            return DAL.LL.KweiGuanli.selectType();
+        }
+        public static IQueryable selectCK()
+        {
+            return DAL.LL.KweiGuanli.selectCK();
+        }
+            public static int add(LocationManagement lo)
         {
             return DAL.LL.KweiGuanli.add(lo);
+        }
+
+        public static int del(int id)
+        {
+            return DAL.LL.KweiGuanli.del(id);
+        }
+        public static IQueryable KwGetById(int kwID)
+        {
+            return DAL.LL.KweiGuanli.KwGetById(kwID);
+        }
+        public static int KwEdit(LocationManagement lo)
+        {
+            return DAL.LL.KweiGuanli.KwEdit(lo);
         }
         }
 }

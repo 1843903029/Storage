@@ -88,5 +88,29 @@ namespace DAL.TXY
             return entity.SaveChanges();
 
         }
+        public static IQueryable SysRoleQuery(int pageIndex, int pageSize, string RoleName)
+        {
+            StorageEntities entity = new StorageEntities();
+
+            var obj = from p in entity.SysRole
+                      where p.RoleName.IndexOf(RoleName) != -1
+                      && p.IsDelete == true
+                      orderby p.SysRoleID
+                      select new
+                      {
+                          SysRoleID = p.SysRoleID,
+                          IsDelete = p.IsDelete,
+                          Remark = p.Remark,
+                          RoleName = p.RoleName,
+                          RoleNum = p.RoleNum,
+                          CreateTime = p.CreateTime,
+                      };
+
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            list.PageCount = obj.Count();
+            return list.DataList;
+
+        }
     }
 }

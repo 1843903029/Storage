@@ -260,22 +260,22 @@
         
     }
     //模糊查询
-    //错的
-    //哈哈
-    //难搞哦
     function SysDepartQuery()
     {
         var Search = $("#txtSearch").val();
+        alert(PageIndex);
         $.ajax({
             type: "POST",
             url: "/TXY/SysDepartQuery",
-            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",DepartName:" + Search + "}",
+            //data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",DepartName:" + Search + "}",
+            data: { PageIndex: PageIndex, PageSize: PageSize, DepartName: Search},
             dataType: "json",
-            contentType: "application/json",
+            //contentType: "application/json",
             success: function (result) {
+                //alert(JSON.stringify(result));
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
-                $.each(result.DataList, function (index, data) {
+                $.each(result, function (index, data) {
                     $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.SysDepartID + "</td ><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysDepartID + ")' ></i><a  href='javascript:Eite(" + data.SysDepartID + ")'><i class='layui-icon layui-icon-edit' title='编辑'></i></a>&nbsp;<a href='#'><i  class='layui-icon layui-icon-console'></i></a></td></tr>");
                 })
             },

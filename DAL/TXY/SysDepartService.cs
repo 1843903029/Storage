@@ -70,19 +70,7 @@ namespace DAL.TXY
                           IsDelete = p.IsDelete,
                           CreateTime = p.CreateTime
                       };
-            //var obj = from p in entity.SysDepart
-            //          select new
-            //          {
-            //              CreateTime = p.CreateTime,
-            //              DepartName = p.DepartName,
-            //              DepartNum = p.DepartNum,
-            //              IsDelete = p.IsDelete,
-            //              SysDepartID = p.SysDepartID,
-            //          };
-            //if (!string.IsNullOrEmpty(DepartName))
-            //{
-            //    obj = obj.Where(p => p.DepartName.Contains(DepartName));
-            //}
+           
             PageList list = new PageList();
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
