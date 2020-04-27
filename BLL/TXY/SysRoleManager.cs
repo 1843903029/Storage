@@ -34,5 +34,9 @@ namespace BLL.TXY
             return DAL.TXY.SysRoleService.SysRoleEdit(role);
 
         }
-    }
+        public static IQueryable SysRoleQuery(int pageIndex, int pageSize, string RoleName)
+        {
+            return DAL.TXY.SysRoleService.SysRoleQuery(pageIndex,pageSize,RoleName);
+        }
+        }
 }
