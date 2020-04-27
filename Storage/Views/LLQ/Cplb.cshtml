@@ -18,15 +18,8 @@
         <div style="padding:15px;border:1px solid red">
             <table>
                 <tr>
-                    <td><a href="#">首页<</a></td>
-                    <td>基本资料<</td>
-                    <td>产品类别</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
                     <td><strong style="margin-left:20px">产品类别管理</strong></td>
-                    <td> <input style="margin-left:750px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                    <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
@@ -52,59 +45,90 @@
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody id="tb1">
-
-                </tbody>
+                <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; background-color:aliceblue" hidden>
-                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                    <table class="formtab_user">
-                        <tbody>
-                            <tr>
-                                <td>类别编号</td>
-                                <td>
-                                    <input id="txtCpId" name="txtCpId" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>类别名称</td>
-                                <td>
-                                    <input id="txtCpLbName" name="txtCpLbName" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>备注</td>
-                                <td>
-                                    <input id="txtremark" name="txtremark" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tr>
-                            <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="CplbAdd()" value="确认" /></td>
-                            <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+
             @*分页*@
             <div id="pageDemo">
 
             </div>
         </div>
     </div>
+    <div id="jbox-content" hidden>
+        <table class="formtab_user">
+            <tbody>
+                <tr>
+                    <td>类别编号</td>
+                    <td>
+                        <input id="txtId" name="txtId" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                    </td>
+                </tr>
+                <tr>
+                    <td>类别名称</td>
+                    <td>
+                        <input id="txtCpLbName" name="txtCpLbName" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <input id="txtremark" name="txtremark" type="text" class="input-medium">
+                    </td>
+                </tr>
+            </tbody>
+            <tr>
+                <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="CplbAdd()" value="确认" /></td>
+                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
+            </tr>
+        </table>
+    </div>
+    <div id="hide11" @*style="height: 300px;width:500px; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue"*@ hidden="hidden">
+        <form class="navbar-form navbar-left" role="search">
+
+            <dl>
+                <dd>产品名称</dd>
+                <dd>
+                    <input id="ID" type="text" hidden />
+                    <input id="CpLbName" name="CpLbName" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>创建人</dd>
+                <dd>
+                    <input id="UserName" name="UserName" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>创建时间</dd>
+                <dd>
+                    <input id="CpTime" name="CpTime" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>备注</dd>
+                <dd>
+                    <input id="remark" name="remark" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" />
+            <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
+
+        </form>
+    </div>c
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
 <script>
+    var PageIndex = 1;
+    var PageSize = 6;
+    var PageCount = 0;
+    var rows = 0;
     $(function () {
 
         GetCplbAll();
 
-        var PageIndex = 1;
-        var PageSize = 6;
-        var PageCount = 0;
-        var rows = 0;
+        
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -112,7 +136,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 2//每页显示数
+                , limit: 6//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -124,50 +148,65 @@
                 }
             });
         });
-        function GetCplbAll() {
-            $.ajax({
-                type: "POST",
-                url: "/LLQ/GetCplbAll",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    $("#tb1 tr").remove();
-                    rows = result.PageCount;
-                    $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' id='dit' title='删除'></i></td></tr>");
-                    });
-                },
-                erro: function (ex) {
-                    alert(ex.responseText);
-                }
-            })
-        }
         
-        $("#btnSubhh").click(function () {
-            if ($("#jbox-content").css("display") == "none") {
-                $("#jbox-content").show();
+        
+        //$("#btnSubhh").click(function () {
+        //    if ($("#jbox-content").css("display") == "none") {
+        //        $("#jbox-content").show();
 
-            } else {
-                $("#jbox-content").hide();
-            }
-        });
+        //    } else {
+        //        $("#jbox-content").hide();
+        //    }
+        //});
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
     });
+    //分页查询
+    function GetCplbAll() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/GetCplbAll",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                });
+            },
+            erro: function (ex) {
+                alert(ex.responseText);
+            }
+        })
+    }
 
+    //新增
+    function insert() {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['新增计量单位', 'font-size:18px'],
+            area: ['auto', 'auto'],
+            shadeClose: true,
+            content: $('#jbox-content'),
+            shade: 0,
+        });
+    }
     function CplbAdd() {
         $.ajax({
             type: "POST",
             url: "/LLQ/CplbAdd",
-            data: "{cplb:{CpId:'" + $("#txtCpId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
+            data: "{cplb:{ID:'" + $("#txtId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("新增成功");
                     GetCplbAll();
+                    window.location.href = "/LLQ/Cplb";
                 }
             },
             error: function (ex) {
@@ -175,20 +214,21 @@
 
             }
         });
+        GetCplbAll();
     }
 
-    function CplbDet() {
-        var id = $("[name='txtCpId']").val();
+    //删除
+    function CplbDet(id) {
         $.ajax({
             type: "POST",
             url: "/LLQ/CplbDet",
-            data: "{cplb:" + id + "}",
+            data: "{id:" + id + "}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("删除成功");
-                    GetCplbAll();
+                    GetCplbAll();//重新加载全部数据
                 }
                 else {
                     alert("删除失败");
@@ -198,7 +238,7 @@
                 alert("Error:" + ex.responseText);
             }
         });
-
+        GetCplbAll();
     };
 
     function ConvertDate(date) {

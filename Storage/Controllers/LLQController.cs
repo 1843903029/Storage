@@ -61,10 +61,9 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.JldwManager.JldwAdd(jldw),JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult JldwDet(JLinfo jldw)
+        public ActionResult JldwDet(int jlid)
         {
-            jldw.Delit = false;
-            return Json(BLL.LLQ.JldwManager.JldwDet(jldw), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.JldwManager.JldwDet(jlid), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult JldwGetById(int Jlid)
@@ -87,13 +86,14 @@ namespace Storage.Controllers
         public ActionResult CplbAdd(CpLbinfo cplb)
         {
             cplb.Delit = true;
+            cplb.UserName = 1;
+            cplb.CpTime= DateTime.Now;
             return Json(BLL.LLQ.CplbManager.CplbAdd(cplb), JsonRequestBehavior.AllowGet);
         }
         //删除
-        public ActionResult CplbDet(CpLbinfo cplb)
+        public ActionResult CplbDet(int id)
         {
-            cplb.Delit = false;
-            return Json(BLL.LLQ.CplbManager.CplbDet(cplb), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.CplbManager.CplbDet(id), JsonRequestBehavior.AllowGet);
         }
 
 
