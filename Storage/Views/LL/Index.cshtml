@@ -25,23 +25,23 @@
                 </div>
             </div>
             <div id="xzdiv">
-                <form id="form1">
+               
                     <table class="table table-striped">
                         <tbody>
                             <tr>
                                 <td>库位编号</td>
                                 <td>
-                                    <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium">
+                                    <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium"/>
                                 </td>
                                 <td>库位名称</td>
                                 <td>
-                                    <input id="kwName1" name="kwName" type="text" placeholder="请输入库位名称" >
+                                    <input id="qwerty" name="kwName" type="text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>库位类型</td>
                                 <td>
-                                    <select id="kwType1" name="kwType"  style="width:164px;">
+                                    <select id="kw" name="kwType"  style="width:164px;">
                                         <option value="">请选择库位类型</option>
                                         @*<option value="1">正式库区</option>
                                         <option value="2">待入库区</option>
@@ -52,7 +52,7 @@
                                 </td>
                                 <td>仓库</td>
                                 <td>
-                                    <select id="CKName1" name="CKName"  style="width:164px;">
+                                    <select id="ck" name="CKName"  style="width:164px;">
                                         <option value="">请选择仓库</option>
                                         @*<option value="1">产品仓库</option>*@
                                     </select>
@@ -61,14 +61,14 @@
                             <tr>
                                 <td>是否默认</td>
                                 <td>
-                                    <select id="Zhuangtai1" name="Zhuangtai"  style="width:164px;">
+                                    <select id="zt" name="Zhuangtai"  style="width:164px;">
                                         <option value="">请选择</option>
                                         <option value="1">是</option>
                                         <option value="2">否</option>
                                     </select>
                                 </td>
                                 <td>创建时间</td>
-                                <td><input id="Time1" name="Time" type="text" placeholder="请输入当前时间" ></td>
+                                <td><input id="Time1" name="Time" type="text" placeholder="请输入当前时间" /></td>
                             </tr>
                             
 
@@ -76,7 +76,7 @@
                         </tbody>
                     </table>
                     <input id="Button1" type="button" value="button"  onclick="add()"/>
-                    </form>
+                   
 
 </div>
 
@@ -164,10 +164,10 @@
             area: ['650px', '359px'],
             shadeClose: true,
             shade: 0,
-            content: $('#xzdiv').html(),
+            content: $('#xzdiv'),
             btn: ['确定', '取消'],
             yes: function () {
-                add();
+               add();
             },
         });
 
@@ -211,7 +211,6 @@
     }
 
     function add() {
-
         //获取对应表单下的表单元素的值  注意:此方法返回的是JSON对象而非JSON字符串
         //var data = $("#form1").serializeArray();
         //var obj = {};
@@ -224,7 +223,7 @@
             url: "/LL/KWAdd",
             //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
             //data: "{lo:" + jsons + "}",
-            data: "{lo:{kwName:'" + $("#kwName").val() + "',CKName:'" + $("#CKName").val() + "',kwType:'" + $("#kwType").val() + "',Time:'" + $("#Time").val()+ "'}}",
+            data: "{lo:{kwName:'" + $("#qwerty").val() + "',CKName:'" + $("#ck").val() + "',kwType:'" + $("#kw").val() + "',Time:'" + $("#Time1").val() + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
