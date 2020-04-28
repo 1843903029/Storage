@@ -36,9 +36,9 @@ namespace BLL.LLQ
         /// </summary>
         /// <param name="jldw"></param>
         /// <returns></returns>
-        public static int JldwDet(Models.JLinfo jldw)
+        public static int JldwDet(int jlid)
         {
-            return DAL.LLQ.JldwService.JldwDet(jldw);
+            return DAL.LLQ.JldwService.JldwDet(jlid);
         }
 
         /// <summary>

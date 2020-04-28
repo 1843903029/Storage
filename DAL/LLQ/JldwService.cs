@@ -39,19 +39,20 @@ namespace DAL.LLQ
         {
             StorageEntities b = new StorageEntities();
             b.JLinfo.Add(jldw);
-            return b.SaveChanges();
+                        return b.SaveChanges();
         }
 
         //删除
-        public static int JldwDet(Models.JLinfo jldw)
+        public static int JldwDet(int jlid)
         {
             StorageEntities entity = new StorageEntities();
-            var obj = (from p in entity.JLinfo where p.Jlid == jldw.Jlid select p).First();
-            obj.Delit = jldw.Delit;
+            var obj = (from p in entity.JLinfo where p.Jlid == jlid select p).First();
+            obj.Delit = false;
             return entity.SaveChanges();
 
         }
 
+        //根据编号查询
         public static IQueryable JldwGetById(int Jlid)
         {
             StorageEntities entity = new StorageEntities();

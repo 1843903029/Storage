@@ -22,9 +22,9 @@ namespace BLL.LLQ
         }
 
         //删除
-        public static int CplbDet(Models.CpLbinfo cplb)
+        public static int CplbDet(int id)
         {
-            return DAL.LLQ.CplbService.CplbDet(cplb);
+            return DAL.LLQ.CplbService.CplbDet(id);
 
         }
 
