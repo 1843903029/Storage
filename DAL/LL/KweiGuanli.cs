@@ -89,8 +89,8 @@ namespace DAL.LL
             obj.kwName = lo.kwName;
             obj.kwType = lo.kwType;
             obj.CangKu = lo.CangKu;
-            obj.Isdefault = lo.Isdefault;
-
+            obj.Zhuangtai = lo.Zhuangtai;
+            obj.Time = lo.Time;
             return s.SaveChanges();
 
         }

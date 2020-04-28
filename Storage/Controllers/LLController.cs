@@ -64,11 +64,13 @@ namespace Storage.Controllers
         }
         public ActionResult KWEdit(LocationManagement lo)
         {
+            lo.Shuju = true;
+            lo.Isdefault = 2;
             return Json(BLL.LL.KweiGuanliManager.KwEdit(lo),JsonRequestBehavior.AllowGet);
         }
-        public ActionResult KWGetByID(int ID)
+        public ActionResult KWGetByID(int kwID)
         {
-            return Json(BLL.LL.KweiGuanliManager.KwGetById(ID),JsonRequestBehavior.AllowGet);
+            return Json(BLL.LL.KweiGuanliManager.KwGetById(kwID),JsonRequestBehavior.AllowGet);
         }
             public ActionResult KHAdd(Client c)
         {

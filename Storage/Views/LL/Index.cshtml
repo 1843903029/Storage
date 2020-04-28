@@ -4,64 +4,71 @@
     Layout = "~/Views/MainPage.cshtml";
 }
 
+<!DOCTYPE html>
 
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/layui/css/layui.css" rel="stylesheet" />
-<div style="border:0px solid #4cff00;width:95%;">
-    <div style="padding:15px;border:1px solid red">
-        <div>
-            <table>
-                <tr>
-                    <td><a href="#">首页<</a></td>
-                    <td>基本信息<</td>
-                    <td>库位管理</td>
-                </tr>
-            </table>
-            <div style="height:70px;">
-                <h4>库位管理</h4>
-                <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="xzshow()">新增</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="border:0px solid #4cff00;width:95%;">
+        <div style="padding:15px;border:1px solid red">
+            <div>
+                <table>
+                    <tr>
+                        <td><a href="#">首页<</a></td>
+                        <td>基本信息<</td>
+                        <td>库位管理</td>
+                    </tr>
+                </table>
+                <div style="height:70px;">
+                    <h4>库位管理</h4>
+                    <div style="float:right;display:inline;">
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="xzshow()">新增</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                    </div>
                 </div>
-            </div>
-            <div id="xzdiv">
-               
+                <div id="xzdiv">
+
                     <table class="table table-striped">
                         <tbody>
                             <tr>
                                 <td>库位编号</td>
                                 <td>
-                                    <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium"/>
+                                    <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium" />
                                 </td>
                                 <td>库位名称</td>
                                 <td>
-                                    <input id="qwerty" name="kwName" type="text"/>
+                                    <input id="qwerty" name="kwName" type="text" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>库位类型</td>
                                 <td>
-                                    <select id="kw" name="kwType"  style="width:164px;">
-                                        <option value="">请选择库位类型</option>
+                                    <select id="kw" name="kwType" style="width:164px;">
+                                        <option>请选择库位类型</option>
                                         @*<option value="1">正式库区</option>
-                                        <option value="2">待入库区</option>
-                                        <option value="3">待检库区</option>
-                                        <option value="4">待出库区</option>
-                                        <option value="5">报损库区</option>*@
+                                            <option value="2">待入库区</option>
+                                            <option value="3">待检库区</option>
+                                            <option value="4">待出库区</option>
+                                            <option value="5">报损库区</option>*@
                                     </select>
                                 </td>
                                 <td>仓库</td>
                                 <td>
-                                    <select id="ck" name="CKName"  style="width:164px;">
-                                        <option value="">请选择仓库</option>
-                                        @*<option value="1">产品仓库</option>*@
+                                    <select id="ck" name="CKName" style="width:164px;">
+                                        <option>请选择仓库</option>
+                                       
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>是否默认</td>
                                 <td>
-                                    <select id="zt" name="Zhuangtai"  style="width:164px;">
+                                    <select id="zt" name="Zhuangtai" style="width:164px;">
                                         <option value="">请选择</option>
                                         <option value="1">是</option>
                                         <option value="2">否</option>
@@ -70,55 +77,56 @@
                                 <td>创建时间</td>
                                 <td><input id="Time1" name="Time" type="text" placeholder="请输入当前时间" /></td>
                             </tr>
-                            
+
 
 
                         </tbody>
                     </table>
-                    <input id="Button1" type="button" value="button"  onclick="add()"/>
-                   
+                    
 
-</div>
 
-            <table action="javascript:void(0)" class="form-horizontal">
-                <tr>
-                    <td>仓库:<input id="txtSearch" type="text" class="input-group" placeholder="请选择仓库"></td>
-                    <td>类型:<input id="txtSearch" type="text" class="input-group" placeholder="请选择"></td>
-                    <td>库位:<input id="txtSearch" type="text" class="input-group" placeholder=""></td>
-                    <td>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
-                    </td>
+                </div>
 
-                </tr>
+                <table action="javascript:void(0)" class="form-horizontal">
+                    <tr>
+                        <td>仓库:<input id="txtSearch" type="text" class="input-group" placeholder="请选择仓库"></td>
+                        <td>类型:<input id="txtSearch" type="text" class="input-group" placeholder="请选择"></td>
+                        <td>库位:<input id="txtSearch" type="text" class="input-group" placeholder=""></td>
+                        <td>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                        </td>
+
+                    </tr>
+                </table>
+                <div class="widget" hidden>
+
+                </div>
+            </div>
+            <table style="width:100%;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td><input type='checkbox' /></td>
+                        <td>序号</td>
+                        <td>库位编号</td>
+                        <td>库位名</td>
+                        <td>所在仓库</td>
+                        <td>库位类型</td>
+                        <td>是否禁用</td>
+                        <td>是否默认</td>
+                        <td>创建时间</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody id="tb1"></tbody>
             </table>
-            <div class="widget" hidden>
+            @*layui分页*@
+            <div id="pageDome">
 
             </div>
         </div>
-        <table style="width:100%;" class="table table-bordered">
-            <thead>
-                <tr>
-                    <td><input type='checkbox' /></td>
-                    <td>序号</td>
-                    <td>库位编号</td>
-                    <td>库位名</td>
-                    <td>所在仓库</td>
-                    <td>库位类型</td>
-                    <td>是否禁用</td>
-                    <td>是否默认</td>
-                    <td>创建时间</td>
-                    <td>操作</td>
-                </tr>
-            </thead>
-            <tbody id="tb1"></tbody>
-        </table>
-        @*layui分页*@
-        <div id="pageDome">
-
-        </div>
     </div>
-</div>
-
+    </body>
+</html>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
@@ -153,12 +161,12 @@
         });
 
 
-       
+
 
     })
     function xzshow() {
         layer.open({
-            type:1,
+            type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['添加库位', 'font-size:18px'],
             area: ['650px', '359px'],
@@ -167,11 +175,11 @@
             content: $('#xzdiv'),
             btn: ['确定', '取消'],
             yes: function () {
-               add();
+                add();
             },
         });
 
-        
+
     }
     function Type() {
         $.ajax({
@@ -218,19 +226,17 @@
         //    obj[b.name] = b.value;
         //});
         //var jsons = JSON.stringify(obj);
-        $.ajax({  
+        $.ajax({
             type: "POST",
             url: "/LL/KWAdd",
-            //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
             //data: "{lo:" + jsons + "}",
-            data: "{lo:{kwName:'" + $("#qwerty").val() + "',CKName:'" + $("#ck").val() + "',kwType:'" + $("#kw").val() + "',Time:'" + $("#Time1").val() + "'}}",
+            data: "{lo:{kwName:'" + $("#qwerty").val() + "',CangKu:'" + $("#ck").val() + "',kwType:'" + $("#kw").val() + "',Zhuangtai:'" + $("#zt").val() + "',Time:'" + $("#Time1").val() + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
-                    alert($("#kwName").text());
                     alert("添加成功");
-                    //location.href = '/AJAXDemo/Index';
+                    window.location.reload();
                 }
                 else {
                     alert("添加失败");
@@ -243,32 +249,7 @@
             }
         });
 
-        //var data = $("#form1").serializeArray();
-        //var obj = {};
-        //$.each(data, function (a, b) {
-        //    obj[b.name] = b.value;
-        //});
-        //var jsons = JSON.stringify(obj);
-        //$.ajax({
-        //    type: "POST",
-        //    url: "/LL/KWAdd",
-        //    //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
-        //    data: "{lo:" + jsons + "}",
-        //    dataType: "json",
-        //    contentType: "application/json",
-        //    success: function (result) {
-        //        if (result > 0) {
-        //            alert("新增成功");
-        //            window.location.reload();
-        //        } else {
-        //            alert("删除失败");
-        //        }
-        //    },
-        //    error: function (ex) {
-        //        alert("Error:" + ex.responseText);
-
-        //    }
-        //});
+        
     }
     function del(id) {
         $.ajax({
@@ -303,7 +284,7 @@
                 $("#tb1 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CKName + "</td><td>" + data.kwType + "</td><td>" + data.Zhuangtai + "</td><td>" + data.Isdefault + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.kwID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.kwID + ");' /></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CKName + "</td><td>" + data.kwType + "</td><td>" + data.Isdefault + "</td><td>" + data.Zhuangtai + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.kwID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.kwID + ");' /></td></tr>");
                 });
             },
             error: function (ex) {
@@ -321,28 +302,29 @@
             area: ['650px', '359px'],
             shadeClose: true,
             shade: 0,
-            content: $('#xzdiv').html(),
+            content: $('#xzdiv'),
             btn: ['确定', '取消'],
             yes: function () {
-                
+                Edit();
             },
         });
         $.ajax({
             type: "POST",
-            url: "/LL/KWGetById",
+            url: "/LL/KWGetByID",
             data: "{kwID:" + id + "}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 //console.log(result);
                 $.each(result, function (Index, data) {
-
-                    $("#kwName1").val(data.kwName);
-                    $("#kwType1").val(data.KwTypeID);
-                    $("#CKName1").val(data.Ckid);
-                    $("#Zhuangtai1").val(data.Zhuangtai);
-                    $("#Time1").val(data.Time);
                     
+                    $("#kwID").val(data.kwID);
+                    $("#qwerty").val(data.kwName);
+                    $("#kw").val(data.KwTypeID);
+                    $("#ck").val(data.Ckid);
+                    $("#zt").val(data.Zhuangtai);
+                    $("#Time1").val(ConvertDate(data.Time));
+
                 });
             },
             error: function (ex) {
@@ -350,6 +332,32 @@
             }
         });
     }
+    function Edit() {
+        $.ajax({
+            type: "POST",
+            url: "/LL/KWEdit",
+            //data: "{lo:" + jsons + "}",
+            data: "{lo:{kwID:'" + $("#kwID").val() + "',kwName:'" + $("#qwerty").val() + "',CangKu:'" + $("#ck").val() + "',kwType:'" + $("#kw").val() + "',Zhuangtai:'" + $("#zt").val() + "',Isdefault:'" + $("#zt").val() + "',Time:'" + $("#Time1").val() + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    window.location.reload();
+
+                }
+                else {
+                    alert("修改失败");
+
+                }
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();
