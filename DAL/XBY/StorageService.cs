@@ -197,6 +197,7 @@ namespace DAL.XBY
                                           cptiaoma = pp.CpGlinfo.Cpbh,
                                           cpguige = pp.CpGlinfo.Specification,
                                           cpjiage = pp.CpGlinfo.CpPrice,
+                                          cpid = pp.CpGlinfo.CpID,
                                           Price = pp.Price,
                                           StorageNumber = pp.StorageNumber,
                                           Summoney = pp.Summoney,
@@ -249,6 +250,36 @@ namespace DAL.XBY
             StorageEntities ent = new StorageEntities();
             Storage obj = ent.Storage.Find(id);
             obj.DataState = false;
+            return ent.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// 审核入库单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int RuKuShenHe(string danhao, int state)
+        {
+            StorageEntities ent = new StorageEntities();
+            Storage obj = ent.Storage.Find(danhao);
+            obj.State = state;
+            return ent.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        public static int RuKuSHHou(int cpid, int Count)
+        {
+            StorageEntities ent = new StorageEntities();
+            CpGlinfo obj = ent.CpGlinfo.Find(cpid);
+            obj.CpShuLiang += Count;
             return ent.SaveChanges();
         }
 

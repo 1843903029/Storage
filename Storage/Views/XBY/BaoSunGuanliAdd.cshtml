@@ -24,22 +24,20 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control" placeholder="可不填自动生成" readonly>
+                    <input type="text" class="form-control" id="BaoSunRandom" placeholder="可不填自动生成" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" id="BsLeiXing">
+                        <option>请选择报损类型</option>
+                        <option>损坏报损</option>
+                        <option>丢失报损</option>
                     </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <input type="text" class="form-control">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="BaoSunTime">
                 </div>
             </div>
             <div style="display:flex">
@@ -51,7 +49,7 @@
                     <input type="text" class="form-control">
                 </div>
                 <div style="text-align:left;width:615px;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="bsbeizhu">
                 </div>
             </div>
         </div>
@@ -60,6 +58,7 @@
             <table class="table table-striped table-bordered table-hover" id="tabInfo">
                 <thead>
                     <tr class="widget-title">
+                        <th class="hidden-480">产品编号</th>
                         <th class="hidden-480">产品名称</th>
                         <th class="hidden-480">产品条码</th>
                         <th class="hidden-480">规格</th>
@@ -87,7 +86,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary" onclick="BaoSunAdd()">保存</button>
             <button type="button" class="btn">取消</button>
         </div>
 
@@ -104,8 +103,15 @@
     var pageSize = 5;
     var pageCount = 0;
     var rowss = 0;
+    var info = [];
+    var danhapsuiji;
     $(function () {
         rukuList();
+
+        var addtime = new Date();
+        $("#BaoSunTime").val(addtime.toLocaleDateString());//赋值当前日期到页面
+        suijidanhao();//随机单号生成
+
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -141,7 +147,7 @@
                 $("#tb2 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.KwName+ "</td><td>" + data.CpShuLiang + "</td></tr>");
+                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.KwName + "</td><td>" + data.CpShuLiang + "</td></tr>");
                 });
             },
             error: function (ex) {
@@ -150,7 +156,7 @@
             }
         });
     }
-    
+
 
     function SelectChanPin(id) {
         $.ajax({
@@ -161,7 +167,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td></td><td>" + data.KwName + "</td><td><input id='RukuShu' type='text' /></td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.Specification + "</td><td></td><td>" + data.KwName + "</td><td><input name='" + data.Cpbh + "' type='text'  onchange='www(" + data.Cpbh + "," + data.CpShuLiang + ")' /></td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
 
                 });
             },
@@ -171,6 +177,105 @@
             }
         });
     }
+
+    function www(ff,kucun) {
+        var chukushu = document.getElementsByName(ff);
+        //alert(danjia);
+        //alert(rukushu[0].value);
+        //alert(kucun);
+        if (chukushu[0].value > kucun) {
+            alert("没有这么多库存呢！");
+            $("input[name='" + ff + "']").val(1);
+        } 
+
+
+    }
+
+    //   根据当前时间和随机数生成流水号
+    function suijidanhao() {
+        var now = new Date()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hour = now.getHours()
+        var minutes = now.getMinutes()
+        var seconds = now.getSeconds()
+        //month = now.setTimeDateFmt(month)
+        //hour = now.setTimeDateFmt(hour)
+        //minutes = now.setTimeDateFmt(minutes)
+        //seconds = this.setTimeDateFmt(seconds)
+        danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
+        $("#BaoSunRandom").val(danhapsuiji);
+    }
+
+
+    function BaoSunAdd() {
+        var num = $("#tb1 tr").length;
+
+        //console.log(info)
+
+
+        if ($("#BsLeiXing").val() == "请选择报损类型") {
+            alert("请选择报损类型后添加！");
+        }
+        else {
+            for (var i = 0; i < num; i++) {
+                var obj = {};
+                obj.ProductID = $("#tb1 tr").eq(i).children("td").eq(0).text()
+                obj.Price = $("#tb1 tr").eq(i).children("td").eq(5).text();
+                obj.BaoSunCount = $("#tb1 tr").eq(i).children("td").eq(6).children("input").val();
+                if ($("#tb1 tr").eq(i).children("td").eq(6).children("input").val() == "") {
+                    alert("报损数量不能为0");
+                    return;
+                }
+                obj.WarehouseID = 1;
+                obj.BreakageIDS = danhapsuiji;
+                info.push(obj);
+
+            }
+
+            var rukuzongshu = 0;//定义总数量
+            for (var i = 0; i < info.length; i++) {
+                rukuzongshu += parseInt(info[i].BaoSunCount) ;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/XBY/AddBaoSun",
+                data: "{zhu:{BreakageID:'" + danhapsuiji + "',BreakageType:'" + $("#BsLeiXing").val() + "',BreakageCount:'" + rukuzongshu + "',EmployeeID:'" + 1 + "',StateText:'" + $("#bsbeizhu").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    AddXiang();
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+    }
+
+    function AddXiang() {
+        for (var i = 0; i < info.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/AddBaoSuniang",
+                data: "{xiang:{BreakageIDS:'" + info[i].BreakageIDS + "',ProductID:'" + info[i].ProductID + "',Price:'" + info[i].Price + "',BreakageNumber:'" + info[i].BaoSunCount + "',WarehouseID:'" + info[i].WarehouseID + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+        alert("添加成功");
+        location.href = "/XBY/BaoSunGuanli"
+    }
+
 
 
     function ConvertDate(date) {

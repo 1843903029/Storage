@@ -170,7 +170,7 @@ namespace DAL.XBY
                           DataState = p.DataState,
                           StateText = p.StateText,
                           xiangbiao = from pp in p.BreakageDetailed
-                                      where pp.BreakageIDS==Danhao
+                                      where pp.BreakageIDS == Danhao
                                       select new
                                       {
                                           //[BreakageDetailedID], [BreakageIDS], 
@@ -180,6 +180,7 @@ namespace DAL.XBY
                                           ProductID = pp.ProductID,
                                           productName = pp.CpGlinfo.CpXsName,
                                           cptiaoma = pp.CpGlinfo.Cpbh,
+                                          cpid = pp.CpGlinfo.CpID,
                                           cpguige = pp.CpGlinfo.Specification,
                                           cpjiage = pp.CpGlinfo.CpPrice,
                                           Price = pp.Price,
@@ -209,5 +210,58 @@ namespace DAL.XBY
             return ent.SaveChanges();
         }
 
+
+        /// <summary>
+        /// 新增报损主表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddBaoSun(Breakage zhu)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.Breakage.Add(zhu);
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 新增报损详表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddBaoSuniang(BreakageDetailed xiang)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.BreakageDetailed.Add(xiang);
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 审核报损单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int BaoSunShenHe(string danhao, int state)
+        {
+            StorageEntities ent = new StorageEntities();
+            Breakage obj = ent.Breakage.Find(danhao);
+            obj.State = state;
+            return ent.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        public static int BaoSunSHHou(int cpid, int Count)
+        {
+            StorageEntities ent = new StorageEntities();
+            CpGlinfo obj = ent.CpGlinfo.Find(cpid);
+            obj.CpShuLiang = obj.CpShuLiang - Count;
+            return ent.SaveChanges();
+        }
     }
 }

@@ -197,16 +197,54 @@ namespace DAL.XBY
         }
 
 
+
         /// <summary>
-        /// 删除移库单
+        /// 添加移库主表
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="zhu"></param>
         /// <returns></returns>
-        public static int ShanChuYiKu(string id)
+        public static int AddYiKu(Movement zhu)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.Movement.Add(zhu);
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 添加移库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public static int AddYiKuxiang(MovementDetailed xiang)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.MovementDetailed.Add(xiang);
+            return ent.SaveChanges();
+        }
+            /// <summary>
+            /// 删除移库单
+            /// </summary>
+            /// <param name="id"></param>
+            /// <returns></returns>
+            public static int ShanChuYiKu(string id)
         {
             StorageEntities ent = new StorageEntities();
             Movement obj = ent.Movement.Find(id);
             obj.DataState = false;
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 审核移库单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int YiKuShenHe(string danhao, int state)
+        {
+            StorageEntities ent = new StorageEntities();
+            Movement obj = ent.Movement.Find(danhao);
+            obj.State = state;
             return ent.SaveChanges();
         }
 
