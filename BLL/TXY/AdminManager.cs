@@ -48,5 +48,23 @@ namespace BLL.TXY
         {
             return DAL.TXY.AdminService.SysAdminbyRoleNamebanding();
         }
-        }
+        //读取
+        public static IQueryable AdminGetById(int AdminID)
+        {
+            return DAL.TXY.AdminService.AdminGetById(AdminID);
+        
+    }
+        //修改
+        public static int AdminEdit(Admin admin)
+        {
+        return DAL.TXY.AdminService.AdminEdit(admin);
+
+    }
+        //模糊查询
+        public static IQueryable AdminQuery(int pageIndex, int pageSize, string UserName)
+        {
+
+        return DAL.TXY.AdminService.AdminQuery(pageIndex, pageSize, UserName);
+    }
+    }
 }

@@ -34,7 +34,7 @@
                     <tr>
 
                         <td><strong style="margin-left:20px">用户管理</strong></td>
-                        <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:" onclick="xzshow()" >新增</a></td>
+                        <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
 
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
@@ -44,7 +44,7 @@
                     <tr>
                         <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入用户名或者工号"></td>
                         <td>
-                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="AdminQuery()">搜索</a>
                         </td>
                         <td>
                             <button style="margin-left:10px" id="btnHSearch" data-toggle="dropdown" class="btn btn-primary">高级搜索<span class="caret"></span></button>
@@ -64,23 +64,23 @@
                         <tr>
                             <td><label for="firstName" class="control-label">部门</label></td>
                             <td>
-                                <select id="dn" name="ddlDepart" class="input-medium">
+                                <select id="DepartNum_id" name="DepartNum_id" class="input-medium">
                                     <option value="">请选择部门</option>
                                     @*<option value="000001">质量部门</option>
-        <option value="000002">仓库部门</option>
-        <option value="000003">采购部门</option>*@
+                                        <option value="000002">仓库部门</option>
+                                        <option value="000003">采购部门</option>*@
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="firstName" class="control-label">角色</label></td>
                             <td>
-                                <select id="rn" name="ddlRole" class="input-medium">
+                                <select id="RoleNum" name="RoleNum" class="input-medium">
                                     <option value="">请选择角色</option>
                                     @*<option value="DR_0000">系统管理员</option>
-                                    <option value="000001">仓管员</option>
-                                    <option value="000002">采购员</option>
-                                    <option value="000003">门卫</option>*@
+                                        <option value="000001">仓管员</option>
+                                        <option value="000002">采购员</option>
+                                        <option value="000003">门卫</option>*@
                                 </select>
                             </td>
                         </tr>
@@ -116,23 +116,90 @@
         </div>
 
     </div>
-    <div id="yyy" >
+    <div id="yyyy">
         <table class="formtab_user">
             <tr>
                 <td hidden><input id="AdminID" name="AdminID" type="text"></td>
                 <td>用户名</td>
                 <td>
-                    <input id="txtUserName1" name="txtUserName" type="text" placeholder="请输入用户名" class="input-medium">
+                    <input id="UserName2" name="UserName" type="text" placeholder="请输入用户名" class="input-medium">
                 </td>
                 <td>用户编号</td>
                 <td>
-                    <input id="txtUserCode1" name="txtUserCode1" type="text" class="input-medium">
+                    <input id="UserCode2" name="UserCode" type="text" class="input-medium">
                 </td>
             </tr>
             <tr>
                 <td>密码</td>
                 <td>
-                    <input id="txtPassword" name="txtPassword" type="password" placeholder="请输入密码" class="input-medium">
+                    <input id="PassWord2" name="PassWord" type="password" placeholder="请输入密码" class="input-medium">
+                </td>
+                <td>手机</td>
+                <td>
+                    <input id="Phone2" name="Phone" type="text" placeholder="" class="input-medium">
+                </td>
+            </tr>
+
+            <tr>
+                <td>真名</td>
+                <td>
+                    <input id="RealName2" name="RealName" type="text" placeholder="" class="input-medium">
+                </td>
+                <td>Email</td>
+                <td>
+                    <input id="Email2" name="Email" type="text" placeholder="" class="input-medium">
+                </td>
+            </tr>
+            <tr>
+                
+            </tr>
+            <tr>
+                <td>部门</td>
+                <td>
+                    <select id="DepartNum_id2" name="DepartNum_id" class="input-medium" style="width:164px;">
+                        <option>请选择部门</option>
+                        @*<option value="1">质量部门</option>
+                            <option value="2">仓库部门</option>
+                            <option value="3">采购部门</option>*@
+                    </select>
+                </td>
+                <td>角色</td>
+                <td>
+                    <select id="RoleNum2" name="RoleNum" class="input-medium" style="width:164px;">
+                        <option>请选择角色</option>
+                        @*<option value="0">系统管理员</option>
+                            <option value="1">仓管员</option>
+                            <option value="2">采购员</option>
+                            <option value="3">门卫</option>*@
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="Button1" type="button" class="btn-success" style="margin-top:15px;width:50px;height:30px" onclick="update()" value="确认" />
+                <td />
+                <td> <input id="Button1_1" type="button" class="btn-info" style="margin-top:15px;width:50px;height:30px" value="取消" />
+                <td />
+            </tr>
+        </table>
+    </div>
+    <div id="yyy">
+        <table class="formtab_user">
+            <tr>
+                <td hidden><input id="AdminID" name="AdminID" type="text"></td>
+                <td>用户名</td>
+                <td>
+                    <input id="UserName" name="UserName" type="text" placeholder="请输入用户名" class="input-medium">
+                </td>
+                <td>用户编号</td>
+                <td>
+                    <input id="UserCode" name="UserCode" type="text" class="input-medium">
+                </td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td>
+                    <input id="PassWord" name="PassWord" type="password" placeholder="请输入密码" class="input-medium">
                 </td>
                 <td>确认密码</td>
                 <td>
@@ -143,56 +210,52 @@
             <tr>
                 <td>真名</td>
                 <td>
-                    <input id="txtRealName" name="txtRealName" type="text" placeholder="" class="input-medium">
+                    <input id="RealName" name="RealName" type="text" placeholder="" class="input-medium">
                 </td>
                 <td>Email</td>
                 <td>
-                    <input id="txtEmail" name="txtEmail" type="text" placeholder="" class="input-medium">
+                    <input id="Email" name="Email" type="text" placeholder="" class="input-medium">
                 </td>
             </tr>
-            <tr>
-                <td>电话</td>
-                <td>
-                    <input id="txtPhone" name="txtPhone" type="text" placeholder="" class="input-medium">
-                </td>
-                <td>手机</td>
-                <td>
-                    <input id="txtMobile" name="txtMobile" type="text" placeholder="" class="input-medium">
-                </td>
-            </tr>
+
             <tr>
                 <td>部门</td>
                 <td>
-                    <select id="dn" name="ddlDepart" class="input-medium" style="width:164px;">
+                    <select id="DepartNum_id1" name="DepartNum_id" class="input-medium" style="width:164px;">
                         <option>请选择部门</option>
                         @*<option value="1">质量部门</option>
-                        <option value="2">仓库部门</option>
-                        <option value="3">采购部门</option>*@
+                    <option value="2">仓库部门</option>
+                    <option value="3">采购部门</option>*@
                     </select>
                 </td>
                 <td>角色</td>
                 <td>
-                    <select id="rn" name="ddlRole" class="input-medium" style="width:164px;">
+                    <select id="RoleNum1" name="RoleNum" class="input-medium" style="width:164px;">
                         <option>请选择角色</option>
                         @*<option value="0">系统管理员</option>
-                        <option value="1">仓管员</option>
-                        <option value="2">采购员</option>
-                        <option value="3">门卫</option>*@
+                    <option value="1">仓管员</option>
+                    <option value="2">采购员</option>
+                    <option value="3">门卫</option>*@
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>创建时间</td>
                 <td>
-                    <input id="textCreateTime" name="textCreateTime" type="text" class="input-medium">
+                    <input id="CreateTime" name="CreateTime" type="text" class="input-medium">
+                </td>
+                <td>手机</td>
+                <td>
+                    <input id="Phone" name="Phone" type="text" placeholder="" class="input-medium">
                 </td>
             </tr>
+          
             <tr>
                 <td>
                     <input id="Button1" type="button" class="btn-success" style="margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" />
-                <td/>
+                <td />
                 <td> <input id="Button1_1" type="button" class="btn-info" style="margin-top:15px;width:50px;height:30px" value="取消" />
-                <td/>
+                <td />
             </tr>
         </table>
     </div>
@@ -209,7 +272,8 @@
     var rows = 0;
     $(function () {
         $("#yyy").hide();
-        //get(Stuate)
+        $("#yyyy").hide();
+        get(Stuate)
        
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -233,14 +297,6 @@
             });
         });
 
-        //$("#btnSubhh").click(function () {
-        //    if ($("#yyyyy").css("display") == "none") {
-        //        $("#yyyyy").show();
-
-        //    } else {
-        //        $("#yyyyy").hide();
-        //    }
-        //});
         $("#Button1_1").click(function () {
             $("#yyyyy").hide();
         });
@@ -266,7 +322,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartNum + "</td><td>" + data.RoleNum + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='#'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartName + "</td><td>" + data.RoleName + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='javascript:reads(" + data.AdminID + ")'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
 
                     
                 })
@@ -275,6 +331,103 @@
                 alert(ex.responseText);
             }
         })
+    }
+    function AdminQuery() {
+        var Search = $("#txtSearch").val();
+        $.ajax({
+            type: "POST",
+            url: "/TXY/AdminQuery",
+            data: { PageIndex: PageIndex , PageSize: PageSize , UserName:Search},
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartName + "</td><td>" + data.RoleName + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='javascript:reads(" + data.AdminID + ")'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+
+
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+
+    }
+    //读取
+    function reads(AdminID) {
+        alert(AdminID);
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['编辑角色', 'font-size:18px'],
+            area: ['500px', '250px'],
+            shadeClose: true,
+            content: $('#yyyy'),
+            shade: 0,
+
+        });
+
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/TXY/AdminGetById",
+            data: "{AdminID:" + AdminID + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                console.log(result);
+                $.each(result, function (Index, data) {
+
+                    $("#UserCode2").val(data.UserCode);
+                    $("#UserName2").val(data.UserName);
+                    $("#PassWord2").val(data.PassWord);
+                    $("#RealName2").val(data.RealName);
+                    $("#DepartNum_id2").val(data.DepartNum_id);
+                    $("#RoleNum2").val(data.RoleNum);
+                    $("#Email2").val(data.Email);
+                    $("#Phone2").val(data.Phone);
+                    
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    function update() {
+        var UserCode = $("#UserCode2").val();
+        var UserName = $("#UserName2").val();
+        var PassWord = $("#PassWord2").val();
+        var RealName = $("#RealName2").val();
+        var DepartNum_id = $("#DepartNum_id2").val();
+        var RoleNum = $("#RoleNum2").val();
+        var Email = $("#Email2").val();
+        var Phone = $("#Phone2").val();
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysRoleEdit",
+            data: "{role:{UserName:'" + UserName + "',UserCode:'" + UserCode + "',PassWord: '" + PassWord + "', RealName: '" + RealName + "',Email:'" + Email + "', Phone:'" + Phone + "',DepartNum_id:'" + DepartNum_id + "',RoleNum:'" + RoleNum + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    get();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+
+
     }
     //删除
     function btnSub(AdminID) {
@@ -288,7 +441,7 @@
             success: function (result) {
                 if (result > 0) {
                     alert("删除成功");
-                    get(dss);
+                    window.location.reload();
                 }
                 else {
                     alert("删除失败");
@@ -300,7 +453,7 @@
             }
 
         });
-        get(dss);
+        
     };
     //SysAdminbyRoleNamebanding
     function rn() {
@@ -312,7 +465,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("[name='ddlRole']").append("<option value='" + data.SysRoleID + "'>" + data.RoleName + "</option>");
+                    $("[name='RoleNum']").append("<option value='" + data.SysRoleID + "'>" + data.RoleName + "</option>");
                 });
             },
             //请求失败后的回调函数
@@ -331,7 +484,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("[name='ddlDepart']").append("<option value='" + data.SysDepartID + "'>" + data.DepartName + "</option>");
+                    $("[name='DepartNum_id']").append("<option value='" + data.SysDepartID + "'>" + data.DepartName + "</option>");
                 });
             },
             //请求失败后的回调函数
@@ -357,29 +510,38 @@
             type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['新增用户', 'font-size:18px'],
-            area: ['650px', '359px'],
+            area: ['500px', '300px'],
             shadeClose: true,
             shade: 0,
-            content: $('#yyy').html(),
-            btn: ['确定', '取消'],
-            yes: function () {
-               add();
-            },
+            content: $('#yyy'),
         });
 
 
     }
     function add() {
-        var UserCode = $("#txtUserCode1").val();
-        var name = "aaa";
-        var aa = $("#textCreateTime").val();
+        var UserCode = $("#UserCode").val();
+        var UserName = $("#UserName").val();
+        var PassWord = $("#PassWord").val();
+        var RealName = $("#RealName").val();
+        var DepartNum_id = $("#DepartNum_id1").val();
+        var RoleNum = $("#RoleNum1").val();
+        var Email = $("#Email").val();
+        var Phone = $("#Phone").val();
+        var CreateTime = $("#CreateTime").val();
         var IsDelete = true;
+        var Remark = "无";
+        var CreateIp = "邵阳";
+        var CreateUser = "小艳";
+        var LoginCount = 1;
+        var Picture = "无";
+        var UpdateTime = "2019/1/1";
+        var Status_id = 1;
         $.ajax({
             type: "POST",
             url: "/TXY/SysAdminadd",
-            data: "{admin:{UserName:" + name + ",UserCode:" + UserCode+ ",Password:'" + $("#txtPassword").val() + "',RealName:'" + $("#txtRealName").val() + "',Email:'" + $("#txtEmail").val() + "',Phone:'" + $("#txtPhone").val() + "',Mobile:'" + $("#txtMobile").val() + "',DepartNum:'" + $("#dn").val() + "',RoleNum:'" + $("#rn").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
+            data: "{admin:{UserName:'" + UserName + "',UserCode:'" + UserCode + "',PassWord: '" + PassWord + "', RealName: '" + RealName + "',Email:'" + Email + "', Phone:'" + Phone + "',DepartNum_id:'" + DepartNum_id + "',RoleNum:'" + RoleNum+ "',CreateTime:'" + CreateTime + "',IsDelete:'" + IsDelete + "',Remark:'" + Remark + "',CreateIp:'" + CreateIp + "',CreateUser:'" + CreateUser + "',LoginCount:'" + LoginCount + "',Status_id:'" + Status_id+"',Picture:'" + Picture + "',UpdateTime:'" + UpdateTime+"'}}",
             dataType: "json",
-            //contentType: "application/json",
+            contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("添加成功")
@@ -392,6 +554,5 @@
 
             }
         });
-        get();
     }
 </script>

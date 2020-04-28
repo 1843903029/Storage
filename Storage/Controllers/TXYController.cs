@@ -141,7 +141,21 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.AdminManager.SysAdminbyRoleNamebanding(), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult AdminGetById(int AdminID)
+        {
+            
+            return Json(BLL.TXY.AdminManager.AdminGetById(AdminID), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AdminEdit(Admin admin)
+        {
 
+            return Json(BLL.TXY.AdminManager.AdminEdit(admin), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AdminQuery(int PageIndex, int PageSize, string UserName)
+        {
+
+            return Json(BLL.TXY.AdminManager.AdminQuery(PageIndex, PageSize, UserName), JsonRequestBehavior.AllowGet);
+        }
 
 
 

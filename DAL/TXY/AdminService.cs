@@ -70,8 +70,8 @@ namespace DAL.TXY
                           //RoleNum = p.RoleNum,
                           IsDelete = p.IsDelete,
                           Stuate = p.SysStatus.StatusID,
-                          DepartNum=p.SysDepart.DepartNum,
-                          RoleNum= p.SysRole.RoleNum,
+                          DepartName = p.SysDepart.DepartName,
+                          RoleName = p.SysRole.RoleName,
 
                          
                       };
@@ -125,6 +125,74 @@ namespace DAL.TXY
                           RoleName = p.RoleName
                       };
             return obj;
+
+        }
+        //读取
+        public static IQueryable AdminGetById(int AdminID)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.Admin
+                      where p.AdminID == AdminID
+                      select new
+                      {
+                          UserName = p.UserName,
+                          UserCode = p.UserCode,
+                          PassWord = p.PassWord,
+                          RealName = p.RealName,
+                          Email = p.Email,
+                          Phone = p.Phone,
+                          DepartNum_id = p.DepartNum_id,
+                          RoleNum = p.RoleNum,
+            
+                          
+                      };
+            return obj;
+        }
+        //修改
+        public static int AdminEdit(Admin admin)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.Admin where p.AdminID == admin.AdminID select p).First();
+            obj.UserName = admin.UserName;
+            obj.UserCode = admin.UserCode;
+            obj.PassWord = admin.PassWord;
+            obj.RealName = admin.RealName;
+            obj.Email = admin.Email;
+            obj.RoleNum = admin.RoleNum;
+            obj.DepartNum_id = admin.DepartNum_id;
+            return entity.SaveChanges();
+
+        }
+        //模糊查询
+        public static IQueryable AdminQuery(int pageIndex, int pageSize, string UserName)
+        {
+            StorageEntities entity = new StorageEntities();
+
+            var obj = from p in entity.Admin
+                      where p.UserName.IndexOf(UserName) != -1
+                      && p.IsDelete == true
+                      orderby p.AdminID
+                      select new
+                      {
+                          AdminID = p.AdminID,
+                          UserName = p.UserName,
+                          UserCode = p.UserCode,
+                          RealName = p.RealName,
+                          Email = p.Email,
+                          Phone = p.Phone,
+                          LoginCount = p.LoginCount,
+                          //DepartNum_id = p.DepartNum_id,
+                          //RoleNum = p.RoleNum,
+                          IsDelete = p.IsDelete,
+                          Stuate = p.SysStatus.StatusID,
+                          DepartName = p.SysDepart.DepartName,
+                          RoleName = p.SysRole.RoleName,
+                      };
+
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            list.PageCount = obj.Count();
+            return list.DataList;
 
         }
     }
