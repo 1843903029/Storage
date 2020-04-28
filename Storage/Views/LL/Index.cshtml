@@ -219,17 +219,10 @@
     }
 
     function add() {
-        //获取对应表单下的表单元素的值  注意:此方法返回的是JSON对象而非JSON字符串
-        //var data = $("#form1").serializeArray();
-        //var obj = {};
-        //$.each(data, function (a, b) {
-        //    obj[b.name] = b.value;
-        //});
-        //var jsons = JSON.stringify(obj);
+        
         $.ajax({
             type: "POST",
             url: "/LL/KWAdd",
-            //data: "{lo:" + jsons + "}",
             data: "{lo:{kwName:'" + $("#qwerty").val() + "',CangKu:'" + $("#ck").val() + "',kwType:'" + $("#kw").val() + "',Zhuangtai:'" + $("#zt").val() + "',Time:'" + $("#Time1").val() + "'}}",
             dataType: "json",
             contentType: "application/json",

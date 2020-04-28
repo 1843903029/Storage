@@ -76,7 +76,32 @@ namespace Storage.Controllers
         {
             c.State = true;
             c.Time = "2020-03-09";
+
             return Json(BLL.LL.KHguanliManager.add(c), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GYSAdd(Supplier sup) {
+            sup.GysType = "合作供应商";
+            sup.State = true;
+            return Json(BLL.LL.GYSguanliManager.add(sup),JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GYSGetById(int id)
+        {
+            return Json(BLL.LL.GYSguanliManager.GYSGetById(id), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GYSEdit(Supplier sup)
+        {
+            return Json(BLL.LL.GYSguanliManager.GYSEdit(sup), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult KhGetById(int ID)
+        {
+            return Json(BLL.LL.KHguanliManager.KhGetById(ID), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult KhEdit(Client c)
+        {
+            return Json(BLL.LL.KHguanliManager.KhEdit(c), JsonRequestBehavior.AllowGet);
         }
     }
 }

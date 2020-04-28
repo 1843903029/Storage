@@ -3,210 +3,340 @@
     ViewBag.Title = "GYSguanli";
     Layout = "~/Views/MainPage.cshtml";
 }
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
 
-<div style="border:0px solid #4cff00;width:95%;">
-    <div style="padding:15px;border:1px solid red">
-        <div>
-            <table>
-                <tr>
-                    <td><a href="#">首页<</a></td>
-                    <td>基本信息<</td>
-                    <td>供应商管理</td>
-                </tr>
-            </table>
-            <div style="height:70px;">
-                <h4>供应商管理</h4>
-                <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GYSguanli</title>
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+<body>
+    <div style="border:0px solid #4cff00;width:95%;">
+        <div style="padding:15px;border:1px solid red">
+            <div>
+                <table>
+                    <tr>
+                        <td><a href="#">首页<</a></td>
+                        <td>基本信息<</td>
+                        <td>供应商管理</td>
+                    </tr>
+                </table>
+                <div style="height:70px;">
+                    <h4>供应商管理</h4>
+                    <div style="float:right;display:inline;">
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="plsc();">删除</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                    </div>
+                </div>
+
+                <table action="javascript:void(0)" class="form-horizontal">
+                    <tr>
+                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择供应商编号或名称"></td>
+
+                        <td>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                        </td>
+
+                    </tr>
+                </table>
+                <div class="widget" hidden>
+
                 </div>
             </div>
-
-            <table action="javascript:void(0)" class="form-horizontal">
-                <tr>
-                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择供应商编号或名称"></td>
-
-                    <td>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
-                    </td>
-
-                </tr>
+            <table style="width:100%;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td><input type='checkbox' /></td>
+                        <td>供应商编号</td>
+                        <td>供应商类型</td>
+                        <td>供应商名称</td>
+                        <td>电话</td>
+                        <td>Email</td>
+                        <td>传真</td>
+                        <td>联系人</td>
+                        <td>地址</td>
+                        <td>描述</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody id="tb1"></tbody>
             </table>
-            <div class="widget" hidden>
+            <div id="xzdiv">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>供应商编号</td>
+                            <td>
+                                <input id="GysID" name="GysID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium">
+                            </td>
+                            <td>供应商名称</td>
+                            <td>
+                                <input id="GysName" name="GysName" type="text" placeholder="请输入供应商名称" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>传真</td>
+                            <td>
+                                <input id="ChuangZhen" name="ChuangZhen" type="text" class="input-medium">
+                            </td>
+                            <td>Email</td>
+                            <td>
+                                <input id="Email" name="Email" type="text" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>电话</td>
+                            <td>
+                                <input id="Hone" name="Hone" type="text" class="input-medium">
+                            </td>
+                            <td>联系人</td>
+                            <td>
+                                <input id="Contacts" name="Contacts" type="text" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>地址</td>
+                            <td>
+                                <input id="Address" name="Address" type="text" class="input-medium">
+                            </td>
+                            <td>描述</td>
+                            <td>
+                                <input id="Describe" name="Describe" type="text" class="input-medium">
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
+            @*layui分页*@
+            <div id="pageDome">
 
             </div>
         </div>
-        <table style="width:100%;" class="table table-bordered">
-            <thead>
-                <tr>
-                    <td><input type='checkbox' /></td>
-                    <td>供应商编号</td>
-                    <td>供应商类型</td>
-                    <td>供应商名称</td>
-                    <td>电话</td>
-                    <td>Email</td>
-                    <td>传真</td>
-                    <td>联系人</td>
-                    <td>地址</td>
-                    <td>描述</td>
-                    <td>操作</td>
-                </tr>
-            </thead>
-            <tbody id="tb1"></tbody>
-        </table>
-        <div id="xzdiv">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <td>库位编号</td>
-                        <td>
-                            <input id="kwID" name="kwID" type="text" placeholder="自动生成,可不填" class="input-medium">
-                        </td>
-                        <td>库位名称</td>
-                        <td>
-                            <input id="kwName" name="kwName" type="text" placeholder="请输入库位名称" class="input-medium">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>库位类型</td>
-                        <td>
-                            <select id="kwType" name="kwType" class="input-medium" style="width:164px;">
-                                <option value="">请选择库位类型</option>
-                                <option value="1">正式库区</option>
-                                <option value="2">待入库区</option>
-                                <option value="3">待检库区</option>
-                                <option value="4">待出库区</option>
-                                <option value="5">报损库区</option>
-                            </select>
-                        </td>
-                        <td>仓库</td>
-                        <td>
-                            <select id="CKName" name="CKName" class="input-medium" style="width:164px;">
-                                <option value="">请选择仓库</option>
-                                <option value="1">产品仓库</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>是否默认</td>
-                        <td>
-                            <select id="Zhuangtai" name="Zhuangtai" class="input-medium" style="width:164px;">
-                                <option value="">请选择</option>
-                                <option value="1">是</option>
-                                <option value="2">否</option>
-                            </select>
-                        </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
-
-
-        </div>
-        @*layui分页*@
-        <div id="pageDome">
-
-        </div>
     </div>
-</div>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
-    var pageIndex = 1;
-    var pageSize = 12;
-    var rowss = 0;
-    $(function () {
-        $("#xzdiv").hide();
-        rukuList();
+</body>
+</html>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        var pageIndex = 1;
+        var pageSize = 15;
+        var rowss = 0;
+        $(function () {
+            $("#xzdiv").hide();
+            rukuList();
 
-        layui.use(['laypage', 'layer'], function () {
-            var laypage = layui.laypage
-                , layer = layui.layer;
+            layui.use(['laypage', 'layer'], function () {
+                var laypage = layui.laypage
+                    , layer = layui.layer;
 
-            //完整功能
-            laypage.render({
-                elem: 'pageDome'
-                , count: rowss
-                , limit: 3
-                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-                , jump: function (obj) {
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
-                    
+                //完整功能
+                laypage.render({
+                    elem: 'pageDemo'
+                    , count: rowss//总条数
+                    , limit: 3//每页显示数
+                    , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                    , jump: function (obj) {
+
+                        //设置当前页
+                        PageIndex = obj.curr;
+                        //设置每页显示
+                        PageSize = obj.limit;
+                    }
+                });
+            });
+
+           
+
+        })
+
+        function plsc(id) {
+            //bo = $(".sc").prop("checked")
+            if ($("#" + id + "").is(":checked") == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "/LL/delGYS",
+                    data: "{id:'" + id + "'}",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        if (result > 0) {
+                            alert("删除成功");
+                            window.location.reload();
+                        }
+                    },
+                    error: function (ex) {
+                        alert("Error:" + ex.responseText);
+
+                    }
+                });
+            } else {
+                alert("未选择数据！");
+            }
+           
+        }
+        function GetByID(id) {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo',//样式类名
+                title: ['修改供应商', 'font-size:18px'],
+                area: ['650px', '359px'],
+                shadeClose: true,
+                shade: 0,
+                content: $('#xzdiv'),
+                btn: ['确定', '取消'],
+                yes: function () {
+                    Edit();
+                },
+            });
+            $.ajax({
+                type: "POST",
+                url: "/LL/GYSGetById",
+                data: "{id:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    //console.log(result);
+                    $.each(result, function (Index, data) {
+
+                        $("#GysID").val(data.GysID);
+                        $("#GysType").val(data.GysType);
+                        $("#GysName").val(data.GysName);
+                        $("#Hone").val(data.Hone);
+                        $("#ChuangZhen").val(data.ChuangZhen);
+                        $("#Email").val(data.Email);
+                        $("#Contacts").val(data.Contacts);
+                        $("#Address").val(data.Address);
+                        $("#Describe").val(data.Describe);
+
+                    });
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
                 }
             });
-        });
+        }
+        function Edit() {
+            $.ajax({
+                type: "POST",
+                url: "/LL/GYSEdit",
+                //data: "{lo:" + jsons + "}",
+                data: "{sup:{GysID:'" + $("#GysID").val() + "',GysName:'" + $("#GysName").val() + "',GysType:'" + $("#GysType").val() + "',ChuangZhen:'" + $("#ChuangZhen").val() + "',Email:'" + $("#Email").val() + "',Hone:'" + $("#Hone").val() + "',Contacts:'" + $("#Contacts").val() + "',Address:'" + $("#Address").val() + "',Describe:'" + $("#Describe").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("修改成功");
+                        window.location.reload();
 
+                    }
+                    else {
+                        alert("修改失败");
 
-
-
-    })
-
-
-    function rukuList() {
-        $.ajax({
-            type: "POST",
-            url: "/LL/Listfenye2",
-            data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                console.log("1");
-                $("#tt tr").remove();
-                rowss = result.PageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /></td> </tr>");
-                });
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
-
-            }
-        });
-    }
-    function xzshow() {
-        layer.open({
-            type: 1,
-            skin: 'layui-layer-demo',//样式类名
-            title: ['添加库位', 'font-size:18px'],
-            area: ['650px', '359px'],
-            shadeClose: true,
-            content: $('#xzdiv').html(),
-            btn: ['确定', '取消'],
-            yes: function () {
-
-            },
-        });
-
-
-    }
-    function del(id) {
-        $.ajax({
-            type: "POST",
-            url: "/LL/delGYS",
-            data: "{id:" + id + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                if (result > 0) {
-                    alert("删除成功");
-                    window.location.reload();
-
-                } else {
-                    alert("删除失败");
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
                 }
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
+            });
+        }
 
-            }
-        });
-    }
+        function rukuList() {
+            $.ajax({
+                type: "POST",
+                url: "/LL/Listfenye2",
+                data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    console.log("1");
+                    $("#tb1 tr").remove();
+                    rowss = result.PageCount;
+                    $.each(result.DataList, function (index, data) {
+                        $("#tb1").append("<tr><td><input id='" + data.GysID + "' type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
 
-    function ConvertDate(date) {
-        var time = new Date(parseInt(date.substr(6)));
-        return time.toLocaleDateString();
-    }
-</script>
+                }
+            });
+        }
+        
+        function xzshow() {
+            
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo',//样式类名
+                title: ['添加供应商', 'font-size:18px'],
+                area: ['650px', '359px'],
+                shadeClose: true,
+                shade: 0,
+                content: $('#xzdiv'),
+                btn: ['确定', '取消'],
+                yes: function () {
+                    add();
+                },
+            });
+
+
+        }
+        function add() {
+
+            $.ajax({
+                type: "POST",
+                url: "/LL/GYSAdd",
+                //data: "{lo:" + jsons + "}",
+                data: "{sup:{GysName:'" + $("#GysName").val() + "',GysType:'" + $("#GysType").val() + "',ChuangZhen:'" + $("#ChuangZhen").val() + "',Email:'" + $("#Email").val() + "',Hone:'" + $("#Hone").val() + "',Contacts:'" + $("#Contacts").val() + "',Address:'" + $("#Address").val() + "',Describe:'" + $("#Describe").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("添加成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("添加失败");
+
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+
+
+        }
+        function del(id) {
+            $.ajax({
+                type: "POST",
+                url: "/LL/delGYS",
+                data: "{id:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        window.location.reload();
+
+                    } else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+
+        function ConvertDate(date) {
+            var time = new Date(parseInt(date.substr(6)));
+            return time.toLocaleDateString();
+        }
+    </script>
