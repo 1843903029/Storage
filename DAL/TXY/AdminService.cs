@@ -101,5 +101,31 @@ namespace DAL.TXY
             h.Admin.Add(admin);
             return h.SaveChanges();
         }
+        //下拉框绑定
+        public static IQueryable SysAdminbyDepartNamebanding()
+        {
+            StorageEntities h = new StorageEntities();
+            var obj = from p in h.SysDepart
+                      select new
+                      {
+                          SysDepartID = p.SysDepartID,
+                          DepartName = p.DepartName
+                      };
+            return obj;
+
+        }
+        //下拉框绑定
+        public static IQueryable SysAdminbyRoleNamebanding()
+        {
+            StorageEntities h = new StorageEntities();
+            var obj = from p in h.SysRole
+                      select new
+                      {
+                          SysRoleID = p.SysRoleID,
+                          RoleName = p.RoleName
+                      };
+            return obj;
+
+        }
     }
 }

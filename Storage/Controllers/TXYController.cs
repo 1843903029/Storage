@@ -131,7 +131,16 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.AdminManager.SysAdminadd(admin), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SysAdminbyDepartNamebanding()
+        {
 
+            return Json(BLL.TXY.AdminManager.SysAdminbyDepartNamebanding(), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SysAdminbyRoleNamebanding()
+        {
+
+            return Json(BLL.TXY.AdminManager.SysAdminbyRoleNamebanding(), JsonRequestBehavior.AllowGet);
+        }
 
 
 

@@ -62,6 +62,7 @@ namespace DAL.TXY
         //    entity.SysRole.Add(role);
         //    return entity.SaveChanges();
         //}
+        //读取
         public static IQueryable SysRoleGetById(int SysRoleID)
         {
             StorageEntities entity = new StorageEntities();
@@ -76,7 +77,7 @@ namespace DAL.TXY
                       };
             return obj;
         }
-
+        //修改
         public static int SysRoleEdit(SysRole role)
         {
             StorageEntities entity = new StorageEntities();
@@ -88,6 +89,7 @@ namespace DAL.TXY
             return entity.SaveChanges();
 
         }
+        //模糊查询
         public static IQueryable SysRoleQuery(int pageIndex, int pageSize, string RoleName)
         {
             StorageEntities entity = new StorageEntities();

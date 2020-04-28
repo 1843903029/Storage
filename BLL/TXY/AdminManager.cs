@@ -40,5 +40,13 @@ namespace BLL.TXY
         {
             return DAL.TXY.AdminService.SysAdminadd(admin);
         }
-    }
+        public static IQueryable SysAdminbyDepartNamebanding()
+        {
+            return DAL.TXY.AdminService.SysAdminbyDepartNamebanding();
+        }
+        public static IQueryable SysAdminbyRoleNamebanding()
+        {
+            return DAL.TXY.AdminService.SysAdminbyRoleNamebanding();
+        }
+        }
 }

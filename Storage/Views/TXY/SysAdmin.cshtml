@@ -34,7 +34,8 @@
                     <tr>
 
                         <td><strong style="margin-left:20px">用户管理</strong></td>
-                        <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
+                        <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:" onclick="xzshow()" >新增</a></td>
+
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
@@ -63,23 +64,23 @@
                         <tr>
                             <td><label for="firstName" class="control-label">部门</label></td>
                             <td>
-                                <select id="ddlDepart" name="ddlDepart" class="input-medium">
+                                <select id="dn" name="ddlDepart" class="input-medium">
                                     <option value="">请选择部门</option>
-                                    <option value="000001">质量部门</option>
-                                    <option value="000002">仓库部门</option>
-                                    <option value="000003">采购部门</option>
+                                    @*<option value="000001">质量部门</option>
+        <option value="000002">仓库部门</option>
+        <option value="000003">采购部门</option>*@
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="firstName" class="control-label">角色</label></td>
                             <td>
-                                <select id="ddlRole" name="ddlRole" class="input-medium">
+                                <select id="rn" name="ddlRole" class="input-medium">
                                     <option value="">请选择角色</option>
-                                    <option value="DR_0000">系统管理员</option>
+                                    @*<option value="DR_0000">系统管理员</option>
                                     <option value="000001">仓管员</option>
                                     <option value="000002">采购员</option>
-                                    <option value="000003">门卫</option>
+                                    <option value="000003">门卫</option>*@
                                 </select>
                             </td>
                         </tr>
@@ -115,17 +116,17 @@
         </div>
 
     </div>
-    <div hidden id="yyyyy" >
+    <div id="yyy" >
         <table class="formtab_user">
             <tr>
                 <td hidden><input id="AdminID" name="AdminID" type="text"></td>
                 <td>用户名</td>
                 <td>
-                    <input id="txtUserName" name="txtUserName" type="text" placeholder="请输入用户名" class="input-medium">
+                    <input id="txtUserName1" name="txtUserName" type="text" placeholder="请输入用户名" class="input-medium">
                 </td>
                 <td>用户编号</td>
                 <td>
-                    <input id="txtUserCode" name="txtUserCode" type="text" class="input-medium">
+                    <input id="txtUserCode1" name="txtUserCode1" type="text" class="input-medium">
                 </td>
             </tr>
             <tr>
@@ -162,21 +163,21 @@
             <tr>
                 <td>部门</td>
                 <td>
-                    <select id="ddlDepart" name="ddlDepart" class="input-medium" style="width:164px;">
-                        <option value="">请选择部门</option>
-                        <option value="1">质量部门</option>
+                    <select id="dn" name="ddlDepart" class="input-medium" style="width:164px;">
+                        <option>请选择部门</option>
+                        @*<option value="1">质量部门</option>
                         <option value="2">仓库部门</option>
-                        <option value="3">采购部门</option>
+                        <option value="3">采购部门</option>*@
                     </select>
                 </td>
                 <td>角色</td>
                 <td>
-                    <select id="ddlRole" name="ddlRole" class="input-medium" style="width:164px;">
-                        <option value="">请选择角色</option>
-                        <option value="0">系统管理员</option>
+                    <select id="rn" name="ddlRole" class="input-medium" style="width:164px;">
+                        <option>请选择角色</option>
+                        @*<option value="0">系统管理员</option>
                         <option value="1">仓管员</option>
                         <option value="2">采购员</option>
-                        <option value="3">门卫</option>
+                        <option value="3">门卫</option>*@
                     </select>
                 </td>
             </tr>
@@ -207,8 +208,8 @@
     var PageCount = 0;
     var rows = 0;
     $(function () {
-
-        get(Stuate)
+        $("#yyy").hide();
+        //get(Stuate)
        
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -227,6 +228,7 @@
                     //设置每页显示
                     PageSize = obj.limit;
                     get(Stuate)
+                    
                 }
             });
         });
@@ -250,6 +252,8 @@
                 $(".widget").hide();
             }
         })
+        dn();
+        rn();
     });
     function get(dss) {
         $.ajax({
@@ -298,40 +302,88 @@
         });
         get(dss);
     };
+    //SysAdminbyRoleNamebanding
+    function rn() {
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysAdminbyRoleNamebanding",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='ddlRole']").append("<option value='" + data.SysRoleID + "'>" + data.RoleName + "</option>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
 
+    function dn() {
+        $.ajax({
+            type: "POST",
+            url: "/TXY/SysAdminbyDepartNamebanding",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='ddlDepart']").append("<option value='" + data.SysDepartID + "'>" + data.DepartName + "</option>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
     //新增
 
 
     function xzshow() {
+        //layer.open({
+        //    type: 1,
+        //    skin: 'layui-layer-demo',//样式类名
+        //    title: ['新增用户', 'font-size:18px'],
+        //    area: ['500px', '300px'],
+        //    shadeClose: true,
+        //    content: $('#yyy'),
+        //    shade: 0,
+        //});
         layer.open({
             type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['新增用户', 'font-size:18px'],
-            area: ['500px', '300px'],
+            area: ['650px', '359px'],
             shadeClose: true,
-            content: $('#yyyyy'),
             shade: 0,
-
+            content: $('#yyy').html(),
+            btn: ['确定', '取消'],
+            yes: function () {
+               add();
+            },
         });
 
 
     }
-
     function add() {
-        var UserCode = $("#txtUserCode").val();
-        var name = $("#txtUserName").val()
+        var UserCode = $("#txtUserCode1").val();
+        var name = "aaa";
         var aa = $("#textCreateTime").val();
         var IsDelete = true;
         $.ajax({
             type: "POST",
             url: "/TXY/SysAdminadd",
-            data: "{admin:{UserName:" + name + ",UserCode:" + UserCode+ ",Password:'" + $("#txtPassword").val() + "',RealName:'" + $("#txtRealName").val() + "',Email:'" + $("#txtEmail").val() + "',Phone:'" + $("#txtPhone").val() + "',Mobile:'" + $("#txtMobile").val() + "',DepartNum:'" + $("#ddlDepart").val() + "',RoleNum:'" + $("#ddlRole").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
+            data: "{admin:{UserName:" + name + ",UserCode:" + UserCode+ ",Password:'" + $("#txtPassword").val() + "',RealName:'" + $("#txtRealName").val() + "',Email:'" + $("#txtEmail").val() + "',Phone:'" + $("#txtPhone").val() + "',Mobile:'" + $("#txtMobile").val() + "',DepartNum:'" + $("#dn").val() + "',RoleNum:'" + $("#rn").val() + "',CreateTime:'" + aa + "',IsDelete:'" + IsDelete + "'}}",
             dataType: "json",
-            contentType: "application/json",
+            //contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("添加成功")
-                    get(dss);
+                    get();
                     window.location.href = "/TXY/SysAdmin";
                 }
             },
@@ -340,6 +392,6 @@
 
             }
         });
-        get(dss);
+        get();
     }
 </script>
