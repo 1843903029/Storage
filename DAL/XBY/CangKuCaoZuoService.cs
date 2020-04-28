@@ -251,9 +251,10 @@ namespace DAL.XBY
                           KehuID = p.KehuID,
                           CustomerAddressID = p.CustomerAddressID,
                           CustomerAddressName = p.CustomerAddressName,
-                          Lianxiren = p.Lianxiren,
+                          Lianxiren = p.Lianxiren.Trim(),
                           phone = p.phone,
                           State = p.State
+
 
                       };
             return obj;

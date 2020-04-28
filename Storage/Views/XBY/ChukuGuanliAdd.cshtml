@@ -27,7 +27,7 @@
                     <input type="text" class="form-control" id="ChuKuRandom" placeholder="可不填自动生成" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <select class="form-control">
+                    <select class="form-control" id="chukuleixing">
                         <option>销售提货出库</option>
                         <option>采购退货出库</option>
                         <option>领用出库</option>
@@ -73,13 +73,13 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="Lianxiren">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
                     <input type="text" class="form-control">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="beizhuxinxi">
                 </div>
 
             </div>
@@ -121,7 +121,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary" onclick="ChuKuAdd()">保存</button>
             <button type="button" class="btn">取消</button>
         </div>
 
@@ -137,6 +137,8 @@
     var pageSize = 5;
     var pageCount = 0;
     var rowss = 0;
+    var info = [];
+    var danhapsuiji;
     $(function () {
         rukuList();
         KeHuList();//查询客户信息绑定到下拉框
@@ -190,19 +192,20 @@
     }
 
 
-    function www(ff) {
-        var num = $("#tb1 tr").length;
-        for (var i = 0; i < num; i++) {
-            if ($("#tb1 tr").eq(i).children("td").eq(8).children("input").val() < $("#tb1 tr").eq(i).children("td").eq(9).text()) {
-                $("#" + ff + "").text($("#tb1 tr").eq(i).children("td").eq(8).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(5).text());
-            } else {
-                alert("库存没这么多！");
-                $("#tb1 tr").eq(i).children("td").eq(8).children("input").val("1");
-                return;
-            }
-
-
+    function www(ff, danjia, kucun) {
+        var chukushu = document.getElementsByName(ff);
+        //alert(danjia);
+        //alert(rukushu[0].value);
+        //alert(kucun);
+        if (chukushu[0].value < kucun) {
+            $("#" + ff + "").text(danjia * chukushu[0].value);
+        } else {
+            alert("没这么多库存了！");
+            $("input[name='" + ff + "']").val(1);
+            $("#" + ff + "").text(danjia * 1);
         }
+
+
     }
 
     function SelectChanPin(id) {
@@ -214,7 +217,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.CpID + "</td><td></td><td>" + data.CpPrice + "</td><td id='" + data.Cpbh + "'></td><td>" + data.Specification + "</td><td><input id='RukuShu' type='text' onchange='www(" + data.Cpbh + ")' /></td><td>" + data.CpShuLiang + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.CpID + "</td><td></td><td>" + data.CpPrice + "</td><td id='" + data.Cpbh + "'></td><td>" + data.Specification + "</td><td><input name='" + data.Cpbh + "' type='text' onchange='www(" + data.Cpbh + "," + data.CpPrice + "," + data.CpShuLiang + ")' /> </td><td>" + data.CpShuLiang + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
 
                 });
             },
@@ -260,6 +263,7 @@
                         $("#Khdizhi option").remove();
                         $("#Khdizhi").append("<option value='请选择'>请选择</option>");
                         $("#Khsdianhua").val(null);
+                        $("#Lianxiren").val(null);
                         $.each(data.dizhi, function (index, datadz) {
                             $("#Khdizhi").append("<option value='" + datadz.ID + "'>" + datadz.CustomerAddressName + "</option>");
                         })
@@ -275,6 +279,7 @@
             $("#Khdizhi option").remove();
             $("#Khdizhi").append("<option value='请选择'>请选择</option>");
             $("#Khsdianhua").val(null);
+            $("#Lianxiren").val(null);
         }
     }
 
@@ -291,6 +296,7 @@
                     $.each(result, function (index, data) {
 
                         $("#Khsdianhua").val(data.phone);
+                        $("#Lianxiren").val(data.Lianxiren);
 
                     });
                 },
@@ -301,6 +307,7 @@
             });
         } else {
             $("#Khsdianhua").val(null);
+            $("#Lianxiren").val(null);
         }
     }
 
@@ -319,6 +326,79 @@
         //seconds = this.setTimeDateFmt(seconds)
         danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
         $("#ChuKuRandom").val(danhapsuiji);
+    }
+
+
+    function ChuKuAdd() {
+        var num = $("#tb1 tr").length;
+        for (var i = 0; i < num; i++) {
+            var obj = {};
+            obj.ProductID = $("#tb1 tr").eq(i).children("td").eq(0).text()
+            obj.Price = $("#tb1 tr").eq(i).children("td").eq(5).text();
+            obj.StockRemovalNumber = $("#tb1 tr").eq(i).children("td").eq(8).children("input").val();
+            obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(8).text();
+            //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
+            //$("#tb1 tr").eq(i).children("td").eq(7).text()
+            obj.WarehouseID = 1;
+            obj.StockRemovalIDS = danhapsuiji;
+            //console.log(obj)
+            info.push(obj);
+
+
+        }
+        //console.log(info)
+
+
+        if ($("#Khbh").val() == "") {
+            alert("请选择客户后添加！");
+        }
+        else {
+            var rukuzongshu = 0;//定义总数量
+            var rukuzongjia = 0;//定义总价
+            for (var i = 0; i < info.length; i++) {
+                rukuzongshu += parseInt(info[i].StockRemovalNumber) ;
+                rukuzongjia += parseInt(info[i].Summoney);
+            }
+            //alert(rukuzongshu);
+            //alert(rukuzongjia);
+
+
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ChuKuAddZhu",
+                data: "{zhu:{StockRemovalID:'" + danhapsuiji + "',StockRemovalType:'" + $("#chukuleixing").val() + "',SupplierID:'" + $("#Khbh").val() + "',EmployeeID:'" + 1 + "',GoodsCount:'" + rukuzongshu + "',Summoney:'" + rukuzongjia + "',StateText:'" + $("#beizhuxinxi").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    AddXiang();
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+    }
+
+    function AddXiang() {
+        for (var i = 0; i < info.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/AddChuKuXiang",
+                data: "{xiang:{StockRemovalIDS:'" + info[i].StockRemovalIDS + "',ProductID:'" + info[i].ProductID + "',Price:'" + info[i].Price + "',StockRemovalNumber:'" + info[i].StockRemovalNumber + "',Summoney:'" + info[i].Summoney + "',WarehouseID:'" + info[i].WarehouseID + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+        alert("添加成功");
+        location.href = "/XBY/ChukuGuanli"
     }
 
 

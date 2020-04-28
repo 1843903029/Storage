@@ -89,5 +89,27 @@ namespace BLL.XBY
         {
             return DAL.XBY.StorageService.ShanChuRuKu(id);
         }
+
+        /// <summary>
+        /// 审核入库单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int RuKuShenHe(string danhao, int state)
+        {
+            return DAL.XBY.StorageService.RuKuShenHe(danhao, state);
         }
-    }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        public static int RuKuSHHou(int cpid, int Count)
+        {
+            return DAL.XBY.StorageService.RuKuSHHou(cpid, Count);
+        }
+        }
+}

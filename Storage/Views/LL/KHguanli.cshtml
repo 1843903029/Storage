@@ -3,225 +3,305 @@
     ViewBag.Title = "KHguanli";
     Layout = "~/Views/MainPage.cshtml";
 }
+<!DOCTYPE html>
 
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>KHguanli</title>
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    </head>
+<body>
+    <div style="border:0px solid #4cff00;width:95%;">
+        <div style="padding:15px;border:1px solid red">
+            <div>
+                <table>
+                    <tr>
+                        <td><a href="#">首页<</a></td>
+                        <td>基本信息<</td>
+                        <td>客户管理</td>
+                    </tr>
+                </table>
+                <div style="height:70px;">
+                    <h4>客户管理</h4>
+                    <div style="float:right;display:inline;">
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                    </div>
+                </div>
 
-<div style="border:0px solid #4cff00;width:95%;">
-    <div style="padding:15px;border:1px solid red">
-        <div>
-            <table>
-                <tr>
-                    <td><a href="#">首页<</a></td>
-                    <td>基本信息<</td>
-                    <td>客户管理</td>
-                </tr>
-            </table>
-            <div style="height:70px;">
-                <h4>客户管理</h4>
-                <div style="float:right;display:inline;">
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">删除</a>
-                    <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                <table action="javascript:void(0)" class="form-horizontal">
+                    <tr>
+                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择客户编号或名称"></td>
+
+                        <td>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                        </td>
+
+                    </tr>
+                </table>
+                <div class="widget" hidden>
+
                 </div>
             </div>
-
-            <table action="javascript:void(0)" class="form-horizontal">
-                <tr>
-                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择客户编号或名称"></td>
-
-                    <td>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
-                    </td>
-
-                </tr>
+            <table style="width:100%;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td><input type='checkbox' /></td>
+                        <td>客户编号</td>
+                        <td>客户名称</td>
+                        <td>电话</td>
+                        <td>传真</td>
+                        <td>创建时间</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody id="tb1"></tbody>
             </table>
-            <div class="widget" hidden>
+            <div id="xzdiv">
+                <table class="table table-striped">
+                    <tbody>
+                        
+                        <tr>
+                            <td><input id="ID" name="ID" type="hidden" class="input-medium">编号</td>
+                            <td>
+                                <input id="KhID" name="KhID" type="text" class="input-medium">
+                            </td>
+                            <td>名称</td>
+                            <td>
+                                <input id="KhName" name="KhName" type="text" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>备注</td>
+                            <td>
+                                <input id="beizhu" name="beizhu" type="text" class="input-medium">
+                            </td>
+                            <td>传真</td>
+                            <td>
+                                <input id="chuanzhen" name="chuanzhen" type="text" class="input-medium">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Eamil</td>
+                            <td>
+                                <input id="youxiang" name="youxiang" type="text" class="input-medium">
+                            </td>
+                            <td><input id="Time" name="Time" type="hidden" class="input-medium">电话</td>
+                            <td>
+                                <input id="Hone" name="Hone" type="text" class="input-medium">
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+            @*layui分页*@
+            <div id="pageDome">
 
             </div>
         </div>
-        <table style="width:100%;" class="table table-bordered">
-            <thead>
-                <tr>
-                    <td><input type='checkbox' /></td>
-                    <td>客户编号</td>
-                    <td>客户名称</td>
-                    <td>电话</td>
-                    <td>传真</td>
-                    <td>创建时间</td>
-                    <td>操作</td>
-                </tr>
-            </thead>
-            <tbody id="tb1"></tbody>
-        </table>
-        <div id="xzdiv">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <td>编号</td>
-                        <td>
-                            <input id="KhID" name="KhID" type="text"  class="input-medium">
-                        </td>
-                        <td>名称</td>
-                        <td>
-                            <input id="KhName" name="KhName" type="text"  class="input-medium">
-                        </td>
-                        <td>备注</td>
-                        <td>
-                            <input id="beizhu" name="beizhu" type="text"  class="input-medium">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>传真</td>
-                        <td>
-                            <input id="chuanzhen" name="chuanzhen" type="text"  class="input-medium">
-                        </td>
-                        <td>Eamil</td>
-                        <td>
-                            <input id="youxiang" name="youxiang" type="text"  class="input-medium">
-                        </td>
-                        <td>电话</td>
-                        <td>
-                            <input id="Hone" name="Hone" type="text"  class="input-medium">
-                        </td>
-                    </tr>
-                   
-
-
-                </tbody>
-            </table>
-
-
-        </div>
-        @*layui分页*@
-        <div id="pageDome">
-
-        </div>
     </div>
-</div>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
-    var pageIndex = 1;
-    var pageSize = 10;
-    var rowss = 0;
-    $(function () {
-        rukuList();
-        $("#xzdiv").hide();
-        
+</body>
+</html>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        var pageIndex = 1;
+        var pageSize = 10;
+        var rowss = 0;
+        $(function () {
+            rukuList();
+            $("#xzdiv").hide();
 
-        layui.use(['laypage', 'layer'], function () {
-            var laypage = layui.laypage
-                , layer = layui.layer;
 
-            //完整功能
-            laypage.render({
-                elem: 'pageDome'
-                , count: rowss
-                , limit: 3
-                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-                , jump: function (obj) {
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
+            layui.use(['laypage', 'layer'], function () {
+                var laypage = layui.laypage
+                    , layer = layui.layer;
+
+                //完整功能
+                laypage.render({
+                    elem: 'pageDemo'
+                    , count: rowss//总条数
+                    , limit: 3//每页显示数
+                    , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                    , jump: function (obj) {
+
+                        //设置当前页
+                        PageIndex = obj.curr;
+                        //设置每页显示
+                        PageSize = obj.limit;
+                    }
+                });
+            });
+
+
+
+
+        })
+
+
+        function rukuList() {
+            $.ajax({
+                type: "POST",
+                url: "/LL/Listfenye3",
+                data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
                     
+                    $("#tb1 tr").remove();
+                    rowss = result.PageCount;
+                    $.each(result.DataList, function (index, data) {
+                        $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.KhID + "</td><td>" + data.KhName + "</td><td>" + data.Hone + "</td><td>" + data.chuanzhen + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.ID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.ID + ");' /></td></tr>");
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
                 }
             });
-        });
+        }
+        function xzshow() {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo',//样式类名
+                title: ['添加客户', 'font-size:18px'],
+                area: ['650px', '359px'],
+                shadeClose: true,
+                shade: 0,
+                content: $('#xzdiv'),
+                btn: ['确定', '取消'],
+                yes: function () {
+                    add();
+                },
+            });
 
 
+        }
+        function add() {
+            
+            $.ajax({
+                type: "POST",
+                url: "/LL/KHAdd",
+                //data: "{lo:" + jsons + "}",
+                data: "{c:{KhID:'" + $("#KhID").val() + "',KhName:'" + $("#KhName").val() + "',beizhu:'" + $("#beizhu").val() + "',chuanzhen:'" + $("#chuanzhen").val() + "',youxiang:'" + $("#youxiang").val() + "',Hone:'" + $("#Hone").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("添加成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("添加失败");
 
-
-    })
-
-
-    function rukuList() {
-        $.ajax({
-            type: "POST",
-            url: "/LL/Listfenye3",
-            data: "{pageindex:" + pageIndex + ",pagesize:" + pageSize + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                //console.log("1");
-                //$("#tt tr").remove();
-                rowss = result.PageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.KhID + "</td><td>" + data.KhName + "</td><td>" + data.Hone + "</td><td>" + data.chuanzhen + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.ID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='' /></td></tr>");
-                });
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
-
-            }
-        });
-    }
-    function xzshow() {
-        layer.open({
-            type: 1,
-            skin: 'layui-layer-demo',//样式类名
-            title: ['添加库位', 'font-size:18px'],
-            area: ['684px', '365px'],
-            shadeClose: true,
-            content: $('#xzdiv').html(),
-            btn: ['确定', '取消'],
-            yes: function () {
-                add();
-            },
-        });
-
-
-    }
-    function add() {
-        $.ajax({
-            type: "POST",
-            url: "/LL/KHAdd",
-            //data: "{lo:kwName:'" + $("[name='kwName']").val() + "'CangKu:'" + $("[name='CangKu']").val() + "'kwType:'" + $("[name='kwType']").val() + "'Zhuangtai:'" + $("[name='Zhuangtai']").val() + "'Time:'" + $("[name='Time']").val()+ "'}}",
-            //data: "{lo:" + jsons + "}",
-            data: "{c:{KhID:'" + $("#KhID").val() + "',KhName:'" + $("#KhName").val() + "',beizhu:'" + $("#beizhu").val() + "',chuanzhen:'" + $("#chuanzhen").val() + "',youxiang:'" + $("#youxiang").val() + "',Hone:'" + $("#Hone").val()+ "'}}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                if (result > 0) {
-                    alert($("#KhID").val());
-                    alert("添加成功");
-                    //location.href = '/AJAXDemo/Index';
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
                 }
-                else {
-                    alert("添加失败");
+            });
+
+
+        }
+        function GetByID(id) {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo',//样式类名
+                title: ['修改客户', 'font-size:18px'],
+                area: ['650px', '359px'],
+                shadeClose: true,
+                shade: 0,
+                content: $('#xzdiv'),
+                btn: ['确定', '取消'],
+                yes: function () {
+                    Edit();
+                },
+            });
+            $.ajax({
+                type: "POST",
+                url: "/LL/KhGetById",
+                data: "{ID:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    //console.log(result);
+                    $.each(result, function (Index, data) {
+                        $("#ID").val(data.ID);
+                        $("#Time").val(data.Time);
+                        $("#KhID").val(data.KhID);
+                        $("#KhName").val(data.KhName);
+                        $("#beizhu").val(data.beizhu);
+                        $("#chuanzhen").val(data.chuanzhen);
+                        $("#youxiang").val(data.youxiang);
+                        $("#Hone").val(data.Hone);
+
+                    });
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+        }
+        function Edit() {
+            $.ajax({
+                type: "POST",
+                url: "/LL/KhEdit",
+                //data: "{lo:" + jsons + "}",
+                data: "{c:{ID:'" + $("#ID").val() + "',KhID:'" + $("#KhID").val() + "',KhName:'" + $("#KhName").val() + "',beizhu:'" + $("#beizhu").val() + "',chuanzhen:'" + $("#chuanzhen").val() + "',youxiang:'" + $("#youxiang").val() + "',Hone:'" + $("#Hone").val() + "',Time:'" + $("#Time").val() + "'}}",
+                //data: "{lo:{kwID:'" + $("#kwID").val() + "',kwName:'" + $("#qwerty").val() + "',CangKu:'" + $("#ck").val() + "',kwType:'" + $("#kw").val() + "',Zhuangtai:'" + $("#zt").val() + "',Isdefault:'" + $("#zt").val() + "',Time:'" + $("#Time1").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("修改成功");
+                        window.location.reload();
+
+                    }
+                    else {
+                        alert("修改失败");
+
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+        }
+        function del(id) {
+            $.ajax({
+                type: "POST",
+                url: "/LL/delKH",
+                data: "{id:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        window.location.reload();
+                    } else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
 
                 }
-            },
-            //请求失败后的回调函数
-            error: function (ex) {
-                alert(ex.responseText);
-            }
-        });
-    }
-
-    function del(id) {
-        $.ajax({
-            type: "POST",
-            url: "/LL/delKH",
-            data: "{id:" + id + "}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                if (result > 0) {
-                    alert("删除成功");
-                    window.location.reload();
-                } else {
-                    alert("删除失败");
-                }
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
-
-            }
-        });
-    }
+            });
+        }
 
 
-    function ConvertDate(date) {
-        var time = new Date(parseInt(date.substr(6)));
-        return time.toLocaleDateString();
-    }
-</script>
+        function ConvertDate(date) {
+            var time = new Date(parseInt(date.substr(6)));
+            return time.toLocaleDateString();
+        }
+    </script>
 

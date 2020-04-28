@@ -17,5 +17,20 @@ namespace BLL.LL
         {
             return DAL.LL.GYSguanli.del(id);
         }
+
+        public static int add(Supplier sup)
+        {
+            return DAL.LL.GYSguanli.add(sup);
+        }
+
+        public static IQueryable GYSGetById(int ID)
+        {
+            return DAL.LL.GYSguanli.GYSGetById(ID);
+        }
+
+        public static int GYSEdit(Supplier sup)
+        {
+            return DAL.LL.GYSguanli.GYSEdit(sup);
+        }
         }
 }

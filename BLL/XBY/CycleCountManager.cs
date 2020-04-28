@@ -56,5 +56,16 @@ namespace BLL.XBY
         {
             return DAL.XBY.CycleCountService.ShanChuPanDian(id);
         }
+
+        /// <summary>
+        /// 审核盘点单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int PanDianShenHe(string danhao, int state)
+        {
+            return DAL.XBY.CycleCountService.PanDianShenHe(danhao, state);
+        }
         }
 }

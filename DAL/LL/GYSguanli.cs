@@ -40,5 +40,47 @@ namespace DAL.LL
             return s.SaveChanges();
 
         }
+        public static int add(Supplier sup)
+        {
+            s.Supplier.Add(sup);
+            return s.SaveChanges();
+        }
+
+        public static IQueryable GYSGetById(int ID)
+        {
+
+            var obj = from p in s.Supplier
+                      where p.GysID == ID
+                      select new
+                      {
+                        GysID= p.GysID,
+                        GysName= p.GysName,
+                        GysType= p.GysType,
+                        Hone= p.Hone,
+                        ChuangZhen= p.ChuangZhen,
+                        Email= p.Email,
+                        Contacts= p.Contacts,
+                        Address= p.Address,
+                        Describe = p.Describe
+                      };
+            return obj;
+        }
+
+        public static int GYSEdit(Supplier sup)
+        {
+
+            var obj = (from p in s.Supplier where p.GysID == sup.GysID select p).First();
+            obj.GysName = sup.GysName;
+            obj.GysType = sup.GysType;
+            obj.Hone = sup.Hone;
+            obj.ChuangZhen = sup.ChuangZhen;
+            obj.Email = sup.Email;
+            obj.Contacts = sup.Contacts;
+            obj.Address = sup.Address;
+            obj.Describe = sup.Describe;
+            
+            return s.SaveChanges();
+
+        }
     }
 }

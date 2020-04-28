@@ -66,5 +66,47 @@ namespace BLL.XBY
             return DAL.XBY.BreakageService.ShanChuBaoSun(id);
         }
 
+        /// <summary>
+        /// 新增报损主表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddBaoSun(Breakage zhu)
+        {
+            return DAL.XBY.BreakageService.AddBaoSun(zhu);
+        }
+
+        /// <summary>
+        /// 新增报损详表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddBaoSuniang(BreakageDetailed xiang)
+        {
+            return DAL.XBY.BreakageService.AddBaoSuniang(xiang);
+        }
+
+        /// <summary>
+        /// 审核报损单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int BaoSunShenHe(string danhao, int state)
+        {
+            return DAL.XBY.BreakageService.BaoSunShenHe(danhao, state);
+        }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        public static int BaoSunSHHou(int cpid, int Count)
+        {
+            return DAL.XBY.BreakageService.BaoSunSHHou(cpid, Count);
+        }
+
         }
 }

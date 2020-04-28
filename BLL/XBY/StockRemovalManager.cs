@@ -79,5 +79,47 @@ namespace BLL.XBY
             return DAL.XBY.StockRemovalService.ShanChuChuKu(id);
         }
 
+        /// <summary>
+        /// 新增出库主表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddChuKu(StockRemoval zhu)
+        {
+            return DAL.XBY.StockRemovalService.AddChuKu(zhu);
         }
+
+        /// <summary>
+        /// 新增出库详表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddChuKuXiang(StockRemovalDetailed xiang)
+        {
+            return DAL.XBY.StockRemovalService.AddChuKuXiang(xiang);
+        }
+
+        /// <summary>
+        /// 审核出库单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int ChuKuShenHe(string danhao, int state)
+        {
+            return DAL.XBY.StockRemovalService.ChuKuShenHe(danhao, state);
+        }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        public static int ChuKuSHHou(int cpid, int Count)
+        {
+            return DAL.XBY.StockRemovalService.ChuKuSHHou(cpid, Count);
+        }
+
+    }
 }

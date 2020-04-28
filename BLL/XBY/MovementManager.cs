@@ -56,6 +56,26 @@ namespace BLL.XBY
         }
 
         /// <summary>
+        /// 添加移库主表
+        /// </summary>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public static int AddYiKu(Movement zhu)
+        {
+            return DAL.XBY.MovementService.AddYiKu(zhu);
+        }
+
+        /// <summary>
+        /// 添加移库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public static int AddYiKuxiang(MovementDetailed xiang)
+        {
+            return DAL.XBY.MovementService.AddYiKuxiang(xiang);
+        }
+
+        /// <summary>
         /// 删除移库单
         /// </summary>
         /// <param name="id"></param>
@@ -65,5 +85,15 @@ namespace BLL.XBY
             return DAL.XBY.MovementService.ShanChuYiKu(id);
         }
 
+        /// <summary>
+        /// 审核移库单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int YiKuShenHe(string danhao, int state)
+        {
+            return DAL.XBY.MovementService.YiKuShenHe(danhao, state);
+        }
         }
 }

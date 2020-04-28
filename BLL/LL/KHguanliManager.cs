@@ -21,5 +21,14 @@ namespace BLL.LL
 
             return DAL.LL.KHguanli.add(c);
         }
+
+        public static IQueryable KhGetById(int ID)
+        {
+            return DAL.LL.KHguanli.KhGetById(ID);
+        }
+        public static int KhEdit(Client c)
+        {
+            return DAL.LL.KHguanli.KhEdit(c);
+        }
         }
 }

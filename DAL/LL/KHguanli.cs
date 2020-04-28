@@ -45,5 +45,39 @@ namespace DAL.LL
             s.Client.Add(c);
             return s.SaveChanges();
         }
+
+        public static IQueryable KhGetById(int ID)
+        {
+
+            var obj = from p in s.Client
+                      where p.ID == ID
+                      select new
+                      {
+                          ID = p.ID,
+                          KhID = p.KhID,
+                          KhName = p.KhName,
+                          beizhu = p.beizhu,
+                          Hone = p.Hone,
+                          chuanzhen = p.chuanzhen,
+                          youxiang = p.youxiang,
+                          Time = p.Time,
+                          State = p.State
+                      };
+            return obj;
         }
+        public static int KhEdit(Client c)
+        {
+
+            var obj = (from p in s.Client where p.ID == c.ID select p).First();
+            obj.KhID = c.KhID;
+            obj.KhName = c.KhName;
+            obj.beizhu = c.beizhu;
+            obj.chuanzhen = c.chuanzhen;
+            obj.youxiang = c.youxiang;
+            obj.Hone = c.Hone;
+            obj.Time = c.Time;
+            return s.SaveChanges();
+
+        }
+    }
 }
