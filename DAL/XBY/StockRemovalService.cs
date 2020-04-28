@@ -204,7 +204,7 @@ namespace DAL.XBY
                                           kuweiname = pp.LocationManagement.kwName,
                                           WarehouseID = pp.WarehouseID,
                                           Batch = pp.Batch,
-                                          
+
 
                                       }
                       };
@@ -231,7 +231,7 @@ namespace DAL.XBY
                       };
             return obj.Take(1);
 
-                  
+
         }
 
 
@@ -248,6 +248,58 @@ namespace DAL.XBY
             return ent.SaveChanges();
         }
 
+
+        /// <summary>
+        /// 新增出库主表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddChuKu(StockRemoval zhu)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.StockRemoval.Add(zhu);
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 新增出库详表
+        /// </summary>
+        /// <param name="chuku"></param>
+        /// <returns></returns>
+        public static int AddChuKuXiang(StockRemovalDetailed xiang)
+        {
+            StorageEntities ent = new StorageEntities();
+            ent.StockRemovalDetailed.Add(xiang);
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 审核出库单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int ChuKuShenHe(string danhao, int state)
+        {
+            StorageEntities ent = new StorageEntities();
+            StockRemoval obj = ent.StockRemoval.Find(danhao);
+            obj.State = state;
+            return ent.SaveChanges();
+        }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        public static int ChuKuSHHou(int cpid, int Count)
+        {
+            StorageEntities ent = new StorageEntities();
+            CpGlinfo obj = ent.CpGlinfo.Find(cpid);
+            obj.CpShuLiang = obj.CpShuLiang - Count;
+            return ent.SaveChanges();
+        }
 
 
     }

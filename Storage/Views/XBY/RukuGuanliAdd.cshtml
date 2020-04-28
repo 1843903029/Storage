@@ -214,13 +214,13 @@
 
     })
 
-    function www(ff) {
-        var num = $("#tb1 tr").length;
-        for (var i = 0; i < num; i++) {
-            $("#" + ff + "").text($("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text());
 
-        }
-
+    function www(ff, danjia) {
+        var rukushu = document.getElementsByName(ff);
+        alert(danjia);
+        alert(rukushu[0].value);
+        //alert(kucun);
+            $("#" + ff + "").text(danjia * rukushu[0].value);
     }
 
     //返回到入库查询页面
@@ -301,7 +301,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.Specification + "</td><td>" + data.CpPrice + "</td><td><input id='RukuShu' type='text' onchange='www(" + data.Cpbh + ")' /></td><td id='" + data.Cpbh + "'></td><td>" + data.KwName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td>" + data.Specification + "</td><td>" + data.CpPrice + "</td><td><input name='" + data.Cpbh + "' type='text' onchange='www(" + data.Cpbh + "," + data.CpPrice + ")' /></td><td id='" + data.Cpbh + "'></td><td>" + data.KwName + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
 
                 });
             },
@@ -424,7 +424,7 @@
             $.ajax({
                 type: "POST",
                 url: "/XBY/ADDRukuxiang",
-                data: "{xiang:{StorageIDS:'" + info[i].StorageIDS + "',productID:'" + info[i].productID + "',Price:'" + info[i].Price + "',StorageNumber:'" + info[i].StorageNumber + "',Summoney:'" + info[i].Summoney + "',WarehouseID:'" + info[i].WarehouseID + "'}}",
+                data: "{xiang:{StorageIDS:'" + info[i].StorageIDS + "',p    roductID:'" + info[i].productID + "',Price:'" + info[i].Price + "',StorageNumber:'" + info[i].StorageNumber + "',Summoney:'" + info[i].Summoney + "',WarehouseID:'" + info[i].WarehouseID + "'}}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {

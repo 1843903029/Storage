@@ -23,22 +23,21 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control" placeholder="可不填自动生成" readonly>
+                    <input type="text" class="form-control" id="YKdanhao" placeholder="可不填自动生成" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" id="YiKuleixing">
+                        <option value="请选择移库类型">请选择移库类型</option>
+                        <option value="移库上架">移库上架</option>
+                        <option value="仓库移库">仓库移库</option>
+                        <option value="报损移库">报损移库</option>
                     </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <input type="text" class="form-control">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="YiKutime">
                 </div>
             </div>
             <div style="display:flex">
@@ -50,7 +49,7 @@
                     <input type="text" class="form-control">
                 </div>
                 <div style="text-align:left;width:615px;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="yikubeizhu">
                 </div>
             </div>
         </div>
@@ -87,7 +86,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary" onclick="YiKuAdd()">保存</button>
             <button type="button" class="btn">取消</button>
         </div>
 
@@ -104,8 +103,16 @@
     var pageSize = 5;
     var pageCount = 0;
     var rowss = 0;
+    var info = [];
+    var danhapsuiji;
     $(function () {
         rukuList();
+
+        var addtime = new Date();
+        $("#YiKutime").val(addtime.toLocaleDateString());//赋值当前日期到页面
+
+        //   根据当前时间和随机数生成流水号
+        suijidanhao();
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -141,7 +148,27 @@
                 $("#tb2 tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb2").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.KwName + "</td><td>" + data.CpShuLiang + "</td></tr>");
+                    $("#tb2").append("<tr onclick='SelectChanPin(" + data.CpID + ")'><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.KwName + "</td><td>" + data.CpShuLiang + "</td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
+
+    function SelectChanPin(id) {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/IDCanPin",
+            data: "{id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#tb1").append("<tr><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.Cpbh + "</td><td></td><td><input name='" + data.Cpbh + "' type='text' /></td><td>" + data.KwName + "</td><td>  <select class='form-control' >< option > 请选择库位</option ><option value='1'>成品库位</option ><option value='2'>报损库位</option ><option value='3'>待出库位</option ><option value='4'>待检库位</option ><option value='5'>待入库位</option ></select > </td><td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+
                 });
             },
             error: function (ex) {
@@ -152,12 +179,120 @@
     }
 
 
+    //   根据当前时间和随机数生成流水号
+    function suijidanhao() {
+        var now = new Date()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hour = now.getHours()
+        var minutes = now.getMinutes()
+        var seconds = now.getSeconds()
+        //month = now.setTimeDateFmt(month)
+        //hour = now.setTimeDateFmt(hour)
+        //minutes = now.setTimeDateFmt(minutes)
+        //seconds = this.setTimeDateFmt(seconds)
+        danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
+        $("#YKdanhao").val(danhapsuiji);
+    }
+
+    function YiKuAdd() {
+        var num = $("#tb1 tr").length;
+
+        //console.log(info)
+
+
+        if ($("#YiKuleixing").val() == "请选择移库类型") {
+            alert("请选择移库类型后添加！");
+        }
+        else {
+            for (var i = 0; i < num; i++) {
+                if ($("#tb1 tr").eq(i).children("td").eq(4).children("input").val() == "") {
+                    alert("请输入移库数量");
+                    return;
+                }
+                var obj = {};
+                obj.ProductID = $("#tb1 tr").eq(i).children("td").eq(0).text();
+                obj.MovementNumber = $("#tb1 tr").eq(i).children("td").eq(4).children("input").val();
+                //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
+                //$("#tb1 tr").eq(i).children("td").eq(7).text()
+                obj.WarehouseID = YiKucangku($("#tb1 tr").eq(i).children("td").eq(5).text());
+                obj.WarehouseIDs = $("#tb1 tr").eq(i).children("td").eq(6).children("select").val();
+                obj.MovementIDS = danhapsuiji;
+                //console.log(obj)
+                info.push(obj);
+
+
+            }
+
+            if (info.length > 0) {
+
+                var rukuzongshu = 0;//定义总数量
+                for (var i = 0; i < info.length; i++) {
+                    rukuzongshu += parseInt(info[i].MovementNumber) ;
+                }
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/XBY/AddYiKu",
+                    data: "{zhu:{MovementID:'" + danhapsuiji + "',MovementType:'" + $("#YiKuleixing").val() + "',MovementCount:'" + rukuzongshu + "',EmployeeID:'" + 1 + "',StateText:'" + yikubeizhu + "'}}",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        AddXiang();
+                    },
+                    error: function (ex) {
+                        alert("Error:" + ex.responseText);
+
+                    }
+                });
+            } else {
+                alert("请选择移库产品!");
+            }
+        }
+    }
+
+    function AddXiang() {
+        for (var i = 0; i < info.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/AddYiKuxiang",
+                data: "{xiang:{MovementIDS:'" + info[i].MovementIDS + "',ProductID:'" + info[i].ProductID + "',MovementNumber:'" + info[i].MovementNumber + "',WarehouseID:'" + info[i].WarehouseID + "',WarehouseIDs:'" + info[i].WarehouseIDs + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
+        }
+        alert("添加成功");
+        location.href = "/XBY/YiKuGuanli"
+    }
+
+    function YiKucangku(id) {
+        if (id == "成品库位") {
+            return 1;
+        }
+        if (id == "报损库位") {
+            return 2;
+        }
+        if (id == "待出库位") {
+            return 3;
+        }
+        if (id == "待检库位") {
+            return 4;
+        }
+        if (id == "待入库位") {
+            return 5;
+        }
+    }
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();
     }
 </script>
-
-
-

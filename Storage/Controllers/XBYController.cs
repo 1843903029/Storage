@@ -34,6 +34,27 @@ namespace Storage.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 入库审核
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult RuKuShenHe(string danhao, int state)
+        {
+            return Json(BLL.XBY.StorageManager.RuKuShenHe(danhao, state), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult RuKuSHHou(int cpid, int Count)
+        {
+            return Json(BLL.XBY.StorageManager.RuKuSHHou(cpid, Count), JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult GYSlist()
         {
@@ -147,6 +168,53 @@ namespace Storage.Controllers
         public ActionResult ChukuGuanliAdd()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 出库审核
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult ChuKuShenHe(string danhao, int state)
+        {
+            return Json(BLL.XBY.StockRemovalManager.ChuKuShenHe(danhao, state), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult ChuKuSHHou(int cpid, int Count)
+        {
+            return Json(BLL.XBY.StockRemovalManager.ChuKuSHHou(cpid, Count), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        ///添加出库主表
+        /// </summary>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public ActionResult ChuKuAddZhu(StockRemoval zhu)
+        {
+            zhu.State = 2;
+            zhu.OperationType = "电脑";
+            zhu.CreationTime = DateTime.Now;
+            zhu.DataState = true;
+            return Json(BLL.XBY.StockRemovalManager.AddChuKu(zhu), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        ///添加出库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public ActionResult AddChuKuXiang(StockRemovalDetailed xiang)
+        {
+            xiang.Batch = 0;
+            return Json(BLL.XBY.StockRemovalManager.AddChuKuXiang(xiang), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -268,6 +336,51 @@ namespace Storage.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 报损审核
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult BaoSunShenHe(string danhao, int state)
+        {
+            return Json(BLL.XBY.BreakageManager.BaoSunShenHe(danhao, state), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 通过审核后修改相应库存数量
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult BaoSunSHHou(int cpid, int Count)
+        {
+            return Json(BLL.XBY.BreakageManager.BaoSunSHHou(cpid, Count), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        ///添加报损主表
+        /// </summary>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public ActionResult AddBaoSun(Breakage zhu)
+        {
+            zhu.State = 2;
+            zhu.CreationTime = DateTime.Now;
+            zhu.DataState = true;
+            zhu.operationType = "电脑";
+            return Json(BLL.XBY.BreakageManager.AddBaoSun(zhu), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 添加报损详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public ActionResult AddBaoSuniang(BreakageDetailed xiang)
+        {
+            return Json(BLL.XBY.BreakageManager.AddBaoSuniang(xiang), JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// 删除报损单
@@ -319,6 +432,40 @@ namespace Storage.Controllers
 
 
         /// <summary>
+        /// 移库审核
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult YiKuShenHe(string danhao, int state)
+        {
+            return Json(BLL.XBY.MovementManager.YiKuShenHe(danhao, state), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        ///添加移库主表
+        /// </summary>
+        /// <param name="zhu"></param>
+        /// <returns></returns>
+        public ActionResult AddYiKu(Movement zhu)
+        {
+            zhu.State = 2;
+            zhu.CreationTime = DateTime.Now;
+            zhu.DataState = true;
+            return Json(BLL.XBY.MovementManager.AddYiKu(zhu), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 添加移库详表
+        /// </summary>
+        /// <param name="xiang"></param>
+        /// <returns></returns>
+        public ActionResult AddYiKuxiang(MovementDetailed xiang)
+        {
+            return Json(BLL.XBY.MovementManager.AddYiKuxiang(xiang), JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
         /// 删除移库单
         /// </summary>
         /// <param name="id"></param>
@@ -362,6 +509,16 @@ namespace Storage.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 盘点审核
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ActionResult PanDianShenHe(string danhao, int state)
+        {
+            return Json(BLL.XBY.CycleCountManager.PanDianShenHe(danhao, state), JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// 删除盘点单

@@ -145,5 +145,19 @@ namespace DAL.XBY
             return ent.SaveChanges();
         }
 
+        /// <summary>
+        /// 审核盘点单
+        /// </summary>
+        /// <param name="danhao"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int PanDianShenHe(string danhao, int state)
+        {
+            StorageEntities ent = new StorageEntities();
+            CycleCount obj = ent.CycleCount.Find(danhao);
+            obj.State = state;
+            return ent.SaveChanges();
+        }
+
     }
 }
