@@ -25,18 +25,18 @@
     <div style="border:0px solid #4cff00;width:100%;">
         <div style="padding:15px;border:1px solid red">
             <table>
-            <tr>
+                <tr>
                     <td><strong style="margin-left:20px">计量单位</strong></td>
                     <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
-        </table>
+            </table>
             <table action="javascript:void(0)" class="form-horizontal">
                 <tr>
-                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入单位编名或者名称"></td>
+                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入单位名称"></td>
                     <td>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="JldwGetByQuery()">搜索</a>
                     </td>
                 </tr>
             </table>
@@ -59,26 +59,25 @@
         </div>
     </div>
     <div id="jbox-content" hidden>
-        <table class="formtab_user">
-            <tr>
-                <td>编号</td>
-                <td>
+        <form class="navbar-form navbar-left" role="search">
+            <dl>
+                <dd>编号</dd>
+                <dd>
                     <input id="txtJlid" name="txtJlid" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled" value="">
-                </td>
-            </tr>
-            <tr>
-                <td>名称</td>
-                <td>
+                </dd>
+            </dl>
+            <dl>
+                <dd>名称</dd>
+                <dd>
                     <input id="txtJlName" name="txtJlName" type="text" placeholder="请输入计量单位名称" class="input-medium" value="">
-                </td>
-            </tr>
-            <tr>
-                <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="JldwAdd()" value="确认" /></td>
-                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
-            </tr>
-        </table>
+                </dd>
+            </dl>
+            <input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="JldwAdd()" value="确认" />
+            <input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" />
+
+        </form>
     </div>
-    <div id="hide11" @*style="height: 300px;width:500px; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue"*@ hidden="hidden">
+    <div id="hide11" hidden="hidden">
         <form class="navbar-form navbar-left" role="search">
 
             <dl>
@@ -88,7 +87,7 @@
                     <input id="jlName" name="jlName" type="text" class="input-medium">
                 </dd>
             </dl>
-            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" />
+            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="Eite()" value="确认" />
             <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
 
         </form>
@@ -98,12 +97,11 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var pageIndex = 1;
-    var pageSize = 6;
-    var PageCount = 0;
+    var pageSize = 10;
     var rows = 0;
     $(function () {
         GetJldwAll();
-             
+
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -112,7 +110,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 6//每页显示数
+                , limit: 3//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -130,7 +128,7 @@
         });
     });
 
-
+    //分页查询
     function GetJldwAll() {
 
         $.ajax({
@@ -144,7 +142,7 @@
                 //获取总条数
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td  style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><a  href='javascript:reads(" + data.Jlid + ")'><i class='layui-icon layui-icon-edit' id='button' title='编辑'></i> </a> <a href='#'><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
                 });
             },
             error: function (ex) {
@@ -158,7 +156,7 @@
             type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['新增计量单位', 'font-size:18px'],
-            area: ['auto', 'auto'],
+            area: ['400px', '359px'],
             shadeClose: true,
             content: $('#jbox-content'),
             shade: 0,
@@ -191,65 +189,113 @@
         //alert(jlid);
         //判断按钮是否选中
         //if ($("#" + jlid + "").is(":checked") == true) {
-            $.ajax({
-                type: "POST",
-                url: "/LLQ/JldwDet",
-                data: "{jlid:'" + jlid + "'}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    if (result > 0) {
-                        alert("删除成功");
-                        GetJldwAll();//重新加载全部数据
-                    }
-                    else {
-                        alert("删除失败");
-                    }
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
-
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/JldwDet",
+            data: "{jlid:'" + jlid + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    GetJldwAll();//重新加载全部数据
                 }
-            });
+                else {
+                    alert("删除失败");
+                }
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
         //} else {
         //    alert("未选择数据！");
         //}
         GetJldwAll();
     };
 
-    //function reads() {
-    //    layer.open({
-    //        type: 1,
-    //        skin: 'layui-layer-demo',//样式类名
-    //        title: ['编辑', 'font-size:18px'],
-    //        area: ['400px', '359px'],
-    //        shadeClose: true,
-    //        content: $('#jbox-content1').html(),
-    //        btn: ['确定', '取消'],
-    //        yes: function () {
-    //        },
-    //    });
-    //}
+    function reads(Jlid) {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['编辑计量单位', 'font-size:18px'],
+            area: ['400px', '359px'],
+            shadeClose: true,
+            content: $('#hide11'),
+            shade: 0,
 
-    //function JldwGetById(Jlid) {
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/LLQ/JldwGetById",
-    //        data: "{Jlid:" + Jlid + "}",
-    //        dataType: "json",
-    //        contentType: "application/json",
-    //        success: function (result) {
-    //            $.each(result, function (Index, data) {
-    //                $("[name='txtJlName']").val(data.JlName);
-    //            });
-    //        },
-    //        error: function (ex) {
-    //            alert(ex.responseText);
-    //        }
-    //    });
-    //}
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/JldwGetById",
+            data: "{Jlid:" + Jlid + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                console.log(result);
+                $.each(result, function (Index, data) {
+                    
+                    $("#jlid").val(data.Jlid);
+                    $("#jlName").val(data.JlName);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+    //修改
+    function Eite() {
+        var jlid = $("#jlid").val();
+        var jlName = $("#jlName").val();
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/JldwEdit",
+            data: "{Jlid: " + jlid + ",JlName:'" + jlName + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    GetJldwAll();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    };
 
 
+    //模糊查询
+    function JldwGetByQuery() {
+        var Search = $("#txtSearch").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/JldwGetByQuery",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",jlName:'" + Search + "'}",
+            //data: { PageIndex: PageIndex, PageSize: PageSize, JlName: Search },
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td  style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><a  href='javascript:reads(" + data.Jlid + ")'><i class='layui-icon layui-icon-edit' id='button' title='编辑'></i> </a> <a href='#'><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();

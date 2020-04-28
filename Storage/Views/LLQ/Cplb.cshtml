@@ -29,7 +29,7 @@
                 <tr>
                     <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入类别编号或者名称"></td>
                     <td>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="CplbQuery()">搜索</a>
                     </td>
                 </tr>
             </table>
@@ -96,12 +96,16 @@
                 <dd>创建人</dd>
                 <dd>
                     <input id="UserName" name="UserName" type="text" class="input-medium">
+                    <datalist id="UserName">
+                        <option>哈哈哈</option>
+                        <option>llll</option>
+                    </datalist>
                 </dd>
             </dl>
             <dl>
                 <dd>创建时间</dd>
                 <dd>
-                    <input id="CpTime" name="CpTime" type="text" class="input-medium">
+                    <input id="CpTime" name="CpTime" type="date" class="input-medium">
                 </dd>
             </dl>
             <dl>
@@ -110,11 +114,11 @@
                     <input id="remark" name="remark" type="text" class="input-medium">
                 </dd>
             </dl>
-            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" />
+            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="Eite()" value="确认" />
             <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
 
         </form>
-    </div>c
+    </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -174,7 +178,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
                 });
             },
             erro: function (ex) {
@@ -240,6 +244,97 @@
         });
         GetCplbAll();
     };
+
+    function reads(ID) {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['编辑计量单位', 'font-size:18px'],
+            area: ['400px', '359px'],
+            shadeClose: true,
+            content: $('#hide11'),
+            shade: 0,
+
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/CplbGetById",
+            data: "{ID:" + ID + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                console.log(result);
+                $.each(result, function (Index, data) {
+                    
+                    $("#ID").val(data.ID);
+                    $("#CpLbName").val(data.CpLbName);
+                    $("#UserName").val(data.UserName);
+                    $("#CpTime").val(data.CpTime);
+                    $("#remark").val(data.remark);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+    //修改
+    function Eite() {
+        var ID = $("#ID").val();
+        var CpLbName = $("#CpLbName").val();
+        var UserName = $("#UserName").val();
+        var CpTime = $("#CpTime").val();
+        var remark = $("#remark").val();
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/CplbEdit",
+            data: "{ID: " + ID + ",CpLbName:'" + CpLbName + "',UserName: '" + UserName + "',CpTime:'" + CpTime + "',remark: '" + remark + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    GetCplbAll();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    };
+
+
+    //模糊查询
+    function CplbQuery() {
+        var Search = $("#txtSearch").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/CplbQuery",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",CpLbName:'" + Search + "'}",
+            //data: { PageIndex: PageIndex, PageSize: PageSize, JlName: Search },
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i></a> <i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
+
+
+
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));

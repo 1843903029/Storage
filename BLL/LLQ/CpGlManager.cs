@@ -21,10 +21,24 @@ namespace BLL.LLQ
         }
 
         //删除
-        public static int CpGlDet(Models.CpGlinfo cpgl)
+        public static int CpGlDet(int CpID)
         {
-            return DAL.LLQ.CpGlService.CpGlDet(cpgl);
+            return DAL.LLQ.CpGlService.CpGlDet(CpID);
         }
-
+        //根据id单个查询
+        public static IQueryable CpGlGetById(int CpID)
+        {
+            return DAL.LLQ.CpGlService.CpGlGetById(CpID);
+        }
+        //修改
+        public static int CpGlEdit(CpGlinfo cpgl)
+        {
+            return DAL.LLQ.CpGlService.CpGlEdit(cpgl);
+        }
+        //模糊查询
+        public static IQueryable CpGlQuery(int pageIndex, int pageSize, string CpXsName)
+        {
+            return DAL.LLQ.CpGlService.CpGlQuery(pageIndex,  pageSize,  CpXsName);
+        }
     }
 }

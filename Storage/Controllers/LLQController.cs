@@ -60,17 +60,26 @@ namespace Storage.Controllers
             jldw.Delit = true;
             return Json(BLL.LLQ.JldwManager.JldwAdd(jldw),JsonRequestBehavior.AllowGet);
         }
-
+        //删除
         public ActionResult JldwDet(int jlid)
         {
             return Json(BLL.LLQ.JldwManager.JldwDet(jlid), JsonRequestBehavior.AllowGet);
         }
-
+        //模糊查询
+        public ActionResult JldwGetByQuery(int pageIndex, int pageSize, string jlName)
+        {
+            return Json(BLL.LLQ.JldwManager.JldwGetByQuery( pageIndex,  pageSize,  jlName), JsonRequestBehavior.AllowGet);
+        }
+        //单个id查询
         public ActionResult JldwGetById(int Jlid)
         {
             return Json(BLL.LLQ.JldwManager.JldwGetById(Jlid), JsonRequestBehavior.AllowGet);
         }
-
+        //修改
+        public ActionResult JldwEdit(JLinfo jldw)
+        {
+            return Json(BLL.LLQ.JldwManager.JldwEdit(jldw), JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// 产品类别分页
@@ -95,7 +104,21 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CplbManager.CplbDet(id), JsonRequestBehavior.AllowGet);
         }
-
+        //模糊查询
+        public ActionResult CplbQuery(int pageIndex, int pageSize, string CpLbName)
+        {
+            return Json(BLL.LLQ.CplbManager.CplbQuery(pageIndex, pageSize, CpLbName), JsonRequestBehavior.AllowGet);
+        }
+        //单个id查询
+        public ActionResult CplbGetById(int id)
+        {
+            return Json(BLL.LLQ.CplbManager.CplbGetById(id), JsonRequestBehavior.AllowGet);
+        }
+        //修改
+        public ActionResult CplbEdit(CpLbinfo cplb)
+        {
+            return Json(BLL.LLQ.CplbManager.CplbEdit(cplb), JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// 产品管理分页
@@ -114,11 +137,24 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.CpGlManager.CpGlAdd(cpgl), JsonRequestBehavior.AllowGet);
         }
         //删除
-        public ActionResult CpGlDet(CpGlinfo cpgl )
+        public ActionResult CpGlDet(int CpID)
         {
-            cpgl.State = false;
-            return Json(BLL.LLQ.CpGlManager.CpGlDet(cpgl), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.CpGlManager.CpGlDet(CpID), JsonRequestBehavior.AllowGet);
         }
-
+        //模糊查询
+        public ActionResult CpGlQuery(int pageIndex, int pageSize, string CpXsName)
+        {
+            return Json(BLL.LLQ.CpGlManager.CpGlQuery(pageIndex, pageSize, CpXsName), JsonRequestBehavior.AllowGet);
+        }
+        //单个id查询
+        public ActionResult CpGlGetById(int CpID)
+        {
+            return Json(BLL.LLQ.CpGlManager.CpGlGetById(CpID), JsonRequestBehavior.AllowGet);
+        }
+        //修改
+        public ActionResult CpGlEdit(CpGlinfo cpgl)
+        {
+            return Json(BLL.LLQ.CpGlManager.CpGlEdit(cpgl), JsonRequestBehavior.AllowGet);
+        }
     }
 }
