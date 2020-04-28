@@ -42,13 +42,28 @@ namespace BLL.LLQ
         }
 
         /// <summary>
-        /// 根据id查询
+        /// 模糊查询
         /// </summary>
-        /// <param name="Jlid"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="jlName"></param>
         /// <returns></returns>
+
+        public static IQueryable JldwGetByQuery(int pageIndex, int pageSize, string jlName)
+        {
+            return DAL.LLQ.JldwService.JldwGetByQuery(pageIndex,  pageSize,  jlName);
+        }
+
+        //根据id查询单个
         public static IQueryable JldwGetById(int Jlid)
         {
             return DAL.LLQ.JldwService.JldwGetById(Jlid);
+       }
+        //修改
+        public static int JldwEdit(JLinfo jldw)
+        {
+            return DAL.LLQ.JldwService.JldwEdit(jldw);
+
         }
 
     }

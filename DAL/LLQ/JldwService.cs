@@ -52,12 +52,32 @@ namespace DAL.LLQ
 
         }
 
-        //根据编号查询
+        //模糊查询名称
+        public static IQueryable JldwGetByQuery(int pageIndex,int pageSize, string jlName)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.JLinfo
+                      where p.JlName.IndexOf(jlName)!=-1&&p.Delit==true
+                      orderby p.Jlid ascending
+                      select new
+                      {
+                          Jlid = p.Jlid,
+                          Jlbh = p.Jlbh,
+                          JlName = p.JlName
+                      };
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            list.PageCount = obj.Count();
+            return list.DataList;
+        }
+
+        //根据id查询单个
         public static IQueryable JldwGetById(int Jlid)
         {
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.JLinfo
-                      where p.Jlid == Jlid && p.Delit == true
+                      where p.Jlid == Jlid
+                      orderby p.Jlid ascending
                       select new
                       {
                           Jlid = p.Jlid,
@@ -66,8 +86,16 @@ namespace DAL.LLQ
                       };
             return obj;
         }
+        //修改
+        public static int JldwEdit(JLinfo jldw)
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = (from p in entity.JLinfo where p.Jlid == jldw.Jlid select p).First();
+            obj.Jlid = jldw.Jlid;
+            obj.JlName = jldw.JlName;
+            return entity.SaveChanges();
 
-
+        }
 
     }
 }

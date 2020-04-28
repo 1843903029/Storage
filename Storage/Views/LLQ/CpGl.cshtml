@@ -20,7 +20,7 @@
                 <table>
                     <tr>
                         <td><strong style="margin-left:20px">产品管理</strong></td>
-                        <td> <input style="margin-left:750px;" id="btnSubhh" class="btn btn-primary" type="button" value="新增" /></td>
+                        <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
@@ -53,134 +53,236 @@
                 </thead>
                 <tbody id="tb1"></tbody>
             </table>
-            <div id="jbox-content" style="height: 136px;  position: static; margin-left:500px;position:absolute;margin-top:-300px;background-color:aliceblue" hidden>
-                <div class="tab-pane active" id="widget_tab1" style="margin-top:30px">
-                    <table class="formtab_user">
-                        <tbody>
-                            <tr>
-                                <td>产品编号</td>
-                                <td>
-                                    <input id="txtCpID" name="txtCpID" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
-                                </td>
-                                <td>产品条码</td>
-                                <td>
-                                    <input id="txtCpbh" name="txtCpbh" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>产品名称</td>
-                                <td>
-                                    <input id="txtCpXsName" name="txtCpXsName" type="password" class="input-medium">
-                                </td>
-                                <td>产品类别</td>
-                                <td>
-                                    <select id="CpLbName" name="CpLbName" class="input-medium" style="width:164px;">
-                                        <option value="">请选择类别</option>
-                                        <option value="DR_0000">儿童</option>
-                                        <option value="000001">娱乐</option>
-                                        <option value="000002">饮料类</option>
-                                        <option value="000003">干货类</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>预警上限</td>
-                                <td>
-                                    <input id="txtCpSx" name="txtCpSx" type="text" placeholder="0" class="input-medium">
-                                </td>
-                                <td>预警下限</td>
-                                <td>
-                                    <input id="txtCpXx" name="txtCpXx" type="text" placeholder="0" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>规格</td>
-                                <td>
-                                    <input id="txtSpecification" name="txtSpecification" type="password" class="input-medium">
-                                </td>
-                                <td>单位</td>
-                                <td>
-                                    <select id="CpJlName" name="CpJlName" class="input-medium" style="width:164px;">
-                                        <option value="">请选择单位</option>
-                                        <option value="DR_0000">千克</option>
-                                        <option value="000001">吨</option>
-                                        <option value="000002">克</option>
-                                        <option value="000003">升</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>价格</td>
-                                <td>
-                                    <input id="txtCpPrice" name="txtCpPrice" type="password" class="input-medium">
-                                </td>
-                                <td>客户</td>
-                                <td>
-                                    <select id="khName" name="khName" class="input-medium" style="width:164px;">
-                                        <option value="">请选择客户</option>
-                                        <option value="DR_0000">阿里巴巴</option>
-                                        <option value="000001">腾讯</option>
-                                        <option value="000002">网易</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>默认仓库</td>
-                                <td>
-                                    <select id="CkId" name="CkId" class="input-medium" style="width:164px;">
-                                        <option value="">请选择仓库</option>
-                                        <option value="DR_0000">系统管理员</option>
-                                        <option value="000001">仓管员</option>
-                                        <option value="000002">采购员</option>
-                                        <option value="000003">门卫</option>
-                                    </select>
-                                </td>
-                                <td>默认库位</td>
-                                <td>
-                                    <select id="KwId" name="KwId" class="input-medium" style="width:164px;">
-                                        <option value="">请选择库位</option>
-                                        <option value="DR_0000">系统管理员</option>
-                                        <option value="000001">仓管员</option>
-                                        <option value="000002">采购员</option>
-                                        <option value="000003">门卫</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>产品数量</td>
-                                <td>
-                                    <input id="txtCpShuLiang" name="txtCpShuLiang" type="text" placeholder="" class="input-medium">
-                                </td>
-                                <td>备注</td>
-                                <td>
-                                    <input id="txtremark" name="txtremark" type="text" placeholder="" class="input-medium">
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tr>
-                            <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="CpGlAdd()" value="确认" /></td>
-                            <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+
             @*分页*@
             <div id="pageDemo">
 
             </div>
         </div>
     </div>
+    <div id="jbox-content" hidden>
+        <table class="formtab_user">
+            <tbody>
+                <tr>
+                    <td>产品编号</td>
+                    <td>
+                        <input id="txtCpID" name="txtCpID" type="text" placeholder="自动生成,可不填" class="input-medium" disabled="disabled">
+                    </td>
+                    <td>产品条码</td>
+                    <td>
+                        <input id="txtCpbh" name="txtCpbh" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>产品名称</td>
+                    <td>
+                        <input id="txtCpXsName" name="txtCpXsName" type="password" class="input-medium">
+                    </td>
+                    <td>产品类别</td>
+                    <td>
+                        <select id="CpLbName" name="CpLbName" class="input-medium" style="width:164px;">
+                            <option value="">请选择类别</option>
+                            <option value="DR_0000">儿童</option>
+                            <option value="000001">娱乐</option>
+                            <option value="000002">饮料类</option>
+                            <option value="000003">干货类</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>预警上限</td>
+                    <td>
+                        <input id="txtCpSx" name="txtCpSx" type="text" placeholder="0" class="input-medium">
+                    </td>
+                    <td>预警下限</td>
+                    <td>
+                        <input id="txtCpXx" name="txtCpXx" type="text" placeholder="0" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>规格</td>
+                    <td>
+                        <input id="txtSpecification" name="txtSpecification" type="password" class="input-medium">
+                    </td>
+                    <td>单位</td>
+                    <td>
+                        <select id="txtCpJlName" name="CpJlName" class="input-medium" style="width:164px;">
+                            <option value="">请选择单位</option>
+                            <option value="DR_0000">千克</option>
+                            <option value="000001">吨</option>
+                            <option value="000002">克</option>
+                            <option value="000003">升</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>价格</td>
+                    <td>
+                        <input id="txtCpPrice" name="txtCpPrice" type="password" class="input-medium">
+                    </td>
+                    <td>客户</td>
+                    <td>
+                        <select id="txtkhName" name="khName" class="input-medium" style="width:164px;">
+                            <option value="">请选择客户</option>
+                            <option value="DR_0000">阿里巴巴</option>
+                            <option value="000001">腾讯</option>
+                            <option value="000002">网易</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>默认仓库</td>
+                    <td>
+                        <select id="txtCkId" name="CkId" class="input-medium" style="width:164px;">
+                            <option value="">请选择仓库</option>
+                            <option value="DR_0000">系统管理员</option>
+                            <option value="000001">仓管员</option>
+                            <option value="000002">采购员</option>
+                            <option value="000003">门卫</option>
+                        </select>
+                    </td>
+                    <td>默认库位</td>
+                    <td>
+                        <select id="txtKwId" name="KwId" class="input-medium" style="width:164px;">
+                            <option value="">请选择库位</option>
+                            <option value="DR_0000">系统管理员</option>
+                            <option value="000001">仓管员</option>
+                            <option value="000002">采购员</option>
+                            <option value="000003">门卫</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>产品数量</td>
+                    <td>
+                        <input id="txtCpShuLiang" name="txtCpShuLiang" type="text" placeholder="" class="input-medium">
+                    </td>
+                    <td>备注</td>
+                    <td>
+                        <input id="txtremark" name="txtremark" type="text" placeholder="" class="input-medium">
+                    </td>
+                </tr>
+            </tbody>
+            <tr>
+                <td><input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="CpGlAdd()" value="确认" /></td>
+                <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" /></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <form class="navbar-form navbar-left" role="search">
+            <dl>
+                <dd>产品条码</dd>
+                <dd>
+                    <input id="CpID" type="text" hidden />
+                    <input id="Cpbh" name="txtCpbh" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>产品名称</dd>
+                <dd>
+                    <input id="txtCpXsName" name="txtCpXsName" type="password" class="input-medium">
+                </dd>
+                <dd>产品类别</dd>
+                <dd>
+                    <select id="CpLbName" name="CpLbName" class="input-medium" style="width:164px;">
+                        <option value="">请选择类别</option>
+                        <option value="DR_0000">儿童</option>
+                        <option value="000001">娱乐</option>
+                        <option value="000002">饮料类</option>
+                        <option value="000003">干货类</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dd>预警上限</dd>
+                <dd>
+                    <input id="txtCpSx" name="txtCpSx" type="text" placeholder="0" class="input-medium">
+                </dd>
+                <dd>预警下限</dd>
+                <dd>
+                    <input id="txtCpXx" name="txtCpXx" type="text" placeholder="0" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>规格</dd>
+                <dd>
+                    <input id="txtSpecification" name="txtSpecification" type="password" class="input-medium">
+                </dd>
+                <dd>单位</dd>
+                <dd>
+                    <select id="CpJlName" name="CpJlName" class="input-medium" style="width:164px;">
+                        <option value="">请选择单位</option>
+                        <option value="DR_0000">千克</option>
+                        <option value="000001">吨</option>
+                        <option value="000002">克</option>
+                        <option value="000003">升</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dd>价格</dd>
+                <dd>
+                    <input id="txtCpPrice" name="txtCpPrice" type="password" class="input-medium">
+                </dd>
+                <dd>客户</dd>
+                <dd>
+                    <select id="khName" name="khName" class="input-medium" style="width:164px;">
+                        <option value="">请选择客户</option>
+                        <option value="DR_0000">阿里巴巴</option>
+                        <option value="000001">腾讯</option>
+                        <option value="000002">网易</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dd>默认仓库</dd>
+                <dd>
+                    <select id="CkId" name="CkId" class="input-medium" style="width:164px;">
+                        <option value="">请选择仓库</option>
+                        <option value="DR_0000">系统管理员</option>
+                        <option value="000001">仓管员</option>
+                        <option value="000002">采购员</option>
+                        <option value="000003">门卫</option>
+                    </select>
+                </dd>
+                <dd>默认库位</dd>
+                <dd>
+                    <select id="KwId" name="KwId" class="input-medium" style="width:164px;">
+                        <option value="">请选择库位</option>
+                        <option value="DR_0000">系统管理员</option>
+                        <option value="000001">仓管员</option>
+                        <option value="000002">采购员</option>
+                        <option value="000003">门卫</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dd>产品数量</dd>
+                <dd>
+                    <input id="txtCpShuLiang" name="txtCpShuLiang" type="text" placeholder="" class="input-medium">
+                </dd>
+                <dd>备注</dd>
+                <dd>
+                    <input id="txtremark" name="txtremark" type="text" placeholder="" class="input-medium">
+                </dd>
+            </dl>
+            <input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="Eite()" value="确认" />
+            <input id="Button1_1" type="button" class="btn-info" style="margin-left:50px;margin-top:15px" value="取消" />
+
+        </form>
+    </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
+    var PageIndex = 1;
+    var PageSize = 6;
+    var PageCount = 0;
+    var rows = 0;
     $(function () {
         GetCpGlAll();
 
-        var PageIndex = 1;
-        var PageSize = 6;
-        var PageCount = 0;
-        var rows = 0;
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -200,44 +302,71 @@
                 }
             });
         });
-        function GetCpGlAll() {
-            $.ajax({
-                type: "POST",
-                url: "/LLQ/GetCpGlAll",
-                data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    $("#tb1 tr").remove();
-                    rows = result.PageCount;
-                    $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.CpJlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete'id='dit' title='删除'></i></td></tr>");
-                    });
-                },
-                erro: function (ex) {
-                    alert(ex.responseText);
-                }
-            })
-        }
 
-        $("#btnSubhh").click(function () {
-            if ($("#jbox-content").css("display") == "none") {
-                $("#jbox-content").show();
 
-            } else {
-                $("#jbox-content").hide();
-            }
-        });
+        //$("#btnSubhh").click(function () {
+        //    if ($("#jbox-content").css("display") == "none") {
+        //        $("#jbox-content").show();
+
+        //    } else {
+        //        $("#jbox-content").hide();
+        //    }
+        //});
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
     });
 
+    //查询
+    function GetCpGlAll() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/GetCpGlAll",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.JlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CpGlDet(" + data.CpID + ")'></i></td></tr>");
+                });
+            },
+            erro: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
+
+    //新增
+    function insert() {
+        CpLbName
+        CpJlName
+        khName
+        CkId
+        KwId
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['新增计量单位', 'font-size:18px'],
+            area: ['auto', 'auto'],
+            shadeClose: true,
+            content: $('#jbox-content'),
+            shade: 0,
+        });
+    }
     function CpGlAdd() {
+        var rukuzongshu = 0;//定义总数量
+        var rukuzongjia = 0;//定义总价
+        for (var i = 0; i < info.length; i++) {
+            rukuzongshu += parseInt(info[i].StorageNumber);
+            rukuzongjia += parseInt(info[i].Summoney);
+        }
+
         $.ajax({
             type: "POST",
             url: "/LLQ/CpGlAdd",
-            data: "{cpgl:{CpId:'" + $("#txtCpId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'CpId:'" + $("#txtCpId").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
+            data: "{cpgl:{CpID:'" + $("#txtCpID").val() + "'Cpbh:'" + $("#txtCpbh").val() + "',CpXsName:'" + $("#txtCpXsName").val() + "',remark:'" + $("#txtremark").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',remark:'" + $("#txtremark").val() + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
@@ -254,16 +383,15 @@
     }
 
 
-
-    function CpGlDet() {
-        var id = $("[name='txtCpId']").val();
+    //删除
+    function CpGlDet(CpID) {
         $.ajax({
             //请求方式
             type: "POST",
             //发送请求的地址 /控制器名/动作方法名
             url: "/LLQ/CpGlDet",
             //发送到服务器的数据(方法参数)
-            data: "{cpgl:" + id + "}",
+            data: "{CpID:" + CpID + "}",
             //服务器返回的数据类型
             dataType: "json",
             //发送信息至服务器时内容编码类型
@@ -283,7 +411,102 @@
                 alert(ex.responseText);
             }
         });
+        GetCpGlAll();
     };
+    //单个查询
+    function reads(SysRoleID) {
+        alert(SysRoleID);
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['编辑角色', 'font-size:18px'],
+            area: ['400px', '359px'],
+            shadeClose: true,
+            content: $('#hide11'),
+            shade: 0,
+
+        });
+
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/TXY/CpGlGetById",
+            data: "{CpID:" + CpID + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                console.log(result);
+                $.each(result, function (Index, data) {
+                    alert(data.RoleNum);
+                    $("#SysRoleID").val(data.SysRoleID);
+                    $("#RoleNum1").val(data.RoleNum);
+                    $("#RoleName1").val(data.RoleName);
+                    $("#SysRoleID").val(data.SysRoleID);
+                    $("#RoleNum1").val(data.RoleNum);
+                    $("#RoleName1").val(data.RoleName);
+                    $("#SysRoleID").val(data.SysRoleID);
+                    $("#RoleNum1").val(data.RoleNum);
+                    $("#RoleName1").val(data.RoleName);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    function update() {
+        var SysRoleID = $("#SysRoleID").val();
+        var RoleNum = $("#RoleNum1").val();
+        var RoleName = $("#RoleName1").val();
+        var Remark = $("#Remark1").val();
+        $.ajax({
+            type: "POST",
+            url: "/TXY/CpGlEdit",
+            data: "{role:{SysRoleID:'" + SysRoleID + "',RoleNum:'" + RoleNum + "',RoleName:'" + RoleName + "',Remark:'" + Remark + "'}}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    get();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+
+
+    }
+    function CpGlQuery() {
+        var Search = $("#txtSearch").val();
+        alert(PageIndex);
+        $.ajax({
+            type: "POST",
+            url: "/TXY/CpGlQuery",
+            //data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",DepartName:" + Search + "}",
+            data: { PageIndex: PageIndex, PageSize: PageSize, CpXsName: Search },
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.JlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CpGlDet(" + data.CpID + ")'></i></td></tr>");
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+
+    }
+
 
 
     function ConvertDate(date) {
