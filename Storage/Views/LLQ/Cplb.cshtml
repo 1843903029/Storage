@@ -95,11 +95,10 @@
             <dl>
                 <dd>创建人</dd>
                 <dd>
-                    <input id="UserName" name="UserName" type="text" class="input-medium">
-                    <datalist id="UserName">
-                        <option>哈哈哈</option>
-                        <option>llll</option>
-                    </datalist>
+                    <select id="UserName" name="UserName" class="input-medium" style="width:164px;">
+                        <option value="">请选择</option>
+
+                    </select>
                 </dd>
             </dl>
             <dl>
@@ -333,7 +332,24 @@
         })
     }
 
-
+    function Ad() {
+        $.ajax({
+            type: "POST",
+            url: "/LLQ/selectAd",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='UserName']").append("<option value='" + data.AdminID + "'>" + data.UserName + "</option>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
 
 
     function ConvertDate(date) {
