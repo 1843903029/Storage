@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ChukuGuanliAdd";
+    ViewBag.Title = "CukuGuanliXiuGai";
     Layout = "~/Views/MainPage.cshtml";
     Models.Admin stu = Session["user"] as Models.Admin;
 }
@@ -29,11 +29,11 @@
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <select class="form-control" id="chukuleixing">
-                        <option>销售提货出库</option>
-                        <option>采购退货出库</option>
-                        <option>领用出库</option>
-                        <option>接货出库</option>
-                        <option>借出换入</option>
+                        <option value="销售提货出库">销售提货出库</option>
+                        <option value="采购退货出库">采购退货出库</option>
+                        <option value="领用出库">领用出库</option>
+                        <option value="接货出库">接货出库</option>
+                        <option value="借出换入">借出换入</option>
                     </select>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
@@ -77,7 +77,7 @@
                     <input type="text" class="form-control" id="Lianxiren">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="zhidanrendl">
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:10px;">
                     <input type="text" class="form-control" id="beizhuxinxi">
@@ -139,14 +139,16 @@
     var pageCount = 0;
     var rowss = 0;
     var info = [];
-    var danhapsuiji;
-    $(function () {
-        rukuList();
-        KeHuList();//查询客户信息绑定到下拉框
-        var addtime = new Date();
-        $("#FaHuoTime").val(addtime.toLocaleDateString());//赋值当前日期到页面
 
-        suijidanhao();//随机单号生成
+     var Cdh =@Request.QueryString["id"].ToString();//传过来的单号
+
+    $(function () {
+        KeHuList();//查询客户信息绑定到下拉框
+
+        cpList();//产品
+        IDChuku();//订单详情
+
+
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -161,17 +163,51 @@
                 , jump: function (obj) {
                     pageIndex = obj.curr;
                     pageSize = obj.limit;
-                    rukuList();
+                    cpList();
                 }
             });
         });
 
     })
 
+    //页面进来查询这个订单所有的信息并显示
+    function IDChuku() {
+        $.ajax({
+            type: "POST",
+            url: "/XBY/IDChuku",
+            data: "{Danhao:" + Cdh + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                $.each(result, function (index, data1) {
+                    $("#ChuKuRandom").val(data1.StockRemovalID);
+                    $("#chukuleixing").val(data1.StockRemovalType);
+                    $("#zhidanrendl").val(data1.EmployeeID);
+                    $("#Khbh").val(data1.SupplierID);
+                    $("#kehulist").val(data1.SupplierID);
+                    $("#Khdizhi").val(data1.lianxiren);
+                    $("#gysdianhua").val(data1.dianhua);
+                    $("#zhidanTime").val(ConvertDate(data1.CreationTime));
+                    $("#beizhuxinxi").val(data1.StateText);
+
+                    $.each(data1.xiangbiao, function (index, data) {
+                        $("#tb1").append("<tr><td>" + data.cpid + "</td><td>" + data.productName + "</td><td>" + data.cptiaoma + "</td><td>" + data.cpguige + "</td><td>" + data.cpjiage + "</td><td><input name='" + data.cptiaoma + "' type='text' value='" + data.StorageNumber + "' onchange='www(" + data.cptiaoma + "," + data.Price + ")' /></td><td id='" + data.cptiaoma + "'>" + data.Summoney + "</td><td>" + data.kuweiname + "</td> <td><i class='layui-icon layui-icon-edit' title='编辑'></i>  <i class='layui-icon layui-icon-delete' title='删除'></i>        </td></tr>");
+                    });
+                });
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+
+            }
+        });
+    }
 
 
 
-    function rukuList() {
+
+
+    function cpList() {
         $.ajax({
             type: "POST",
             url: "/LLQ/GetCpGlAll",
@@ -313,21 +349,7 @@
     }
 
 
-    //   根据当前时间和随机数生成流水号
-    function suijidanhao() {
-        var now = new Date()
-        var month = now.getMonth() + 1
-        var day = now.getDate()
-        var hour = now.getHours()
-        var minutes = now.getMinutes()
-        var seconds = now.getSeconds()
-        //month = now.setTimeDateFmt(month)
-        //hour = now.setTimeDateFmt(hour)
-        //minutes = now.setTimeDateFmt(minutes)
-        //seconds = this.setTimeDateFmt(seconds)
-        danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
-        $("#ChuKuRandom").val(danhapsuiji);
-    }
+
 
 
     function ChuKuAdd() {
@@ -364,26 +386,20 @@
             //alert(rukuzongjia);
 
 
-            if (info.length > 0) {
+            $.ajax({
+                type: "POST",
+                url: "/XBY/ChuKuAddZhu",
+                data: "{zhu:{StockRemovalID:'" + danhapsuiji + "',StockRemovalType:'" + $("#chukuleixing").val() + "',SupplierID:'" + $("#Khbh").val() + "',EmployeeID:'" + @stu.AdminID + "',GoodsCount:'" + rukuzongshu + "',Summoney:'" + rukuzongjia + "',StateText:'" + $("#beizhuxinxi").val() + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    AddXiang();
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
 
-                $.ajax({
-                    type: "POST",
-                    url: "/XBY/ChuKuAddZhu",
-                    data: "{zhu:{StockRemovalID:'" + danhapsuiji + "',StockRemovalType:'" + $("#chukuleixing").val() + "',SupplierID:'" + $("#Khbh").val() + "',EmployeeID:'" + @stu.AdminID + "',GoodsCount:'" + rukuzongshu + "',Summoney:'" + rukuzongjia + "',StateText:'" + $("#beizhuxinxi").val() + "'}}",
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (result) {
-                        AddXiang();
-                    },
-                    error: function (ex) {
-                        alert("Error:" + ex.responseText);
-
-                    }
-                });
-            } else
-            {
-                alert("请选择产品后再继续！");
-            }
+                }
+            });
         }
     }
 
@@ -414,3 +430,4 @@
         return time.toLocaleDateString();
     }
 </script>
+

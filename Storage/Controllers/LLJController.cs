@@ -17,25 +17,43 @@ namespace Storage.Controllers
         }
         //SysDepart
 
-        public ActionResult GetAllSysRole(int PageIndex=1, int PageSize=2)
+        public ActionResult GetAllFunction(int PageIndex=1, int PageSize=2)
         {
 
-            return Json(BLL.LLJ.CanDanManager.SysRolefenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLJ.CanDanManager.Functionfenye(PageIndex, PageSize), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult caidandel(int SysDepartID)
+        public ActionResult caidandel(int NodeId)
         {
 
-            return Json(BLL.LLJ.CanDanManager.caidandel(SysDepartID), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLJ.CanDanManager.caidandel(NodeId), JsonRequestBehavior.AllowGet);
         }
+        //
+        public ActionResult FunctionGetById(int NodeId)
+        {
+
+            return Json(BLL.LLJ.CanDanManager.FunctionGetById(NodeId), JsonRequestBehavior.AllowGet);
+        }
+        
         //新增
-        public ActionResult caidanadd(SysDepart cd)
+        public ActionResult caidanadd(Function cd)
         {
-            cd.CreateTime = DateTime.Now;
+            cd.ADDTime = DateTime.Now;
             return Json(BLL.LLJ.CanDanManager.caidanadd(cd), JsonRequestBehavior.AllowGet);
         }
+        //修改
+        public ActionResult FunctionEdit(int NodeId, string DisplayName)
+        {
 
+            return Json(BLL.LLJ.CanDanManager.FunctionEdit( NodeId, DisplayName), JsonRequestBehavior.AllowGet);
+        }
+        //模糊查询
+        public ActionResult FunctionQuery(int PageIndex, int PageSize, string DisplayName)
+        {
 
-        public ActionResult SysDepart()
+            return Json(BLL.LLJ.CanDanManager.FunctionQuery(PageIndex, PageSize, DisplayName), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Function()
         {
             return View();
         }

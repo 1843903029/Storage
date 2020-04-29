@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "YiKuGuanliAdd";
     Layout = "~/Views/MainPage.cshtml";
+    Models.Admin stu = Session["user"] as Models.Admin;
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
@@ -235,7 +236,7 @@
                 $.ajax({
                     type: "POST",
                     url: "/XBY/AddYiKu",
-                    data: "{zhu:{MovementID:'" + danhapsuiji + "',MovementType:'" + $("#YiKuleixing").val() + "',MovementCount:'" + rukuzongshu + "',EmployeeID:'" + 1 + "',StateText:'" + yikubeizhu + "'}}",
+                    data: "{zhu:{MovementID:'" + danhapsuiji + "',MovementType:'" + $("#YiKuleixing").val() + "',MovementCount:'" + rukuzongshu + "',EmployeeID:'" + @stu.AdminID + "',StateText:'" + yikubeizhu + "'}}",
                     dataType: "json",
                     contentType: "application/json",
                     success: function (result) {

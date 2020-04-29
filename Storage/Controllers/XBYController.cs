@@ -34,6 +34,41 @@ namespace Storage.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 入库管理修改订单页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RukuGuanliXiuGai()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// 入库管理修改时 修改主表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RuKuXiuZhu(Models.Storage zhu)
+        {
+            zhu.State = 2;
+            zhu.OperationType = "电脑";
+            zhu.CreationTime = DateTime.Now;
+            zhu.DataState = true;
+            return Json(BLL.XBY.StorageManager.RuKuXiuZhu(zhu),JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 入库管理修改时 修改主表后的删除详表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RuKuDel(string id)
+        {
+            return Json(BLL.XBY.StorageManager.RuKuDel(id), JsonRequestBehavior.AllowGet);
+        }
+
+
+
         /// <summary>
         /// 入库审核
         /// </summary>
@@ -166,6 +201,15 @@ namespace Storage.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult ChukuGuanliAdd()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 出库管理修改订单页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CukuGuanliXiuGai()
         {
             return View();
         }

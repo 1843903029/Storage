@@ -42,11 +42,14 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
-                    if (result != "") {
+                    if (result > 0) {
                         alert("登录成功!!");
                         location.href = "/XBY/Index";
-                        AdminID = result.AdminID;
-                        
+                        //AdminID = result.AdminID;
+
+                    } else
+                    {
+                        alert("请检查账号密码!!");
                     }
                     
                 },

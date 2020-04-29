@@ -7,49 +7,26 @@ using Models;
 
 namespace DAL.TXY
 {
-   public class AdminService
+    public class AdminService
     {
         //登录
-        public static IQueryable Rogin(Admin a)
+        public static Admin Rogin(Admin a)
         {
             StorageEntities entity = new StorageEntities();
+            
             var obj = from p in entity.Admin
                       where p.UserName == a.UserName && p.PassWord == a.PassWord
-                      select new {
-                          AdminID= a.AdminID,
-                          Authority = a.Authority,
-                          Breakage = a.Breakage,
-                          CpLbinfo = a.CpLbinfo,
-                          CreateIp = a.CreateIp,
-                          CreateTime = a.CreateTime,
-                          CreateUser = a.CreateUser,
-                          CycleCount = a.CycleCount,
-                          DepartNum_id = a.DepartNum_id,
-                          Email = a.Email,
-                          IsDelete = a.IsDelete,
-                          LoginCount = a.LoginCount,
-                          Movement = a.Movement,
-                          PassWord = a.PassWord,
-                          Phone = a.Phone,
-                          Picture = a.Picture,
-                          RealName = a.RealName,
-                          Remark = a.Remark,
-                          Returns = a.Returns,
-                          RoleNum = a.RoleNum,
-                          Status_id = a.Status_id,
-                          StockRemoval = a.StockRemoval,
-                          Storage = a.Storage,
-                          SysDepart = a.SysDepart,
-                          SysRole = a.SysRole,
-                          SysStatus = a.SysStatus,
-                          UpdateTime = a.UpdateTime,
-                          UserCode = a.UserCode,
-                          UserName = a.UserName,
-                         
-                      };
-            return obj;
+                      select p;
+            if (obj.Count() > 0)
+            {
+                return obj.First();
+            }
+            else
+            {
+                return null;
+            }
         }
-        public static PageList Adminfenye(int pageIndex, int pageSize,int Stuate)
+        public static PageList Adminfenye(int pageIndex, int pageSize, int Stuate)
         {
             StorageEntities entity = new StorageEntities();
             //匿名类型
@@ -73,7 +50,7 @@ namespace DAL.TXY
                           DepartName = p.SysDepart.DepartName,
                           RoleName = p.SysRole.RoleName,
 
-                         
+
                       };
             PageList list = new PageList();
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
@@ -144,8 +121,8 @@ namespace DAL.TXY
                           Phone = p.Phone,
                           DepartNum_id = p.DepartNum_id,
                           RoleNum = p.RoleNum,
-            
-                          
+
+
                       };
             return obj;
         }
@@ -197,7 +174,7 @@ namespace DAL.TXY
 
         }
         //高级查询
-        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, int DepartName,int RoleName)
+        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, string DepartName, string RoleName)
         {
             StorageEntities ent = new StorageEntities();
             PageList list = new PageList();
@@ -218,61 +195,43 @@ namespace DAL.TXY
                           Stuate = p.SysStatus.StatusID,
                           DepartName = p.SysDepart.DepartName,
                           RoleName = p.SysRole.RoleName,
-                          DepartNum_id=p.DepartNum_id,
-                          RoleNum = p.RoleNum
                       };
-            if (!string.IsNullOrEmpty(UserName))
-            {
-                obj = obj.Where(item=>item.UserName.IndexOf(UserName)!=-1);
-            }
-            if (!string.IsNullOrEmpty(UserCode))
-            {
-                obj = obj.Where(item => item.UserCode.IndexOf(UserCode) != -1);
-            }
-            if (DepartName!=0)
-            {
-                obj = obj.Where(item => item.DepartNum_id == DepartName);
-            }
-            if (RoleName != 0)
-            {
-                obj = obj.Where(item => item.RoleNum == RoleName);
-            }
 
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             int rows = obj.Count();
 
 
-            //if (obj.Count() != 0 && !string.IsNullOrEmpty(UserName))
-            //{
-            //    obj = obj.Where(p => p.UserName == UserName);
-            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            //    rows = obj.Count();
-            //    return list;
-            //}
-            //if (obj.Count() != 0 && !string.IsNullOrEmpty(UserCode))
-            //{
-            //    obj = obj.Where(p => p.UserCode == UserCode);
-            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            //    rows = obj.Count();
-            //    return list;
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(UserName))
+            {
+                obj = obj.Where(p => p.UserName == UserName);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(UserCode))
+            {
+                obj = obj.Where(p => p.UserCode == UserCode);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
 
-            //}
-            //if (obj.Count() != 0 && !string.IsNullOrEmpty(DepartName))
-            //{
-            //    obj = obj.Where(p => p.DepartName == DepartName);
-            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            //    rows = obj.Count();
-            //    return list;
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(DepartName))
+            {
+                obj = obj.Where(p => p.DepartName == DepartName);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
 
-            //}
-            //if (obj.Count() != 0 && !string.IsNullOrEmpty(RoleName))
-            //{
-            //    obj = obj.Where(p => p.RoleName == RoleName);
-            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            //    rows = obj.Count();
-            //    return list;
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(RoleName))
+            {
+                obj = obj.Where(p => p.RoleName == RoleName);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
 
-            //}
+            }
             return list;
 
 

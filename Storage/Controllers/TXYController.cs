@@ -20,9 +20,15 @@ namespace Storage.Controllers
         //登录
         public ActionResult Rogin(Admin a)
         {
-            @Session["user"] = a;
-            return Json(BLL.TXY.AdminManager.Rogin(a), JsonRequestBehavior.AllowGet);
-           
+            var obj = BLL.TXY.AdminManager.Rogin(a);
+            if (obj != null)
+            {
+                //将对象保存到session
+                Session["user"] = obj;
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+            return Json(0, JsonRequestBehavior.AllowGet);
+
         }
         public ActionResult Login()
         {

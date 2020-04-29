@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SysDepart</title>
+    <title>Function</title>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
@@ -49,8 +49,9 @@
                         <td style="width:20px;"><input type="checkbox" /></td>
                         <td>序号</td>
                         <td>菜单编号</td>
-                        <td>菜单名</td>
+                        <td>菜单名称</td>
                         <td>创建时间</td>
+                        <td>类型</td>
                         <td>操作</td>
                     </tr>
                 </thead>
@@ -63,19 +64,37 @@
                             <tr>
                                 <td>菜单编号</td>
                                 <td>
-                                    <input id="txtRoleNum" name="txtRoleNum" type="text" placeholder="自动生成,可不填" class="input-medium" @*disabled="disabled"*@>
+                                    <input id="txtParentNodeId" name="txtParentNodeId" type="text" class="input-medium" @*disabled="disabled"*@>
                                 </td>
                             </tr>
                             <tr>
                                 <td>菜单名称</td>
                                 <td>
-                                    <input id="txtRoleName" name="txtRoleName" type="text" placeholder="请输入角色名称" class="input-medium">
+                                    <input id="txtDisplayName" name="txtDisplayName" type="text" placeholder="请输入菜单名称" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
-                                <td>备注</td>
+                                <td>父级菜单编号</td>
                                 <td>
-                                    <input id="txtRemark" name="txtRemark" type="text" class="input-medium">
+                                    <input id="txtNodeURL" name="txtNodeURL" type="text" class="input-medium" @*disabled="disabled"*@>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>类型</td>
+                                <td>
+                                    <input id="txtState" name="txtState" type="text" class="input-medium">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>路径</td>
+                                <td>
+                                    <input id="txtDisplayOrder" name="txtDisplayOrder" type="text" class="input-medium">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>创建时间</td>
+                                <td>
+                                    <input id="textADDTime" name="textADDTime" type="text" class="input-medium">
                                 </td>
                             </tr>
                             <tr>
@@ -92,8 +111,102 @@
             </div>
         </div>
     </div>
+    <div id="jbox-content" hidden>
+
+        <table class="formtab_user">
+            <tbody>
+
+                <tr>
+                    <td>菜单编号</td>
+                    <td>
+                        <input id="txtParentNodeId" name="txtParentNodeId" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>菜单名称</td>
+                    <td>
+                        <input id="txtDisplayName" name="txtDisplayName" type="text" placeholder="请输入菜单名称" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>父级菜单编号</td>
+                    <td>
+                        <input id="txtNodeURL" name="txtNodeURL" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>类型</td>
+                    <td>
+                        <input id="txtState" name="txtStatet" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>路径</td>
+                    <td>
+                        <input id="txtDisplayOrder" name="txtDisplayOrder" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td>
+                        <input id="textADDTime" name="textADDTime" type="text" class="input-medium">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" /></td>
+                    <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="hide11" @*style="height: 300px;width:500px; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue"*@ hidden="hidden">
+        <form class="navbar-form navbar-left" role="search">
+
+            <dl>
+                <dd>菜单编号</dd>
+                <dd>
+                    <input id="NodeId" type="text" hidden />
+                    <input id="ParentNodeId1" name="ParentNodeId" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>菜单名称</dd>
+                <dd>
+                    <input id="DisplayName1" name="DisplayName" type="text" placeholder="请输入菜单名称" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>父级菜单编号</dd>
+                <dd>
+                    <input id="NodeURL1" name="NodeURL" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>类型</dd>
+                <dd>
+                    <input id="State1" name="State" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>路径</dd>
+                <dd>
+                    <input id="DisplayOrder1" name="DisplayOrder" type="text" class="input-medium">
+                </dd>
+            </dl>
+            <dl>
+                <dd>创建时间</dd>
+                <dd>
+                    <input id="ADDTime1" name="ADDTime" type="text"class="input-medium">
+                </dd>
+            </dl>
+            <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="update()" value="确认" />
+            <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
+
+        </form>
+    </div>
 </body>
 </html>
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
 <script>
@@ -103,7 +216,7 @@
     var rows = 0;
     $(function () {
         get()
-        
+
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -112,7 +225,7 @@
                 elem: 'pageDemo'
                 , count: rows//总条数
                 , limit: 2//每页显示数
-                , layout: ['DepartNum', 'DepartName', 'IsDelete', 'CreateTime']
+                , layout: ['NodeId', 'DisplayName', 'State', 'ADDTime']
                 , jump: function (obj) {
 
                     //设置当前页
@@ -123,7 +236,7 @@
                 }
             });
         });
-       
+
 
 
         $("#btnSubhh").click(function () {
@@ -141,7 +254,7 @@
     function get() {
         $.ajax({
             type: "POST",
-            url: "/LLJ/GetAllSysRole",
+            url: "/LLJ/GetAllFunction",
             data: "{PageIndex:'" + PageIndex + "',PageSize:'" + PageSize + "'}",
             dataType: "json",
             contentType: "application/json",
@@ -157,14 +270,115 @@
             }
         })
     }
+    //分页查询
+    function get() {
+
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/GetAllFunction",
+            data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append(
+                        "<tr><td><input type='checkbox'/></td><td>" + data.NodeId + "</td><td>" + data.ParentNodeId + "</td><td>" + data.DisplayName + "</td><td>" + ConvertDate(data.ADDTime) + "</td><td>" + data.State + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='Del(" + data.NodeId + ")' /></i><a  href='javascript:reads(" + data.NodeId + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
+
+    function reads(NodeId) {
+        //alert(NodeId);
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-demo',//样式类名
+            title: ['编辑角色', 'font-size:18px'],
+            area: ['400px', '359px'],
+            shadeClose: true,
+            content: $('#hide11'),
+            shade: 0,
+
+        });
+
+        
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/FunctionGetById",
+            data: "{NodeId:" + NodeId + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                alert(JSON.stringify(result))
+                //console.log(result);
+                $.each(result, function (Index, data) {
+                    alert(data.ParentNodeId);
+                    $("#NodeId").val(data.NodeId);
+                    $("#ParentNodeId1").val(data.ParentNodeId);
+                    $("#DisplayName1").val(data.DisplayName);
+                    $("#NodeURL1").val(data.NodeURL);
+                    $("#DisplayOrder1").val(data.DisplayOrder);
+                    $("#ADDTime1").val(data.ADDTime);
+                    $("#State1 ").val(data.State);
+                    //NodeId = p.NodeId,
+                    //    DisplayName = p.DisplayName,
+                    //    NodeURL = p.NodeURL,
+                    //    DisplayOrder = p.DisplayOrder,
+                    //    ParentNodeId = p.ParentNodeId,
+                    //    ADDTime = p.ADDTime,
+                    //    State = p.State,
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    function update() {
+        var NodeId = $("#NodeId").val();
+        var ParentNodeId = $("#ParentNodeId1").val();
+        var DisplayName = $("#DisplayName1").val();
+        var NodeURL = 1;
+        var DisplayOrder = $("#DisplayOrder1").val();
+        var ADDTime = $("#ADDTime1").val();
+        var State = $("#State1").val();
+      
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/FunctionEdit",
+            data: "{NodeId:'" + NodeId + "',DisplayName:'" + DisplayName + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    get();
+                } else {
+                    alert("修改失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+
+
+    } 
     //删除
     function Del(id) {
         //var id = $("[name='txtRolegbf5Num']").val();
+        alert(id);
         var aaa = false;
         $.ajax({
             type: "POST",
-            url: "/LLJ/caidandel",
-            data: "{SysDepartID:" + id + "}",
+            url: "/LLJ/caidandel", 
+            data: "{NodeId:" + id + "}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
@@ -184,20 +398,21 @@
 
     };
     //新增
-    function add()      {
+    function add() {
+       // alert("这是新增");
         var d = new Date();
         var time = d.getTime();
-        var IsDelete = true;
+        var State = true;
         $.ajax({
-            type: "POST",
+            type: "post",
             url: "/LLJ/caidanadd",
-            data: "{cd:{DepartNum:'" + $("#txtRoleNum").val() + "',DepartName:'" + $("#txtRoleName").val() + "',Remark:'" + $("#txtRemark").val() + "',IsDelete:'" + IsDelete + "'}}",
+            data: "{cd:{NodeId:'" + $("#NodeId").val() + "',DisplayName:'" + $("#txtDisplayName").val() + "',State:'" +true+ "',DisplayOrder:'" + 1 + "'}}",
             dataType: "json",
             contentType: "application/json",
-            success: function (result) { 
+            success: function (result) {
                 if (result > 0) {
                     alert("添加成功")
-                   // caidanadd();
+                    // caidanadd();
                     get();
                 }
             },
@@ -207,7 +422,31 @@
             }
         });
     }
+    function FunctionQuery() {
+        var Search = $("#txtSearch").val();
+        alert(PageIndex);
+        $.ajax({
+            type: "POST",
+            url: "/LLJ/FunctionQuery",
+            //data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",DepartName:" + Search + "}",
+            data: { PageIndex: PageIndex, PageSize: PageSize, DisplayName: Search },
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result, function (index, data) {
+                    $("#tb1").append(
+                        "<tr><td><input type='checkbox'/></td><td>" + data.NodeId + "</td><td>" + data.ParentNodeId + "</td><td>" + data.DisplayName + "</td><td>" + ConvertDate(data.ADDTime) + "</td><td>" + data.State + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='Del(" + data.NodeId + ")' /></i><a  href='javascript:reads(" + data.NodeId + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
 
+    }
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(4)));

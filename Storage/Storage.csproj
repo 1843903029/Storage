@@ -302,6 +302,8 @@
     <Content Include="Views\XBY\PanDianGuanliAdd.cshtml" />
     <Content Include="Views\XBY\TuiHuoGuanliAdd.cshtml" />
     <Content Include="Views\TXY\SysRoleRead.cshtml" />
+    <Content Include="Views\XBY\RukuGuanliXiuGai.cshtml" />
+    <Content Include="Views\XBY\CukuGuanliXiuGai.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -11,7 +11,7 @@ namespace BLL.TXY
     public class AdminManager
     {
         //登录
-        public static IQueryable Rogin(Admin a)
+        public static Admin Rogin(Admin a)
         {
             return DAL.TXY.AdminService.Rogin(a);
         }
