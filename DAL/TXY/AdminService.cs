@@ -135,6 +135,7 @@ namespace DAL.TXY
                       where p.AdminID == AdminID
                       select new
                       {
+                          AdminID = p.AdminID,
                           UserName = p.UserName,
                           UserCode = p.UserCode,
                           PassWord = p.PassWord,
@@ -153,12 +154,14 @@ namespace DAL.TXY
         {
             StorageEntities entity = new StorageEntities();
             var obj = (from p in entity.Admin where p.AdminID == admin.AdminID select p).First();
+            obj.AdminID = admin.AdminID;
             obj.UserName = admin.UserName;
             obj.UserCode = admin.UserCode;
             obj.PassWord = admin.PassWord;
             obj.RealName = admin.RealName;
             obj.Email = admin.Email;
             obj.RoleNum = admin.RoleNum;
+            obj.PassWord = admin.PassWord;
             obj.DepartNum_id = admin.DepartNum_id;
             return entity.SaveChanges();
 
@@ -181,8 +184,6 @@ namespace DAL.TXY
                           Email = p.Email,
                           Phone = p.Phone,
                           LoginCount = p.LoginCount,
-                          //DepartNum_id = p.DepartNum_id,
-                          //RoleNum = p.RoleNum,
                           IsDelete = p.IsDelete,
                           Stuate = p.SysStatus.StatusID,
                           DepartName = p.SysDepart.DepartName,
@@ -193,6 +194,69 @@ namespace DAL.TXY
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
             return list.DataList;
+
+        }
+        //高级查询
+        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, string DepartName,string RoleName)
+        {
+            StorageEntities ent = new StorageEntities();
+            PageList list = new PageList();
+            var obj = from p in ent.Admin
+                      where p.IsDelete == true
+                      orderby p.AdminID ascending
+                      select new
+                      {
+
+                          AdminID = p.AdminID,
+                          UserName = p.UserName,
+                          UserCode = p.UserCode,
+                          RealName = p.RealName,
+                          Email = p.Email,
+                          Phone = p.Phone,
+                          LoginCount = p.LoginCount,
+                          IsDelete = p.IsDelete,
+                          Stuate = p.SysStatus.StatusID,
+                          DepartName = p.SysDepart.DepartName,
+                          RoleName = p.SysRole.RoleName,
+                      };
+
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            int rows = obj.Count();
+
+
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(UserName))
+            {
+                obj = obj.Where(p => p.UserName == UserName);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(UserCode))
+            {
+                obj = obj.Where(p => p.UserCode == UserCode);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
+
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(DepartName))
+            {
+                obj = obj.Where(p => p.DepartName == DepartName);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
+
+            }
+            if (obj.Count() != 0 && !string.IsNullOrEmpty(RoleName))
+            {
+                obj = obj.Where(p => p.RoleName == RoleName);
+                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                rows = obj.Count();
+                return list;
+
+            }
+            return list;
+
 
         }
     }

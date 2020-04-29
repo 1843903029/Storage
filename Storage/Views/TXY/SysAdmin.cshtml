@@ -86,7 +86,7 @@
                         </tr>
                         <tr>
                             <td><label for="firstName" class="control-label">&nbsp;&nbsp;</label></td>
-                            <td><a class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)"><i class="icon-search"></i>&nbsp;搜索</a></td>
+                            <td><a class="btn btn-info" href="javascript:void(0)" onclick="AdminQuerylist()"><i class="icon-search"></i>&nbsp;搜索</a></td>
                         </tr>
                     </table>
                 </div>
@@ -117,9 +117,10 @@
 
     </div>
     <div id="yyyy">
+        <input id="AdminID" type="hidden"  />
         <table class="formtab_user">
+
             <tr>
-                <td hidden><input id="AdminID" name="AdminID" type="text"></td>
                 <td>用户名</td>
                 <td>
                     <input id="UserName2" name="UserName" type="text" placeholder="请输入用户名" class="input-medium">
@@ -150,17 +151,15 @@
                     <input id="Email2" name="Email" type="text" placeholder="" class="input-medium">
                 </td>
             </tr>
-            <tr>
-                
-            </tr>
+            <tr></tr>
             <tr>
                 <td>部门</td>
                 <td>
                     <select id="DepartNum_id2" name="DepartNum_id" class="input-medium" style="width:164px;">
                         <option>请选择部门</option>
                         @*<option value="1">质量部门</option>
-                            <option value="2">仓库部门</option>
-                            <option value="3">采购部门</option>*@
+                        <option value="2">仓库部门</option>
+                        <option value="3">采购部门</option>*@
                     </select>
                 </td>
                 <td>角色</td>
@@ -168,9 +167,9 @@
                     <select id="RoleNum2" name="RoleNum" class="input-medium" style="width:164px;">
                         <option>请选择角色</option>
                         @*<option value="0">系统管理员</option>
-                            <option value="1">仓管员</option>
-                            <option value="2">采购员</option>
-                            <option value="3">门卫</option>*@
+                        <option value="1">仓管员</option>
+                        <option value="2">采购员</option>
+                        <option value="3">门卫</option>*@
                     </select>
                 </td>
             </tr>
@@ -339,12 +338,40 @@
             url: "/TXY/AdminQuery",
             data: { PageIndex: PageIndex , PageSize: PageSize , UserName:Search},
             dataType: "json",
-            contentType: "application/json",
+            //contentType: "application/json",
             success: function (result) {
                 //alert(JSON.stringify(result));
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
-                $.each(result.DataList, function (index, data) {
+                $.each(result, function (index, data) {
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartName + "</td><td>" + data.RoleName + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='javascript:reads(" + data.AdminID + ")'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+
+
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+
+    }
+    //高级查询
+    function AdminQuerylist() {
+        var txtUserCode = $("#txtUserCode").val();
+        var txtUserName = $("#txtUserName").val();
+        var DepartNum_id = $("#DepartNum_id").val();
+        var RoleNum = $("#RoleNum").val();
+        $.ajax({
+            type: "POST",
+            url: "/TXY/AdminQuerylist",
+            data: { PageIndex: PageIndex, PageSize: PageSize, UserCode: txtUserCode, UserName: txtUserName, DepartName: DepartNum_id, RoleName: RoleNum},
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result, function (index, data) {
                     $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartName + "</td><td>" + data.RoleName + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='javascript:reads(" + data.AdminID + ")'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
 
 
@@ -358,7 +385,6 @@
     }
     //读取
     function reads(AdminID) {
-        alert(AdminID);
         layer.open({
             type: 1,
             skin: 'layui-layer-demo',//样式类名
@@ -380,9 +406,8 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
-                console.log(result);
                 $.each(result, function (Index, data) {
-
+                    $("#AdminID").val(data.AdminID);
                     $("#UserCode2").val(data.UserCode);
                     $("#UserName2").val(data.UserName);
                     $("#PassWord2").val(data.PassWord);
@@ -400,6 +425,7 @@
         });
     }
     function update() {
+        var AdminID = $("#AdminID").val();
         var UserCode = $("#UserCode2").val();
         var UserName = $("#UserName2").val();
         var PassWord = $("#PassWord2").val();
@@ -410,14 +436,14 @@
         var Phone = $("#Phone2").val();
         $.ajax({
             type: "POST",
-            url: "/TXY/SysRoleEdit",
-            data: "{role:{UserName:'" + UserName + "',UserCode:'" + UserCode + "',PassWord: '" + PassWord + "', RealName: '" + RealName + "',Email:'" + Email + "', Phone:'" + Phone + "',DepartNum_id:'" + DepartNum_id + "',RoleNum:'" + RoleNum + "'}}",
+            url: "/TXY/AdminEdit",
+            data: "{admin:{AdminID:'" + AdminID +"',UserName:'" + UserName + "',UserCode:'" + UserCode + "',PassWord: '" + PassWord + "', RealName: '" + RealName + "',Email:'" + Email + "', Phone:'" + Phone + "',DepartNum_id:'" + DepartNum_id + "',RoleNum:'" + RoleNum + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("修改成功");
-                    get();
+                    window.location.reload();
                 } else {
                     alert("修改失败");
                 }
