@@ -67,7 +67,7 @@ namespace BLL.TXY
         return DAL.TXY.AdminService.AdminQuery(pageIndex, pageSize, UserName);
     }
         //高级查询
-        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, string DepartName, string RoleName)
+        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, int DepartName, int RoleName)
         {
             return DAL.TXY.AdminService.AdminQuerylist(pageIndex, pageSize, UserName, UserCode, DepartName, RoleName);
         }
