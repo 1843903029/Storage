@@ -65,7 +65,7 @@
                             <td><label for="firstName" class="control-label">部门</label></td>
                             <td>
                                 <select id="DepartNum_id" name="DepartNum_id" class="input-medium">
-                                    <option value="">请选择部门</option>
+                                    <option value="0">请选择部门</option>
                                     @*<option value="000001">质量部门</option>
                                         <option value="000002">仓库部门</option>
                                         <option value="000003">采购部门</option>*@
@@ -76,7 +76,7 @@
                             <td><label for="firstName" class="control-label">角色</label></td>
                             <td>
                                 <select id="RoleNum" name="RoleNum" class="input-medium">
-                                    <option value="">请选择角色</option>
+                                    <option value="0">请选择角色</option>
                                     @*<option value="DR_0000">系统管理员</option>
                                         <option value="000001">仓管员</option>
                                         <option value="000002">采购员</option>
@@ -364,6 +364,7 @@
         var txtUserName = $("#txtUserName").val();
         var DepartNum_id = $("#DepartNum_id").val();
         var RoleNum = $("#RoleNum").val();
+        alert(RoleNum)
         $.ajax({
             type: "POST",
             async: false,
@@ -375,7 +376,7 @@
                 //alert(JSON.stringify(result));
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
-                $.each(result, function (index, data) {
+                $.each(result.DataList, function (index, data) {
                     $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' name='checkbox' class='check' data-id='" + data.AdminID +"' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartName + "</td><td>" + data.RoleName + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='javascript:reads(" + data.AdminID + ")'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
 
 

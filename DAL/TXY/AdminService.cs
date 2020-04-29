@@ -197,7 +197,7 @@ namespace DAL.TXY
 
         }
         //高级查询
-        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, string DepartName,string RoleName)
+        public static PageList AdminQuerylist(int pageIndex, int pageSize, string UserName, string UserCode, int DepartName,int RoleName)
         {
             StorageEntities ent = new StorageEntities();
             PageList list = new PageList();
@@ -218,43 +218,61 @@ namespace DAL.TXY
                           Stuate = p.SysStatus.StatusID,
                           DepartName = p.SysDepart.DepartName,
                           RoleName = p.SysRole.RoleName,
+                          DepartNum_id=p.DepartNum_id,
+                          RoleNum = p.RoleNum
                       };
+            if (!string.IsNullOrEmpty(UserName))
+            {
+                obj = obj.Where(item=>item.UserName.IndexOf(UserName)!=-1);
+            }
+            if (!string.IsNullOrEmpty(UserCode))
+            {
+                obj = obj.Where(item => item.UserCode.IndexOf(UserCode) != -1);
+            }
+            if (DepartName!=0)
+            {
+                obj = obj.Where(item => item.DepartNum_id == DepartName);
+            }
+            if (RoleName != 0)
+            {
+                obj = obj.Where(item => item.RoleNum == RoleName);
+            }
 
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             int rows = obj.Count();
 
 
-            if (obj.Count() != 0 && !string.IsNullOrEmpty(UserName))
-            {
-                obj = obj.Where(p => p.UserName == UserName);
-                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                rows = obj.Count();
-                return list;
-            }
-            if (obj.Count() != 0 && !string.IsNullOrEmpty(UserCode))
-            {
-                obj = obj.Where(p => p.UserCode == UserCode);
-                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                rows = obj.Count();
-                return list;
+            //if (obj.Count() != 0 && !string.IsNullOrEmpty(UserName))
+            //{
+            //    obj = obj.Where(p => p.UserName == UserName);
+            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //    rows = obj.Count();
+            //    return list;
+            //}
+            //if (obj.Count() != 0 && !string.IsNullOrEmpty(UserCode))
+            //{
+            //    obj = obj.Where(p => p.UserCode == UserCode);
+            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //    rows = obj.Count();
+            //    return list;
 
-            }
-            if (obj.Count() != 0 && !string.IsNullOrEmpty(DepartName))
-            {
-                obj = obj.Where(p => p.DepartName == DepartName);
-                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                rows = obj.Count();
-                return list;
+            //}
+            //if (obj.Count() != 0 && !string.IsNullOrEmpty(DepartName))
+            //{
+            //    obj = obj.Where(p => p.DepartName == DepartName);
+            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //    rows = obj.Count();
+            //    return list;
 
-            }
-            if (obj.Count() != 0 && !string.IsNullOrEmpty(RoleName))
-            {
-                obj = obj.Where(p => p.RoleName == RoleName);
-                list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-                rows = obj.Count();
-                return list;
+            //}
+            //if (obj.Count() != 0 && !string.IsNullOrEmpty(RoleName))
+            //{
+            //    obj = obj.Where(p => p.RoleName == RoleName);
+            //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //    rows = obj.Count();
+            //    return list;
 
-            }
+            //}
             return list;
 
 

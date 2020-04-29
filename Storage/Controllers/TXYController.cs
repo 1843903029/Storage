@@ -156,7 +156,7 @@ namespace Storage.Controllers
 
             return Json(BLL.TXY.AdminManager.AdminQuery(PageIndex, PageSize, UserName), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult AdminQuerylist(int PageIndex, int PageSize, string UserName, string UserCode, string DepartName, string RoleName)
+        public ActionResult AdminQuerylist(int PageIndex, int PageSize, string UserName, string UserCode, int DepartName, int RoleName)
         {
 
             return Json(BLL.TXY.AdminManager.AdminQuerylist(PageIndex, PageSize, UserName, UserCode, DepartName, RoleName), JsonRequestBehavior.AllowGet);
