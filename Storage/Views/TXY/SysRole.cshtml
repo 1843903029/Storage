@@ -46,7 +46,7 @@
                     <tr>
                         <td><strong style="margin-left:20px">用户管理</strong></td>
                         <td> <a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
-                        <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
+                        <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()" type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
                 </table>
@@ -62,7 +62,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
                         <td>序号</td>
                         <td>角色编号</td>
                         <td>角色名</td>
@@ -197,6 +197,7 @@
 
         $.ajax({
             type: "POST",
+            async: false,
             url: "/TXY/GetAllSysRole",
             data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + "}",
             dataType: "json",
@@ -206,7 +207,7 @@
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
                     $("#tb1").append(
-                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysRoleID + ")' /></i><a  href='javascript:reads(" + data.SysRoleID + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+                        "<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.SysRoleID +"' /></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysRoleID + ")' /></i><a  href='javascript:reads(" + data.SysRoleID + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
                     
                 })
             },
@@ -251,6 +252,63 @@
                 alert(ex.responseText);
             }
         });
+    }
+    function quanxuan(objName, type) {
+        var objNameList = document.getElementsByName(objName);
+        if (null != objNameList) {
+            for (var i = 0; i < objNameList.length; i++) {
+                if (objNameList[i].checked == true) {
+                    if (type != 'checkall') {  // 非全选
+                        objNameList[i].checked = false;
+                    }
+                } else {
+                    if (type != 'uncheckall') {  // 非取消全选
+                        objNameList[i].checked = true;
+                        //console.log($("input[name='checkbox']").data("id"));
+                        //alert($("input[name='checkbox']").data("id"));
+
+                    }
+                }
+            }
+        }
+    }
+
+    function you() {
+        var fan = 0;
+        var list = []
+        $.each($("[name='checkbox']"), function (index, result) {
+            //alert($(this).is("checked"));
+            //console.log(result);
+            if ($(this).prop("checked")) {
+                list.push($(this).data("id"));
+
+            }
+        });
+        $.each(list, function (index2, result2) {
+            alert(result2);
+            $.ajax({
+                type: "POST",
+                url: "/TXY/SysRoledelete",
+                data: "{SysRoleID:" + result2 + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    //console.log(result);
+                    if (result > 0) {
+                        alert("删除成功2");
+                        window.location.reload();
+
+                    } else {
+                        alert("删除失败2");
+
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+
+        })
     }
     function update() {
         var SysRoleID = $("#SysRoleID").val();
@@ -369,6 +427,7 @@
         alert(PageIndex);
         $.ajax({
             type: "POST",
+            async: false,
             url: "/TXY/SysRoleQuery",
             //data: "{PageIndex:" + PageIndex + ",PageSize:" + PageSize + ",DepartName:" + Search + "}",
             data: { PageIndex: PageIndex, PageSize: PageSize, RoleName: Search },
@@ -380,7 +439,7 @@
                 rows = result.PageCount;
                 $.each(result, function (index, data) {
                     $("#tb1").append(
-                        "<tr><td><input type='checkbox'/></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysRoleID + ")' /></i><a  href='javascript:reads(" + data.SysRoleID + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+                        "<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.SysRoleID +"' /></td><td>" + data.SysRoleID + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td>" + data.Remark + "</td><td><i class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.SysRoleID + ")' /></i><a  href='javascript:reads(" + data.SysRoleID + ")'><i class='layui-icon layui-icon-edit' id='butten' title='编辑'></i></a>&nbsp;<a  href='#'><i href='#' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
                 })
             },
             error: function (ex) {
