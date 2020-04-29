@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    Models.Admin stu = Session["user"] as Models.Admin;
 }
 
 <!DOCTYPE html>
@@ -27,9 +28,9 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">当前登录</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">admin</a></dd>
+                        <dd><a href="">@stu.UserName</a></dd>
                         <dd><a href="">修改密码</a></dd>
-                        <dd><a href="">退出系统</a></dd>
+                        <dd><a href="javascript:;" onclick="Exit()">退出系统</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -135,5 +136,11 @@
         
     });
 
+
+    function Exit()
+    {
+        location.href = '/TXY/Login';
+        @Session["user"]=null;
+    }
 </script>
 
