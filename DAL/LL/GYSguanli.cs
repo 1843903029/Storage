@@ -33,10 +33,35 @@ namespace DAL.LL
             list.PageCount = obj.Count();
             return list;
         }
+        public static PageList mohu(int pageindex, int pagesize,string GysName)
+        {
+            var obj = from p in s.Supplier
+                      where p.GysName.IndexOf(GysName) != -1
+                      && p.State == true
+                      orderby p.GysID
+                      select new
+                      {
+                          GysID = p.GysID,
+                          GysType = p.GysType,
+                          GysName = p.GysName,
+                          Hone = p.Hone,
+                          ChuangZhen = p.ChuangZhen,
+                          Email = p.Email,
+                          Contacts = p.Contacts,
+                          Address = p.Address,
+                          Describe = p.Describe,
+                          State = p.State
+                      };
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
+            list.PageCount = obj.Count();
+            return list;
+        }
+
         public static int del(int id)
         {
-            Supplier c = s.Supplier.Find(id);
-            c.State = false;
+            var obj = (from p in s.Supplier where p.GysID == id select p).First();
+            obj.State = false;
             return s.SaveChanges();
 
         }

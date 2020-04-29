@@ -26,17 +26,17 @@
                     <h4>供应商管理</h4>
                     <div style="float:right;display:inline;">
                         <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="plsc();">删除</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:plsc();" >删除</a>
                         <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
                     </div>
                 </div>
 
                 <table action="javascript:void(0)" class="form-horizontal">
                     <tr>
-                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请选择供应商编号或名称"></td>
+                        <td><input id="sswb" type="text" class="input-group" placeholder="请选择供应商名称"></td>
 
                         <td>
-                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                            <a style="margin-left:10px" id="" class="btn btn-info" href="javascript:void(0)" onclick="mohu()">搜索</a>
                         </td>
 
                     </tr>
@@ -152,31 +152,68 @@
            
 
         })
+        function mohu() {
+            var Search = $("#sswb").val();
+            $.ajax({
+                type: "POST",
+                //async: false,
+                url: "/LL/mohu",
+                data: {pageindex:pageIndex,pagesize: pageSize,GysName: Search },
+                dataType: "json",
+                //contentType: "application/json",
+                success: function (result) {
+                    //alert(JSON.stringify(result));
+                    $("#tb1 tr").remove();
+                    rows = result.PageCount;
+                    $.each(result, function (index, data) {
+                       // $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID + "' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
+                        $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID + "' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
 
-        function plsc(id) {
-            //bo = $(".sc").prop("checked")
-            if ($("#" + id + "").is(":checked") == true) {
+                    })
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+                }
+            })
+
+        }
+
+        function plsc() {
+            var fan = 0;
+            var list = []
+            $.each($("[name='checkbox']"), function (index, result) {
+                //alert($(this).is("checked"));
+                //console.log(result);
+                if ($(this).prop("checked")) {
+                    list.push($(this).data("id"));
+
+                }
+            });
+            $.each(list, function (index2, result2) {
+                alert(result2);
                 $.ajax({
                     type: "POST",
                     url: "/LL/delGYS",
-                    data: "{id:'" + id + "'}",
+                    data: "{id:" + result2 + "}",
                     dataType: "json",
                     contentType: "application/json",
                     success: function (result) {
+                        //console.log(result);
                         if (result > 0) {
                             alert("删除成功");
                             window.location.reload();
+
+                        } else {
+                            alert("删除失败");
+
                         }
                     },
                     error: function (ex) {
-                        alert("Error:" + ex.responseText);
-
+                        alert(ex.responseText);
                     }
                 });
-            } else {
-                alert("未选择数据！");
-            }
-           
+
+            })
         }
         function GetByID(id) {
             layer.open({
@@ -257,7 +294,7 @@
                     $("#tb1 tr").remove();
                     rowss = result.PageCount;
                     $.each(result.DataList, function (index, data) {
-                        $("#tb1").append("<tr><td><input id='" + data.GysID + "' type='checkbox'/></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
+                        $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID +"' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
                     });
                 },
                 error: function (ex) {

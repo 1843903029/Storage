@@ -58,6 +58,10 @@ namespace Storage.Controllers
         {
             return Json(BLL.LL.KweiGuanliManager.selectType(),JsonRequestBehavior.AllowGet);
         }
+        public ActionResult mohu(int pageindex, int pagesize, string GysName)
+        {
+            return Json(BLL.LL.GYSguanliManager.mohu(pageindex, pagesize, GysName), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult selectCK()
         {
             return Json(BLL.LL.KweiGuanliManager.selectCK(), JsonRequestBehavior.AllowGet);
