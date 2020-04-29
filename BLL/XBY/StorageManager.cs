@@ -111,5 +111,15 @@ namespace BLL.XBY
         {
             return DAL.XBY.StorageService.RuKuSHHou(cpid, Count);
         }
+
+        /// <summary>
+        /// 修改操作查询详表数据并删除数据库记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int RuKuDel(string id)
+        {
+            return DAL.XBY.StorageService.RuKuDel(id);
+        }
         }
 }

@@ -34,6 +34,15 @@ namespace Storage.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 入库管理修改订单页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RukuGuanliXiuGai()
+        {
+            return View();
+        }
         /// <summary>
         /// 入库审核
         /// </summary>

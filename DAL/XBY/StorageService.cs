@@ -284,6 +284,19 @@ namespace DAL.XBY
         }
 
 
+        /// <summary>
+        /// 修改操作查询详表数据并删除数据库记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int RuKuDel(string id)
+        {
+            StorageEntities ent = new StorageEntities();
+            //StorageDetailed st = ent.StorageDetailed.Find(id);
+            var obj = ent.StorageDetailed.Find(id);
+            ent.StorageDetailed.Remove(obj);
+            return ent.SaveChanges();
+        }
 
     }
 }
