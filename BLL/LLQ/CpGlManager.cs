@@ -40,5 +40,11 @@ namespace BLL.LLQ
         {
             return DAL.LLQ.CpGlService.CpGlQuery(pageIndex,  pageSize,  CpXsName);
         }
+
+        //查询客户表
+        public static IQueryable selectAd()
+        {
+            return DAL.LLQ.CpGlService.selectAd();
+        }
     }
 }
