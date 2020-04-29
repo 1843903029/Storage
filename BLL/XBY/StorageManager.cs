@@ -113,11 +113,22 @@ namespace BLL.XBY
         }
 
         /// <summary>
-        /// 修改操作查询详表数据并删除数据库记录
+        /// 修改入库主表
         /// </summary>
-        /// <param name="id"></param>
+        /// 
         /// <returns></returns>
-        public static int RuKuDel(string id)
+        public static int RuKuXiuZhu(Storage p)
+        {
+            return DAL.XBY.StorageService.RuKuXiuZhu(p);
+        }
+
+
+            /// <summary>
+            /// 修改操作查询详表数据并删除数据库记录
+            /// </summary>
+            /// <param name="id"></param>
+            /// <returns></returns>
+            public static int RuKuDel(string id)
         {
             return DAL.XBY.StorageService.RuKuDel(id);
         }

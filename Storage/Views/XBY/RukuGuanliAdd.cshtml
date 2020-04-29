@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "RukuGuanliAdd";
     Layout = "~/Views/MainPage.cshtml";
+    Models.Admin stu = Session["user"] as Models.Admin;
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
@@ -217,9 +218,8 @@
 
     function www(ff, danjia) {
         var rukushu = document.getElementsByName(ff);
-        alert(danjia);
-        alert(rukushu[0].value);
-        //alert(kucun);
+        //alert(danjia);
+        //alert(rukushu[0].value);
             $("#" + ff + "").text(danjia * rukushu[0].value);
     }
 
@@ -400,21 +400,26 @@
             //alert(rukuzongshu);
             //alert(rukuzongjia);
 
+            if (info.length > 0) {
 
-            $.ajax({
-                type: "POST",
-                url: "/XBY/ADDRuku",
-                data: "{zhu:{StorageID:'" + danhapsuiji + "',StorageType:'" + $("#rukuleixing1").val() + "',SupplierID:'" + $("#gysbh").val() + "',EmployeeID:'" + 1 + "',GoodsCount:'" + rukuzongshu + "',Summoney:'" + rukuzongjia + "',StateText:'" + $("#beizhuxinxi").val() + "'}}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    AddXiang();
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
+                $.ajax({
+                    type: "POST",
+                    url: "/XBY/ADDRuku",
+                    data: "{zhu:{StorageID:'" + danhapsuiji + "',StorageType:'" + $("#rukuleixing1").val() + "',SupplierID:'" + $("#gysbh").val() + "',EmployeeID:'" + @stu.AdminID + "',GoodsCount:'" + rukuzongshu + "',Summoney:'" + rukuzongjia + "',StateText:'" + $("#beizhuxinxi").val() + "'}}",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        AddXiang();
+                    },
+                    error: function (ex) {
+                        alert("Error:" + ex.responseText);
 
-                }
-            });
+                    }
+                });
+            } else
+            {
+                alert("请选择产品后再继续！");
+            }
         }
 
     }

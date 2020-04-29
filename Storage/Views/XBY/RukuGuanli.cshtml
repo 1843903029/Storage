@@ -3,177 +3,185 @@
     ViewBag.Title = "RukuGuanli";
     Layout = "~/Views/MainPage.cshtml";
 }
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/layui/css/layui.css" rel="stylesheet" />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CpGl</title>
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
 
 
-<div style=" border:0px solid #4cff00;width:95%;">
-    <div style="height:50px;background-color:#e7e7e7;">
-        <div style="width:150px;margin-left:15px;font-weight:600;padding-top:15px;color:#373737">入库单管理</div>
-    </div>
-</div>
-<div style="border:0px solid #4cff00;width:95%;">
-    <div style="padding:15px;border:1px solid red">
-        <button class="btn btn-default" onclick="Suoyou()">所有</button>
-        <button class="btn btn-default" id="daish">待审核</button>
-        <button class="btn btn-default" id="shenhetg">审核通过</button>
-        <button class="btn btn-default" id="shenhesb">审核失败</button>
-        <input class="btn btn-primary" type="button" onclick="TiaoADD()" value="新增" style="width:80px;margin-left:52%" />
-        <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
-        <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
-        <div style="padding-top:8px;display:flex;margin-bottom:20px">
-            <input type="text" class="form-control" id="danhaoh" placeholder="请输入入库单号" style="width:170px;margin-right:10px" />
-            <div style="padding-top:6px;margin-right:5px;">时间</div>
-            <input class="form-control" id="time1" style="width:170px;margin-right:10px">
-            <div style="padding-top:6px;margin-right:5px;">-</div>
-            <input class="form-control" id="time2" style="width:170px;margin-right:10px">
-
-            <input class="btn btn-info" type="button" onclick="MoHurukuList()" value="搜索" style="width:80px;margin-right:5px" />
-            <input class="btn btn-primary" type="button" value="高级搜索" style="width:100px;" />
+    <div style=" border:0px solid #4cff00;width:95%;">
+        <div style="height:50px;background-color:#e7e7e7;">
+            <div style="width:150px;margin-left:15px;font-weight:600;padding-top:15px;color:#373737">入库单管理</div>
         </div>
+    </div>
+    <div style="border:0px solid #4cff00;width:95%;">
+        <div style="padding:15px;border:1px solid red">
+            <button class="btn btn-default" onclick="Suoyou()">所有</button>
+            <button class="btn btn-default" id="daish">待审核</button>
+            <button class="btn btn-default" id="shenhetg">审核通过</button>
+            <button class="btn btn-default" id="shenhesb">审核失败</button>
+            <input class="btn btn-primary" type="button" onclick="TiaoADD()" value="新增" style="width:80px;margin-left:52%" />
+            <input class="btn btn-danger" type="button" value="删除" style="width:80px;" />
+            <input class="btn btn-info" type="button" value="导出" style="width:80px;" />
 
-        <div style="">
-            <table style="width:100%;" class="table table-striped">
-                <thead>
-                    <tr style="font-weight:600">
-                        <td><input type='checkbox' /></td>
-                        <td>入库单号</td>
-                        <td>入库类型</td>
-                        <td>供应商</td>
-                        <td>关联单号</td>
-                        <td>货品总数</td>
-                        <td>总金额</td>
-                        <td>状态</td>
-                        <td>制单人</td>
-                        <td>操作方式</td>
-                        <td>创建时间</td>
-                        <td>操作</td>
-                    </tr>
-                </thead>
-                <tbody id="tt"></tbody>
+            <div style="padding-top:8px;display:flex;margin-bottom:20px">
+                <input type="text" class="form-control" id="danhaoh" placeholder="请输入入库单号" style="width:170px;margin-right:10px" />
+                <div style="padding-top:6px;margin-right:5px;">时间</div>
+                <input class="form-control" id="time1" style="width:170px;margin-right:10px">
+                <div style="padding-top:6px;margin-right:5px;">-</div>
+                <input class="form-control" id="time2" style="width:170px;margin-right:10px">
+
+                <input class="btn btn-info" type="button" onclick="MoHurukuList()" value="搜索" style="width:80px;margin-right:5px" />
+                <input class="btn btn-primary" type="button" value="高级搜索" style="width:100px;" />
+            </div>
+
+            <div style="">
+                <table style="width:100%;" class="table table-striped">
+                    <thead>
+                        <tr style="font-weight:600">
+                            <td><input type='checkbox' /></td>
+                            <td>入库单号</td>
+                            <td>入库类型</td>
+                            <td>供应商</td>
+                            <td>关联单号</td>
+                            <td>货品总数</td>
+                            <td>总金额</td>
+                            <td>状态</td>
+                            <td>制单人</td>
+                            <td>操作方式</td>
+                            <td>创建时间</td>
+                            <td>操作</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tt"></tbody>
+                </table>
+
+                @*layui分页*@
+                <div id="pageDome">
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="hideID33" hidden="hidden">
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>入库单号</td>
+                    <td class="rukdh"></td>
+                    <td>类型</td>
+                    <td class="ruklx"></td>
+                    <td>状态</td>
+                    <td class="rukzt"></td>
+                </tr>
+                <tr>
+                    <td>供应商编号</td>
+                    <td class="rukgysid"></td>
+                    <td>供应商名称</td>
+                    <td class="rukgysname"></td>
+                    <td>联系人</td>
+                    <td class="ruklianxiren"></td>
+                </tr>
+                <tr>
+                    <td>关联订单号</td>
+                    <td class="rukgldd"></td>
+                    <td>创建人</td>
+                    <td class="rukcjr"></td>
+                    <td>创建时间</td>
+                    <td class="rukgltime"></td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td class="rukdianhua"></td>
+                    <td>备注</td>
+                    <td class="rukbeizhu" colspan="3"></td>
+                </tr>
             </table>
 
-            @*layui分页*@
-            <div id="pageDome">
-
-            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>产品名称</td>
+                        <td>产品条码</td>
+                        <td>规格</td>
+                        <td>批次</td>
+                        <td>单价</td>
+                        <td>入库数</td>
+                        <td>总价</td>
+                        <td>库位</td>
+                    </tr>
+                </thead>
+                <tbody id="xiangtt"></tbody>
+            </table>
         </div>
-
-
     </div>
-</div>
-<div id="hideID33" hidden="hidden">
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <td>入库单号</td>
-                <td class="rukdh"></td>
-                <td>类型</td>
-                <td class="ruklx"></td>
-                <td>状态</td>
-                <td class="rukzt"></td>
-            </tr>
-            <tr>
-                <td>供应商编号</td>
-                <td class="rukgysid"></td>
-                <td>供应商名称</td>
-                <td class="rukgysname"></td>
-                <td>联系人</td>
-                <td class="ruklianxiren"></td>
-            </tr>
-            <tr>
-                <td>关联订单号</td>
-                <td class="rukgldd"></td>
-                <td>创建人</td>
-                <td class="rukcjr"></td>
-                <td>创建时间</td>
-                <td class="rukgltime"></td>
-            </tr>
-            <tr>
-                <td>电话</td>
-                <td class="rukdianhua"></td>
-                <td>备注</td>
-                <td class="rukbeizhu" colspan="3"></td>
-            </tr>
-        </table>
 
-        <table class="table table-striped">
-            <thead>
+    <div id="hidSshenhe" hidden="hidden">
+        <div>
+            <table class="table table-bordered">
                 <tr>
-                    <td>产品名称</td>
-                    <td>产品条码</td>
-                    <td>规格</td>
-                    <td>批次</td>
-                    <td>单价</td>
-                    <td>入库数</td>
-                    <td>总价</td>
-                    <td>库位</td>
+                    <td>入库单号</td>
+                    <td class="rukdh" name="rukudanh"></td>
+                    <td>类型</td>
+                    <td class="ruklx"></td>
+                    <td>状态</td>
+                    <td class="rukzt"></td>
                 </tr>
-            </thead>
-            <tbody id="xiangtt"></tbody>
-        </table>
-    </div>
-</div>
-
-<div id="hidSshenhe" hidden="hidden">
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <td>入库单号</td>
-                <td class="rukdh" name="rukudanh"></td>
-                <td>类型</td>
-                <td class="ruklx"></td>
-                <td>状态</td>
-                <td class="rukzt"></td>
-            </tr>
-            <tr>
-                <td>供应商编号</td>
-                <td class="rukgysid"></td>
-                <td>供应商名称</td>
-                <td class="rukgysname"></td>
-                <td>联系人</td>
-                <td class="ruklianxiren"></td>
-            </tr>
-            <tr>
-                <td>关联订单号</td>
-                <td class="rukgldd"></td>
-                <td>创建人</td>
-                <td class="rukcjr"></td>
-                <td>创建时间</td>
-                <td class="rukgltime"></td>
-            </tr>
-            <tr>
-                <td>电话</td>
-                <td class="rukdianhua"></td>
-                <td>备注</td>
-                <td class="rukbeizhu" colspan="3"></td>
-            </tr>
-        </table>
-
-        <table class="table table-striped">
-            <thead>
                 <tr>
-                    <td>产品名称</td>
-                    <td>产品条码</td>
-                    <td>规格</td>
-                    <td>批次</td>
-                    <td>单价</td>
-                    <td>入库数</td>
-                    <td>总价</td>
-                    <td>库位</td>
+                    <td>供应商编号</td>
+                    <td class="rukgysid"></td>
+                    <td>供应商名称</td>
+                    <td class="rukgysname"></td>
+                    <td>联系人</td>
+                    <td class="ruklianxiren"></td>
                 </tr>
-            </thead>
-            <tbody id="xiangtt2"></tbody>
-        </table>
-    </div>
-    <div id="anniukuai" style="text-align:right;padding-right:30px;padding-top:50px">
-        <button class="btn btn-default" id="shenhetg" onclick="RuKuShenHe(1)">审核通过</button>
-        <button class="btn btn-default" id="shenhesb" onclick="RuKuShenHe(0)">审核失败</button>
-        <button class="btn btn-default" id="tuichu">退出</button>
-    </div>
-</div>
+                <tr>
+                    <td>关联订单号</td>
+                    <td class="rukgldd"></td>
+                    <td>创建人</td>
+                    <td class="rukcjr"></td>
+                    <td>创建时间</td>
+                    <td class="rukgltime"></td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td class="rukdianhua"></td>
+                    <td>备注</td>
+                    <td class="rukbeizhu" colspan="3"></td>
+                </tr>
+            </table>
 
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>产品名称</td>
+                        <td>产品条码</td>
+                        <td>规格</td>
+                        <td>批次</td>
+                        <td>单价</td>
+                        <td>入库数</td>
+                        <td>总价</td>
+                        <td>库位</td>
+                    </tr>
+                </thead>
+                <tbody id="xiangtt2"></tbody>
+            </table>
+        </div>
+        <div id="anniukuai" style="text-align:right;padding-right:30px;padding-top:50px">
+            <button class="btn btn-default" id="shenhetg" onclick="RuKuShenHe(1)">审核通过</button>
+            <button class="btn btn-default" id="shenhesb" onclick="RuKuShenHe(0)">审核失败</button>
+            <button class="btn btn-default" id="tuichu">退出</button>
+        </div>
+    </div>
+</body>
+</html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layui/layui.js"></script>
 <script>
@@ -412,6 +420,7 @@
 
     //查询所有入库信息的layui
     function Suoyou() {
+        SuoyouList();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -443,11 +452,13 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StorageID + "'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'  onclick='XiuGaiYe(" + data.StorageID+")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StorageID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuRuku(" + data.StorageID + ")'></i>  <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StorageID + "' onclick='shenheyemian(" + data.StorageID + ")' ></i>        </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StorageID + "'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑' id='bj" + data.StorageID + "'  onclick='XiuGaiYe(" + data.StorageID + ")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StorageID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuRuku(" + data.StorageID + ")'></i>  <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StorageID + "' onclick='shenheyemian(" + data.StorageID + ")' ></i>        </td></tr>");
 
                     if (data.State != 2) {
                         document.getElementById("ck" + data.StorageID + "").style.display = "none";
+                        document.getElementById("bj" + data.StorageID + "").style.display = "none";
                     }
+
                 });
             },
             error: function (ex) {
@@ -473,10 +484,12 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StorageID + "'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑' onclick='XiuGaiYe(" + data.StorageID +")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StorageID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuRuku(" + data.StorageID + ")'> </i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StorageID + "' onclick='shenheyemian(" + data.StorageID + ")' ></i>      </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StorageID + "'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑' id='bj" + data.StorageID + "' onclick='XiuGaiYe(" + data.StorageID + ")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StorageID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuRuku(" + data.StorageID + ")'> </i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StorageID + "' onclick='shenheyemian(" + data.StorageID + ")' ></i>      </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.StorageID + "").style.display = "none";
+                        document.getElementById("bj" + data.StorageID + "").style.display = "none";
                     }
+
                 });
             },
             error: function (ex) {
@@ -498,9 +511,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StorageID + "'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑' onclick='XiuGaiYe(" + data.StorageID +")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StorageID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuRuku(" + data.StorageID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StorageID + "' onclick='shenheyemian(" + data.StorageID + ")' ></i>       </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StorageID + "'/></td><td>" + data.StorageID + "</td><td>" + data.StorageType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + data.OperationType + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑' id='bj" + data.StorageID + "' onclick='XiuGaiYe(" + data.StorageID + ")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StorageID + ")'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuRuku(" + data.StorageID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StorageID + "' onclick='shenheyemian(" + data.StorageID + ")' ></i>       </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.StorageID + "").style.display = "none";
+                        document.getElementById("bj" + data.StorageID + "").style.display = "none";
                     }
                 });
             },

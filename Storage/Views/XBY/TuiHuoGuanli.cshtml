@@ -102,6 +102,7 @@
     })
 
     function Suoyou() {
+        SuoyouList();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -132,9 +133,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.ReturnsID + "'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuTuiHuo(" + data.ReturnsID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.ReturnsID + "' ></i>       </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.ReturnsID + "'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' id='bj" + data.ReturnsID + "' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuTuiHuo(" + data.ReturnsID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.ReturnsID + "' ></i>       </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
+                        document.getElementById("bj" + data.ReturnsID + "").style.display = "none";
                     }
                 });
             },
@@ -156,9 +158,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.ReturnsID + "'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuTuiHuo(" + data.ReturnsID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.ReturnsID + "' ></i>    </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.ReturnsID + "'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' id='bj" + data.ReturnsID + "' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuTuiHuo(" + data.ReturnsID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.ReturnsID + "' ></i>    </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
+                        document.getElementById("bj" + data.ReturnsID + "").style.display = "none";
                     }
                 });
             },
@@ -180,9 +183,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.ReturnsID + "'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuTuiHuo(" + data.ReturnsID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.ReturnsID + "' ></i>    </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.ReturnsID + "'/></td><td>" + data.ReturnsID + "</td><td>" + data.ReturnsType + "</td><td>" + data.tuihuoSum + "</td><td>" + data.AssociatedNumber + "</td><td>" + ZTString(data.State) + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' id='bj" + data.ReturnsID + "' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuTuiHuo(" + data.ReturnsID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.ReturnsID + "' ></i>    </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
+                        document.getElementById("bj" + data.ReturnsID + "").style.display = "none";
                     }
                 });
             },

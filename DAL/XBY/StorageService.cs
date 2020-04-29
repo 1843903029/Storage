@@ -43,7 +43,7 @@ namespace DAL.XBY
                           StateText = p.StateText
                       };
             list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-            int rows = obj.Count();
+            list.PageCount = obj.Count();
             return list;
 
         }
@@ -82,7 +82,7 @@ namespace DAL.XBY
                           StateText = p.StateText
                       };
             list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-            int rows = obj.Count();
+            list.PageCount = obj.Count();
             return list;
 
         }
@@ -123,21 +123,21 @@ namespace DAL.XBY
                       };
 
             list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-            int rows = obj.Count();
+            list.PageCount = obj.Count();
 
 
             if (obj.Count() != 0 && !string.IsNullOrEmpty(Danhao))
             {
                 obj = obj.Where(p => p.StorageID == Danhao);
                 list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-                rows = obj.Count();
+                list.PageCount   = obj.Count();
                 return list;
             }
             if (obj.Count() != 0 && !string.IsNullOrEmpty(time1) && !string.IsNullOrEmpty(time2))
             {
                 obj = obj.Where(p => p.CreationTime > Convert.ToDateTime(time1) && p.CreationTime < Convert.ToDateTime(time2));
                 list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-                rows = obj.Count();
+                list.PageCount   = obj.Count();
                 return list;
 
             }
@@ -285,6 +285,31 @@ namespace DAL.XBY
 
 
         /// <summary>
+        /// 修改入库主表
+        /// </summary>
+        /// 
+        /// <returns></returns>
+        public static int RuKuXiuZhu(Storage p)
+        {
+            StorageEntities ent = new StorageEntities();
+            Storage sto = ent.Storage.Find(p.StorageID);
+            sto.StorageType = p.StorageType;
+            sto.SupplierID = p.SupplierID;
+            sto.AssociatedNumber = p.AssociatedNumber;
+            sto.GoodsCount = p.GoodsCount;
+            sto.Summoney = p.Summoney;
+            sto.State = p.State;
+            sto.EmployeeID = p.EmployeeID;
+            sto.OperationType = p.OperationType;
+            sto.CreationTime = p.CreationTime;
+            sto.DataState = p.DataState;
+            sto.StateText = p.StateText;
+
+            return ent.SaveChanges();
+
+        }
+
+        /// <summary>
         /// 修改操作查询详表数据并删除数据库记录
         /// </summary>
         /// <param name="id"></param>
@@ -293,8 +318,8 @@ namespace DAL.XBY
         {
             StorageEntities ent = new StorageEntities();
             //StorageDetailed st = ent.StorageDetailed.Find(id);
-            var obj = ent.StorageDetailed.Find(id);
-            ent.StorageDetailed.Remove(obj);
+            var obj = from p in ent.StorageDetailed where p.StorageIDS == id select p;
+            ent.StorageDetailed.RemoveRange(obj);
             return ent.SaveChanges();
         }
 

@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "BaoSunGuanliAdd";
     Layout = "~/Views/MainPage.cshtml";
+    Models.Admin stu = Session["user"] as Models.Admin;
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
@@ -238,20 +239,26 @@
                 rukuzongshu += parseInt(info[i].BaoSunCount) ;
             }
 
-            $.ajax({
-                type: "POST",
-                url: "/XBY/AddBaoSun",
-                data: "{zhu:{BreakageID:'" + danhapsuiji + "',BreakageType:'" + $("#BsLeiXing").val() + "',BreakageCount:'" + rukuzongshu + "',EmployeeID:'" + 1 + "',StateText:'" + $("#bsbeizhu").val() + "'}}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    AddXiang();
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
+            if (info.length > 0) {
 
-                }
-            });
+                $.ajax({
+                    type: "POST",
+                    url: "/XBY/AddBaoSun",
+                    data: "{zhu:{BreakageID:'" + danhapsuiji + "',BreakageType:'" + $("#BsLeiXing").val() + "',BreakageCount:'" + rukuzongshu + "',EmployeeID:'" + @stu.AdminID + "',StateText:'" + $("#bsbeizhu").val() + "'}}",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        AddXiang();
+                    },
+                    error: function (ex) {
+                        alert("Error:" + ex.responseText);
+
+                    }
+                });
+            } else
+            {
+                alert("请选择产品后再继续！");
+            }
         }
     }
 

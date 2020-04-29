@@ -370,6 +370,7 @@
 
 
     function Suoyou() {
+        SuoyouList();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -400,9 +401,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + ZTString(data.State) + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>  <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.MovementID + "' onclick='yikushnehe(" + data.MovementID + ")' ></i>      </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + ZTString(data.State) + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' id='bj" + data.MovementID + "' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>  <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.MovementID + "' onclick='yikushnehe(" + data.MovementID + ")' ></i>      </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.MovementID + "").style.display = "none";
+                        document.getElementById("bj" + data.MovementID + "").style.display = "none";
                     }
                 });
             },
@@ -425,9 +427,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + ZTString(data.State) + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.MovementID + "' onclick='yikushnehe(" + data.MovementID + ")'></i>      </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + ZTString(data.State) + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' id='bj" + data.MovementID + "' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.MovementID + "' onclick='yikushnehe(" + data.MovementID + ")'></i>      </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.MovementID + "").style.display = "none";
+                        document.getElementById("bj" + data.MovementID + "").style.display = "none";
                     }
                 });
             },
@@ -449,9 +452,10 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + ZTString(data.State) + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.MovementID + "' onclick='yikushnehe(" + data.MovementID + ")'></i>      </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.MovementID + "'/></td><td>" + data.MovementID + "</td><td>" + data.MovementType + "</td><td>" + data.Associatednumber + "</td><td>" + data.MovementCount + "</td><td>" + data.name + "</td><td>" + ZTString(data.State) + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit' id='bj" + data.MovementID + "' title='编辑'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.MovementID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuYiKu(" + data.MovementID + ")'></i>    <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.MovementID + "' onclick='yikushnehe(" + data.MovementID + ")'></i>      </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.MovementID + "").style.display = "none";
+                        document.getElementById("bj" + data.MovementID + "").style.display = "none";
                     }
                 });
             },

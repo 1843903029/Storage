@@ -119,21 +119,21 @@ namespace DAL.XBY
                       };
 
             list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-            int rows = obj.Count();
+            list.PageCount = obj.Count();
 
 
             if (obj.Count() != 0 && !string.IsNullOrEmpty(Danhao))
             {
                 obj = obj.Where(p => p.BreakageID == Danhao);
                 list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-                rows = obj.Count();
+                list.PageCount = obj.Count();
                 return list;
             }
             if (obj.Count() != 0 && !string.IsNullOrEmpty(time1) && !string.IsNullOrEmpty(time2))
             {
                 obj = obj.Where(p => p.CreationTime > Convert.ToDateTime(time1) && p.CreationTime < Convert.ToDateTime(time2));
                 list.DataList = obj.Skip((PageIndex - 1) * PageSize).Take(PageSize);
-                rows = obj.Count();
+                list.PageCount = obj.Count();
                 return list;
 
             }
