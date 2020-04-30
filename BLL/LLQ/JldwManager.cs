@@ -66,5 +66,11 @@ namespace BLL.LLQ
 
         }
 
+        //查询计量单位
+        public static IQueryable selectJldw()
+        {
+            return DAL.LLQ.JldwService.selectJldw();
+        }
+
     }
 }

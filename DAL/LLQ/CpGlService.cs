@@ -141,5 +141,20 @@ namespace DAL.LLQ
             return list.DataList;
 
         }
+
+        //查询客户表
+        public static IQueryable selectAd()
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.Admin
+                      select new
+                      {
+                          AdminID = p.AdminID,
+                          UserName = p.UserName
+                      };
+            return obj;
+        }
+
+
     }
 }

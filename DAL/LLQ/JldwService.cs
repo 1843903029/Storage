@@ -96,6 +96,20 @@ namespace DAL.LLQ
             return entity.SaveChanges();
 
         }
+        //查询计量单位
+        public static IQueryable selectJldw()
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.JLinfo
+                      select new
+                      {
+                          Jlid = p.Jlid,
+                          JlName = p.JlName
+                      };
+            return obj;
+
+        }
+
 
     }
 }

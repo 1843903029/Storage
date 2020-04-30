@@ -58,7 +58,7 @@ namespace DAL.LLQ
         {
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.CpLbinfo
-                      where p.ID==id
+                      where p.ID == id
                       select new
                       {
                           ID = p.ID,
@@ -110,6 +110,18 @@ namespace DAL.LLQ
 
             return list.DataList;
 
+        }
+        //查询类别
+        public static IQueryable selectCplb()
+        {
+            StorageEntities entity = new StorageEntities();
+            var obj = from p in entity.CpLbinfo
+                      select new
+                      {
+                          ID = p.ID,
+                          CpLbName = p.CpLbName
+                      };
+            return obj;
         }
 
     }
