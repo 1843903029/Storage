@@ -20,7 +20,7 @@
                 <tr>
                     <td><strong style="margin-left:20px">产品类别管理</strong></td>
                     <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
-                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
+                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()"  type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
             </table>
@@ -36,7 +36,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')"  /></td>
                         <td>类别编号</td>
                         <td>类别名称</td>
                         <td>创建人</td>
@@ -88,7 +88,7 @@
             <dl>
                 <dd>产品名称</dd>
                 <dd>
-                    <input id="ID" type="text" hidden />
+                    @*<input id="ID" type="text" hidden />*@
                     <input id="CpLbName" name="CpLbName" type="text" class="input-medium">
                 </dd>
             </dl>
@@ -96,7 +96,7 @@
                 <dd>创建人</dd>
                 <dd>
                     <select id="UserName" name="UserName" class="input-medium" style="width:164px;">
-                        <option value="">请选择</option>
+                        <option value="0">请选择</option>
 
                     </select>
                 </dd>
@@ -124,7 +124,7 @@
 <script src="~/layui/layui.js"></script>
 <script>
     var PageIndex = 1;
-    var PageSize = 6;
+    var PageSize = 10;
     var PageCount = 0;
     var rows = 0;
     $(function () {
@@ -139,7 +139,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 6//每页显示数
+                , limit: 5//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -164,6 +164,7 @@
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
+        Ad();
     });
     //分页查询
     function GetCplbAll() {
@@ -177,12 +178,70 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.ID + "' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CpTime) + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
                 });
             },
             erro: function (ex) {
                 alert(ex.responseText);
             }
+        })
+    }
+    //全选
+    function quanxuan(objName, type) {
+        var objNameList = document.getElementsByName(objName);
+        if (null != objNameList) {
+            for (var i = 0; i < objNameList.length; i++) {
+                if (objNameList[i].checked == true) {
+                    if (type != 'checkall') {  // 非全选
+                        objNameList[i].checked = false;
+                    }
+                } else {
+                    if (type != 'uncheckall') {  // 非取消全选
+                        objNameList[i].checked = true;
+                        //console.log($("input[name='checkbox']").data("id"));
+                        //alert($("input[name='checkbox']").data("id"));
+
+                    }
+                }
+            }
+        }
+    }
+
+    function you() {
+        var fan = 0;
+        var list = []
+        $.each($("[name='checkbox']"), function (index, result) {
+            //alert($(this).is("checked"));
+            //console.log(result);
+            if ($(this).prop("checked")) {
+                list.push($(this).data("id"));
+
+            }
+        });
+        $.each(list, function (index2, id) {
+
+            $.ajax({
+                type: "POST",
+                url: "/LLQ/CplbDet",
+                data: "{id:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    //console.log(result);
+                    if (result > 0) {
+                        alert("删除成功2");
+                        window.location.reload();
+
+                    } else {
+                        alert("删除失败2");
+
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+
         })
     }
 
@@ -209,7 +268,7 @@
                 if (result > 0) {
                     alert("新增成功");
                     GetCplbAll();
-                    window.location.href = "/LLQ/Cplb";
+                    //window.location.href = "/LLQ/Cplb";
                 }
             },
             error: function (ex) {
@@ -244,6 +303,7 @@
         GetCplbAll();
     };
 
+    //编辑修改
     function reads(ID) {
         layer.open({
             type: 1,
@@ -263,13 +323,12 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
-                console.log(result);
                 $.each(result, function (Index, data) {
                     
                     $("#ID").val(data.ID);
                     $("#CpLbName").val(data.CpLbName);
                     $("#UserName").val(data.UserName);
-                    $("#CpTime").val(data.CpTime);
+                    $("#CpTime").val(ConvertDate(data.CpTime));
                     $("#remark").val(data.remark);
                 });
             },
@@ -323,7 +382,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + data.CpTime + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i></a> <i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.ID + "' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CpTime) + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
                 });
             },
             error: function (ex) {
@@ -350,7 +409,6 @@
             }
         });
     }
-
 
     function ConvertDate(date) {
         var time = new Date(parseInt(date.substr(6)));

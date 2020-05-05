@@ -42,59 +42,47 @@
                 </table>
                 <table action="javascript:void(0)" class="form-horizontal">
                     <tr>
-                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入用户名或者工号"></td>
+                        <td><input id="txtSearch" type="text" class="form-control" placeholder="请输入用户名或者工号"></td>
                         <td>
                             <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="AdminQuery()">搜索</a>
                         </td>
                         <td>
-                            <button style="margin-left:10px" id="btnHSearch" data-toggle="dropdown" class="btn btn-primary">高级搜索<span class="caret"></span></button>
+
+                            @*<button style="margin-left:10px" id="btnHSearch" data-toggle="dropdown" class="btn btn-primary">高级搜索<span class="caret"></span></button>*@
                         </td>
                     </tr>
                 </table>
-                <div class="widget" hidden>
-                    <table>
-                        <tr>
-                            <td> <label for="firstName" class="control-label">员工编号</label></td>
-                            <td> <input id="txtUserCode" name="txtUserCode" type="text" class="span12"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="firstName" class="control-label">员工姓名</label></td>
-                            <td><input id="txtUserName" name="txtUserName" type="text" class="span12"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="firstName" class="control-label">部门</label></td>
-                            <td>
-                                <select id="DepartNum_id" name="DepartNum_id" class="input-medium">
-                                    <option value="0">请选择部门</option>
-                                    @*<option value="000001">质量部门</option>
-                                        <option value="000002">仓库部门</option>
-                                        <option value="000003">采购部门</option>*@
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="firstName" class="control-label">角色</label></td>
-                            <td>
-                                <select id="RoleNum" name="RoleNum" class="input-medium">
-                                    <option value="0">请选择角色</option>
-                                    @*<option value="DR_0000">系统管理员</option>
-                                        <option value="000001">仓管员</option>
-                                        <option value="000002">采购员</option>
-                                        <option value="000003">门卫</option>*@
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="firstName" class="control-label">&nbsp;&nbsp;</label></td>
-                            <td><a class="btn btn-info" href="javascript:void(0)" onclick="AdminQuerylist()"><i class="icon-search"></i>&nbsp;搜索</a></td>
-                        </tr>
-                    </table>
+                <div style="padding-top:8px;display:flex;margin-bottom:20px">
+                    <div style="padding-top:6px;margin-right:5px;"> <label for="firstName" class="control-label" >员工编号</label></div>
+                    <input id="txtUserCode" name="txtUserCode" style="width:170px;margin-right:10px" type="text" class="form-control">
+
+                    <div  style="padding-top:6px;margin-right:5px;"><label for="firstName" class="control-label">员工姓名</label></div>
+                    <input id="txtUserName"  style="width:170px;margin-right:10px" name="txtUserName" type="text"class="form-control">
+
+                    <div  style="padding-top:6px;margin-right:5px;"><label for="firstName" class="control-label">部门</label></div>
+
+                    <select id="DepartNum_id" name="DepartNum_id" class="form-control" style="width:170px;margin-right:10px;">
+                        <option value="0">请选择部门</option>
+                        
+                    </select>
+
+
+                    <div  style="padding-top:6px;margin-right:5px;"><label for="firstName" class="control-label">角色</label></div>
+
+                    <select id="RoleNum" name="RoleNum" class="form-control" style="width:170px;margin-right:10px">
+                        <option value="0">请选择角色</option>
+                       
+                    </select>
+
+
+                    <div><label for="firstName" class="control-label">&nbsp;&nbsp;</label></div>
+                    <a class="btn btn-primary" href="javascript:void(0)" onclick="AdminQuerylist()"><i class="icon-search"></i>&nbsp;高级搜索</a>
                 </div>
             </div>
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" id="check1"  onclick="quanxuan('checkbox', 'reversecheck')"  /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
                         <td>用户名</td>
                         <td>编号</td>
                         <td>真名</td>
@@ -116,8 +104,11 @@
         </div>
 
     </div>
+   
+    
+
     <div id="yyyy">
-        <input id="AdminID" type="hidden"  />
+        <input id="AdminID" type="hidden" />
         <table class="formtab_user">
 
             <tr>
@@ -158,8 +149,8 @@
                     <select id="DepartNum_id2" name="DepartNum_id" class="input-medium" style="width:164px;">
                         <option>请选择部门</option>
                         @*<option value="1">质量部门</option>
-                        <option value="2">仓库部门</option>
-                        <option value="3">采购部门</option>*@
+                            <option value="2">仓库部门</option>
+                            <option value="3">采购部门</option>*@
                     </select>
                 </td>
                 <td>角色</td>
@@ -167,9 +158,9 @@
                     <select id="RoleNum2" name="RoleNum" class="input-medium" style="width:164px;">
                         <option>请选择角色</option>
                         @*<option value="0">系统管理员</option>
-                        <option value="1">仓管员</option>
-                        <option value="2">采购员</option>
-                        <option value="3">门卫</option>*@
+                            <option value="1">仓管员</option>
+                            <option value="2">采购员</option>
+                            <option value="3">门卫</option>*@
                     </select>
                 </td>
             </tr>
@@ -223,8 +214,8 @@
                     <select id="DepartNum_id1" name="DepartNum_id" class="input-medium" style="width:164px;">
                         <option>请选择部门</option>
                         @*<option value="1">质量部门</option>
-                    <option value="2">仓库部门</option>
-                    <option value="3">采购部门</option>*@
+                            <option value="2">仓库部门</option>
+                            <option value="3">采购部门</option>*@
                     </select>
                 </td>
                 <td>角色</td>
@@ -232,9 +223,9 @@
                     <select id="RoleNum1" name="RoleNum" class="input-medium" style="width:164px;">
                         <option>请选择角色</option>
                         @*<option value="0">系统管理员</option>
-                    <option value="1">仓管员</option>
-                    <option value="2">采购员</option>
-                    <option value="3">门卫</option>*@
+                            <option value="1">仓管员</option>
+                            <option value="2">采购员</option>
+                            <option value="3">门卫</option>*@
                     </select>
                 </td>
             </tr>
@@ -248,7 +239,7 @@
                     <input id="Phone" name="Phone" type="text" placeholder="" class="input-medium">
                 </td>
             </tr>
-          
+
             <tr>
                 <td>
                     <input id="Button1" type="button" class="btn-success" style="margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" />
@@ -364,7 +355,6 @@
         var txtUserName = $("#txtUserName").val();
         var DepartNum_id = $("#DepartNum_id").val();
         var RoleNum = $("#RoleNum").val();
-        alert(RoleNum)
         $.ajax({
             type: "POST",
             async: false,
@@ -520,7 +510,6 @@
     }
     //删除
     function btnSub(AdminID) {
-        alert(AdminID);
         $.ajax({
             type: "POST",
             url: "/TXY/SysAdmindelete",
@@ -530,6 +519,7 @@
             success: function (result) {
                 if (result > 0) {
                     alert("删除成功");
+                   
                     window.location.reload();
                 }
                 else {
@@ -583,8 +573,8 @@
         });
     }
     //新增
-
-
+    
+    
     function xzshow() {
         //layer.open({
         //    type: 1,
