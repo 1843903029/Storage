@@ -35,7 +35,7 @@
                 </table>
                 <table>
                     <tr>
-                        <td><strong style="margin-left:20px">用户管理</strong></td>
+                        <td><strong style="margin-left:20px">部门管理</strong></td>
                         <td><a style="margin-left:900px;" id="btnSubhh" class="btn btn-primary" href="javascript:xzshow()">新增</a></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" onclick="you()" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
@@ -43,7 +43,7 @@
                 </table>
                 <table action="javascript:void(0)" class="form-horizontal">
                     <tr>
-                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入用户名"></td>
+                        <td><input id="txtSearch" type="text" class="form-control" placeholder="请输入用户名"></td>
                         <td>
                             <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="SysDepartQuery()">搜索</a>
                         </td>
@@ -219,7 +219,7 @@
     }
     //删除
     function btnSub(SysDepartID) {
-        alert(SysDepartID);
+        
         $.ajax({
             type: "POST",
             url: "/TXY/SysDepartdelete",
@@ -318,7 +318,7 @@
     function SysDepartQuery()
     {
         var Search = $("#txtSearch").val();
-        alert(PageIndex);
+        
         $.ajax({
             type: "POST",
             async: false,
