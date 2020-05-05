@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "Index";
     Layout = "~/Views/MainPage.cshtml";
 }
@@ -61,7 +63,7 @@
                                 <td>
                                     <select id="ck" name="CKName" style="width:164px;">
                                         <option>请选择仓库</option>
-                                       
+
                                     </select>
                                 </td>
                             </tr>
@@ -82,7 +84,7 @@
 
                         </tbody>
                     </table>
-                    
+
 
 
                 </div>
@@ -125,7 +127,7 @@
             </div>
         </div>
     </div>
-    </body>
+</body>
 </html>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -164,6 +166,7 @@
 
 
     })
+    
     function xzshow() {
         layer.open({
             type: 1,
@@ -219,7 +222,7 @@
     }
 
     function add() {
-        
+
         $.ajax({
             type: "POST",
             url: "/LL/KWAdd",
@@ -242,7 +245,7 @@
             }
         });
 
-        
+
     }
     function del(id) {
         $.ajax({
@@ -310,7 +313,7 @@
             success: function (result) {
                 //console.log(result);
                 $.each(result, function (Index, data) {
-                    
+
                     $("#kwID").val(data.kwID);
                     $("#qwerty").val(data.kwName);
                     $("#kw").val(data.KwTypeID);

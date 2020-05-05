@@ -17,8 +17,11 @@ namespace BLL.LL
         {
             return DAL.LL.GYSguanli.del(id);
         }
-
-        public static int add(Supplier sup)
+        public static PageList mohu(int pageindex, int pagesize, string GysName)
+        {
+            return DAL.LL.GYSguanli.mohu(pageindex,pagesize,GysName);
+        }
+            public static int add(Supplier sup)
         {
             return DAL.LL.GYSguanli.add(sup);
         }

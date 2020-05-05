@@ -43,5 +43,10 @@ namespace BLL.LLQ
             return DAL.LLQ.CplbService.CplbQuery(pageIndex, pageSize, CpLbName);
         }
 
+        //查询类别
+        public static IQueryable selectCplb()
+        {
+            return DAL.LLQ.CplbService.selectCplb();
+        }
     }
 }

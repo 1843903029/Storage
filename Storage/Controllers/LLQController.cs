@@ -20,7 +20,7 @@ namespace Storage.Controllers
         {
             return View();
         }
-       
+
         /// <summary>
         /// 产品类别的页面
         /// </summary>
@@ -29,7 +29,7 @@ namespace Storage.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// 产品管理的页面
         /// </summary>
@@ -58,7 +58,7 @@ namespace Storage.Controllers
         public ActionResult JldwAdd(JLinfo jldw)
         {
             jldw.Delit = true;
-            return Json(BLL.LLQ.JldwManager.JldwAdd(jldw),JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.JldwManager.JldwAdd(jldw), JsonRequestBehavior.AllowGet);
         }
         //删除
         public ActionResult JldwDet(int jlid)
@@ -68,7 +68,7 @@ namespace Storage.Controllers
         //模糊查询
         public ActionResult JldwGetByQuery(int pageIndex, int pageSize, string jlName)
         {
-            return Json(BLL.LLQ.JldwManager.JldwGetByQuery( pageIndex,  pageSize,  jlName), JsonRequestBehavior.AllowGet);
+            return Json(BLL.LLQ.JldwManager.JldwGetByQuery(pageIndex, pageSize, jlName), JsonRequestBehavior.AllowGet);
         }
         //单个id查询
         public ActionResult JldwGetById(int Jlid)
@@ -96,7 +96,7 @@ namespace Storage.Controllers
         {
             cplb.Delit = true;
             cplb.UserName = 1;
-            cplb.CpTime= DateTime.Now;
+            cplb.CpTime = DateTime.Now;
             return Json(BLL.LLQ.CplbManager.CplbAdd(cplb), JsonRequestBehavior.AllowGet);
         }
         //删除
@@ -155,6 +155,25 @@ namespace Storage.Controllers
         public ActionResult CpGlEdit(CpGlinfo cpgl)
         {
             return Json(BLL.LLQ.CpGlManager.CpGlEdit(cpgl), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        //查询客户
+        public ActionResult selectAd()
+        {
+            return Json(BLL.LLQ.CpGlManager.selectAd(), JsonRequestBehavior.AllowGet);
+        }
+        //查询计量单位
+        public ActionResult selectJldw()
+        {
+            return Json(BLL.LLQ.JldwManager.selectJldw(), JsonRequestBehavior.AllowGet);
+        }
+
+        //查询类别
+        public ActionResult selectCplb()
+        {
+            return Json(BLL.LLQ.CplbManager.selectCplb(), JsonRequestBehavior.AllowGet);
         }
     }
 }
