@@ -21,7 +21,7 @@
                     <tr>
                         <td><strong style="margin-left:20px">产品管理</strong></td>
                         <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
-                        <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
+                        <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()"  type="button" value="删除" /></td>
                         <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                     </tr>
                 </table>
@@ -249,7 +249,7 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var PageIndex = 1;
-    var PageSize = 6;
+    var PageSize = 10;
     var PageCount = 0;
     var rows = 0;
     $(function () {
@@ -262,7 +262,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 2//每页显示数
+                , limit: 5//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -306,7 +306,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.JlName + "</td><td>" + data.remark + "</td><td><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CpGlDet(" + data.CpID + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' name='checkbox' class='check' data-id='" + data.CpID + "' /></td><td>" + data.CpID + "</td><td>" + data.CpXsName + "</td><td>" + data.CpSx + "</td><td>" + data.CpXx + "</td><td>" + data.CpPrice + "</td><td>" + data.Specification + "</td><td>" + data.CpShuLiang + "</td><td>" + data.CpLbName + "</td><td>" + data.JlName + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.CpID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CpGlDet(" + data.CpID + ")'></i></td></tr>");
                 });
             },
             erro: function (ex) {
@@ -315,6 +315,62 @@
         })
     }
 
+    function quanxuan(objName, type) {
+        var objNameList = document.getElementsByName(objName);
+        if (null != objNameList) {
+            for (var i = 0; i < objNameList.length; i++) {
+                if (objNameList[i].checked == true) {
+                    if (type != 'checkall') {  // 非全选
+                        objNameList[i].checked = false;
+                    }
+                } else {
+                    if (type != 'uncheckall') {  // 非取消全选
+                        objNameList[i].checked = true;
+                        //console.log($("input[name='checkbox']").data("id"));
+                        //alert($("input[name='checkbox']").data("id"));
+
+                    }
+                }
+            }
+        }
+    }
+
+    function you() {
+        var fan = 0;
+        var list = []
+        $.each($("[name='checkbox']"), function (index, result) {
+            //alert($(this).is("checked"));
+            //console.log(result);
+            if ($(this).prop("checked")) {
+                list.push($(this).data("id"));
+
+            }
+        });
+        $.each(list, function (index2, CpID) {
+            $.ajax({
+                type: "POST",
+                url: "/LLQ/CpGlDet",
+                data: "{CpID:" + CpID + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    //console.log(result);
+                    if (result > 0) {
+                        alert("删除成功2");
+                        window.location.reload();
+
+                    } else {
+                        alert("删除失败2");
+
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+
+        })
+    }
 
     //新增
     function insert() {
