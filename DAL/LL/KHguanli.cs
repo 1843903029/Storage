@@ -34,6 +34,30 @@ namespace DAL.LL
             return list;
         }
 
+        public static PageList mohuKH(int pageindex, int pagesize ,string KHname)
+        {
+            var obj = from p in s.Client
+                      where p.KhName.IndexOf(KHname) != -1
+                      && p.State == true
+                      orderby p.KhID
+                      select new
+                      {
+                          ID = p.ID,
+                          KhID = p.KhID,
+                          KhName = p.KhName,
+                          beizhu = p.beizhu,
+                          Hone = p.Hone,
+                          chuanzhen = p.chuanzhen,
+                          youxiang = p.youxiang,
+                          Time = p.Time,
+                          State = p.State
+                      };
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
+            list.PageCount = obj.Count();
+            return list;
+        }
+
         public static int del( int id) {
             var obj = s.Client.Find(id);
             obj.State = false;

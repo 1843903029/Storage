@@ -17,7 +17,11 @@ namespace BLL.LL
         {
             return DAL.LL.KHguanli.del(id);
         }
-        public static int add(Client c) {
+        public static PageList mohuKH(int pageindex, int pagesize, string KHname)
+        {
+            return DAL.LL.KHguanli.mohuKH(pageindex,pagesize,KHname);
+        }
+            public static int add(Client c) {
 
             return DAL.LL.KHguanli.add(c);
         }
