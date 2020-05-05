@@ -43,7 +43,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
                         <td>序号</td>
                         <td>名称</td>
                         <td>操作</td>
@@ -83,7 +83,6 @@
             <dl>
                 <dd>计量名称</dd>
                 <dd>
-                    <input id="jlid" type="text" hidden />
                     <input id="jlName" name="jlName" type="text" class="input-medium">
                 </dd>
             </dl>
@@ -96,12 +95,12 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 10;
+    var PageIndex = 1;
+    var PageSize = 10;
+    var PageCount = 0;
     var rows = 0;
     $(function () {
         GetJldwAll();
-
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -110,7 +109,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 3//每页显示数
+                , limit: 5//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -142,7 +141,7 @@
                 //获取总条数
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td  style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><a  href='javascript:reads(" + data.Jlid + ")'><i class='layui-icon layui-icon-edit' id='button' title='编辑'></i> </a> <a href='#'><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td  style='width: 20px; '><input type='checkbox'name='checkbox' class='check' data-id='" + data.Jlid + "' /></td><td id='hhh'>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><a  href='javascript:reads(" + data.Jlid + ")'><i class='layui-icon layui-icon-edit' id='button' title='编辑'></i> </a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
                 });
             },
             error: function (ex) {
@@ -150,6 +149,65 @@
             }
         });
     }
+
+    //全选删除
+    function quanxuan(objName, type) {
+        var objNameList = document.getElementsByName(objName);
+        if (null != objNameList) {
+            for (var i = 0; i < objNameList.length; i++) {
+                if (objNameList[i].checked == true) {
+                    if (type != 'checkall') {  // 非全选
+                        objNameList[i].checked = false;
+                    }
+                } else {
+                    if (type != 'uncheckall') {  // 非取消全选
+                        objNameList[i].checked = true;
+                        //console.log($("input[name='checkbox']").data("id"));
+                        //alert($("input[name='checkbox']").data("id"));
+
+                    }
+                }
+            }
+        }
+    }
+    function you() {
+        var fan = 0;
+        var list = []
+        $.each($("[name='checkbox']"), function (index, result) {
+            //alert($(this).is("checked"));
+            //console.log(result);
+            if ($(this).prop("checked")) {
+                list.push($(this).data("id"));
+
+            }
+        });
+        $.each(list, function (index2, jlid) {
+            alert(jlid);
+            $.ajax({
+                type: "POST",
+                url: "/LLQ/JldwDet",
+                data: "{jlid:" + jlid + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    //console.log(result);
+                    if (result > 0) {
+                        alert("删除成功2");
+                        window.location.reload();
+
+                    } else {
+                        alert("删除失败2");
+
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+
+        })
+    }
+
     //新增
     function insert() {
         layer.open({
@@ -162,7 +220,6 @@
             shade: 0,
         });
     }
-
     function JldwAdd() {
         $.ajax({
             type: "POST",
@@ -215,6 +272,7 @@
         GetJldwAll();
     };
 
+    //修改（获取的id）
     function reads(Jlid) {
         layer.open({
             type: 1,
@@ -236,7 +294,7 @@
             success: function (result) {
                 console.log(result);
                 $.each(result, function (Index, data) {
-                    
+
                     $("#jlid").val(data.Jlid);
                     $("#jlName").val(data.JlName);
                 });
@@ -288,7 +346,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td  style='width: 20px; '><input type='checkbox' /></td><td id='hhh'>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><a  href='javascript:reads(" + data.Jlid + ")'><i class='layui-icon layui-icon-edit' id='button' title='编辑'></i> </a> <a href='#'><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td  style='width: 20px; '><input type='checkbox'name='checkbox' class='check' data-id='" + data.Jlid + "' /></td><td id='hhh'>" + data.Jlid + "</td><td>" + data.JlName + "</td><td><a  href='javascript:reads(" + data.Jlid + ")'><i class='layui-icon layui-icon-edit' id='button' title='编辑'></i> </a><i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='JldwDet(" + data.Jlid + ")'></i></td></tr>");
                 });
             },
             error: function (ex) {

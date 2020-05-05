@@ -37,7 +37,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')"  /></td>
                         <td>序号</td>
                         <td>显示名</td>
                         <td>上限</td>
@@ -156,7 +156,7 @@
         </table>
     </div>
     <div>
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" hidden>
             <dl>
                 <dd>产品条码</dd>
                 <dd>
@@ -287,6 +287,11 @@
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
+        Cplb();//产品类别
+        Jldw();//计量单位
+        Kh();//客户
+        CK();//仓库
+        Type();//库位
     });
 
     //查询

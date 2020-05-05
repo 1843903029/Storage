@@ -64,7 +64,7 @@ namespace DAL.LLQ
                           ID = p.ID,
                           CpId = p.CpId,
                           CpLbName = p.CpLbName,
-                          UserName = p.Admin.UserName,//管理员的名称
+                          UserName = p.UserName,//管理员的名称
                           CpTime = p.CpTime,
                           remark = p.remark,
                           Delit = p.Delit//是否删除
