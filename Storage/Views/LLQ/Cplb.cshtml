@@ -20,7 +20,7 @@
                 <tr>
                     <td><strong style="margin-left:20px">产品类别管理</strong></td>
                     <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
-                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" type="button" value="删除" /></td>
+                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()"  type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
             </table>
@@ -178,7 +178,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CpTime) + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.ID + "' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CpTime) + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
                 });
             },
             erro: function (ex) {
@@ -303,6 +303,7 @@
         GetCplbAll();
     };
 
+    //编辑修改
     function reads(ID) {
         layer.open({
             type: 1,
@@ -381,7 +382,7 @@
                 $("#tb1 tr").remove();
                 rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input type='checkbox' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CpTime) + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.ID + "' /></td><td>" + data.ID + "</td><td>" + data.CpLbName + "</td><td>" + data.UserName + "</td><td>" + ConvertDate(data.CpTime) + "</td><td>" + data.remark + "</td><td><a href='javascript:reads(" + data.ID + ")'><i class='layui-icon layui-icon-edit'type='button' title='编辑'></i></a> <i class='layui-icon layui-icon-file-b' type='button' title='详情'></i><i class='layui-icon layui-icon-delete'title='删除' onclick='CplbDet(" + data.ID + ")'></i></td></tr>");
                 });
             },
             error: function (ex) {
