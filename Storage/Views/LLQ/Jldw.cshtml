@@ -28,7 +28,7 @@
                 <tr>
                     <td><strong style="margin-left:20px">计量单位</strong></td>
                     <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
-                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()"  type="button" value="删除" /></td>
+                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()" type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
             </table>
@@ -83,6 +83,7 @@
             <dl>
                 <dd>计量名称</dd>
                 <dd>
+                    <input id="Jlid" name="jlid" type="hidden">
                     <input id="jlName" name="jlName" type="text" class="input-medium">
                 </dd>
             </dl>
@@ -162,9 +163,6 @@
                 } else {
                     if (type != 'uncheckall') {  // 非取消全选
                         objNameList[i].checked = true;
-                        //console.log($("input[name='checkbox']").data("id"));
-                        //alert($("input[name='checkbox']").data("id"));
-
                     }
                 }
             }
@@ -295,7 +293,7 @@
                 console.log(result);
                 $.each(result, function (Index, data) {
 
-                    $("#jlid").val(data.Jlid);
+                    $("#Jlid").val(data.Jlid);
                     $("#jlName").val(data.JlName);
                 });
             },
@@ -307,7 +305,7 @@
 
     //修改
     function Eite() {
-        var jlid = $("#jlid").val();
+        var jlid = $("#Jlid").val();
         var jlName = $("#jlName").val();
         $.ajax({
             type: "POST",

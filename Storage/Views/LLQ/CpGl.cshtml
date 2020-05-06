@@ -37,7 +37,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
                         <td>序号</td>
                         <td>显示名</td>
                         <td>上限</td>
@@ -155,7 +155,7 @@
             </tr>
         </table>
     </div>
-    <div>
+    <div id="hide11" hidden="hidden">
         <form class="navbar-form navbar-left" role="search" hidden>
             <dl>
                 <dd>产品条码</dd>
@@ -180,11 +180,11 @@
             <dl>
                 <dd>预警上限</dd>
                 <dd>
-                    <input id="CpSx" name="txtCpSx" type="text" placeholder="0" class="input-medium">
+                    <input id="CpSx" name="txtCpSx" type="text"  class="input-medium">
                 </dd>
                 <dd>预警下限</dd>
                 <dd>
-                    <input id="CpXx" name="txtCpXx" type="text" placeholder="0" class="input-medium">
+                    <input id="CpXx" name="txtCpXx" type="text"  class="input-medium">
                 </dd>
             </dl>
             <dl>
@@ -232,11 +232,11 @@
             <dl>
                 <dd>产品数量</dd>
                 <dd>
-                    <input id="CpShuLiang" name="txtCpShuLiang" type="text" placeholder="" class="input-medium">
+                    <input id="CpShuLiang" name="txtCpShuLiang" type="text"  class="input-medium">
                 </dd>
                 <dd>备注</dd>
                 <dd>
-                    <input id="remark" name="txtremark" type="text" placeholder="" class="input-medium">
+                    <input id="remark" name="txtremark" type="text" class="input-medium">
                 </dd>
             </dl>
             <input id="Button1" type="button" class="btn-success" style="margin-left:50px;margin-top:15px" onclick="Eite()" value="确认" />
@@ -406,7 +406,7 @@
             success: function (result) {
                 if (result > 0) {
                     alert("新增成功");
-                    GetCpGlAll();
+                    window.location.reload();
                 }
             },
             error: function (ex) {
