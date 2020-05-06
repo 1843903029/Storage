@@ -211,7 +211,7 @@
 <script src="~/layui/layui.js"></script>
 <script>
     var PageIndex = 1;
-    var PageSize = 4;
+    var PageSize = 10;
     var PageCount = 0;
     var rows = 0;
     $(function () {
@@ -224,8 +224,8 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 2//每页显示数
-                , layout: ['NodeId', 'DisplayName', 'State', 'ADDTime']
+                , limit: 3//每页显示数
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
                     //设置当前页
@@ -251,25 +251,25 @@
             $("#jbox-content").hide();
         });
     });
-    function get() {
-        $.ajax({
-            type: "POST",
-            url: "/LLJ/GetAllFunction",
-            data: "{PageIndex:'" + PageIndex + "',PageSize:'" + PageSize + "'}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                $("#tb1 tr").remove();
-                rows = result.PageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox'/></td><td id='hhh'>" + data.ID + "</td><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.ID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
-                })
-            },
-            error: function (ex) {
-                alert("Error:" + ex.responseText);
-            }
-        })
-    }
+    //function get() {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/LLJ/GetAllFunction",
+    //        data: "{PageIndex:'" + PageIndex + "',PageSize:'" + PageSize + "'}",
+    //        dataType: "json",
+    //        contentType: "application/json",
+    //        success: function (result) {
+    ////            $("#tb1 tr").remove();
+    //            rows = result.PageCount;
+    //            $.each(result.DataList, function (index, data) {
+    //                $("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox'/></td><td id='hhh'>" + data.ID + "</td><td>" + data.DepartNum + "</td ><td>" + data.DepartName + "</td><td>" + ConvertDate(data.CreateTime) + "</td><td><input  class='btn btn-warning' type='button' value='删除' onclick='Del(" + data.ID + ")' /><a class='btn btn-warning' href='#'>编辑</a>&nbsp;<a href='#' class='btn btn-warning'>权限分配</a></td></tr>");
+    //            })
+    //        },
+    //        error: function (ex) {
+    //            alert("Error:" + ex.responseText);
+    //        }
+    //    })
+    //}
     //分页查询
     function get() {
 
@@ -352,7 +352,7 @@
         $.ajax({
             type: "POST",
             url: "/LLJ/FunctionEdit",
-            data: "{NodeId:'" + NodeId + "',DisplayName:'" + DisplayName + "'}",
+            data: "{NodeId:'" + NodeId + "',DisplayName:'" + DisplayName + "',ParentNodeId:'" + ParentNodeId + "',NodeURL:'" + NodeURL + "',DisplayOrder:'" + DisplayOrder + "',ADDTime:'" + ADDTime + "',State:'" + State + "'}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
