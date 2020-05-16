@@ -34,7 +34,7 @@ namespace DAL.LL
             return list;
         }
 
-        public static PageList mohuKH(int pageindex, int pagesize ,string KHname)
+        public static IQueryable mohuKH(int pageindex, int pagesize ,string KHname)
         {
             var obj = from p in s.Client
                       where p.KhName.IndexOf(KHname) != -1
@@ -52,10 +52,10 @@ namespace DAL.LL
                           Time = p.Time,
                           State = p.State
                       };
-            PageList list = new PageList();
-            list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
-            list.PageCount = obj.Count();
-            return list;
+            //PageList list = new PageList();
+            //list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
+            //list.PageCount = obj.Count();
+            return obj;
         }
 
         public static int del( int id) {

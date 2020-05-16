@@ -33,7 +33,7 @@ namespace DAL.LL
             list.PageCount = obj.Count();
             return list;
         }
-        public static PageList mohu(int pageindex, int pagesize,string GysName)
+        public static IQueryable mohu(int pageindex, int pagesize,string GysName)
         {
             var obj = from p in s.Supplier
                       where p.GysName.IndexOf(GysName) != -1
@@ -52,10 +52,10 @@ namespace DAL.LL
                           Describe = p.Describe,
                           State = p.State
                       };
-            PageList list = new PageList();
-            list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
-            list.PageCount = obj.Count();
-            return list;
+            //PageList list = new PageList();
+            //list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
+            //list.PageCount = obj.Count();
+            return obj;
         }
 
         public static int del(int id)

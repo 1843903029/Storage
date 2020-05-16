@@ -17,7 +17,7 @@ namespace BLL.LL
         {
             return DAL.LL.GYSguanli.del(id);
         }
-        public static PageList mohu(int pageindex, int pagesize, string GysName)
+        public static IQueryable mohu(int pageindex, int pagesize, string GysName)
         {
             return DAL.LL.GYSguanli.mohu(pageindex,pagesize,GysName);
         }
