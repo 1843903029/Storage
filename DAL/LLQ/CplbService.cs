@@ -76,10 +76,9 @@ namespace DAL.LLQ
         {
             StorageEntities entity = new StorageEntities();
             var obj = (from p in entity.CpLbinfo where p.ID == cplb.ID select p).First();
-
             obj.CpLbName = cplb.CpLbName;
             obj.Admin.UserName = cplb.Admin.UserName;
-            obj.CpTime = cplb.CpTime;
+            //obj.CpTime = cplb.CpTime;
             obj.remark = cplb.remark;
             return entity.SaveChanges();
 

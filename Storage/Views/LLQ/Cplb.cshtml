@@ -102,12 +102,6 @@
                 </dd>
             </dl>
             <dl>
-                <dd>创建时间</dd>
-                <dd>
-                    <input id="CpTime" name="CpTime" type="date" class="input-medium">
-                </dd>
-            </dl>
-            <dl>
                 <dd>备注</dd>
                 <dd>
                     <input id="remark" name="remark" type="text" class="input-medium">
@@ -324,11 +318,9 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (Index, data) {
-                    
-                    $("#ID").val(data.ID);
+                    alert(ID);
                     $("#CpLbName").val(data.CpLbName);
                     $("#UserName").val(data.UserName);
-                    $("#CpTime").val(ConvertDate(data.CpTime));
                     $("#remark").val(data.remark);
                 });
             },
@@ -343,12 +335,11 @@
         var ID = $("#ID").val();
         var CpLbName = $("#CpLbName").val();
         var UserName = $("#UserName").val();
-        var CpTime = $("#CpTime").val();
         var remark = $("#remark").val();
         $.ajax({
             type: "POST",
             url: "/LLQ/CplbEdit",
-            data: "{ID: " + ID + ",CpLbName:'" + CpLbName + "',UserName: '" + UserName + "',CpTime:'" + CpTime + "',remark: '" + remark + "'}",
+            data: "{cplb:{ID:" + ID + ",CpLbName:'" + CpLbName + "',UserName:'" + UserName + "',remark:'" + remark + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
