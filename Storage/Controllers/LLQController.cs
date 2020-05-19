@@ -38,8 +38,6 @@ namespace Storage.Controllers
         {
             return View();
         }
-
-
         /// <summary>
         /// 计量单位分页
         /// </summary>
@@ -120,6 +118,7 @@ namespace Storage.Controllers
             return Json(BLL.LLQ.CplbManager.CplbEdit(cplb), JsonRequestBehavior.AllowGet);
         }
 
+
         /// <summary>
         /// 产品管理分页
         /// </summary>
@@ -156,9 +155,7 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.CpGlManager.CpGlEdit(cpgl), JsonRequestBehavior.AllowGet);
         }
-
-
-
+        
         //查询客户
         public ActionResult selectAd()
         {
@@ -169,7 +166,6 @@ namespace Storage.Controllers
         {
             return Json(BLL.LLQ.JldwManager.selectJldw(), JsonRequestBehavior.AllowGet);
         }
-
         //查询类别
         public ActionResult selectCplb()
         {

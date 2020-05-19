@@ -20,7 +20,7 @@
                 <tr>
                     <td><strong style="margin-left:20px">产品类别管理</strong></td>
                     <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
-                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()"  type="button" value="删除" /></td>
+                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()" type="button" value="删除" /></td>
                     <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
                 </tr>
             </table>
@@ -36,7 +36,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')"  /></td>
+                        <td style="width:20px;"><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
                         <td>类别编号</td>
                         <td>类别名称</td>
                         <td>创建人</td>
@@ -109,7 +109,6 @@
             </dl>
             <input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:1px;width:50px;height:30px" onclick="Eite()" value="确认" />
             <input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" />
-
         </form>
     </div>
 </body>
@@ -125,7 +124,7 @@
 
         GetCplbAll();
 
-        
+
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -145,8 +144,8 @@
                 }
             });
         });
-        
-        
+
+
         //$("#btnSubhh").click(function () {
         //    if ($("#jbox-content").css("display") == "none") {
         //        $("#jbox-content").show();
@@ -158,6 +157,7 @@
         $("#Button1_1").click(function () {
             $("#jbox-content").hide();
         });
+        //客户下拉
         Ad();
     });
     //分页查询
@@ -317,8 +317,9 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
+                console.log(result);
                 $.each(result, function (Index, data) {
-                    alert(ID);
+                    //alert(ID);
                     $("#CpLbName").val(data.CpLbName);
                     $("#UserName").val(data.UserName);
                     $("#remark").val(data.remark);
@@ -394,7 +395,7 @@
                     $("[name='UserName']").append("<option value='" + data.AdminID + "'>" + data.UserName + "</option>");
                 });
             },
-            //请求失败后的回调函数
+            //请求失败后的回调函数2
             error: function (ex) {
                 alert(ex.responseText);
             }
