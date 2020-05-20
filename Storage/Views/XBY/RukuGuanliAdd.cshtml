@@ -123,50 +123,7 @@
 
     </div>
 </div>
-<div style="width:720px;margin:20px auto;">
-    <button type="button" id="btn">获取表格数据</button>
-    <form action="" id="ht">
-        <table id="dynamicTable">
-            <tbody>
-                <tr>
-                    <td height="30" align="center">
-                        <input type="text" name="name" size="2" value="1" />
-                    </td>
-                    <td align="center">
-                        <input type="text" name="pre_price" />
-                    </td>
-                    <td align="center">
-                        <input type="text" name="price" />
-                    </td>
-                    <td align="center">
-                        <input type="text" name="total" />
-                    </td>
-                    <td>
-                        <input type="button" id="Button1" value="删行">
-                    </td>
-                </tr>
-                <tr>
-                    <td height="30" align="center">
-                        <input type="text" name="name" size="2" value="1" />
-                    </td>
-                    <td align="center">
-                        <input type="text" name="pre_price" />2222
-                    </td>
-                    <td align="center">
-                        <input type="text" name="price" />3333
-                    </td>
-                    <td align="center">
-                        <input type="text" name="total" />444
-                    </td>
-                    <td>
-                        <input type="button" id="Button1" value="删行">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button>提交数据</button>
-    </form>
-</div>
+
 
 
 
@@ -365,24 +322,7 @@
 
 
     function ADD() {
-        var num = $("#tb1 tr").length;
-        for (var i = 0; i < num; i++) {
-            var obj = {};
-            obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text()
-            obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
-            obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
-            obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
-            //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
-            //$("#tb1 tr").eq(i).children("td").eq(7).text()
-            obj.WarehouseID = 1;
-            obj.StorageIDS = danhapsuiji;
-            console.log(obj)
-            info.push(obj);
-
-
-        }
-        console.log(info)
-        // })
+       
 
         //alert(info.length);
         //alert(info[0].productID);
@@ -391,6 +331,24 @@
             alert("请选择供应商后添加！");
         }
         else {
+            var num = $("#tb1 tr").length;
+            for (var i = 0; i < num; i++) {
+                var obj = {};
+                obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text()
+                obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
+                obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
+                obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
+                //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
+                //$("#tb1 tr").eq(i).children("td").eq(7).text()
+                obj.WarehouseID = 1;
+                obj.StorageIDS = danhapsuiji;
+                console.log(obj)
+                info.push(obj);
+
+
+            }
+            console.log(info)
+
             var rukuzongshu = 0;//定义总数量
             var rukuzongjia = 0;//定义总价
             for (var i = 0; i < info.length; i++) {
