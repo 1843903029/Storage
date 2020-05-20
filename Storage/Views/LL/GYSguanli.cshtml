@@ -97,7 +97,7 @@
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td><input type='checkbox' /></td>
+                        <td><input type="checkbox" id="check1" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
                         <td>供应商编号</td>
                         <td>供应商类型</td>
                         <td>供应商名称</td>
@@ -155,31 +155,60 @@
         })
         function mohu() {
             var Search = $("#sswb").val();
-            alert(Search);
-            $.ajax({
-                type: "POST",
-                async: false,
-                url: "/LL/mohu",
-                data: {pageindex:pageIndex,pagesize: pageSize,GysName: Search },
-                dataType: "json",
-                //contentType: "application/json",
-                success: function (result) {
-                    //alert(JSON.stringify(result));
-                    $("#tb1 tr").remove();
-                    rowss = result.PageCount;
-                    $.each(result, function (index, data) {
-                       
-                        $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID + "' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
+            if (Search != null) {
+                alert(Search);
+                $.ajax({
 
-                    })
-                },
-                error: function (ex) {
-                    alert("Error:" + ex.responseText);
-                }
-            })
+                    type: "POST",
+                    async: false,
+                    url: "/LL/mohu",
+                    data: { pageindex: pageIndex, pagesize: pageSize, GysName: Search },
+                    dataType: "json",
+                    //contentType: "application/json",
+                    success: function (result) {
+                        //alert(JSON.stringify(result));
+                        $("#tb1 tr").remove();
+                        rowss = result.PageCount;
+                        $.each(result, function (index, data) {
+
+                            $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID + "' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
+
+                        })
+                    },
+                    error: function (ex) {
+                        alert("Error:" + ex.responseText);
+                    }
+                })
+               
+               
+               
+            } else {
+                rukuList();
+            }
+            
+            
 
         }
+        //全选
+        function quanxuan(objName, type) {
+            var objNameList = document.getElementsByName(objName);
+            if (null != objNameList) {
+                for (var i = 0; i < objNameList.length; i++) {
+                    if (objNameList[i].checked == true) {
+                        if (type != 'checkall') {  // 非全选
+                            objNameList[i].checked = false;
+                        }
+                    } else {
+                        if (type != 'uncheckall') {  // 非取消全选
+                            objNameList[i].checked = true;
+                            //console.log($("input[name='checkbox']").data("id"));
+                            //alert($("input[name='checkbox']").data("id"));
 
+                        }
+                    }
+                }
+            }
+        }
         function plsc() {
             var fan = 0;
             var list = []
@@ -203,6 +232,7 @@
                         //console.log(result);
                         if (result > 0) {
                             alert("删除成功");
+                            list = [];
                             window.location.reload();
 
                         } else {

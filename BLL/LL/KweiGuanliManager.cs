@@ -30,7 +30,11 @@ namespace BLL.LL
         {
             return DAL.LL.KweiGuanli.del(id);
         }
-        public static IQueryable KwGetById(int kwID)
+        public static PageList GaojiService(int pageindex, int pagesize, int CangKu, int kwType, string kwName)
+        {
+            return DAL.LL.KweiGuanli.GaojiService(pageindex,pagesize,CangKu,kwType,kwName);
+        }
+            public static IQueryable KwGetById(int kwID)
         {
             return DAL.LL.KweiGuanli.KwGetById(kwID);
         }
