@@ -76,7 +76,7 @@
                 <tr>
                     <td>产品名称</td>
                     <td>
-                        <input id="txtCpXsName" name="txtCpXsName" type="password" class="input-medium">
+                        <input id="txtCpXsName" name="txtCpXsName" type="text" class="input-medium">
                     </td>
                     <td>产品类别</td>
                     <td>
@@ -99,7 +99,7 @@
                 <tr>
                     <td>规格</td>
                     <td>
-                        <input id="txtSpecification" name="txtSpecification" type="password" class="input-medium">
+                        <input id="txtSpecification" name="txtSpecification" type="text" class="input-medium">
                     </td>
                     <td>单位</td>
                     <td>
@@ -112,11 +112,11 @@
                 <tr>
                     <td>价格</td>
                     <td>
-                        <input id="txtCpPrice" name="txtCpPrice" type="password" class="input-medium">
+                        <input id="txtCpPrice" name="txtCpPrice" type="text" class="input-medium">
                     </td>
                     <td>客户</td>
                     <td>
-                        <select id="txtkhName" name="khName" class="input-medium" style="width:164px;">
+                        <select id="txtkhName" name="khName"  class="input-medium" style="width:164px;">
                             <option value="">请选择客户</option>
 
                         </select>
@@ -190,7 +190,7 @@
             <dl>
                 <dd>规格</dd>
                 <dd>
-                    <input id="Specification" name="txtSpecification" type="password" class="input-medium">
+                    <input id="Specification" name="txtSpecification" type="text" class="input-medium">
                 </dd>
                 <dd>单位</dd>
                 <dd>
@@ -203,7 +203,7 @@
             <dl>
                 <dd>价格</dd>
                 <dd>
-                    <input id="CpPrice" name="txtCpPrice" type="password" class="input-medium">
+                    <input id="CpPrice" name="txtCpPrice" type="text" class="input-medium">
                 </dd>
                 <dd>客户</dd>
                 <dd>
@@ -216,14 +216,14 @@
             <dl>
                 <dd>默认仓库</dd>
                 <dd>
-                    <select id="CkId" name="CkId" class="input-medium" style="width:164px;">
+                    <select id="CkId" name="CkId"  class="input-medium" style="width:164px;">
                         <option value="">请选择仓库</option>
 
                     </select>
                 </dd>
                 <dd>默认库位</dd>
                 <dd>
-                    <select id="KwId" name="KwId" class="input-medium" style="width:164px;">
+                    <select id="KwId" name="KwId"  class="input-medium" style="width:164px;">
                         <option value="">请选择库位</option>
 
                     </select>
@@ -315,6 +315,7 @@
         })
     }
 
+    //批量删除全选
     function quanxuan(objName, type) {
         var objNameList = document.getElementsByName(objName);
         if (null != objNameList) {
@@ -382,25 +383,21 @@
             shadeClose: true,
             content: $('#jbox-content'),
             shade: 0,
-            btn: ['确定', '取消'],
-            yes: function () {
-                CpGlAdd();
-            },
         });
     }
 
     function CpGlAdd() {
-        var rukuzongshu = 0;//定义总数量
-        var rukuzongjia = 0;//定义总价
-        for (var i = 0; i < info.length; i++) {
-            rukuzongshu += parseInt(info[i].StorageNumber);
-            rukuzongjia += parseInt(info[i].Summoney);
-        }
+        //var rukuzongshu = 0;//定义总数量
+        //var rukuzongjia = 0;//定义总价
+        //for (var i = 0; i < info.length; i++) {
+        //    rukuzongshu += parseInt(info[i].StorageNumber);
+        //    rukuzongjia += parseInt(info[i].Summoney);
+        //}
 
         $.ajax({
             type: "POST",
             url: "/LLQ/CpGlAdd",
-            data: "{cpgl:{CpID:'" + $("#txtCpID").val() + "'Cpbh:'" + $("#txtCpbh").val() + "',CpXsName:'" + $("#txtCpXsName").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',CpSx:'" + $("#txtCpSx").val() + "',CpXx:'" + $("#txtCpXx").val() + "',Specification:'" + $("#txtSpecification").val() + "',CpJlName:'" + $("#txtCpJlName").val() + "',CpPrice:'" + $("#txtCpPrice").val() + "',khName:'" + $("#txtkhName").val() + "',CkId:'" + $("#txtCkId").val() + "',KwId:'" + $("#txtKwId").val() + "',CpShuLiang:'" + $("#txtCpShuLiang").val() + "',remark:'" + $("#txtremark").val() + "'}}",
+            data: "{cpgl:{CpID:" + $("#txtCpID").val() + ",Cpbh:'" + $("#txtCpbh").val() + "',CpXsName:'" + $("#txtCpXsName").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',CpSx:" + $("#txtCpSx").val() + ",CpXx:" + $("#txtCpXx").val() + ",Specification:'" + $("#txtSpecification").val() + "',CpJlName:" + $("#txtCpJlName").val() + ",CpPrice:" + $("#txtCpPrice").val() + ",khName:" + $("#txtkhName").val() + ",CkId:" + $("#txtCkId").val() + ",KwId:" + $("#txtKwId").val() + ",CpShuLiang:" + $("#txtCpShuLiang").val() + ",remark:'" + $("#txtremark").val() + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
