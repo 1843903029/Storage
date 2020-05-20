@@ -75,11 +75,11 @@ namespace DAL.LLQ
         public static int CplbEdit(CpLbinfo cplb)
         {
             StorageEntities entity = new StorageEntities();
-            var obj = (from p in entity.CpLbinfo where p.ID == cplb.ID select p).First();
-            obj.CpLbName = cplb.CpLbName;
-            obj.UserName = cplb.UserName;
+            CpLbinfo rr = entity.CpLbinfo.Find(cplb.ID);
+            rr.CpLbName = cplb.CpLbName;
+            rr.UserName = cplb.UserName;
             //obj.CpTime = cplb.CpTime;
-            obj.remark = cplb.remark;
+            rr.remark = cplb.remark;
             return entity.SaveChanges();
 
         }

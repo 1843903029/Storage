@@ -320,6 +320,7 @@
                 console.log(result);
                 $.each(result, function (Index, data) {
                     //alert(ID);
+                    $("#ID").val(data.ID);
                     $("#CpLbName").val(data.CpLbName);
                     $("#UserName").val(data.UserName);
                     $("#remark").val(data.remark);
@@ -337,10 +338,11 @@
         var CpLbName = $("#CpLbName").val();
         var UserName = $("#UserName").val();
         var remark = $("#remark").val();
+        // alert(ID + " " + CpLbName + " " + UserName + " " + remark + " " )
         $.ajax({
             type: "POST",
             url: "/LLQ/CplbEdit",
-            data: "{cplb:{ID:" + ID + ",CpLbName:'" + CpLbName + "',UserName:'" + UserName + "',remark:'" + remark + "'}}",
+            data: "{cplb:{ID:'" + ID + "',CpLbName:'" + CpLbName + "',UserName:'" + UserName + "',remark:'" + remark + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
