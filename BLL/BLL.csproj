@@ -55,6 +55,7 @@
     <Compile Include="TXY\SysDepartManager.cs" />
     <Compile Include="TXY\SysRoleManager.cs" />
     <Compile Include="XBY\BreakageManager.cs" />
+    <Compile Include="XBY\CaiDanJueSeManager.cs" />
     <Compile Include="XBY\CangKuCaoZuoManager.cs" />
     <Compile Include="XBY\CycleCountManager.cs" />
     <Compile Include="XBY\MovementManager.cs" />
