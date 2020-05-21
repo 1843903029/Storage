@@ -17,6 +17,24 @@ namespace Storage.Controllers
         }
 
         /// <summary>
+        ///菜单主
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CaiDanList()
+        {
+            return Json(BLL.XBY.CaiDanJueSeManager.CaiDanList(), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        ///菜单副
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CaiDanListXiang(String id)
+        {
+            return Json(BLL.XBY.CaiDanJueSeManager.CaiDanListXiang(id), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// 入库管理页面
         /// </summary>
         /// <returns></returns>

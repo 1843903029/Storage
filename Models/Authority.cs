@@ -16,7 +16,7 @@ namespace Models
     {
         public int ID { get; set; }
         public Nullable<int> RoleId { get; set; }
-        public Nullable<int> NodeId { get; set; }
+        public string NodeId { get; set; }
     
         public virtual Admin Admin { get; set; }
         public virtual Function Function { get; set; }

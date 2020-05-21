@@ -20,11 +20,11 @@ namespace Models
             this.Authority = new HashSet<Authority>();
         }
     
-        public int NodeId { get; set; }
+        public string NodeId { get; set; }
         public string DisplayName { get; set; }
         public string NodeURL { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
-        public Nullable<int> ParentNodeId { get; set; }
+        public string ParentNodeId { get; set; }
         public Nullable<System.DateTime> ADDTime { get; set; }
         public bool State { get; set; }
     

@@ -15,7 +15,7 @@ namespace BLL.LLJ
 
             return DAL.LLJ.CaiDanService.caidan(pageIndex, pageSize);
         }
-        public static int caidandel(int NodeId)
+        public static int caidandel(string NodeId)
         {
             return DAL.LLJ.CaiDanService.caidandel(NodeId);
         }
@@ -23,12 +23,12 @@ namespace BLL.LLJ
         {
             return DAL.LLJ.CaiDanService.caidanadd(cd);
         }
-        public static IQueryable FunctionGetById(int NodeId)
+        public static IQueryable FunctionGetById(string NodeId)
         {
             return DAL.LLJ.CaiDanService.FunctionGetById(NodeId);
         }
 
-        public static int FunctionEdit(int NodeId, string DisplayName)
+        public static int FunctionEdit(string NodeId, string DisplayName)
         {
             return DAL.LLJ.CaiDanService.FunctionEdit( NodeId, DisplayName);
 

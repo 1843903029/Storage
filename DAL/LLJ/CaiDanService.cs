@@ -36,7 +36,7 @@ namespace DAL.LLJ
            
         }
         //删除
-        public static int caidandel(int NodeId)
+        public static int caidandel(string NodeId)
         {
             StorageEntities entity = new StorageEntities();
             var aa = entity.Function.Find(NodeId);
@@ -56,7 +56,7 @@ namespace DAL.LLJ
 
         }
         //
-        public static IQueryable FunctionGetById(int NodeId)
+        public static IQueryable FunctionGetById(string NodeId)
         {
             StorageEntities entity = new StorageEntities();
             var obj = from p in entity.Function
@@ -75,7 +75,7 @@ namespace DAL.LLJ
         }
 
         //
-        public static int FunctionEdit(int NodeId, string DisplayName)
+        public static int FunctionEdit(string NodeId, string DisplayName)
         {
             StorageEntities entity = new StorageEntities();
             var obj = (from p in entity.Function where p.NodeId == NodeId select p).First();

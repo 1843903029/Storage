@@ -51,7 +51,7 @@
                         <td>菜单编号</td>
                         <td>菜单名称</td>
                         <td>创建时间</td>
-                        <td>类型</td>
+                        <td>状态</td>
                         <td>操作</td>
                     </tr>
                 </thead>
@@ -224,7 +224,7 @@
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows//总条数
-                , limit: 3//每页显示数
+                , limit: 10//每页显示数
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
 
@@ -449,7 +449,7 @@
     }
 
     function ConvertDate(date) {
-        var time = new Date(parseInt(date.substr(4)));
+        var time = new Date(parseInt(date.substr(6)));
         return time.toLocaleDateString();
     }
 </script>

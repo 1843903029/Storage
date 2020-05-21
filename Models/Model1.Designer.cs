@@ -1,4 +1,4 @@
-﻿// 为模型“C:\Users\Administrator\Desktop\Storage\Models\Model1.edmx”启用了 T4 代码生成。
+﻿// 为模型“G:\vs\Y2 .net\线上学习\就业班项目\页面\最后一次(5.20号shangwu)\5.21中午\Storage\Models\Model1.edmx”启用了 T4 代码生成。
 // 要启用旧代码生成功能，请将“代码生成策略”设计器属性的值
 // 更改为“旧的 ObjectContext”。当在设计器中打开该模型时，此属性会出现在
 // “属性”窗口中。
