@@ -344,7 +344,14 @@
             var obj = {};
             obj.ProductID = $("#tb1 tr").eq(i).children("td").eq(0).text()
             obj.Price = $("#tb1 tr").eq(i).children("td").eq(5).text();
-            obj.StockRemovalNumber = $("#tb1 tr").eq(i).children("td").eq(8).children("input").val();
+            if ($("#tb1 tr").eq(i).children("td").eq(8).children("input").val() > 0) {
+                obj.StockRemovalNumber = $("#tb1 tr").eq(i).children("td").eq(8).children("input").val();
+            } else
+            {
+                obj = null;
+                alert("产品数量需要大于1！！");
+            }
+           
             obj.Summoney = obj.StockRemovalNumber * obj.Price;
             //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
             //$("#tb1 tr").eq(i).children("td").eq(7).text()

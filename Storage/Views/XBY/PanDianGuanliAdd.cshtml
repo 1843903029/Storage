@@ -24,7 +24,7 @@
             </div>
             <div style="display:flex">
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
-                    <input type="text" class="form-control" placeholder="可不填自动生成" readonly>
+                    <input type="text" class="form-control" id="rukudanhsuiji" placeholder="可不填自动生成" readonly>
                 </div>
                 <div style="text-align:left;width:20%;margin:5px;margin-right:33px;margin-bottom:20px;">
                     <select class="form-control">
@@ -147,7 +147,22 @@
         });
     }
 
-    
+
+    //   根据当前时间和随机数生成流水号
+    function suijidanhao() {
+        var now = new Date()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hour = now.getHours()
+        var minutes = now.getMinutes()
+        var seconds = now.getSeconds()
+        //month = now.setTimeDateFmt(month)
+        //hour = now.setTimeDateFmt(hour)
+        //minutes = now.setTimeDateFmt(minutes)
+        //seconds = this.setTimeDateFmt(seconds)
+        danhapsuiji = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
+        $("#rukudanhsuiji").val(danhapsuiji);
+    }
 
 
 

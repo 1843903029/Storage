@@ -329,24 +329,7 @@
     }
 
     function ADD() {
-        var num = $("#tb1 tr").length;
-        for (var i = 0; i < num; i++) {
-            var obj = {};
-            obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text();
-            obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
-            obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
-            obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
-            //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
-            //$("#tb1 tr").eq(i).children("td").eq(7).text()
-            obj.WarehouseID = huankuwei($("#tb1 tr").eq(i).children("td").eq(7).text());
-            obj.StorageIDS = $("#rukudanhsuiji").val();
-            obj.xiangdanhao = Cdh;
-            console.log(obj)
-            info.push(obj);
 
-
-        }
-        console.log(info)
         // })
 
         //alert(info.length);
@@ -356,6 +339,25 @@
             alert("请选择供应商后修改！");
         }
         else {
+            var num = $("#tb1 tr").length;
+            for (var i = 0; i < num; i++) {
+                var obj = {};
+                obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text();
+                obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
+                obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
+                obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
+                //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
+                //$("#tb1 tr").eq(i).children("td").eq(7).text()
+                obj.WarehouseID = huankuwei($("#tb1 tr").eq(i).children("td").eq(7).text());
+                obj.StorageIDS = $("#rukudanhsuiji").val();
+                obj.xiangdanhao = Cdh;
+                console.log(obj)
+                info.push(obj);
+
+
+            }
+            console.log(info)
+
             var rukuzongshu = 0;//定义总数量
             var rukuzongjia = 0;//定义总价
             for (var i = 0; i < info.length; i++) {
@@ -364,7 +366,7 @@
             }
             //alert(rukuzongshu);
             //alert(rukuzongjia);
-
+            if (info.length > 0) {
 
             $.ajax({
                 type: "POST",
@@ -379,7 +381,11 @@
                     alert("Error:" + ex.responseText);
 
                 }
-            });
+                });
+            }
+            else {
+                alert("请选择产品后再继续！");
+            }
         }
 
     }
