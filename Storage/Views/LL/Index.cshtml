@@ -89,13 +89,24 @@
 
                 </div>
 
-                <table action="javascript:void(0)" class="form-horizontal">
+                <table style="width:600px;" action="javascript:void(0)" class="form-horizontal">
                     <tr>
-                        <td>仓库:<input id="txtSearch" type="text" class="input-group" placeholder="请选择仓库"></td>
-                        <td>类型:<input id="txtSearch" type="text" class="input-group" placeholder="请选择"></td>
-                        <td>库位:<input id="txtSearch" type="text" class="input-group" placeholder=""></td>
+                        <td>仓库:
+                                   <select id="CKName" name="CKName" style="width:164px;">
+                                        <option>请选择仓库</option>
+
+                                    </select>
+                        </td>
+                        <td>类型:
+                            <select id="kwType" name="kwType" style="width:164px;">
+                                <option>请选择库位类型</option>
+                            </select>
+                       
+                        
+                        </td>
+                        <td style="width:200px;height:39px;display:inline-block;">库位:<input style="width:164px;" id="kwName" type="text" class="input-group" placeholder="请输入库位名"></td>
                         <td>
-                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">搜索</a>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="GaojiService();">搜索</a>
                         </td>
 
                     </tr>
@@ -166,7 +177,33 @@
 
 
     })
-    
+    function GaojiService() {
+        var CangKu = $("#CKName").val();
+        var kwType = $("#kwType").val();
+        var kwName = $("#kwName").val();
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/LL/GaojiService",
+            data: { pageindex: pageIndex, pagesize: pageSize, CangKu: CangKu, kwType: kwType, kwName: kwName},
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                $("#tb1 tr").remove();
+                rows = result.PageCount;
+                $.each(result.DataList, function (index, data) {
+                    //$("#tb1").append("<tr><td style='width: 20px; '><input type='checkbox' name='checkbox' class='check' data-id='" + data.AdminID + "' /></td><td id='hhh'>" + data.UserName + "</td ><td>" + data.UserCode + "</td ><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.LoginCount + "</td><td>" + data.DepartName + "</td><td>" + data.RoleName + "</td><td><i  class='layui-icon layui-icon-delete' type='button' title='删除' onclick='btnSub(" + data.AdminID + ")'></i>&nbsp;&nbsp;&nbsp;<a href='javascript:reads(" + data.AdminID + ")'><i  class='layui-icon layui-icon-edit'  type='button'  title='编辑'></i></a>&nbsp;&nbsp;&nbsp;<a href='#'><i href='#'  type='button' class='layui-icon layui-icon-console' title='权限分配'></i></a></td></tr>");
+                    $("#tb1").append("<tr><td><input type='checkbox'/></td><td>" + data.kwID + "</td><td>" + data.kwID + "</td><td>" + data.kwName + "</td><td>" + data.CKName + "</td><td>" + data.kwType + "</td><td>" + data.Isdefault + "</td><td>" + data.Zhuangtai + "</td><td>" + ConvertDate(data.Time) + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.kwID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.kwID + ");' /></td></tr>");
+
+                })
+            },
+            error: function (ex) {
+                alert("Error:" + ex.responseText);
+            }
+        })
+    }
     function xzshow() {
         layer.open({
             type: 1,

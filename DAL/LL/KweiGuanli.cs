@@ -34,6 +34,43 @@ namespace DAL.LL
             list.PageCount = obj.Count();
             return list;
         }
+        //高级查询
+        public static PageList GaojiService(int pageindex, int pagesize,int CangKu,int kwType,string kwName)
+        {
+            
+            var obj = from p in s.LocationManagement
+                      where p.Shuju == true
+                      orderby p.kwID ascending
+                      select new
+                      {
+                          kwID = p.kwID,
+                          kwName = p.kwName,
+                          kwType = p.LocationManagementType.KwName,
+                          CKName = p.Cangku1.CKName,
+                          Zhuangtai = p.Zhuangtai,
+                          Isdefault = p.Isdefault,
+                          Time = p.Time,
+                          Shuju = p.Shuju,
+                          CKid=p.Cangku1.Ckid,
+                          kuweiID=p.LocationManagementType.KwID
+                      };
+            if (CangKu != 0)
+            {
+                obj = obj.Where(item => item.CKid == CangKu);
+            }
+            if (kwType != 0)
+            {
+                obj = obj.Where(item => item.kuweiID == kwType);
+            }
+            if (!string.IsNullOrEmpty(kwName))
+            {
+                obj = obj.Where(item => item.kwName.IndexOf(kwName) != -1);
+            }
+            PageList list = new PageList();
+            list.DataList = obj.Skip((pageindex - 1) * pagesize).Take(pagesize);
+            list.PageCount = obj.Count();
+            return list;
+        }
         public static int add(LocationManagement lo) {
             s.LocationManagement.Add(lo);
             return s.SaveChanges();

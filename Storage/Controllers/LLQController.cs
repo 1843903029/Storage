@@ -133,6 +133,7 @@ namespace Storage.Controllers
         public ActionResult CpGlAdd(CpGlinfo cpgl)
         {
             cpgl.State = true;
+
             return Json(BLL.LLQ.CpGlManager.CpGlAdd(cpgl), JsonRequestBehavior.AllowGet);
         }
         //删除

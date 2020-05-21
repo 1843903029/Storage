@@ -23,7 +23,10 @@ namespace Storage.Controllers
         {
             return View();
         }
-
+        public ActionResult GaojiService(int pageindex, int pagesize, int CangKu, int kwType, string kwName)
+        {
+            return Json(BLL.LL.KweiGuanliManager.GaojiService(pageindex, pagesize, CangKu, kwType, kwName), JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Listfenye1(int pageindex,int pagesize)
         {
