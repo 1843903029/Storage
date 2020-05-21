@@ -337,7 +337,12 @@
                 obj.productID = $("#tb1 tr").eq(i).children("td").eq(0).text()
                 obj.Price = $("#tb1 tr").eq(i).children("td").eq(4).text();
                 obj.StorageNumber = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val();
-                obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
+                if ($("#tb1 tr").eq(i).children("td").eq(5).children("input").val() > 0) {
+                    obj.Summoney = $("#tb1 tr").eq(i).children("td").eq(5).children("input").val() * $("#tb1 tr").eq(i).children("td").eq(4).text();
+                } else {
+                    obj = null;
+                    alert("产品数量需要大于1！！");
+                }
                 //alert($("#tb1 tr").eq(i).children("td").eq(6).text());
                 //$("#tb1 tr").eq(i).children("td").eq(7).text()
                 obj.WarehouseID = 1;
