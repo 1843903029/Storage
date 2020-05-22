@@ -28,72 +28,79 @@
                     <div style="float:right;display:inline;">
                         <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:xzshow()" onclick="User.PageClick(1)">新增</a>
                         <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:plsc();" >删除</a>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="User.PageClick(1)">导出</a>
+                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:huishou();">回收站</a>
                     </div>
                 </div>
-                <div id="xzdiv">
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td>供应商编号</td>
-                                <td>
-                                    <input id="GysID" name="GysID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium">
-                                </td>
-                                <td>供应商名称</td>
-                                <td>
-                                    <input id="GysName" name="GysName" type="text" placeholder="请输入供应商名称" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>传真</td>
-                                <td>
-                                    <input id="ChuangZhen" name="ChuangZhen" type="text" class="input-medium">
-                                </td>
-                                <td>Email</td>
-                                <td>
-                                    <input id="Email" name="Email" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>电话</td>
-                                <td>
-                                    <input id="Hone" name="Hone" type="text" class="input-medium">
-                                </td>
-                                <td>联系人</td>
-                                <td>
-                                    <input id="Contacts" name="Contacts" type="text" class="input-medium">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>地址</td>
-                                <td>
-                                    <input id="Address" name="Address" type="text" class="input-medium">
-                                </td>
-                                <td>描述</td>
-                                <td>
-                                    <input id="Describe" name="Describe" type="text" class="input-medium">
-                                </td>
-                            </tr>
+                <div id="huishou2">
+                    <table id="tb2" class="table table-striped">
+                        
 
-                        </tbody>
                     </table>
+                    </div>
+
+                    <div id="xzdiv">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>供应商编号</td>
+                                    <td>
+                                        <input id="GysID" name="GysID" type="text" placeholder="自动生成,可不填" disabled="disabled" class="input-medium">
+                                    </td>
+                                    <td>供应商名称</td>
+                                    <td>
+                                        <input id="GysName" name="GysName" type="text" placeholder="请输入供应商名称" class="input-medium">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>传真</td>
+                                    <td>
+                                        <input id="ChuangZhen" name="ChuangZhen" type="text" class="input-medium">
+                                    </td>
+                                    <td>Email</td>
+                                    <td>
+                                        <input id="Email" name="Email" type="text" class="input-medium">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>电话</td>
+                                    <td>
+                                        <input id="Hone" name="Hone" type="text" class="input-medium">
+                                    </td>
+                                    <td>联系人</td>
+                                    <td>
+                                        <input id="Contacts" name="Contacts" type="text" class="input-medium">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>地址</td>
+                                    <td>
+                                        <input id="Address" name="Address" type="text" class="input-medium">
+                                    </td>
+                                    <td>描述</td>
+                                    <td>
+                                        <input id="Describe" name="Describe" type="text" class="input-medium">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
 
 
+                    </div>
+                    <table action="javascript:void(0)" class="form-horizontal">
+                        <tr>
+                            <td><input id="sswb" type="text" class="input-group" placeholder="请选择供应商名称"></td>
+
+                            <td>
+                                <a style="margin-left:10px" id="" class="btn btn-info" href="javascript:void(0)" onclick="mohu()">搜索</a>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <div class="widget" hidden>
+
+                    </div>
                 </div>
-                <table action="javascript:void(0)" class="form-horizontal">
-                    <tr>
-                        <td><input id="sswb" type="text" class="input-group" placeholder="请选择供应商名称"></td>
-
-                        <td>
-                            <a style="margin-left:10px" id="" class="btn btn-info" href="javascript:void(0)" onclick="mohu()">搜索</a>
-                        </td>
-
-                    </tr>
-                </table>
-                <div class="widget" hidden>
-
-                </div>
-            </div>
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
@@ -128,6 +135,7 @@
         var rowss = 0;
         $(function () {
             $("#xzdiv").hide();
+            $("#huishou2").hide();
             rukuList();
 
             layui.use(['laypage', 'layer'], function () {
@@ -352,6 +360,41 @@
                     add();
                 },
             });
+        }
+        function huishou() {
+            //$("#huishou2").show();
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo',//样式类名
+                title: ['回收站', 'font-size:18px'],
+                area: ['800px', '359px'],
+                shadeClose: true,
+                shade: 0,
+                content: $('#huishou2'),
+                btn: ['确定', '取消'],
+                yes: function () {
+                    
+                },
+            });
+            $.ajax({
+                type: "POST",
+                url: "/LL/huishou",
+                data: "{}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    
+                    $("#tb2 tr").remove();
+                    
+                    $.each(result, function (index, data) {
+                        $("#tb2").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID + "' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='还原' onclick='huanyuan(" + data.GysID + ")' /></td></tr><br/>");
+                    });
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
 
 
         }
@@ -381,6 +424,29 @@
             });
 
 
+        }
+
+        function huanyuan(id) {
+            $.ajax({
+                type: "POST",
+                url: "/LL/huanyuan",
+                data: "{id:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("还原成功");
+                        window.location.reload();
+
+                    } else {
+                        alert("还原失败");
+                    }
+                },
+                error: function (ex) {
+                    alert("Error:" + ex.responseText);
+
+                }
+            });
         }
         function del(id) {
             $.ajax({

@@ -33,6 +33,27 @@ namespace DAL.LL
             list.PageCount = obj.Count();
             return list;
         }
+        
+        public static IQueryable huishou() {
+            var obj = from p in s.Supplier
+                      where p.State == false
+                      orderby p.GysID
+                      select new
+                      {
+                          GysID = p.GysID,
+                          GysType = p.GysType,
+                          GysName = p.GysName,
+                          Hone = p.Hone,
+                          ChuangZhen = p.ChuangZhen,
+                          Email = p.Email,
+                          Contacts = p.Contacts,
+                          Address = p.Address,
+                          Describe = p.Describe,
+                          State = p.State
+                      };
+            
+            return obj;
+        }
         public static IQueryable mohu(int pageindex, int pagesize,string GysName)
         {
             var obj = from p in s.Supplier
@@ -65,6 +86,14 @@ namespace DAL.LL
             return s.SaveChanges();
 
         }
+        public static int huanyuan(int id)
+        {
+            var obj = (from p in s.Supplier where p.GysID == id select p).First();
+            obj.State = true;
+            return s.SaveChanges();
+
+        }
+
         public static int add(Supplier sup)
         {
             s.Supplier.Add(sup);

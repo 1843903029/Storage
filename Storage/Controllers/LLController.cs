@@ -23,6 +23,13 @@ namespace Storage.Controllers
         {
             return View();
         }
+        public ActionResult huishou() {
+            return Json(BLL.LL.GYSguanliManager.huishou(),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult huanyuan(int id)
+        {
+            return Json(BLL.LL.GYSguanliManager.huanyuan(id), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GaojiService(int pageindex, int pagesize, int CangKu, int kwType, string kwName)
         {
             return Json(BLL.LL.KweiGuanliManager.GaojiService(pageindex, pagesize, CangKu, kwType, kwName), JsonRequestBehavior.AllowGet);

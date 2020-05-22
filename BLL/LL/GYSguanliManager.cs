@@ -13,7 +13,15 @@ namespace BLL.LL
         {
             return DAL.LL.GYSguanli.Listfenye(pageindex,pagesize);
         }
-        public static int del(int id)
+        public static IQueryable huishou()
+        {
+            return DAL.LL.GYSguanli.huishou();
+        }
+        public static int huanyuan(int id)
+        {
+            return DAL.LL.GYSguanli.huanyuan(id);
+        }
+            public static int del(int id)
         {
             return DAL.LL.GYSguanli.del(id);
         }
