@@ -8,7 +8,7 @@ using Models;
 namespace DAL.LLJ
 
 {
-   public class CaiDanService
+    public class CaiDanService
     {
         public static PageList caidan(int pageIndex, int pageSize)
         {
@@ -26,14 +26,14 @@ namespace DAL.LLJ
                           ADDTime = p.ADDTime,
                           State = p.State,
                       };
-         
+
 
             PageList list = new PageList();
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             list.PageCount = obj.Count();
             return list;
 
-           
+
         }
         //删除
         public static int caidandel(string NodeId)
@@ -82,8 +82,8 @@ namespace DAL.LLJ
             obj.DisplayName = DisplayName;
             return entity.SaveChanges();
         }
-            //
-            public static IQueryable FunctionQuery(int pageIndex, int pageSize, string DisplayName)
+        //
+        public static IQueryable FunctionQuery(int pageIndex, int pageSize, string DisplayName)
         {
             StorageEntities entity = new StorageEntities();
 

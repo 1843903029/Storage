@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "RukuGuanli";
     Layout = "~/Views/MainPage.cshtml";
+    Models.Admin ssss = Session["user"] as Models.Admin;
 }
 <html>
 <head>
@@ -458,6 +459,9 @@
                         document.getElementById("ck" + data.StorageID + "").style.display = "none";
                         document.getElementById("bj" + data.StorageID + "").style.display = "none";
                     }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.StorageID + "").style.display = "none";
+                    }
 
                 });
             },
@@ -489,6 +493,9 @@
                         document.getElementById("ck" + data.StorageID + "").style.display = "none";
                         document.getElementById("bj" + data.StorageID + "").style.display = "none";
                     }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.StorageID + "").style.display = "none";
+                    }
 
                 });
             },
@@ -515,6 +522,9 @@
                     if (data.State != 2) {
                         document.getElementById("ck" + data.StorageID + "").style.display = "none";
                         document.getElementById("bj" + data.StorageID + "").style.display = "none";
+                    }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.StorageID + "").style.display = "none";
                     }
                 });
             },

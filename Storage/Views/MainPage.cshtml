@@ -25,7 +25,7 @@
                     <li class="layui-nav-item"><a href="">用户</a></li>
                 </ul>*@
             <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item">
+                <li class="layui-nav-item" id="youshang">
                     <a href="javascript:;">当前登录</a>
                     <dl class="layui-nav-child">
                         <dd><a href="">@stu.UserName</a></dd>
@@ -39,59 +39,57 @@
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll" id="cda">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                
+                @*<li class="layui-nav-item">
+                        <a class="" href="javascript:;" id="lie1">系统设置</a>
+                        <dl class="layui-nav-child" id="lie11">
+                            <dd><a href="/TXY/SysAdmin">员工管理</a></dd>
+                            <dd><a href="/TXY/SysRole">角色管理</a></dd>
+                            <dd><a href="/TXY/SysDepart">部门管理</a></dd>
+                            <dd><a href="/LLJ/Index">菜单管理</a></dd>
+                            <dd><a href="javascript:;">权限分配</a></dd>
+                            <dd><a href="javascript:;">标识符管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" id="lie2">基本资料</a>
+                        <dl class="layui-nav-child" id="lie22">
+                            <dd><a href="/LL/Index">库位管理</a></dd>
+                            <dd><a href="/LL/GYSguanli">供应商管理</a></dd>
+                            <dd><a href="/LL/KHguanli">客户管理</a></dd>
+                            <dd><a href="/LLQ/Jldw">计量单位</a></dd>
+                            <dd><a href="/LLQ/Cplb">产品类别</a></dd>
+                            <dd><a href="/LLQ/CpGl">产品管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" id="lie3">仓库作业</a>
+                        <dl class="layui-nav-child" id="lie33">
+                            <dd><a href="/XBY/RukuGuanli">入库管理</a></dd>
+                            <dd><a href="/XBY/ChukuGuanli">出库管理</a></dd>
+                            <dd><a href="/XBY/BaoSunGuanli">报损管理</a></dd>
+                            <dd><a href="/XBY/YiKuGuanli">移库管理</a></dd>
+                            <dd><a href="/XBY/PanDianGuanli">盘点管理</a></dd>
+                            <dd><a href="/XBY/TuiHuoGuanli">退货管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" id="lie4">报表管理</a>
+                        <dl class="layui-nav-child" id="lie44">
+                            <dd><a href="javascript:;">库存清单</a></dd>
+                            <dd><a href="javascript:;">货品统计</a></dd>
+                            <dd><a href="javascript:;">出入库报表</a></dd>
+                            <dd><a href="javascript:;">入库报表</a></dd>
+                            <dd><a href="javascript:;">出库报表</a></dd>
+                            <dd><a href="javascript:;">报损报表</a></dd>
+                            <dd><a href="javascript:;">退货报表</a></dd>
+                            <dd><a href="javascript:;">客户报表</a></dd>
+                            <dd><a href="javascript:;">供应商报表</a></dd>
+                            <dd><a href="javascript:;">台账记录</a></dd>
+                            <dd><a href="javascript:;">自定义报表</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">退出系统</a></li>*@
 
-                    @*<li class="layui-nav-item">
-                            <a class="" href="javascript:;" id="lie1">系统设置</a>
-                            <dl class="layui-nav-child" id="lie11">
-                                <dd><a href="/TXY/SysAdmin">员工管理</a></dd>
-                                <dd><a href="/TXY/SysRole">角色管理</a></dd>
-                                <dd><a href="/TXY/SysDepart">部门管理</a></dd>
-                                <dd><a href="/LLJ/Index">菜单管理</a></dd>
-                                <dd><a href="javascript:;">权限分配</a></dd>
-                                <dd><a href="javascript:;">标识符管理</a></dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a href="javascript:;" id="lie2">基本资料</a>
-                            <dl class="layui-nav-child" id="lie22">
-                                <dd><a href="/LL/Index">库位管理</a></dd>
-                                <dd><a href="/LL/GYSguanli">供应商管理</a></dd>
-                                <dd><a href="/LL/KHguanli">客户管理</a></dd>
-                                <dd><a href="/LLQ/Jldw">计量单位</a></dd>
-                                <dd><a href="/LLQ/Cplb">产品类别</a></dd>
-                                <dd><a href="/LLQ/CpGl">产品管理</a></dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a href="javascript:;" id="lie3">仓库作业</a>
-                            <dl class="layui-nav-child" id="lie33">
-                                <dd><a href="/XBY/RukuGuanli">入库管理</a></dd>
-                                <dd><a href="/XBY/ChukuGuanli">出库管理</a></dd>
-                                <dd><a href="/XBY/BaoSunGuanli">报损管理</a></dd>
-                                <dd><a href="/XBY/YiKuGuanli">移库管理</a></dd>
-                                <dd><a href="/XBY/PanDianGuanli">盘点管理</a></dd>
-                                <dd><a href="/XBY/TuiHuoGuanli">退货管理</a></dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a href="javascript:;" id="lie4">报表管理</a>
-                            <dl class="layui-nav-child" id="lie44">
-                                <dd><a href="javascript:;">库存清单</a></dd>
-                                <dd><a href="javascript:;">货品统计</a></dd>
-                                <dd><a href="javascript:;">出入库报表</a></dd>
-                                <dd><a href="javascript:;">入库报表</a></dd>
-                                <dd><a href="javascript:;">出库报表</a></dd>
-                                <dd><a href="javascript:;">报损报表</a></dd>
-                                <dd><a href="javascript:;">退货报表</a></dd>
-                                <dd><a href="javascript:;">客户报表</a></dd>
-                                <dd><a href="javascript:;">供应商报表</a></dd>
-                                <dd><a href="javascript:;">台账记录</a></dd>
-                                <dd><a href="javascript:;">自定义报表</a></dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item"><a href="">退出系统</a></li>*@
-                
             </div>
         </div>
 
@@ -113,6 +111,7 @@
 <script>
     $(function () {
         CaiDanList();
+        panduan();
 
         //JavaScript代码区域
         layui.use('element', function () {
@@ -151,10 +150,16 @@
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
-                $("#cda").append("<ul class='layui-nav layui-nav-tree' lay-filter='test' id='caidan'><li>1</li></ul>");
+                $("#cda").append("<ul class='layui-nav layui-nav-tree' lay-filter='test' id='caidan'></ul>");
                 $("#caidan li").remove();
                 $.each(result, function (index, data) {
                     $("#caidan").append("<li class='layui-nav-item layui-nav-itemed' id='sds" + data.NodeId + "' onclick='CaiDanListXiang(" + data.NodeId + ")'><a href='javascript:;' id='sds2" + data.NodeId + "'> " + data.DisplayName + "</a></li >");
+                    if (@stu.RoleNum == 2) {
+                      //$("ul #sds101").remove();
+                      //$("ul #sds102").remove();
+                      $("ul #sds101").remove();
+                      $("ul #sds102").remove();
+                        }
 
 
                 });
@@ -171,13 +176,13 @@
         $.ajax({
             type: "POST",
             url: "/XBY/CaiDanListXiang",
-            data: "{id:'"+id+"'}",
+            data: "{id:'" + id + "'}",
             dataType: "json",
             contentType: "application/json",
-                success: function (result) {
+            success: function (result) {
                 $("#sds" + id + " dl").remove();
                 $.each(result, function (index, data) {
-                    $("#sds" + id + "").append("<dl class='layui-nav-child'><dd><a href='" + data.NodeURL+"'>" + data.DisplayName+"</a></dd></dl>");
+                    $("#sds" + id + "").append("<dl class='layui-nav-child'><dd><a href='" + data.NodeURL + "'>" + data.DisplayName + "</a></dd></dl>");
 
                 });
             },
@@ -189,10 +194,23 @@
     }
 
 
-    function Exit()
-    {
+    function Exit() {
         location.href = '/TXY/Login';
         @Session["user"]=null;
+    }
+
+    function panduan()
+    {
+
+         if (@stu.RoleNum == 2) {
+          //$("ul #sds101").remove();
+          //$("ul #sds102").remove();
+             @*alert(@stu.RoleNum);*@
+          //$("ul li").remove();
+          //$("ul li").remove();
+            }
+
+
     }
 </script>
 

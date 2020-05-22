@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ChukuGuanli";
     Layout = "~/Views/MainPage.cshtml";
+    Models.Admin ssss = Session["user"] as Models.Admin;
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
@@ -446,11 +447,16 @@
             success: function (result) {
                 $("#tt tr").remove();
                 rowss = result.PageCount;
+
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit'  id='bj" + data.StockRemovalID + "' title='编辑' onclick='XiuGaiYe(" + data.StockRemovalID +")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StockRemovalID + "' onclick='shenhe(" + data.StockRemovalID + ")' ></i>         </td></tr>");
+
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit'  id='bj" + data.StockRemovalID + "' title='编辑' onclick='XiuGaiYe(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StockRemovalID + "' onclick='shenhe(" + data.StockRemovalID + ")' ></i>         </td></tr>");
                     if (data.State != 2) {
                         document.getElementById("ck" + data.StockRemovalID + "").style.display = "none";
                         document.getElementById("bj" + data.StockRemovalID + "").style.display = "none";
+                    }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.StockRemovalID + "").style.display = "none";
                     }
                 });
             },
@@ -474,9 +480,12 @@
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
                     $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit'  id='bj" + data.StockRemovalID + "' title='编辑' onclick='XiuGaiYe(" + data.StockRemovalID +")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StockRemovalID + "' onclick='shenhe(" + data.StockRemovalID + ")' ></i>         </td></tr>");
-                    if (data.State != 2) {
+                    if (data.State != 2 ) {
                         document.getElementById("ck" + data.StockRemovalID + "").style.display = "none";
                         document.getElementById("bj" + data.StockRemovalID + "").style.display = "none";
+                    }
+                   if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.StockRemovalID + "").style.display = "none";
                     }
                 });
             },
@@ -501,10 +510,15 @@
                 $("#tt tr").remove();
                 rowss = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit'  id='bj" + data.StockRemovalID + "' title='编辑' onclick='XiuGaiYe(" + data.StockRemovalID +")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StockRemovalID + "' onclick='shenhe(" + data.StockRemovalID + ")' ></i>         </td></tr>");
+                    $("#tt").append("<tr><td><input type='checkbox' id='" + data.StockRemovalID + "'/></td><td>" + data.StockRemovalID + "</td><td>" + data.StockRemovalType + "</td><td>" + data.SupplierID + "</td><td>" + data.AssociatedNumber + "</td><td>" + data.GoodsCount + "</td><td>" + data.Summoney + "</td><td>" + ZTString(data.State) + "</td><td>" + data.OperationType + "</td><td>" + data.EmployeeID + "</td><td>" + ConvertDate(data.CreationTime) + "</td><td><i class='layui-icon layui-icon-edit'  id='bj" + data.StockRemovalID + "' title='编辑' onclick='XiuGaiYe(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-file-b' title='详情' onclick='show3(" + data.StockRemovalID + ");'></i>   <i class='layui-icon layui-icon-delete' title='删除' onclick='ShanChuChuku(" + data.StockRemovalID + ")'></i> <i class='layui-icon layui-icon-vercode' title='审核' id='ck" + data.StockRemovalID + "' onclick='shenhe(" + data.StockRemovalID + ")' ></i>         </td></tr>");
+
                     if (data.State != 2) {
                         document.getElementById("ck" + data.StockRemovalID + "").style.display = "none";
                         document.getElementById("bj" + data.StockRemovalID + "").style.display = "none";
+                    }
+
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.StockRemovalID + "").style.display = "none";
                     }
                 });
             },

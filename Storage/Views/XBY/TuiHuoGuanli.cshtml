@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "TuiHuoGuanli";
     Layout = "~/Views/MainPage.cshtml";
+    Models.Admin ssss = Session["user"] as Models.Admin;
 }
 
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
@@ -138,6 +139,9 @@
                         document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
                         document.getElementById("bj" + data.ReturnsID + "").style.display = "none";
                     }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
+                    }
                 });
             },
             error: function (ex) {
@@ -163,6 +167,9 @@
                         document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
                         document.getElementById("bj" + data.ReturnsID + "").style.display = "none";
                     }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
+                    }
                 });
             },
             error: function (ex) {
@@ -187,6 +194,9 @@
                     if (data.State != 2) {
                         document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
                         document.getElementById("bj" + data.ReturnsID + "").style.display = "none";
+                    }
+                    if (@ssss.RoleNum==2) {
+                        document.getElementById("ck" + data.ReturnsID + "").style.display = "none";
                     }
                 });
             },

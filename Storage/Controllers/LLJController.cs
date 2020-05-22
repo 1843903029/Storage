@@ -38,6 +38,7 @@ namespace Storage.Controllers
         public ActionResult caidanadd(Function cd)
         {
             cd.ADDTime = DateTime.Now;
+            cd.NodeId = "101007";
             return Json(BLL.LLJ.CanDanManager.caidanadd(cd), JsonRequestBehavior.AllowGet);
         }
         //修改

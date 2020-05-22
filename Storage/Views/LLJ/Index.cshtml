@@ -62,9 +62,9 @@
                     <table class="formtab_user">
                         <tbody>
                             <tr>
-                                <td>菜单编号</td>
+                                <td>菜单编号啊</td>
                                 <td>
-                                    <input id="txtParentNodeId" name="txtParentNodeId" type="text" class="input-medium" @*disabled="disabled"*@>
+                                    <input id="stt" name="txtParentNodeId" type="text" class="input-medium" @*disabled="disabled"*@>
                                 </td>
                             </tr>
                             <tr>
@@ -111,54 +111,7 @@
             </div>
         </div>
     </div>
-    <div id="jbox-content" hidden>
-
-        <table class="formtab_user">
-            <tbody>
-
-                <tr>
-                    <td>菜单编号</td>
-                    <td>
-                        <input id="txtParentNodeId" name="txtParentNodeId" type="text" class="input-medium">
-                    </td>
-                </tr>
-                <tr>
-                    <td>菜单名称</td>
-                    <td>
-                        <input id="txtDisplayName" name="txtDisplayName" type="text" placeholder="请输入菜单名称" class="input-medium">
-                    </td>
-                </tr>
-                <tr>
-                    <td>父级菜单编号</td>
-                    <td>
-                        <input id="txtNodeURL" name="txtNodeURL" type="text" class="input-medium">
-                    </td>
-                </tr>
-                <tr>
-                    <td>类型</td>
-                    <td>
-                        <input id="txtState" name="txtStatet" type="text" class="input-medium">
-                    </td>
-                </tr>
-                <tr>
-                    <td>路径</td>
-                    <td>
-                        <input id="txtDisplayOrder" name="txtDisplayOrder" type="text" class="input-medium">
-                    </td>
-                </tr>
-                <tr>
-                    <td>创建时间</td>
-                    <td>
-                        <input id="textADDTime" name="textADDTime" type="text" class="input-medium">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input id="Button1" type="button" class="btn-success" style="margin-left:100px;margin-top:15px;width:50px;height:30px" onclick="add()" value="确认" /></td>
-                    <td><input id="Button1_1" type="button" class="btn-info" style="margin-left:150px;margin-top:15px;width:50px;height:30px" value="取消" /></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    
     <div id="hide11" @*style="height: 300px;width:500px; margin-left:450px;position:absolute;margin-top:-350px;background-color:aliceblue"*@ hidden="hidden">
         <form class="navbar-form navbar-left" role="search">
 
@@ -399,14 +352,15 @@
     };
     //新增
     function add() {
-       // alert("这是新增");
+        // alert("这是新增");
+        alert($("#stt").val());
         var d = new Date();
         var time = d.getTime();
         var State = true;
         $.ajax({
             type: "post",
             url: "/LLJ/caidanadd",
-            data: "{cd:{NodeId:'" + $("#NodeId").val() + "',DisplayName:'" + $("#txtDisplayName").val() + "',State:'" +true+ "',DisplayOrder:'" + 1 + "'}}",
+            data: "{cd:{NodeId:'" + $("#stt").val() + "',DisplayName:'" + $("#txtDisplayName").val() + "',State:'" +true+ "',DisplayOrder:'" + 50 + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {

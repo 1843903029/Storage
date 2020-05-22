@@ -1217,7 +1217,7 @@
           <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NodeURL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="ParentNodeId" Type="String" />
+          <Property Name="ParentNodeId" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ADDTime" Type="DateTime" Precision="3" />
           <Property Name="State" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Authority" Relationship="Self.FK_Authority_Function" FromRole="Function" ToRole="Authority" />
