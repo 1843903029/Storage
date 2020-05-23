@@ -54,11 +54,11 @@ namespace DAL.LL
                           CKid=p.Cangku1.Ckid,
                           kuweiID=p.LocationManagementType.KwID
                       };
-            if (CangKu != 0)
+            if (CangKu != -1)
             {
                 obj = obj.Where(item => item.CKid == CangKu);
             }
-            if (kwType != 0)
+            if (kwType != -1)
             {
                 obj = obj.Where(item => item.kuweiID == kwType);
             }
