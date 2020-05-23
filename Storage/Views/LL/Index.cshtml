@@ -92,19 +92,19 @@
                 <table style="width:600px;" action="javascript:void(0)" class="form-horizontal">
                     <tr>
                         <td>仓库:
-                                   <select id="CKName" name="CKName" style="width:164px;">
+                                   <select id="CKNamess" name="CKName" style="width:164px;">
                                         <option>请选择仓库</option>
 
                                     </select>
                         </td>
                         <td>类型:
-                            <select id="kwType" name="kwType" style="width:164px;">
+                            <select id="kwTypess" name="kwType" style="width:164px;">
                                 <option>请选择库位类型</option>
                             </select>
                        
                         
                         </td>
-                        <td style="width:200px;height:39px;display:inline-block;">库位:<input style="width:164px;" id="kwName" type="text" class="input-group" placeholder="请输入库位名"></td>
+                        <td style="width:200px;height:39px;display:inline-block;">库位:<input style="width:164px;" id="kwNameww" type="text" class="input-group" placeholder="请输入库位名"></td>
                         <td>
                             <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="GaojiService();">搜索</a>
                         </td>
@@ -178,9 +178,9 @@
 
     })
     function GaojiService() {
-        var CangKu = $("#CKName").val();
-        var kwType = $("#kwType").val();
-        var kwName = $("#kwName").val();
+        var CangKu = $("#CKNamess").val();
+        var kwType = $("#kwTypess").val();
+        var kwName = $("#kwNameww").val();
 
         $.ajax({
             type: "POST",
