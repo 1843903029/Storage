@@ -80,7 +80,7 @@
                     </td>
                     <td>产品类别</td>
                     <td>
-                        <select id="txtCpLbName" name="CpLbName" class="input-medium" style="width:164px;">
+                        <select id="txtCpLbName" name="txtCpLbName" class="input-medium" style="width:164px;">
                             <option value="">请选择类别</option>
 
                         </select>
@@ -103,7 +103,7 @@
                     </td>
                     <td>单位</td>
                     <td>
-                        <select id="txtCpJlName" name="CpJlName" class="input-medium" style="width:164px;">
+                        <select id="txtCpJlName" name="txtCpJlName" class="input-medium" style="width:164px;">
                             <option value="">请选择单位</option>
 
                         </select>
@@ -171,7 +171,7 @@
                 </dd>
                 <dd>产品类别</dd>
                 <dd>
-                    <select id="CpLbName" name="CpLbName" class="input-medium" style="width:164px;">
+                    <select id="CpLbName" name="txtCpLbName" class="input-medium" style="width:164px;">
                         <option value="">请选择类别</option>
 
                     </select>
@@ -357,7 +357,7 @@
                 success: function (result) {
                     //console.log(result);
                     if (result > 0) {
-                        alert("删除成功2");
+                        alert("删除成功2");                        
                         window.location.reload();
 
                     } else {
@@ -375,11 +375,12 @@
 
     //新增
     function insert() {
+       
         layer.open({
             type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['新增计量单位', 'font-size:18px'],
-            area: ['600px', '500px'],
+            area: ['auto', 'auto'],
             shadeClose: true,
             content: $('#jbox-content'),
             shade: 0,
@@ -387,24 +388,17 @@
     }
 
     function CpGlAdd() {
-        //var rukuzongshu = 0;//定义总数量
-        //var rukuzongjia = 0;//定义总价
-        //for (var i = 0; i < info.length; i++) {
-        //    rukuzongshu += parseInt(info[i].StorageNumber);
-        //    rukuzongjia += parseInt(info[i].Summoney);
-        //}
-
         $.ajax({
             type: "POST",
             url: "/LLQ/CpGlAdd",
-            data: "{cpgl:{CpID:" + $("#txtCpID").val() + ",Cpbh:'" + $("#txtCpbh").val() + "',CpXsName:'" + $("#txtCpXsName").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',CpSx:" + $("#txtCpSx").val() + ",CpXx:" + $("#txtCpXx").val() + ",Specification:'" + $("#txtSpecification").val() + "',CpJlName:" + $("#txtCpJlName").val() + ",CpPrice:" + $("#txtCpPrice").val() + ",khName:" + $("#txtkhName").val() + ",CkId:" + $("#txtCkId").val() + ",KwId:" + $("#txtKwId").val() + ",CpShuLiang:" + $("#txtCpShuLiang").val() + ",remark:'" + $("#txtremark").val() + "'}}",
+            data: "{cpgl:{CpID:'" + $("#txtCpID").val() + "',Cpbh:'" + $("#txtCpbh").val() + "',CpXsName:'" + $("#txtCpXsName").val() + "',CpLbName:'" + $("#txtCpLbName").val() + "',CpSx:'" + $("#txtCpSx").val() + "',CpXx:'" + $("#txtCpXx").val() + "',Specification:'" + $("#txtSpecification").val() + "',CpJlName:'" + $("#txtCpJlName").val() + "',CpPrice:'" + $("#txtCpPrice").val() + "',khName:'" + $("#txtkhName").val() + "',CkId:'" + $("#txtCkId").val() + "',KwId:'" + $("#txtKwId").val() + "',CpShuLiang:'" + $("#txtCpShuLiang").val() + "',remark:'" + $("#txtremark").val() + "'}}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 if (result > 0) {
                     alert("新增成功");
                     GetCpGlAll();
-                    //window.location.reload();
+                   // window.location.reload();
                 }
             },
             error: function (ex) {
