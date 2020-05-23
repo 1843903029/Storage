@@ -379,7 +379,7 @@
             type: 1,
             skin: 'layui-layer-demo',//样式类名
             title: ['新增计量单位', 'font-size:18px'],
-            area: ['400px', '359px'],
+            area: ['600px', '500px'],
             shadeClose: true,
             content: $('#jbox-content'),
             shade: 0,
@@ -403,7 +403,8 @@
             success: function (result) {
                 if (result > 0) {
                     alert("新增成功");
-                    window.location.reload();
+                    GetCpGlAll();
+                    //window.location.reload();
                 }
             },
             error: function (ex) {

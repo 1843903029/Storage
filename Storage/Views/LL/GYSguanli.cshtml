@@ -163,8 +163,8 @@
         })
         function mohu() {
             var Search = $("#sswb").val();
-            if (Search != null) {
-                alert(Search);
+            if (Search != "") {
+                
                 $.ajax({
 
                     type: "POST",
@@ -178,7 +178,6 @@
                         $("#tb1 tr").remove();
                         rowss = result.PageCount;
                         $.each(result, function (index, data) {
-
                             $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.GysID + "' /></td><td>" + data.GysID + "</td><td>" + data.GysType + "</td><td>" + data.GysName + "</td><td>" + data.Hone + "</td><td>" + data.Email + "</td><td>" + data.ChuangZhen + "</td><td>" + data.Contacts + "</td><td>" + data.Address + "</td><td>" + data.Describe + "</td><td><input class='btn btn-warning'  id='Button1' type='button' value='删除' onclick='del(" + data.GysID + ")' /><input class='btn btn-warning'  id='Button1' type='button' value='编辑' onclick='GetByID(" + data.GysID + ");' /></td> </tr>");
 
                         })
@@ -331,7 +330,6 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
-                    console.log("1");
                     $("#tb1 tr").remove();
                     rowss = result.PageCount;
                     $.each(result.DataList, function (index, data) {

@@ -116,7 +116,7 @@
                 <td>
                     <input id="UserName2" name="UserName" type="text" placeholder="请输入用户名" class="input-medium">
                 </td>
-                <td>用户编号</td>
+                <td>登录次数</td>
                 <td>
                     <input id="UserCode2" name="UserCode" type="text" class="input-medium">
                 </td>
@@ -181,10 +181,7 @@
                 <td>
                     <input id="UserName" name="UserName" type="text" placeholder="请输入用户名" class="input-medium">
                 </td>
-                <td>用户编号</td>
-                <td>
-                    <input id="UserCode" name="UserCode" type="text" class="input-medium">
-                </td>
+                
             </tr>
             <tr>
                 <td>密码</td>
@@ -598,7 +595,7 @@
 
     }
     function add() {
-        var UserCode = $("#UserCode").val();
+        var UserCode = 0;
         var UserName = $("#UserName").val();
         var PassWord = $("#PassWord").val();
         var RealName = $("#RealName").val();
