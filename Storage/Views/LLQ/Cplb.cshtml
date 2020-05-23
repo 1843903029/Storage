@@ -10,29 +10,46 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Cplb</title>
+    <style>
+        .input-medium {
+            width: 250px;
+            height: 35px;
+            margin-left: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
     <div style="border:0px solid #4cff00;width:100%;">
         <div style="padding:15px;border:1px solid red">
-            <table>
-                <tr>
-                    <td><strong style="margin-left:20px">产品类别管理</strong></td>
-                    <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
-                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()" type="button" value="删除" /></td>
-                    <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
-                </tr>
-            </table>
+            <div>
+                <table>
+                    <tr>
+                        <td><a href="#">首页<</a></td>
+                        <td>系统设置<</td>
+                        <td>角色管理</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td><strong style="margin-left:20px">产品类别管理</strong></td>
+                        <td> <a style="margin-left:800px;" id="btnSubhh" class="btn btn-primary" href="javascript:insert()">新增</a></td>
+                        <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-danger" onclick="you()" type="button" value="删除" /></td>
+                        <td> <input style="margin-left:10px;" id="btnSub" class="btn btn-info" type="button" value="导出" /></td>
+                    </tr>
+                </table>
 
-            <table action="javascript:void(0)" class="form-horizontal">
-                <tr>
-                    <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入类别编号或者名称"></td>
-                    <td>
-                        <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="CplbQuery()">搜索</a>
-                    </td>
-                </tr>
-            </table>
+                <table action="javascript:void(0)" class="form-horizontal">
+                    <tr>
+                        <td><input id="txtSearch" type="text" class="input-group" placeholder="请输入类别编号或者名称"></td>
+                        <td>
+                            <a style="margin-left:10px" id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="CplbQuery()">搜索</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <table style="width:100%;" class="table table-bordered">
                 <thead>
                     <tr>
